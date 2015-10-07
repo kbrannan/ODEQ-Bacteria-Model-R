@@ -1,0 +1,24 @@
+*** On-Stite and Pets Bacteria Source Model Input File
+*** Watershed: Big Elk Creek Sub-Wtsd 12
+*** Date this Input File Created: 2013-12-26
+MUTSIN Start Year: 1995
+MUTSIN End Year: 2010
+HSPF-Sup File Header Number for Residential/Agricultural Operration Area/Commercial/Urban/Transportation in MON-ACCUM Table:   58
+HSPF-Sup File Header Number for Residential/Agricultural Operration Area/Commercial/Urban/Transportation in MON-SQOLIM Table:  110
+SQOLIM multiplcation factor: 9
+*** Bacteria production rates
+On-site systems (orgs/system-day):     7.6000000E+11
+Pet (orgs/pet-day):     4.7500000E+09
+*** Pet Information
+Number of House-Holds: 31
+Pets per House-Hold: 1
+Residential/Agricultural Operration Area/Commercial/Urban/Transportation (ac): 7.4
+*** On-site Information
+Number of near-stream structures: 6
+Structures for house age pre-1974  (%): 47
+Structures for house age 1974-1986 (%): 21
+Structures for house age post-1986 (%): 33
+Failure rate for house age pre-1974  (%):     2.2500000E+01
+Failure rate for house age 1974-1986 (%):     1.5000000E+01
+Failure rate for house age post-1986 (%):     3.7500000E+00
+On-site Failure directly to stream (%):   2.3991677E-04
