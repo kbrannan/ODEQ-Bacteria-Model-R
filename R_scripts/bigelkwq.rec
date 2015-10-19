@@ -1,0 +1,2321 @@
+
+                     PEST RUN RECORD: CASE bigelkwq
+
+
+PEST Version: 13.0
+
+
+PEST run mode:-
+
+   Parameter estimation mode
+
+
+Case dimensions:-
+
+   Number of parameters                           :    98
+   Number of adjustable parameters                :    98
+   Number of parameter groups                     :    13
+   Number of observations                         :   128
+   Number of prior estimates                      :     0
+
+
+Model command line(s):-
+
+   model.bat
+
+
+Jacobian command line:-
+
+   na
+
+
+Model interface files:-
+
+   Templates:
+      ..\Model\sub-models\General\perlndqin.tpl
+      ..\Model\sub-models\General\rchresqin.tpl
+      ..\Model\sub-models\Cow-Calf\cowcalf01.tpl
+      ..\Model\sub-models\Cow-Calf\cowcalf02.tpl
+      ..\Model\sub-models\Cow-Calf\cowcalf04.tpl
+      ..\Model\sub-models\Cow-Calf\cowcalf05.tpl
+      ..\Model\sub-models\Cow-Calf\cowcalf06.tpl
+      ..\Model\sub-models\Cow-Calf\cowcalf07.tpl
+      ..\Model\sub-models\Cow-Calf\cowcalf08.tpl
+      ..\Model\sub-models\Cow-Calf\cowcalf09.tpl
+      ..\Model\sub-models\Cow-Calf\cowcalf10.tpl
+      ..\Model\sub-models\Cow-Calf\cowcalf11.tpl
+      ..\Model\sub-models\Cow-Calf\cowcalf12.tpl
+      ..\Model\sub-models\Cow-Calf\cowcalf13.tpl
+      ..\Model\sub-models\Cow-Calf\cowcalf14.tpl
+      ..\Model\sub-models\Cow-Calf\cowcalf16.tpl
+      ..\Model\sub-models\Cow-Calf\cowcalf17.tpl
+      ..\Model\sub-models\Cow-Calf\cowcalf18.tpl
+      ..\Model\sub-models\On-site_and_Pets\OnSitePets01.tpl
+      ..\Model\sub-models\On-site_and_Pets\OnSitePets02.tpl
+      ..\Model\sub-models\On-site_and_Pets\OnSitePets04.tpl
+      ..\Model\sub-models\On-site_and_Pets\OnSitePets05.tpl
+      ..\Model\sub-models\On-site_and_Pets\OnSitePets06.tpl
+      ..\Model\sub-models\On-site_and_Pets\OnSitePets07.tpl
+      ..\Model\sub-models\On-site_and_Pets\OnSitePets08.tpl
+      ..\Model\sub-models\On-site_and_Pets\OnSitePets09.tpl
+      ..\Model\sub-models\On-site_and_Pets\OnSitePets10.tpl
+      ..\Model\sub-models\On-site_and_Pets\OnSitePets11.tpl
+      ..\Model\sub-models\On-site_and_Pets\OnSitePets12.tpl
+      ..\Model\sub-models\On-site_and_Pets\OnSitePets13.tpl
+      ..\Model\sub-models\On-site_and_Pets\OnSitePets14.tpl
+      ..\Model\sub-models\On-site_and_Pets\OnSitePets16.tpl
+      ..\Model\sub-models\On-site_and_Pets\OnSitePets17.tpl
+      ..\Model\sub-models\On-site_and_Pets\OnSitePets18.tpl
+      ..\Model\sub-models\Wildlife-Beaver\wildlifeBeaver01.tpl
+      ..\Model\sub-models\Wildlife-Beaver\wildlifeBeaver02.tpl
+      ..\Model\sub-models\Wildlife-Beaver\wildlifeBeaver04.tpl
+      ..\Model\sub-models\Wildlife-Beaver\wildlifeBeaver05.tpl
+      ..\Model\sub-models\Wildlife-Beaver\wildlifeBeaver06.tpl
+      ..\Model\sub-models\Wildlife-Beaver\wildlifeBeaver07.tpl
+      ..\Model\sub-models\Wildlife-Beaver\wildlifeBeaver08.tpl
+      ..\Model\sub-models\Wildlife-Beaver\wildlifeBeaver09.tpl
+      ..\Model\sub-models\Wildlife-Beaver\wildlifeBeaver10.tpl
+      ..\Model\sub-models\Wildlife-Beaver\wildlifeBeaver11.tpl
+      ..\Model\sub-models\Wildlife-Beaver\wildlifeBeaver12.tpl
+      ..\Model\sub-models\Wildlife-Beaver\wildlifeBeaver13.tpl
+      ..\Model\sub-models\Wildlife-Beaver\wildlifeBeaver14.tpl
+      ..\Model\sub-models\Wildlife-Beaver\wildlifeBeaver16.tpl
+      ..\Model\sub-models\Wildlife-Beaver\wildlifeBeaver17.tpl
+      ..\Model\sub-models\Wildlife-Beaver\wildlifeBeaver18.tpl
+      ..\Model\sub-models\Wildlife-Coyote\wildlifeCoyote01.tpl
+      ..\Model\sub-models\Wildlife-Coyote\wildlifeCoyote02.tpl
+      ..\Model\sub-models\Wildlife-Coyote\wildlifeCoyote04.tpl
+      ..\Model\sub-models\Wildlife-Coyote\wildlifeCoyote05.tpl
+      ..\Model\sub-models\Wildlife-Coyote\wildlifeCoyote06.tpl
+      ..\Model\sub-models\Wildlife-Coyote\wildlifeCoyote07.tpl
+      ..\Model\sub-models\Wildlife-Coyote\wildlifeCoyote08.tpl
+      ..\Model\sub-models\Wildlife-Coyote\wildlifeCoyote09.tpl
+      ..\Model\sub-models\Wildlife-Coyote\wildlifeCoyote10.tpl
+      ..\Model\sub-models\Wildlife-Coyote\wildlifeCoyote11.tpl
+      ..\Model\sub-models\Wildlife-Coyote\wildlifeCoyote12.tpl
+      ..\Model\sub-models\Wildlife-Coyote\wildlifeCoyote13.tpl
+      ..\Model\sub-models\Wildlife-Coyote\wildlifeCoyote14.tpl
+      ..\Model\sub-models\Wildlife-Coyote\wildlifeCoyote16.tpl
+      ..\Model\sub-models\Wildlife-Coyote\wildlifeCoyote17.tpl
+      ..\Model\sub-models\Wildlife-Coyote\wildlifeCoyote18.tpl
+      ..\Model\sub-models\Wildlife-Deer\wildlifeDeer01.tpl
+      ..\Model\sub-models\Wildlife-Deer\wildlifeDeer02.tpl
+      ..\Model\sub-models\Wildlife-Deer\wildlifeDeer04.tpl
+      ..\Model\sub-models\Wildlife-Deer\wildlifeDeer05.tpl
+      ..\Model\sub-models\Wildlife-Deer\wildlifeDeer06.tpl
+      ..\Model\sub-models\Wildlife-Deer\wildlifeDeer07.tpl
+      ..\Model\sub-models\Wildlife-Deer\wildlifeDeer08.tpl
+      ..\Model\sub-models\Wildlife-Deer\wildlifeDeer09.tpl
+      ..\Model\sub-models\Wildlife-Deer\wildlifeDeer10.tpl
+      ..\Model\sub-models\Wildlife-Deer\wildlifeDeer11.tpl
+      ..\Model\sub-models\Wildlife-Deer\wildlifeDeer12.tpl
+      ..\Model\sub-models\Wildlife-Deer\wildlifeDeer13.tpl
+      ..\Model\sub-models\Wildlife-Deer\wildlifeDeer14.tpl
+      ..\Model\sub-models\Wildlife-Deer\wildlifeDeer16.tpl
+      ..\Model\sub-models\Wildlife-Deer\wildlifeDeer17.tpl
+      ..\Model\sub-models\Wildlife-Deer\wildlifeDeer18.tpl
+      ..\Model\sub-models\Wildlife-Duck\wildlifeDuck01.tpl
+      ..\Model\sub-models\Wildlife-Duck\wildlifeDuck02.tpl
+      ..\Model\sub-models\Wildlife-Duck\wildlifeDuck04.tpl
+      ..\Model\sub-models\Wildlife-Duck\wildlifeDuck05.tpl
+      ..\Model\sub-models\Wildlife-Duck\wildlifeDuck06.tpl
+      ..\Model\sub-models\Wildlife-Duck\wildlifeDuck07.tpl
+      ..\Model\sub-models\Wildlife-Duck\wildlifeDuck08.tpl
+      ..\Model\sub-models\Wildlife-Duck\wildlifeDuck09.tpl
+      ..\Model\sub-models\Wildlife-Duck\wildlifeDuck10.tpl
+      ..\Model\sub-models\Wildlife-Duck\wildlifeDuck11.tpl
+      ..\Model\sub-models\Wildlife-Duck\wildlifeDuck12.tpl
+      ..\Model\sub-models\Wildlife-Duck\wildlifeDuck13.tpl
+      ..\Model\sub-models\Wildlife-Duck\wildlifeDuck14.tpl
+      ..\Model\sub-models\Wildlife-Duck\wildlifeDuck16.tpl
+      ..\Model\sub-models\Wildlife-Duck\wildlifeDuck17.tpl
+      ..\Model\sub-models\Wildlife-Duck\wildlifeDuck18.tpl
+      ..\Model\sub-models\Wildlife-Elk\wildlifeElk01.tpl
+      ..\Model\sub-models\Wildlife-Elk\wildlifeElk02.tpl
+      ..\Model\sub-models\Wildlife-Elk\wildlifeElk04.tpl
+      ..\Model\sub-models\Wildlife-Elk\wildlifeElk05.tpl
+      ..\Model\sub-models\Wildlife-Elk\wildlifeElk06.tpl
+      ..\Model\sub-models\Wildlife-Elk\wildlifeElk07.tpl
+      ..\Model\sub-models\Wildlife-Elk\wildlifeElk08.tpl
+      ..\Model\sub-models\Wildlife-Elk\wildlifeElk09.tpl
+      ..\Model\sub-models\Wildlife-Elk\wildlifeElk10.tpl
+      ..\Model\sub-models\Wildlife-Elk\wildlifeElk11.tpl
+      ..\Model\sub-models\Wildlife-Elk\wildlifeElk12.tpl
+      ..\Model\sub-models\Wildlife-Elk\wildlifeElk13.tpl
+      ..\Model\sub-models\Wildlife-Elk\wildlifeElk14.tpl
+      ..\Model\sub-models\Wildlife-Elk\wildlifeElk16.tpl
+      ..\Model\sub-models\Wildlife-Elk\wildlifeElk17.tpl
+      ..\Model\sub-models\Wildlife-Elk\wildlifeElk18.tpl
+      ..\Model\sub-models\Wildlife-Geese\wildlifeGeese01.tpl
+      ..\Model\sub-models\Wildlife-Geese\wildlifeGeese02.tpl
+      ..\Model\sub-models\Wildlife-Geese\wildlifeGeese04.tpl
+      ..\Model\sub-models\Wildlife-Geese\wildlifeGeese05.tpl
+      ..\Model\sub-models\Wildlife-Geese\wildlifeGeese06.tpl
+      ..\Model\sub-models\Wildlife-Geese\wildlifeGeese07.tpl
+      ..\Model\sub-models\Wildlife-Geese\wildlifeGeese08.tpl
+      ..\Model\sub-models\Wildlife-Geese\wildlifeGeese09.tpl
+      ..\Model\sub-models\Wildlife-Geese\wildlifeGeese10.tpl
+      ..\Model\sub-models\Wildlife-Geese\wildlifeGeese11.tpl
+      ..\Model\sub-models\Wildlife-Geese\wildlifeGeese12.tpl
+      ..\Model\sub-models\Wildlife-Geese\wildlifeGeese13.tpl
+      ..\Model\sub-models\Wildlife-Geese\wildlifeGeese14.tpl
+      ..\Model\sub-models\Wildlife-Geese\wildlifeGeese16.tpl
+      ..\Model\sub-models\Wildlife-Geese\wildlifeGeese17.tpl
+      ..\Model\sub-models\Wildlife-Geese\wildlifeGeese18.tpl
+      ..\Model\sub-models\Wildlife-Gulls\wildlifeGulls01.tpl
+      ..\Model\sub-models\Wildlife-Gulls\wildlifeGulls02.tpl
+      ..\Model\sub-models\Wildlife-Gulls\wildlifeGulls04.tpl
+      ..\Model\sub-models\Wildlife-Gulls\wildlifeGulls05.tpl
+      ..\Model\sub-models\Wildlife-Gulls\wildlifeGulls06.tpl
+      ..\Model\sub-models\Wildlife-Gulls\wildlifeGulls07.tpl
+      ..\Model\sub-models\Wildlife-Gulls\wildlifeGulls08.tpl
+      ..\Model\sub-models\Wildlife-Gulls\wildlifeGulls09.tpl
+      ..\Model\sub-models\Wildlife-Gulls\wildlifeGulls10.tpl
+      ..\Model\sub-models\Wildlife-Gulls\wildlifeGulls11.tpl
+      ..\Model\sub-models\Wildlife-Gulls\wildlifeGulls12.tpl
+      ..\Model\sub-models\Wildlife-Gulls\wildlifeGulls13.tpl
+      ..\Model\sub-models\Wildlife-Gulls\wildlifeGulls14.tpl
+      ..\Model\sub-models\Wildlife-Gulls\wildlifeGulls16.tpl
+      ..\Model\sub-models\Wildlife-Gulls\wildlifeGulls17.tpl
+      ..\Model\sub-models\Wildlife-Gulls\wildlifeGulls18.tpl
+      ..\Model\sub-models\Wildlife-Herons_Egrets\wildlifeHerEgr01.tpl
+      ..\Model\sub-models\Wildlife-Herons_Egrets\wildlifeHerEgr02.tpl
+      ..\Model\sub-models\Wildlife-Herons_Egrets\wildlifeHerEgr04.tpl
+      ..\Model\sub-models\Wildlife-Herons_Egrets\wildlifeHerEgr05.tpl
+      ..\Model\sub-models\Wildlife-Herons_Egrets\wildlifeHerEgr06.tpl
+      ..\Model\sub-models\Wildlife-Herons_Egrets\wildlifeHerEgr07.tpl
+      ..\Model\sub-models\Wildlife-Herons_Egrets\wildlifeHerEgr08.tpl
+      ..\Model\sub-models\Wildlife-Herons_Egrets\wildlifeHerEgr09.tpl
+      ..\Model\sub-models\Wildlife-Herons_Egrets\wildlifeHerEgr10.tpl
+      ..\Model\sub-models\Wildlife-Herons_Egrets\wildlifeHerEgr11.tpl
+      ..\Model\sub-models\Wildlife-Herons_Egrets\wildlifeHerEgr12.tpl
+      ..\Model\sub-models\Wildlife-Herons_Egrets\wildlifeHerEgr13.tpl
+      ..\Model\sub-models\Wildlife-Herons_Egrets\wildlifeHerEgr14.tpl
+      ..\Model\sub-models\Wildlife-Herons_Egrets\wildlifeHerEgr16.tpl
+      ..\Model\sub-models\Wildlife-Herons_Egrets\wildlifeHerEgr17.tpl
+      ..\Model\sub-models\Wildlife-Herons_Egrets\wildlifeHerEgr18.tpl
+      ..\Model\sub-models\Wildlife-Otter\wildlifeOtter01.tpl
+      ..\Model\sub-models\Wildlife-Otter\wildlifeOtter02.tpl
+      ..\Model\sub-models\Wildlife-Otter\wildlifeOtter04.tpl
+      ..\Model\sub-models\Wildlife-Otter\wildlifeOtter05.tpl
+      ..\Model\sub-models\Wildlife-Otter\wildlifeOtter06.tpl
+      ..\Model\sub-models\Wildlife-Otter\wildlifeOtter07.tpl
+      ..\Model\sub-models\Wildlife-Otter\wildlifeOtter08.tpl
+      ..\Model\sub-models\Wildlife-Otter\wildlifeOtter09.tpl
+      ..\Model\sub-models\Wildlife-Otter\wildlifeOtter10.tpl
+      ..\Model\sub-models\Wildlife-Otter\wildlifeOtter11.tpl
+      ..\Model\sub-models\Wildlife-Otter\wildlifeOtter12.tpl
+      ..\Model\sub-models\Wildlife-Otter\wildlifeOtter13.tpl
+      ..\Model\sub-models\Wildlife-Otter\wildlifeOtter14.tpl
+      ..\Model\sub-models\Wildlife-Otter\wildlifeOtter16.tpl
+      ..\Model\sub-models\Wildlife-Otter\wildlifeOtter17.tpl
+      ..\Model\sub-models\Wildlife-Otter\wildlifeOtter18.tpl
+      ..\Model\sub-models\Wildlife-Racoon\wildlifeRacoon01.tpl
+      ..\Model\sub-models\Wildlife-Racoon\wildlifeRacoon02.tpl
+      ..\Model\sub-models\Wildlife-Racoon\wildlifeRacoon04.tpl
+      ..\Model\sub-models\Wildlife-Racoon\wildlifeRacoon05.tpl
+      ..\Model\sub-models\Wildlife-Racoon\wildlifeRacoon06.tpl
+      ..\Model\sub-models\Wildlife-Racoon\wildlifeRacoon07.tpl
+      ..\Model\sub-models\Wildlife-Racoon\wildlifeRacoon08.tpl
+      ..\Model\sub-models\Wildlife-Racoon\wildlifeRacoon09.tpl
+      ..\Model\sub-models\Wildlife-Racoon\wildlifeRacoon10.tpl
+      ..\Model\sub-models\Wildlife-Racoon\wildlifeRacoon11.tpl
+      ..\Model\sub-models\Wildlife-Racoon\wildlifeRacoon12.tpl
+      ..\Model\sub-models\Wildlife-Racoon\wildlifeRacoon13.tpl
+      ..\Model\sub-models\Wildlife-Racoon\wildlifeRacoon14.tpl
+      ..\Model\sub-models\Wildlife-Racoon\wildlifeRacoon16.tpl
+      ..\Model\sub-models\Wildlife-Racoon\wildlifeRacoon17.tpl
+      ..\Model\sub-models\Wildlife-Racoon\wildlifeRacoon18.tpl
+   for model input files:
+      ..\Model\sub-models\General\perlndqin.txt
+      ..\Model\sub-models\General\rchresqin.txt
+      ..\Model\sub-models\Cow-Calf\cowcalf01.txt
+      ..\Model\sub-models\Cow-Calf\cowcalf02.txt
+      ..\Model\sub-models\Cow-Calf\cowcalf04.txt
+      ..\Model\sub-models\Cow-Calf\cowcalf05.txt
+      ..\Model\sub-models\Cow-Calf\cowcalf06.txt
+      ..\Model\sub-models\Cow-Calf\cowcalf07.txt
+      ..\Model\sub-models\Cow-Calf\cowcalf08.txt
+      ..\Model\sub-models\Cow-Calf\cowcalf09.txt
+      ..\Model\sub-models\Cow-Calf\cowcalf10.txt
+      ..\Model\sub-models\Cow-Calf\cowcalf11.txt
+      ..\Model\sub-models\Cow-Calf\cowcalf12.txt
+      ..\Model\sub-models\Cow-Calf\cowcalf13.txt
+      ..\Model\sub-models\Cow-Calf\cowcalf14.txt
+      ..\Model\sub-models\Cow-Calf\cowcalf16.txt
+      ..\Model\sub-models\Cow-Calf\cowcalf17.txt
+      ..\Model\sub-models\Cow-Calf\cowcalf18.txt
+      ..\Model\sub-models\On-site_and_Pets\OnSitePets01.txt
+      ..\Model\sub-models\On-site_and_Pets\OnSitePets02.txt
+      ..\Model\sub-models\On-site_and_Pets\OnSitePets04.txt
+      ..\Model\sub-models\On-site_and_Pets\OnSitePets05.txt
+      ..\Model\sub-models\On-site_and_Pets\OnSitePets06.txt
+      ..\Model\sub-models\On-site_and_Pets\OnSitePets07.txt
+      ..\Model\sub-models\On-site_and_Pets\OnSitePets08.txt
+      ..\Model\sub-models\On-site_and_Pets\OnSitePets09.txt
+      ..\Model\sub-models\On-site_and_Pets\OnSitePets10.txt
+      ..\Model\sub-models\On-site_and_Pets\OnSitePets11.txt
+      ..\Model\sub-models\On-site_and_Pets\OnSitePets12.txt
+      ..\Model\sub-models\On-site_and_Pets\OnSitePets13.txt
+      ..\Model\sub-models\On-site_and_Pets\OnSitePets14.txt
+      ..\Model\sub-models\On-site_and_Pets\OnSitePets16.txt
+      ..\Model\sub-models\On-site_and_Pets\OnSitePets17.txt
+      ..\Model\sub-models\On-site_and_Pets\OnSitePets18.txt
+      ..\Model\sub-models\Wildlife-Beaver\wildlifeBeaver01.txt
+      ..\Model\sub-models\Wildlife-Beaver\wildlifeBeaver02.txt
+      ..\Model\sub-models\Wildlife-Beaver\wildlifeBeaver04.txt
+      ..\Model\sub-models\Wildlife-Beaver\wildlifeBeaver05.txt
+      ..\Model\sub-models\Wildlife-Beaver\wildlifeBeaver06.txt
+      ..\Model\sub-models\Wildlife-Beaver\wildlifeBeaver07.txt
+      ..\Model\sub-models\Wildlife-Beaver\wildlifeBeaver08.txt
+      ..\Model\sub-models\Wildlife-Beaver\wildlifeBeaver09.txt
+      ..\Model\sub-models\Wildlife-Beaver\wildlifeBeaver10.txt
+      ..\Model\sub-models\Wildlife-Beaver\wildlifeBeaver11.txt
+      ..\Model\sub-models\Wildlife-Beaver\wildlifeBeaver12.txt
+      ..\Model\sub-models\Wildlife-Beaver\wildlifeBeaver13.txt
+      ..\Model\sub-models\Wildlife-Beaver\wildlifeBeaver14.txt
+      ..\Model\sub-models\Wildlife-Beaver\wildlifeBeaver16.txt
+      ..\Model\sub-models\Wildlife-Beaver\wildlifeBeaver17.txt
+      ..\Model\sub-models\Wildlife-Beaver\wildlifeBeaver18.txt
+      ..\Model\sub-models\Wildlife-Coyote\wildlifeCoyote01.txt
+      ..\Model\sub-models\Wildlife-Coyote\wildlifeCoyote02.txt
+      ..\Model\sub-models\Wildlife-Coyote\wildlifeCoyote04.txt
+      ..\Model\sub-models\Wildlife-Coyote\wildlifeCoyote05.txt
+      ..\Model\sub-models\Wildlife-Coyote\wildlifeCoyote06.txt
+      ..\Model\sub-models\Wildlife-Coyote\wildlifeCoyote07.txt
+      ..\Model\sub-models\Wildlife-Coyote\wildlifeCoyote08.txt
+      ..\Model\sub-models\Wildlife-Coyote\wildlifeCoyote09.txt
+      ..\Model\sub-models\Wildlife-Coyote\wildlifeCoyote10.txt
+      ..\Model\sub-models\Wildlife-Coyote\wildlifeCoyote11.txt
+      ..\Model\sub-models\Wildlife-Coyote\wildlifeCoyote12.txt
+      ..\Model\sub-models\Wildlife-Coyote\wildlifeCoyote13.txt
+      ..\Model\sub-models\Wildlife-Coyote\wildlifeCoyote14.txt
+      ..\Model\sub-models\Wildlife-Coyote\wildlifeCoyote16.txt
+      ..\Model\sub-models\Wildlife-Coyote\wildlifeCoyote17.txt
+      ..\Model\sub-models\Wildlife-Coyote\wildlifeCoyote18.txt
+      ..\Model\sub-models\Wildlife-Deer\wildlifeDeer01.txt
+      ..\Model\sub-models\Wildlife-Deer\wildlifeDeer02.txt
+      ..\Model\sub-models\Wildlife-Deer\wildlifeDeer04.txt
+      ..\Model\sub-models\Wildlife-Deer\wildlifeDeer05.txt
+      ..\Model\sub-models\Wildlife-Deer\wildlifeDeer06.txt
+      ..\Model\sub-models\Wildlife-Deer\wildlifeDeer07.txt
+      ..\Model\sub-models\Wildlife-Deer\wildlifeDeer08.txt
+      ..\Model\sub-models\Wildlife-Deer\wildlifeDeer09.txt
+      ..\Model\sub-models\Wildlife-Deer\wildlifeDeer10.txt
+      ..\Model\sub-models\Wildlife-Deer\wildlifeDeer11.txt
+      ..\Model\sub-models\Wildlife-Deer\wildlifeDeer12.txt
+      ..\Model\sub-models\Wildlife-Deer\wildlifeDeer13.txt
+      ..\Model\sub-models\Wildlife-Deer\wildlifeDeer14.txt
+      ..\Model\sub-models\Wildlife-Deer\wildlifeDeer16.txt
+      ..\Model\sub-models\Wildlife-Deer\wildlifeDeer17.txt
+      ..\Model\sub-models\Wildlife-Deer\wildlifeDeer18.txt
+      ..\Model\sub-models\Wildlife-Duck\wildlifeDuck01.txt
+      ..\Model\sub-models\Wildlife-Duck\wildlifeDuck02.txt
+      ..\Model\sub-models\Wildlife-Duck\wildlifeDuck04.txt
+      ..\Model\sub-models\Wildlife-Duck\wildlifeDuck05.txt
+      ..\Model\sub-models\Wildlife-Duck\wildlifeDuck06.txt
+      ..\Model\sub-models\Wildlife-Duck\wildlifeDuck07.txt
+      ..\Model\sub-models\Wildlife-Duck\wildlifeDuck08.txt
+      ..\Model\sub-models\Wildlife-Duck\wildlifeDuck09.txt
+      ..\Model\sub-models\Wildlife-Duck\wildlifeDuck10.txt
+      ..\Model\sub-models\Wildlife-Duck\wildlifeDuck11.txt
+      ..\Model\sub-models\Wildlife-Duck\wildlifeDuck12.txt
+      ..\Model\sub-models\Wildlife-Duck\wildlifeDuck13.txt
+      ..\Model\sub-models\Wildlife-Duck\wildlifeDuck14.txt
+      ..\Model\sub-models\Wildlife-Duck\wildlifeDuck16.txt
+      ..\Model\sub-models\Wildlife-Duck\wildlifeDuck17.txt
+      ..\Model\sub-models\Wildlife-Duck\wildlifeDuck18.txt
+      ..\Model\sub-models\Wildlife-Elk\wildlifeElk01.txt
+      ..\Model\sub-models\Wildlife-Elk\wildlifeElk02.txt
+      ..\Model\sub-models\Wildlife-Elk\wildlifeElk04.txt
+      ..\Model\sub-models\Wildlife-Elk\wildlifeElk05.txt
+      ..\Model\sub-models\Wildlife-Elk\wildlifeElk06.txt
+      ..\Model\sub-models\Wildlife-Elk\wildlifeElk07.txt
+      ..\Model\sub-models\Wildlife-Elk\wildlifeElk08.txt
+      ..\Model\sub-models\Wildlife-Elk\wildlifeElk09.txt
+      ..\Model\sub-models\Wildlife-Elk\wildlifeElk10.txt
+      ..\Model\sub-models\Wildlife-Elk\wildlifeElk11.txt
+      ..\Model\sub-models\Wildlife-Elk\wildlifeElk12.txt
+      ..\Model\sub-models\Wildlife-Elk\wildlifeElk13.txt
+      ..\Model\sub-models\Wildlife-Elk\wildlifeElk14.txt
+      ..\Model\sub-models\Wildlife-Elk\wildlifeElk16.txt
+      ..\Model\sub-models\Wildlife-Elk\wildlifeElk17.txt
+      ..\Model\sub-models\Wildlife-Elk\wildlifeElk18.txt
+      ..\Model\sub-models\Wildlife-Geese\wildlifeGeese01.txt
+      ..\Model\sub-models\Wildlife-Geese\wildlifeGeese02.txt
+      ..\Model\sub-models\Wildlife-Geese\wildlifeGeese04.txt
+      ..\Model\sub-models\Wildlife-Geese\wildlifeGeese05.txt
+      ..\Model\sub-models\Wildlife-Geese\wildlifeGeese06.txt
+      ..\Model\sub-models\Wildlife-Geese\wildlifeGeese07.txt
+      ..\Model\sub-models\Wildlife-Geese\wildlifeGeese08.txt
+      ..\Model\sub-models\Wildlife-Geese\wildlifeGeese09.txt
+      ..\Model\sub-models\Wildlife-Geese\wildlifeGeese10.txt
+      ..\Model\sub-models\Wildlife-Geese\wildlifeGeese11.txt
+      ..\Model\sub-models\Wildlife-Geese\wildlifeGeese12.txt
+      ..\Model\sub-models\Wildlife-Geese\wildlifeGeese13.txt
+      ..\Model\sub-models\Wildlife-Geese\wildlifeGeese14.txt
+      ..\Model\sub-models\Wildlife-Geese\wildlifeGeese16.txt
+      ..\Model\sub-models\Wildlife-Geese\wildlifeGeese17.txt
+      ..\Model\sub-models\Wildlife-Geese\wildlifeGeese18.txt
+      ..\Model\sub-models\Wildlife-Gulls\wildlifeGulls01.txt
+      ..\Model\sub-models\Wildlife-Gulls\wildlifeGulls02.txt
+      ..\Model\sub-models\Wildlife-Gulls\wildlifeGulls04.txt
+      ..\Model\sub-models\Wildlife-Gulls\wildlifeGulls05.txt
+      ..\Model\sub-models\Wildlife-Gulls\wildlifeGulls06.txt
+      ..\Model\sub-models\Wildlife-Gulls\wildlifeGulls07.txt
+      ..\Model\sub-models\Wildlife-Gulls\wildlifeGulls08.txt
+      ..\Model\sub-models\Wildlife-Gulls\wildlifeGulls09.txt
+      ..\Model\sub-models\Wildlife-Gulls\wildlifeGulls10.txt
+      ..\Model\sub-models\Wildlife-Gulls\wildlifeGulls11.txt
+      ..\Model\sub-models\Wildlife-Gulls\wildlifeGulls12.txt
+      ..\Model\sub-models\Wildlife-Gulls\wildlifeGulls13.txt
+      ..\Model\sub-models\Wildlife-Gulls\wildlifeGulls14.txt
+      ..\Model\sub-models\Wildlife-Gulls\wildlifeGulls16.txt
+      ..\Model\sub-models\Wildlife-Gulls\wildlifeGulls17.txt
+      ..\Model\sub-models\Wildlife-Gulls\wildlifeGulls18.txt
+      ..\Model\sub-models\Wildlife-Herons_Egrets\wildlifeHerEgr01.txt
+      ..\Model\sub-models\Wildlife-Herons_Egrets\wildlifeHerEgr02.txt
+      ..\Model\sub-models\Wildlife-Herons_Egrets\wildlifeHerEgr04.txt
+      ..\Model\sub-models\Wildlife-Herons_Egrets\wildlifeHerEgr05.txt
+      ..\Model\sub-models\Wildlife-Herons_Egrets\wildlifeHerEgr06.txt
+      ..\Model\sub-models\Wildlife-Herons_Egrets\wildlifeHerEgr07.txt
+      ..\Model\sub-models\Wildlife-Herons_Egrets\wildlifeHerEgr08.txt
+      ..\Model\sub-models\Wildlife-Herons_Egrets\wildlifeHerEgr09.txt
+      ..\Model\sub-models\Wildlife-Herons_Egrets\wildlifeHerEgr10.txt
+      ..\Model\sub-models\Wildlife-Herons_Egrets\wildlifeHerEgr11.txt
+      ..\Model\sub-models\Wildlife-Herons_Egrets\wildlifeHerEgr12.txt
+      ..\Model\sub-models\Wildlife-Herons_Egrets\wildlifeHerEgr13.txt
+      ..\Model\sub-models\Wildlife-Herons_Egrets\wildlifeHerEgr14.txt
+      ..\Model\sub-models\Wildlife-Herons_Egrets\wildlifeHerEgr16.txt
+      ..\Model\sub-models\Wildlife-Herons_Egrets\wildlifeHerEgr17.txt
+      ..\Model\sub-models\Wildlife-Herons_Egrets\wildlifeHerEgr18.txt
+      ..\Model\sub-models\Wildlife-Otter\wildlifeOtter01.txt
+      ..\Model\sub-models\Wildlife-Otter\wildlifeOtter02.txt
+      ..\Model\sub-models\Wildlife-Otter\wildlifeOtter04.txt
+      ..\Model\sub-models\Wildlife-Otter\wildlifeOtter05.txt
+      ..\Model\sub-models\Wildlife-Otter\wildlifeOtter06.txt
+      ..\Model\sub-models\Wildlife-Otter\wildlifeOtter07.txt
+      ..\Model\sub-models\Wildlife-Otter\wildlifeOtter08.txt
+      ..\Model\sub-models\Wildlife-Otter\wildlifeOtter09.txt
+      ..\Model\sub-models\Wildlife-Otter\wildlifeOtter10.txt
+      ..\Model\sub-models\Wildlife-Otter\wildlifeOtter11.txt
+      ..\Model\sub-models\Wildlife-Otter\wildlifeOtter12.txt
+      ..\Model\sub-models\Wildlife-Otter\wildlifeOtter13.txt
+      ..\Model\sub-models\Wildlife-Otter\wildlifeOtter14.txt
+      ..\Model\sub-models\Wildlife-Otter\wildlifeOtter16.txt
+      ..\Model\sub-models\Wildlife-Otter\wildlifeOtter17.txt
+      ..\Model\sub-models\Wildlife-Otter\wildlifeOtter18.txt
+      ..\Model\sub-models\Wildlife-Racoon\wildlifeRacoon01.txt
+      ..\Model\sub-models\Wildlife-Racoon\wildlifeRacoon02.txt
+      ..\Model\sub-models\Wildlife-Racoon\wildlifeRacoon04.txt
+      ..\Model\sub-models\Wildlife-Racoon\wildlifeRacoon05.txt
+      ..\Model\sub-models\Wildlife-Racoon\wildlifeRacoon06.txt
+      ..\Model\sub-models\Wildlife-Racoon\wildlifeRacoon07.txt
+      ..\Model\sub-models\Wildlife-Racoon\wildlifeRacoon08.txt
+      ..\Model\sub-models\Wildlife-Racoon\wildlifeRacoon09.txt
+      ..\Model\sub-models\Wildlife-Racoon\wildlifeRacoon10.txt
+      ..\Model\sub-models\Wildlife-Racoon\wildlifeRacoon11.txt
+      ..\Model\sub-models\Wildlife-Racoon\wildlifeRacoon12.txt
+      ..\Model\sub-models\Wildlife-Racoon\wildlifeRacoon13.txt
+      ..\Model\sub-models\Wildlife-Racoon\wildlifeRacoon14.txt
+      ..\Model\sub-models\Wildlife-Racoon\wildlifeRacoon16.txt
+      ..\Model\sub-models\Wildlife-Racoon\wildlifeRacoon17.txt
+      ..\Model\sub-models\Wildlife-Racoon\wildlifeRacoon18.txt
+
+   (Parameter values written using single precision protocol.)
+   (Decimal point always included.)
+
+   Instruction files:
+      ..\Model\PostProcess\modout.ins
+   for reading model output files:
+      ..\Model\PostProcess\modout.out
+
+
+PEST-to-model message file:-
+
+   na
+
+
+Singular value decomposition:-
+
+   Perform SVD on XtQX or Q^(1/2)X               : XtQX
+   Max. number of singular values to employ      : 97
+   Ratio of lowest/highest singular value        :  5.000000E-07
+   Record eigenvectors in SVD file               : no
+
+
+Derivatives calculation:-
+
+Param        Increment   Increment   Increment   Forward or   Multiplier  Method
+group        type                    low bound   central      (central)   (central)
+generl       relative    1.0000E-02  1.0000E-06    switch       2.000     parabolic
+cowcaf       relative    1.0000E-02  1.0000E-06    switch       2.000     parabolic
+osnpet       relative    1.0000E-02  1.0000E-06    switch       2.000     parabolic
+wdbeav       relative    1.0000E-02  1.0000E-06    switch       2.000     parabolic
+wdcoyt       relative    1.0000E-02  1.0000E-06    switch       2.000     parabolic
+wddeer       relative    1.0000E-02  1.0000E-06    switch       2.000     parabolic
+wdduck       relative    1.0000E-02  1.0000E-06    switch       2.000     parabolic
+wdelk        relative    1.0000E-02  1.0000E-06    switch       2.000     parabolic
+wdgese       relative    1.0000E-02  1.0000E-06    switch       2.000     parabolic
+wdgull       relative    1.0000E-02  1.0000E-06    switch       2.000     parabolic
+wdheeg       relative    1.0000E-02  1.0000E-06    switch       2.000     parabolic
+wdoter       relative    1.0000E-02  1.0000E-06    switch       2.000     parabolic
+wdracn       relative    1.0000E-02  1.0000E-06    switch       2.000     parabolic
+
+
+Parameter definitions:-
+
+Name         Trans-            Change       Initial        Lower          Upper
+             formation         limit        value          bound          bound
+pwqsop       log               factor      1.50000       0.500000        1.87500    
+fwqsop       log               factor      3.00000        1.00000        3.75000    
+rwqsop       log               factor      1.87500       0.250000        1.87500    
+fstdec       log               factor      1.15000       1.000000E-04    3.00000    
+stckdncc     log               factor      10.0000        5.60000        10.0000    
+baccc        log               factor     2.835000E+09   2.565000E+09   2.835000E+09
+stracfcc01   log               factor     8.454400E-03   1.000000E-04    99.0000    
+stracfcc02   log               factor     4.342600E-03   1.000000E-04    99.0000    
+stracfcc04   log               factor     7.264200E-04   1.000000E-04    99.0000    
+stracfcc05   log               factor     1.651717E-02   1.000000E-04    99.0000    
+stracfcc06   log               factor     7.949639E-02   1.000000E-04    99.0000    
+stracfcc07   log               factor     3.264901E-02   1.000000E-04    99.0000    
+stracfcc08   log               factor     2.190678E-02   1.000000E-04    99.0000    
+stracfcc09   log               factor      1.61352       1.000000E-04    99.0000    
+stracfcc10   log               factor     0.636767       1.000000E-04    99.0000    
+stracfcc11   log               factor     0.219975       1.000000E-04    99.0000    
+stracfcc12   log               factor      1.01211       1.000000E-04    99.0000    
+stracfcc13   log               factor     0.189291       1.000000E-04    99.0000    
+stracfcc14   log               factor     0.147843       1.000000E-04    99.0000    
+stracfcc16   log               factor     0.516508       1.000000E-04    99.0000    
+stracfcc17   log               factor     0.218437       1.000000E-04    99.0000    
+stracfcc18   log               factor      10.0130       1.000000E-04    99.0000    
+stracpcc01   log               factor      80.0000        48.0000        80.0000    
+stracpcc02   log               factor      31.0000        19.0000        31.0000    
+stracpcc04   log               factor      54.0000        32.0000        54.0000    
+stracpcc05   log               factor      61.0000        61.0000        100.000    
+stracpcc06   log               factor      31.0000        31.0000        51.0000    
+stracpcc07   log               factor      71.0000        71.0000        100.000    
+stracpcc08   log               factor      32.0000        32.0000        53.0000    
+stracpcc09   log               factor      7.00000        7.00000        11.0000    
+stracpcc10   log               factor      12.5286       1.000000E-06    25.0000    
+stracpcc11   log               factor      8.04832       1.000000E-06    25.0000    
+stracpcc12   log               factor      54.3128        50.0000        84.0000    
+stracpcc13   log               factor      25.0000        25.0000        41.0000    
+stracpcc14   log               factor      5.00000        5.00000        8.00000    
+stracpcc16   log               factor      32.0000        32.0000        53.0000    
+stracpcc17   log               factor      49.0000        49.0000        81.0000    
+stracpcc18   log               factor      15.0169        11.0000        19.0000    
+instrpcc     log               factor      12.5000        12.5000        37.5000    
+instrfcc     log               factor      37.5000        12.5000        37.5000    
+bachosp      log               factor     7.600000E+11   7.600000E+11   8.400000E+11
+bacposp      log               factor     4.750000E+09   4.750000E+09   5.250000E+09
+frpr74osp    log               factor      22.5000        22.5000        37.5000    
+fr7486osp    log               factor      15.0000        11.2500        18.7500    
+frpt86osp    log               factor      3.75000        3.75000        6.25000    
+dtstosp01    log               factor      25.5532       1.000000E-04    100.000    
+dtstosp02    log               factor      49.7965       1.000000E-04    100.000    
+dtstosp04    log               factor      100.000       1.000000E-04    100.000    
+dtstosp05    log               factor     1.000000E-04   1.000000E-04    100.000    
+dtstosp06    log               factor     1.000000E-04   1.000000E-04    100.000    
+dtstosp07    log               factor     1.000000E-04   1.000000E-04    100.000    
+dtstosp08    log               factor     2.430586E-04   1.000000E-04    100.000    
+dtstosp09    log               factor     0.162210       1.000000E-04    100.000    
+dtstosp10    log               factor      50.0000       1.000000E-04    100.000    
+dtstosp11    log               factor      50.0000       1.000000E-04    100.000    
+dtstosp12    log               factor     2.399168E-04   1.000000E-04    100.000    
+dtstosp13    log               factor      13.5673       1.000000E-04    100.000    
+dtstosp14    log               factor     5.087900E-02   1.000000E-04    100.000    
+dtstosp16    log               factor     4.114500E-02   1.000000E-04    100.000    
+dtstosp17    log               factor     1.000000E-04   1.000000E-04    100.000    
+dtstosp18    log               factor      100.000       1.000000E-04    100.000    
+adbeav       log               factor     7.500000E-03   7.500000E-03   2.250000E-02
+instrbeav    log               factor      31.2500        18.7500        31.2500    
+bacbeav      log               factor      196650.        196650.        217350.    
+adcoyt       log               factor     3.606300E-06   3.606250E-06   7.176440E-04
+instrcoyt    log               factor      1.00000       0.750000        1.25000    
+baccoyt      log               factor     9.000012E+08   8.550000E+08   9.450000E+08
+stracdeer    log               factor      50.0000       0.250000        50.0000    
+addeer       log               factor     4.700000E-04   4.700000E-04   9.353000E-02
+instrdeer    log               factor      1.00000       0.500000        1.50000    
+bacdeer      log               factor     1.837500E+08   1.662500E+08   1.837500E+08
+ads1duck     log               factor     2.500000E-02   2.500000E-02   7.500000E-02
+ads2duck     log               factor     2.500000E-04   2.500000E-04   7.500000E-04
+instrduck    log               factor      99.9999        37.5000        99.9999    
+bacduck      log               factor     8.000000E+08   7.600000E+08   8.400000E+08
+ads1elk      log               factor     3.000000E-03   3.000000E-03   9.000000E-02
+ads2elk      log               factor     4.500000E-02   1.500000E-03   4.500000E-02
+pps1elk      log               factor      9.95000       5.000000E-02    9.95000    
+pfs1elk      log               factor      1.92089       5.000000E-02    9.95000    
+pps2elk      log               factor      9.95000       5.000000E-02    9.95000    
+pfs2elk      log               factor      9.95000       5.000000E-02    9.95000    
+bacelk       log               factor     6.650000E+08   6.650000E+08   7.350000E+08
+ads1gese     log               factor     1.388890E-02   1.388890E-02   2.314810E-02
+ads2gese     log               factor     1.851850E-06   1.851850E-06   3.685190E-04
+instrgese    log               factor      93.7500        56.2500        93.7500    
+bacgese      log               factor     8.000000E+08   7.600000E+08   8.400000E+08
+adgull       log               factor     4.545500E-05   4.545460E-05   9.045460E-03
+instrgull    log               factor      47.5000        5.00000        99.9999    
+bacgull      log               factor     2.390001E+09   2.270500E+09   2.509500E+09
+adheeg       log               factor     1.379400E-05   1.379310E-05   2.744830E-03
+instrheeg    log               factor      99.0000        89.1000        99.9999    
+bacheeg      log               factor     4.302000E+09   4.302000E+09   5.258000E+09
+adotter      log               factor     0.300000       0.300000        9.00000    
+instrotter   log               factor      31.1640        18.7500        31.2500    
+bacotter     log               factor     1.966500E+07   1.966500E+07   2.173500E+07
+adracn       log               factor     4.729682E-03   9.500000E-04   0.950000    
+instrracn    log               factor      5.00039        5.00000        95.0000    
+bacracn      log               factor     4.750000E+07   4.750000E+07   5.250000E+07
+
+Name         Group          Scale         Offset        Model command number
+pwqsop       generl        1.00000        0.00000            1
+fwqsop       generl        1.00000        0.00000            1
+rwqsop       generl        1.00000        0.00000            1
+fstdec       generl        1.00000        0.00000            1
+stckdncc     cowcaf        1.00000        0.00000            1
+baccc        cowcaf        1.00000        0.00000            1
+stracfcc01   cowcaf        1.00000        0.00000            1
+stracfcc02   cowcaf        1.00000        0.00000            1
+stracfcc04   cowcaf        1.00000        0.00000            1
+stracfcc05   cowcaf        1.00000        0.00000            1
+stracfcc06   cowcaf        1.00000        0.00000            1
+stracfcc07   cowcaf        1.00000        0.00000            1
+stracfcc08   cowcaf        1.00000        0.00000            1
+stracfcc09   cowcaf        1.00000        0.00000            1
+stracfcc10   cowcaf        1.00000        0.00000            1
+stracfcc11   cowcaf        1.00000        0.00000            1
+stracfcc12   cowcaf        1.00000        0.00000            1
+stracfcc13   cowcaf        1.00000        0.00000            1
+stracfcc14   cowcaf        1.00000        0.00000            1
+stracfcc16   cowcaf        1.00000        0.00000            1
+stracfcc17   cowcaf        1.00000        0.00000            1
+stracfcc18   cowcaf        1.00000        0.00000            1
+stracpcc01   cowcaf        1.00000        0.00000            1
+stracpcc02   cowcaf        1.00000        0.00000            1
+stracpcc04   cowcaf        1.00000        0.00000            1
+stracpcc05   cowcaf        1.00000        0.00000            1
+stracpcc06   cowcaf        1.00000        0.00000            1
+stracpcc07   cowcaf        1.00000        0.00000            1
+stracpcc08   cowcaf        1.00000        0.00000            1
+stracpcc09   cowcaf        1.00000        0.00000            1
+stracpcc10   cowcaf        1.00000        0.00000            1
+stracpcc11   cowcaf        1.00000        0.00000            1
+stracpcc12   cowcaf        1.00000        0.00000            1
+stracpcc13   cowcaf        1.00000        0.00000            1
+stracpcc14   cowcaf        1.00000        0.00000            1
+stracpcc16   cowcaf        1.00000        0.00000            1
+stracpcc17   cowcaf        1.00000        0.00000            1
+stracpcc18   cowcaf        1.00000        0.00000            1
+instrpcc     cowcaf        1.00000        0.00000            1
+instrfcc     cowcaf        1.00000        0.00000            1
+bachosp      osnpet        1.00000        0.00000            1
+bacposp      osnpet        1.00000        0.00000            1
+frpr74osp    osnpet        1.00000        0.00000            1
+fr7486osp    osnpet        1.00000        0.00000            1
+frpt86osp    osnpet        1.00000        0.00000            1
+dtstosp01    osnpet        1.00000        0.00000            1
+dtstosp02    osnpet        1.00000        0.00000            1
+dtstosp04    osnpet        1.00000        0.00000            1
+dtstosp05    osnpet        1.00000        0.00000            1
+dtstosp06    osnpet        1.00000        0.00000            1
+dtstosp07    osnpet        1.00000        0.00000            1
+dtstosp08    osnpet        1.00000        0.00000            1
+dtstosp09    osnpet        1.00000        0.00000            1
+dtstosp10    osnpet        1.00000        0.00000            1
+dtstosp11    osnpet        1.00000        0.00000            1
+dtstosp12    osnpet        1.00000        0.00000            1
+dtstosp13    osnpet        1.00000        0.00000            1
+dtstosp14    osnpet        1.00000        0.00000            1
+dtstosp16    osnpet        1.00000        0.00000            1
+dtstosp17    osnpet        1.00000        0.00000            1
+dtstosp18    osnpet        1.00000        0.00000            1
+adbeav       wdbeav        1.00000        0.00000            1
+instrbeav    wdbeav        1.00000        0.00000            1
+bacbeav      wdbeav        1.00000        0.00000            1
+adcoyt       wdcoyt        1.00000        0.00000            1
+instrcoyt    wdcoyt        1.00000        0.00000            1
+baccoyt      wdcoyt        1.00000        0.00000            1
+stracdeer    wddeer        1.00000        0.00000            1
+addeer       wddeer        1.00000        0.00000            1
+instrdeer    wddeer        1.00000        0.00000            1
+bacdeer      wddeer        1.00000        0.00000            1
+ads1duck     wdduck        1.00000        0.00000            1
+ads2duck     wdduck        1.00000        0.00000            1
+instrduck    wdduck        1.00000        0.00000            1
+bacduck      wdduck        1.00000        0.00000            1
+ads1elk      wdelk         1.00000        0.00000            1
+ads2elk      wdelk         1.00000        0.00000            1
+pps1elk      wdelk         1.00000        0.00000            1
+pfs1elk      wdelk         1.00000        0.00000            1
+pps2elk      wdelk         1.00000        0.00000            1
+pfs2elk      wdelk         1.00000        0.00000            1
+bacelk       wdelk         1.00000        0.00000            1
+ads1gese     wdgese        1.00000        0.00000            1
+ads2gese     wdgese        1.00000        0.00000            1
+instrgese    wdgese        1.00000        0.00000            1
+bacgese      wdgese        1.00000        0.00000            1
+adgull       wdgull        1.00000        0.00000            1
+instrgull    wdgull        1.00000        0.00000            1
+bacgull      wdgull        1.00000        0.00000            1
+adheeg       wdheeg        1.00000        0.00000            1
+instrheeg    wdheeg        1.00000        0.00000            1
+bacheeg      wdheeg        1.00000        0.00000            1
+adotter      wdoter        1.00000        0.00000            1
+instrotter   wdoter        1.00000        0.00000            1
+bacotter     wdoter        1.00000        0.00000            1
+adracn       wdracn        1.00000        0.00000            1
+instrracn    wdracn        1.00000        0.00000            1
+bacracn      wdracn        1.00000        0.00000            1
+
+
+Prior information:-
+
+   No prior information supplied
+
+
+Observations:-
+
+Observation name        Observation       Weight       Group
+ rch0420070621           2.44716          1.000       resrch04    
+ rch0420070719           2.59107          1.000       resrch04    
+ rch0420070817           2.64345          1.000       resrch04    
+ rch0420070913           2.83885          1.000       resrch04    
+ rch0420071016           2.41497          1.000       resrch04    
+ rch0420071114           2.04139          1.000       resrch04    
+ rch0420080104           2.07918          1.000       resrch04    
+ rch0420080206           1.41497          1.000       resrch04    
+ rch0420080304           1.63347          1.000       resrch04    
+ rch0420080408           1.39794          1.000       resrch04    
+ rch0420080506           2.14613          1.000       resrch04    
+ rch0420080613           2.99123          1.000       resrch04    
+ rch0420080707           3.04139          1.000       resrch04    
+ rch0420080728           2.35218          1.000       resrch04    
+ rch0420080818           2.63849          1.000       resrch04    
+ rch0420080908           2.71600          1.000       resrch04    
+ rch0420080930           2.69020          1.000       resrch04    
+ rch0420091019           1.85126          1.000       resrch04    
+ rch0420091116           1.56820          1.000       resrch04    
+ rch0420091214           1.36173          1.000       resrch04    
+ rch0420100104          0.778151          1.000       resrch04    
+ rch0420100124           1.17609          1.000       resrch04    
+ rch0420100218          0.792392          1.000       resrch04    
+ rch0420100308           1.47712          1.000       resrch04    
+ rch0420100329           2.88649          1.000       resrch04    
+ rch0420100419           1.62325          1.000       resrch04    
+ rch0420100510           2.14613          1.000       resrch04    
+ rch0420100602           2.93952          1.000       resrch04    
+ rch0420100621           1.82608          1.000       resrch04    
+ rch0420100712           2.30103          1.000       resrch04    
+ rch0420100802           3.23045          1.000       resrch04    
+ rch0420100823           2.51851          1.000       resrch04    
+ rch0420100913           2.66276          1.000       resrch04    
+ rch0420101004           2.27875          1.000       resrch04    
+ rch0420101025           2.75588          1.000       resrch04    
+ rch0420101117           1.61278          1.000       resrch04    
+ rch0420101206           1.46240          1.000       resrch04    
+ rch0420101227           1.34242          1.000       resrch04    
+ rch0920080408           1.41497          1.000       resrch09    
+ rch0920080506           1.83251          1.000       resrch09    
+ rch0920080613           1.79934          1.000       resrch09    
+ rch0920080707           1.80618          1.000       resrch09    
+ rch0920080728           1.38021          1.000       resrch09    
+ rch0920080818           1.75588          1.000       resrch09    
+ rch0920080908          0.954243          1.000       resrch09    
+ rch0920080930           1.20412          1.000       resrch09    
+ rch1220070621           1.36173          1.000       resrch12    
+ rch1220070719           1.71600          1.000       resrch12    
+ rch1220070817           1.47712          1.000       resrch12    
+ rch1220070913           1.69020          1.000       resrch12    
+ rch1220071016           1.41497          1.000       resrch12    
+ rch1220071114           1.66276          1.000       resrch12    
+ rch1220080104           2.20412          1.000       resrch12    
+ rch1220080206           1.04139          1.000       resrch12    
+ rch1220080304           1.27875          1.000       resrch12    
+ rch1220080408           1.20412          1.000       resrch12    
+ rch1220080506           1.50515          1.000       resrch12    
+ rch1220080613           1.51851          1.000       resrch12    
+ rch1220080707           1.77085          1.000       resrch12    
+ rch1220080728           1.07918          1.000       resrch12    
+ rch1220080818           1.69020          1.000       resrch12    
+ rch1220080908           1.74036          1.000       resrch12    
+ rch1220080930           1.04139          1.000       resrch12    
+ rch1720070621           1.74819          1.000       resrch17    
+ rch1720070719           1.64345          1.000       resrch17    
+ rch1720070817           1.99564          1.000       resrch17    
+ rch1720070913           1.91908          1.000       resrch17    
+ rch1720071016           1.44716          1.000       resrch17    
+ rch1720071114           1.59107          1.000       resrch17    
+ rch1720071204           1.74819          1.000       resrch17    
+ rch1720071205           1.76343          1.000       resrch17    
+ rch1720071206           1.63347          1.000       resrch17    
+ rch1720080104           2.41497          1.000       resrch17    
+ rch1720080206           1.25527          1.000       resrch17    
+ rch1720080304           1.14613          1.000       resrch17    
+ rch1720080408           1.49136          1.000       resrch17    
+ rch1720080506           1.30103          1.000       resrch17    
+ rch1720081111           1.93450          1.000       resrch17    
+ rch1720081112           2.14613          1.000       resrch17    
+ rch1720081113           2.61278          1.000       resrch17    
+ rch1720091019           1.27875          1.000       resrch17    
+ rch1720091116           1.27875          1.000       resrch17    
+ rch1720091214           1.30103          1.000       resrch17    
+ rch1720100104          0.716003          1.000       resrch17    
+ rch1720100124           1.17609          1.000       resrch17    
+ rch1720100218           1.49136          1.000       resrch17    
+ rch1720100308          0.986772          1.000       resrch17    
+ rch1720100329           2.66276          1.000       resrch17    
+ rch1720100419           1.57978          1.000       resrch17    
+ rch1720100510           1.43136          1.000       resrch17    
+ rch1720100602           3.04139          1.000       resrch17    
+ rch1720100621           1.81954          1.000       resrch17    
+ rch1720100712           1.95424          1.000       resrch17    
+ rch1720100802           1.98227          1.000       resrch17    
+ rch1720100823           1.67210          1.000       resrch17    
+ rch1720100913           1.53148          1.000       resrch17    
+ rch1720101004          0.477121          1.000       resrch17    
+ rch1720101025           2.69897          1.000       resrch17    
+ rch1720101117           1.38021          1.000       resrch17    
+ rch1720101206           1.44716          1.000       resrch17    
+ rch1720101227           1.27875          1.000       resrch17    
+ rch1820070621           1.39794          1.000       resrch18    
+ rch1820070719           1.44716          1.000       resrch18    
+ rch1820070817           1.74819          1.000       resrch18    
+ rch1820070913           1.41497          1.000       resrch18    
+ rch1820071016           2.04139          1.000       resrch18    
+ rch1820071114           1.43136          1.000       resrch18    
+ rch1820080104           1.69020          1.000       resrch18    
+ rch1820080206           1.00000          1.000       resrch18    
+ rch1820080304           1.14613          1.000       resrch18    
+ rch1820080408           1.59107          1.000       resrch18    
+ rch1820080506           1.49136          1.000       resrch18    
+ rch0420070817dig        2.64345          1.000       digress406  
+ rch0420070913dig        2.83885          1.000       digress406  
+ rch0420080613dig        2.99123          1.000       digress406  
+ rch0420080707dig        3.04139          1.000       digress406  
+ rch0420080818dig        2.63849          1.000       digress406  
+ rch0420080908dig        2.71600          1.000       digress406  
+ rch0420080930dig        2.69020          1.000       digress406  
+ rch0420100329dig        2.88649          1.000       digress406  
+ rch0420100602dig        2.93952          1.000       digress406  
+ rch0420100802dig        3.23045          1.000       digress406  
+ rch0420100913dig        2.66276          1.000       digress406  
+ rch0420101025dig        2.75588          1.000       digress406  
+ rch1720081113dig        2.61278          1.000       digress406  
+ rch1720100329dig        2.66276          1.000       digress406  
+ rch1720100602dig        3.04139          1.000       digress406  
+ rch1720101025dig        2.69897          1.000       digress406  
+
+
+Control settings:-
+
+   Initial lambda                                               :  10.000    
+   Lambda adjustment factor                                     : iteration-dependent
+   Value of variable governing adjustment                       : -3.0000    
+   Sufficient new/old phi ratio per optimisation iteration      : 0.30000    
+   Limiting relative phi reduction between lambdas              : 3.00000E-02
+   Maximum trial lambdas per iteration                          :  10
+   Forgive model run failure during lamda testing               : no
+   Forgive model run failure during Jacobian runs               : no
+
+   Perform Broyden's update of Jacobian matrix                  : yes
+   Maximum number of updates per iteration                      : 999
+   Undertake observation re-referencing                         : no
+
+   Maximum  factor  parameter change (factor-limited changes)   :  5.0000
+   Maximum relative parameter change (relative-limited changes) : na
+   Fraction of initial parameter values used in computing
+   change limit for near-zero parameters                        : 1.00000E-03
+   Allow bending of parameter upgrade vector                    : no
+   Allow parameters to stick to their bounds                    : no
+
+   Relative phi reduction below which to begin use of
+   central derivatives                                          : 0.10000             
+   Iteration at which to first consider derivatives switch      :   1
+
+   Relative phi reduction indicating convergence                : 0.50000E-02
+   Number of phi values required within this range              :   4
+   Maximum number of consecutive failures to lower phi          :   4
+   Minimal relative parameter change indicating convergence     : 0.50000E-02
+   Number of consecutive iterations with minimal param change   :   4
+   Maximum number of optimisation iterations                    :   5
+
+   Attempt automatic user intervention                          : no
+
+   Attempt reuse of parameter sensitivities                     : no
+
+   Scale parameters by their bounds                             : no
+
+
+File saving options: -
+
+   Save best JCO file                                           : yes
+   Save multiple JCO files                                      : no
+   Save multiple REI files                                      : no
+   Save multiple PAR files                                      : no
+
+
+                            OPTIMISATION RECORD
+
+
+INITIAL CONDITIONS: 
+   Sum of squared weighted residuals (ie phi)               =   52.520    
+   Contribution to phi from observation group "resrch04"    =   15.185    
+   Contribution to phi from observation group "resrch09"    =   5.2188    
+   Contribution to phi from observation group "resrch12"    =   7.8941    
+   Contribution to phi from observation group "resrch17"    =   14.742    
+   Contribution to phi from observation group "resrch18"    =   4.0036    
+   Contribution to phi from observation group "digress406"  =   5.4763    
+
+      Current parameter values
+      pwqsop           1.50000    
+      fwqsop           3.00000    
+      rwqsop           1.87500    
+      fstdec           1.15000    
+      stckdncc         10.0000    
+      baccc           2.835000E+09
+      stracfcc01      8.454400E-03
+      stracfcc02      4.342600E-03
+      stracfcc04      7.264200E-04
+      stracfcc05      1.651717E-02
+      stracfcc06      7.949639E-02
+      stracfcc07      3.264901E-02
+      stracfcc08      2.190678E-02
+      stracfcc09       1.61352    
+      stracfcc10      0.636767    
+      stracfcc11      0.219975    
+      stracfcc12       1.01211    
+      stracfcc13      0.189291    
+      stracfcc14      0.147843    
+      stracfcc16      0.516508    
+      stracfcc17      0.218437    
+      stracfcc18       10.0130    
+      stracpcc01       80.0000    
+      stracpcc02       31.0000    
+      stracpcc04       54.0000    
+      stracpcc05       61.0000    
+      stracpcc06       31.0000    
+      stracpcc07       71.0000    
+      stracpcc08       32.0000    
+      stracpcc09       7.00000    
+      stracpcc10       12.5286    
+      stracpcc11       8.04832    
+      stracpcc12       54.3128    
+      stracpcc13       25.0000    
+      stracpcc14       5.00000    
+      stracpcc16       32.0000    
+      stracpcc17       49.0000    
+      stracpcc18       15.0169    
+      instrpcc         12.5000    
+      instrfcc         37.5000    
+      bachosp         7.600000E+11
+      bacposp         4.750000E+09
+      frpr74osp        22.5000    
+      fr7486osp        15.0000    
+      frpt86osp        3.75000    
+      dtstosp01        25.5532    
+      dtstosp02        49.7965    
+      dtstosp04        100.000    
+      dtstosp05       1.000000E-04
+      dtstosp06       1.000000E-04
+      dtstosp07       1.000000E-04
+      dtstosp08       2.430586E-04
+      dtstosp09       0.162210    
+      dtstosp10        50.0000    
+      dtstosp11        50.0000    
+      dtstosp12       2.399168E-04
+      dtstosp13        13.5673    
+      dtstosp14       5.087900E-02
+      dtstosp16       4.114500E-02
+      dtstosp17       1.000000E-04
+      dtstosp18        100.000    
+      adbeav          7.500000E-03
+      instrbeav        31.2500    
+      bacbeav          196650.    
+      adcoyt          3.606300E-06
+      instrcoyt        1.00000    
+      baccoyt         9.000012E+08
+      stracdeer        50.0000    
+      addeer          4.700000E-04
+      instrdeer        1.00000    
+      bacdeer         1.837500E+08
+      ads1duck        2.500000E-02
+      ads2duck        2.500000E-04
+      instrduck        99.9999    
+      bacduck         8.000000E+08
+      ads1elk         3.000000E-03
+      ads2elk         4.500000E-02
+      pps1elk          9.95000    
+      pfs1elk          1.92089    
+      pps2elk          9.95000    
+      pfs2elk          9.95000    
+      bacelk          6.650000E+08
+      ads1gese        1.388890E-02
+      ads2gese        1.851850E-06
+      instrgese        93.7500    
+      bacgese         8.000000E+08
+      adgull          4.545500E-05
+      instrgull        47.5000    
+      bacgull         2.390001E+09
+      adheeg          1.379400E-05
+      instrheeg        99.0000    
+      bacheeg         4.302000E+09
+      adotter         0.300000    
+      instrotter       31.1640    
+      bacotter        1.966500E+07
+      adracn          4.729682E-03
+      instrracn        5.00039    
+      bacracn         4.750000E+07
+
+
+OPTIMISATION ITERATION NO.        : 1
+   Model calls so far             : 1
+   Starting phi for this iteration                          :   52.520    
+   Contribution to phi from observation group "resrch04"    :   15.185    
+   Contribution to phi from observation group "resrch09"    :   5.2188    
+   Contribution to phi from observation group "resrch12"    :   7.8941    
+   Contribution to phi from observation group "resrch17"    :   14.742    
+   Contribution to phi from observation group "resrch18"    :   4.0036    
+   Contribution to phi from observation group "digress406"  :   5.4763    
+
+   Parameter "pwqsop" has no effect on observations.
+   Parameter "fwqsop" has no effect on observations.
+   Parameter "rwqsop" has no effect on observations.
+   Parameter "fstdec" has no effect on observations.
+   Parameter "stracfcc01" has no effect on observations.
+   Parameter "stracfcc02" has no effect on observations.
+   Parameter "stracfcc04" has no effect on observations.
+   Parameter "stracfcc05" has no effect on observations.
+   Parameter "stracfcc06" has no effect on observations.
+   Parameter "stracfcc07" has no effect on observations.
+   Parameter "stracfcc08" has no effect on observations.
+   Parameter "stracfcc10" has no effect on observations.
+   Parameter "stracfcc11" has no effect on observations.
+   Parameter "stracfcc12" has no effect on observations.
+   Parameter "stracfcc13" has no effect on observations.
+   Parameter "stracfcc14" has no effect on observations.
+   Parameter "stracfcc18" has no effect on observations.
+   Parameter "stracpcc18" has no effect on observations.
+   Parameter "frpr74osp" has no effect on observations.
+   Parameter "fr7486osp" has no effect on observations.
+   Parameter "frpt86osp" has no effect on observations.
+   Parameter "dtstosp04" has no effect on observations.
+   Parameter "dtstosp05" has no effect on observations.
+   Parameter "dtstosp06" has no effect on observations.
+   Parameter "dtstosp07" has no effect on observations.
+   Parameter "dtstosp08" has no effect on observations.
+   Parameter "dtstosp10" has no effect on observations.
+   Parameter "dtstosp11" has no effect on observations.
+   Parameter "dtstosp12" has no effect on observations.
+   Parameter "dtstosp14" has no effect on observations.
+   Parameter "dtstosp16" has no effect on observations.
+   Parameter "dtstosp17" has no effect on observations.
+   Parameter "adbeav" has no effect on observations.
+   Parameter "instrbeav" has no effect on observations.
+   Parameter "adcoyt" has no effect on observations.
+   Parameter "instrcoyt" has no effect on observations.
+   Parameter "baccoyt" has no effect on observations.
+   Parameter "stracdeer" has no effect on observations.
+   Parameter "addeer" has no effect on observations.
+   Parameter "instrdeer" has no effect on observations.
+   Parameter "ads1duck" has no effect on observations.
+   Parameter "ads2duck" has no effect on observations.
+   Parameter "instrduck" has no effect on observations.
+   Parameter "bacduck" has no effect on observations.
+   Parameter "pps1elk" has no effect on observations.
+   Parameter "pfs1elk" has no effect on observations.
+   Parameter "pps2elk" has no effect on observations.
+   Parameter "pfs2elk" has no effect on observations.
+   Parameter "ads1gese" has no effect on observations.
+   Parameter "ads2gese" has no effect on observations.
+   Parameter "instrgese" has no effect on observations.
+   Parameter "bacgese" has no effect on observations.
+   Parameter "adgull" has no effect on observations.
+   Parameter "instrgull" has no effect on observations.
+   Parameter "bacgull" has no effect on observations.
+   Parameter "adheeg" has no effect on observations.
+   Parameter "instrheeg" has no effect on observations.
+   Parameter "bacheeg" has no effect on observations.
+   Parameter "instrotter" has no effect on observations.
+   Parameter "instrracn" has no effect on observations.
+       param "stracpcc04" frozen: gradient and update vectors out of bounds
+       param "stracpcc05" frozen: gradient and update vectors out of bounds
+       param "stracpcc06" frozen: gradient and update vectors out of bounds
+       param "stracpcc07" frozen: gradient and update vectors out of bounds
+       param "stracpcc08" frozen: gradient and update vectors out of bounds
+       param "stracpcc09" frozen: gradient and update vectors out of bounds
+       param "instrpcc" frozen: gradient and update vectors out of bounds
+       param "bachosp" frozen: gradient and update vectors out of bounds
+       param "bacbeav" frozen: gradient and update vectors out of bounds
+       param "ads1elk" frozen: gradient and update vectors out of bounds
+       param "ads2elk" frozen: gradient and update vectors out of bounds
+       param "bacelk" frozen: gradient and update vectors out of bounds
+       param "adotter" frozen: gradient and update vectors out of bounds
+       param "bacotter" frozen: gradient and update vectors out of bounds
+       param "bacracn" frozen: gradient and update vectors out of bounds
+       param "stckdncc" frozen: gradient and update vectors out of bounds
+       param "stracpcc13" frozen: gradient and update vectors out of bounds
+       param "stracpcc14" frozen: gradient and update vectors out of bounds
+       param "stracpcc16" frozen: gradient and update vectors out of bounds
+       param "stracpcc17" frozen: gradient and update vectors out of bounds
+       param "bacposp" frozen: gradient and update vectors out of bounds
+       param "dtstosp18" frozen: gradient and update vectors out of bounds
+       param "stracpcc01" frozen: - update vector out of bounds
+       param "stracpcc02" frozen: - update vector out of bounds
+       param "instrfcc" frozen: - update vector out of bounds
+
+       Lambda =   10.000     ----->
+          Phi =   52.305      (  0.996 of starting phi)
+
+       Broyden's update of Jacobian matrix undertaken.
+
+       Lambda =   4.6416     ----->
+          Phi =   52.412      (  0.998 of starting phi)
+
+       Broyden's update of Jacobian matrix undertaken.
+
+       Lambda =   21.544     ----->
+          Phi =   52.294      (  0.996 of starting phi)
+
+   No more lambdas: relative phi reduction between lambdas less than 0.0300
+   Lowest phi this iteration:   52.294    
+   Relative phi reduction between optimisation iterations less than 0.1000
+   Switch to central derivatives calculation
+
+      Current parameter values                 Previous parameter values
+      pwqsop           1.50000                 pwqsop            1.50000    
+      fwqsop           3.00000                 fwqsop            3.00000    
+      rwqsop           1.87500                 rwqsop            1.87500    
+      fstdec           1.15000                 fstdec            1.15000    
+      stckdncc         10.0000                 stckdncc          10.0000    
+      baccc           2.565000E+09             baccc            2.835000E+09
+      stracfcc01      8.454400E-03             stracfcc01       8.454400E-03
+      stracfcc02      4.342600E-03             stracfcc02       4.342600E-03
+      stracfcc04      7.264200E-04             stracfcc04       7.264200E-04
+      stracfcc05      1.651717E-02             stracfcc05       1.651717E-02
+      stracfcc06      7.949639E-02             stracfcc06       7.949639E-02
+      stracfcc07      3.264901E-02             stracfcc07       3.264901E-02
+      stracfcc08      2.190678E-02             stracfcc08       2.190678E-02
+      stracfcc09       1.61318                 stracfcc09        1.61352    
+      stracfcc10      0.636767                 stracfcc10       0.636767    
+      stracfcc11      0.219975                 stracfcc11       0.219975    
+      stracfcc12       1.01211                 stracfcc12        1.01211    
+      stracfcc13      0.189291                 stracfcc13       0.189291    
+      stracfcc14      0.147843                 stracfcc14       0.147843    
+      stracfcc16      0.516399                 stracfcc16       0.516508    
+      stracfcc17      0.218391                 stracfcc17       0.218437    
+      stracfcc18       10.0130                 stracfcc18        10.0130    
+      stracpcc01       80.0000                 stracpcc01        80.0000    
+      stracpcc02       31.0000                 stracpcc02        31.0000    
+      stracpcc04       54.0000                 stracpcc04        54.0000    
+      stracpcc05       61.0000                 stracpcc05        61.0000    
+      stracpcc06       31.0000                 stracpcc06        31.0000    
+      stracpcc07       71.0000                 stracpcc07        71.0000    
+      stracpcc08       32.0000                 stracpcc08        32.0000    
+      stracpcc09       7.00000                 stracpcc09        7.00000    
+      stracpcc10       12.5259                 stracpcc10        12.5286    
+      stracpcc11       7.98684                 stracpcc11        8.04832    
+      stracpcc12       53.9726                 stracpcc12        54.3128    
+      stracpcc13       25.0000                 stracpcc13        25.0000    
+      stracpcc14       5.00000                 stracpcc14        5.00000    
+      stracpcc16       32.0000                 stracpcc16        32.0000    
+      stracpcc17       49.0000                 stracpcc17        49.0000    
+      stracpcc18       15.0169                 stracpcc18        15.0169    
+      instrpcc         12.5000                 instrpcc          12.5000    
+      instrfcc         37.5000                 instrfcc          37.5000    
+      bachosp         7.600000E+11             bachosp          7.600000E+11
+      bacposp         4.750000E+09             bacposp          4.750000E+09
+      frpr74osp        22.5000                 frpr74osp         22.5000    
+      fr7486osp        15.0000                 fr7486osp         15.0000    
+      frpt86osp        3.75000                 frpt86osp         3.75000    
+      dtstosp01        29.5998                 dtstosp01         25.5532    
+      dtstosp02        47.5762                 dtstosp02         49.7965    
+      dtstosp04        100.000                 dtstosp04         100.000    
+      dtstosp05       1.000000E-04             dtstosp05        1.000000E-04
+      dtstosp06       1.000000E-04             dtstosp06        1.000000E-04
+      dtstosp07       1.000000E-04             dtstosp07        1.000000E-04
+      dtstosp08       2.430586E-04             dtstosp08        2.430586E-04
+      dtstosp09       0.156755                 dtstosp09        0.162210    
+      dtstosp10        50.0000                 dtstosp10         50.0000    
+      dtstosp11        50.0000                 dtstosp11         50.0000    
+      dtstosp12       2.399168E-04             dtstosp12        2.399168E-04
+      dtstosp13        14.0586                 dtstosp13         13.5673    
+      dtstosp14       5.087900E-02             dtstosp14        5.087900E-02
+      dtstosp16       4.114500E-02             dtstosp16        4.114500E-02
+      dtstosp17       1.000000E-04             dtstosp17        1.000000E-04
+      dtstosp18        100.000                 dtstosp18         100.000    
+      adbeav          7.500000E-03             adbeav           7.500000E-03
+      instrbeav        31.2500                 instrbeav         31.2500    
+      bacbeav          196650.                 bacbeav           196650.    
+      adcoyt          3.606300E-06             adcoyt           3.606300E-06
+      instrcoyt        1.00000                 instrcoyt         1.00000    
+      baccoyt         9.000012E+08             baccoyt          9.000012E+08
+      stracdeer        50.0000                 stracdeer         50.0000    
+      addeer          4.700000E-04             addeer           4.700000E-04
+      instrdeer        1.00000                 instrdeer         1.00000    
+      bacdeer         1.836909E+08             bacdeer          1.837500E+08
+      ads1duck        2.500000E-02             ads1duck         2.500000E-02
+      ads2duck        2.500000E-04             ads2duck         2.500000E-04
+      instrduck        99.9999                 instrduck         99.9999    
+      bacduck         8.000000E+08             bacduck          8.000000E+08
+      ads1elk         3.000000E-03             ads1elk          3.000000E-03
+      ads2elk         4.500000E-02             ads2elk          4.500000E-02
+      pps1elk          9.95000                 pps1elk           9.95000    
+      pfs1elk          1.92089                 pfs1elk           1.92089    
+      pps2elk          9.95000                 pps2elk           9.95000    
+      pfs2elk          9.95000                 pfs2elk           9.95000    
+      bacelk          6.650000E+08             bacelk           6.650000E+08
+      ads1gese        1.388890E-02             ads1gese         1.388890E-02
+      ads2gese        1.851850E-06             ads2gese         1.851850E-06
+      instrgese        93.7500                 instrgese         93.7500    
+      bacgese         8.000000E+08             bacgese          8.000000E+08
+      adgull          4.545500E-05             adgull           4.545500E-05
+      instrgull        47.5000                 instrgull         47.5000    
+      bacgull         2.390001E+09             bacgull          2.390001E+09
+      adheeg          1.379400E-05             adheeg           1.379400E-05
+      instrheeg        99.0000                 instrheeg         99.0000    
+      bacheeg         4.302000E+09             bacheeg          4.302000E+09
+      adotter         0.300000                 adotter          0.300000    
+      instrotter       31.1640                 instrotter        31.1640    
+      bacotter        1.966500E+07             bacotter         1.966500E+07
+      adracn          4.693557E-03             adracn           4.729682E-03
+      instrracn        5.00039                 instrracn         5.00039    
+      bacracn         4.750000E+07             bacracn          4.750000E+07
+   Maximum   factor change:  1.158     ["dtstosp01"]
+   Maximum relative change: 0.1584     ["dtstosp01"]
+
+
+OPTIMISATION ITERATION NO.        : 2
+   Model calls so far             : 102
+   Starting phi for this iteration                          :   52.294    
+   Contribution to phi from observation group "resrch04"    :   14.950    
+   Contribution to phi from observation group "resrch09"    :   5.2435    
+   Contribution to phi from observation group "resrch12"    :   7.9266    
+   Contribution to phi from observation group "resrch17"    :   14.655    
+   Contribution to phi from observation group "resrch18"    :   4.0011    
+   Contribution to phi from observation group "digress406"  :   5.5173    
+   All frozen parameters freed.
+
+   Parameter "pwqsop" has no effect on observations.
+   Parameter "fwqsop" has no effect on observations.
+   Parameter "stracfcc02" has no effect on observations.
+   Parameter "stracfcc04" has no effect on observations.
+   Parameter "stracfcc05" has no effect on observations.
+   Parameter "stracfcc07" has no effect on observations.
+   Parameter "stracfcc18" has no effect on observations.
+   Parameter "fr7486osp" has no effect on observations.
+   Parameter "dtstosp04" has no effect on observations.
+   Parameter "dtstosp10" has no effect on observations.
+   Parameter "dtstosp11" has no effect on observations.
+   Parameter "dtstosp12" has no effect on observations.
+   Parameter "dtstosp16" has no effect on observations.
+   Parameter "instrcoyt" has no effect on observations.
+   Parameter "baccoyt" has no effect on observations.
+   Parameter "stracdeer" has no effect on observations.
+   Parameter "instrdeer" has no effect on observations.
+   Parameter "bacduck" has no effect on observations.
+   Parameter "bacgese" has no effect on observations.
+   Parameter "instrgull" has no effect on observations.
+   Parameter "bacgull" has no effect on observations.
+       param "instrfcc" frozen: gradient and update vectors out of bounds
+       param "bacposp" frozen: gradient and update vectors out of bounds
+       param "frpr74osp" frozen: gradient and update vectors out of bounds
+       param "dtstosp17" frozen: gradient and update vectors out of bounds
+       param "dtstosp18" frozen: gradient and update vectors out of bounds
+       param "instrgese" frozen: gradient and update vectors out of bounds
+       param "bacheeg" frozen: gradient and update vectors out of bounds
+       param "adotter" frozen: gradient and update vectors out of bounds
+       param "bacracn" frozen: gradient and update vectors out of bounds
+       param "stracpcc05" frozen: gradient and update vectors out of bounds
+       param "stracpcc07" frozen: gradient and update vectors out of bounds
+       param "stracpcc09" frozen: gradient and update vectors out of bounds
+       param "stracpcc13" frozen: gradient and update vectors out of bounds
+       param "stracpcc16" frozen: gradient and update vectors out of bounds
+       param "stracpcc17" frozen: gradient and update vectors out of bounds
+       param "instrpcc" frozen: gradient and update vectors out of bounds
+       param "bachosp" frozen: gradient and update vectors out of bounds
+       param "adbeav" frozen: gradient and update vectors out of bounds
+       param "instrduck" frozen: gradient and update vectors out of bounds
+       param "ads2elk" frozen: gradient and update vectors out of bounds
+       param "bacelk" frozen: gradient and update vectors out of bounds
+       param "stckdncc" frozen: gradient and update vectors out of bounds
+       param "stracpcc06" frozen: gradient and update vectors out of bounds
+       param "stracpcc08" frozen: gradient and update vectors out of bounds
+       param "dtstosp06" frozen: gradient and update vectors out of bounds
+       param "pps1elk" frozen: gradient and update vectors out of bounds
+       param "pps2elk" frozen: gradient and update vectors out of bounds
+       param "pfs2elk" frozen: gradient and update vectors out of bounds
+       param "ads2gese" frozen: gradient and update vectors out of bounds
+       param "bacotter" frozen: gradient and update vectors out of bounds
+       param "baccc" frozen: gradient and update vectors out of bounds
+       param "rwqsop" frozen: - update vector out of bounds
+       param "stracpcc01" frozen: - update vector out of bounds
+       param "stracpcc02" frozen: - update vector out of bounds
+       param "stracpcc04" frozen: - update vector out of bounds
+       param "ads1duck" frozen: - update vector out of bounds
+       param "ads1elk" frozen: - update vector out of bounds
+       param "stracpcc14" frozen: - update vector out of bounds
+       param "dtstosp07" frozen: - update vector out of bounds
+       param "bacbeav" frozen: - update vector out of bounds
+
+       Lambda =   21.544     ----->
+          Phi =   52.289      (  1.000 of starting phi)
+
+       Broyden's update of Jacobian matrix undertaken.
+
+       Lambda =   7.7426     ----->
+          Phi =   52.289      (  1.000 of starting phi)
+
+       Broyden's update of Jacobian matrix undertaken.
+
+       Lambda =   59.948     ----->
+          Phi =   52.289      (  1.000 of starting phi)
+
+   No more lambdas: relative phi reduction between lambdas less than 0.0300
+   Lowest phi this iteration:   52.289    
+
+      Current parameter values                 Previous parameter values
+      pwqsop           1.50000                 pwqsop            1.50000    
+      fwqsop           3.00000                 fwqsop            3.00000    
+      rwqsop           1.87500                 rwqsop            1.87500    
+      fstdec           1.15000                 fstdec            1.15000    
+      stckdncc         10.0000                 stckdncc          10.0000    
+      baccc           2.565000E+09             baccc            2.565000E+09
+      stracfcc01      8.454400E-03             stracfcc01       8.454400E-03
+      stracfcc02      4.342600E-03             stracfcc02       4.342600E-03
+      stracfcc04      7.264200E-04             stracfcc04       7.264200E-04
+      stracfcc05      1.651717E-02             stracfcc05       1.651717E-02
+      stracfcc06      7.949426E-02             stracfcc06       7.949639E-02
+      stracfcc07      3.264901E-02             stracfcc07       3.264901E-02
+      stracfcc08      2.190678E-02             stracfcc08       2.190678E-02
+      stracfcc09       1.61273                 stracfcc09        1.61318    
+      stracfcc10      0.636767                 stracfcc10       0.636767    
+      stracfcc11      0.219969                 stracfcc11       0.219975    
+      stracfcc12       1.01211                 stracfcc12        1.01211    
+      stracfcc13      0.189291                 stracfcc13       0.189291    
+      stracfcc14      0.147839                 stracfcc14       0.147843    
+      stracfcc16      0.516385                 stracfcc16       0.516399    
+      stracfcc17      0.218385                 stracfcc17       0.218391    
+      stracfcc18       10.0130                 stracfcc18        10.0130    
+      stracpcc01       80.0000                 stracpcc01        80.0000    
+      stracpcc02       31.0000                 stracpcc02        31.0000    
+      stracpcc04       54.0000                 stracpcc04        54.0000    
+      stracpcc05       61.0000                 stracpcc05        61.0000    
+      stracpcc06       31.0000                 stracpcc06        31.0000    
+      stracpcc07       71.0000                 stracpcc07        71.0000    
+      stracpcc08       32.0000                 stracpcc08        32.0000    
+      stracpcc09       7.00000                 stracpcc09        7.00000    
+      stracpcc10       12.4984                 stracpcc10        12.5259    
+      stracpcc11       7.87363                 stracpcc11        7.98684    
+      stracpcc12       53.4670                 stracpcc12        53.9726    
+      stracpcc13       25.0000                 stracpcc13        25.0000    
+      stracpcc14       5.00000                 stracpcc14        5.00000    
+      stracpcc16       32.0000                 stracpcc16        32.0000    
+      stracpcc17       49.0000                 stracpcc17        49.0000    
+      stracpcc18       15.0169                 stracpcc18        15.0169    
+      instrpcc         12.5000                 instrpcc          12.5000    
+      instrfcc         37.5000                 instrfcc          37.5000    
+      bachosp         7.600000E+11             bachosp          7.600000E+11
+      bacposp         4.750000E+09             bacposp          4.750000E+09
+      frpr74osp        22.5000                 frpr74osp         22.5000    
+      fr7486osp        15.0000                 fr7486osp         15.0000    
+      frpt86osp        3.75000                 frpt86osp         3.75000    
+      dtstosp01        29.8320                 dtstosp01         29.5998    
+      dtstosp02        48.0178                 dtstosp02         47.5762    
+      dtstosp04        100.000                 dtstosp04         100.000    
+      dtstosp05       1.002787E-04             dtstosp05        1.000000E-04
+      dtstosp06       1.000000E-04             dtstosp06        1.000000E-04
+      dtstosp07       1.000000E-04             dtstosp07        1.000000E-04
+      dtstosp08       2.430586E-04             dtstosp08        2.430586E-04
+      dtstosp09       0.143416                 dtstosp09        0.156755    
+      dtstosp10        50.0000                 dtstosp10         50.0000    
+      dtstosp11        50.0000                 dtstosp11         50.0000    
+      dtstosp12       2.399168E-04             dtstosp12        2.399168E-04
+      dtstosp13        14.0254                 dtstosp13         14.0586    
+      dtstosp14       5.087900E-02             dtstosp14        5.087900E-02
+      dtstosp16       4.114500E-02             dtstosp16        4.114500E-02
+      dtstosp17       1.000000E-04             dtstosp17        1.000000E-04
+      dtstosp18        100.000                 dtstosp18         100.000    
+      adbeav          7.500000E-03             adbeav           7.500000E-03
+      instrbeav        31.2500                 instrbeav         31.2500    
+      bacbeav          196650.                 bacbeav           196650.    
+      adcoyt          3.606300E-06             adcoyt           3.606300E-06
+      instrcoyt        1.00000                 instrcoyt         1.00000    
+      baccoyt         9.000012E+08             baccoyt          9.000012E+08
+      stracdeer        50.0000                 stracdeer         50.0000    
+      addeer          4.700000E-04             addeer           4.700000E-04
+      instrdeer        1.00000                 instrdeer         1.00000    
+      bacdeer         1.837500E+08             bacdeer          1.836909E+08
+      ads1duck        2.500000E-02             ads1duck         2.500000E-02
+      ads2duck        2.500000E-04             ads2duck         2.500000E-04
+      instrduck        99.9999                 instrduck         99.9999    
+      bacduck         8.000000E+08             bacduck          8.000000E+08
+      ads1elk         3.000000E-03             ads1elk          3.000000E-03
+      ads2elk         4.500000E-02             ads2elk          4.500000E-02
+      pps1elk          9.95000                 pps1elk           9.95000    
+      pfs1elk          1.92089                 pfs1elk           1.92089    
+      pps2elk          9.95000                 pps2elk           9.95000    
+      pfs2elk          9.95000                 pfs2elk           9.95000    
+      bacelk          6.650000E+08             bacelk           6.650000E+08
+      ads1gese        1.388890E-02             ads1gese         1.388890E-02
+      ads2gese        1.851850E-06             ads2gese         1.851850E-06
+      instrgese        93.7500                 instrgese         93.7500    
+      bacgese         8.000000E+08             bacgese          8.000000E+08
+      adgull          4.545500E-05             adgull           4.545500E-05
+      instrgull        47.5000                 instrgull         47.5000    
+      bacgull         2.390001E+09             bacgull          2.390001E+09
+      adheeg          1.379400E-05             adheeg           1.379400E-05
+      instrheeg        99.0000                 instrheeg         99.0000    
+      bacheeg         4.302000E+09             bacheeg          4.302000E+09
+      adotter         0.300000                 adotter          0.300000    
+      instrotter       31.2500                 instrotter        31.1640    
+      bacotter        1.966500E+07             bacotter         1.966500E+07
+      adracn          4.496421E-03             adracn           4.693557E-03
+      instrracn        5.55266                 instrracn         5.00039    
+      bacracn         4.750000E+07             bacracn          4.750000E+07
+   Maximum   factor change:  1.110     ["instrracn"]
+   Maximum relative change: 0.1104     ["instrracn"]
+
+
+OPTIMISATION ITERATION NO.        : 3
+   Model calls so far             : 301
+   Starting phi for this iteration                          :   52.289    
+   Contribution to phi from observation group "resrch04"    :   14.894    
+   Contribution to phi from observation group "resrch09"    :   5.2654    
+   Contribution to phi from observation group "resrch12"    :   7.9688    
+   Contribution to phi from observation group "resrch17"    :   14.652    
+   Contribution to phi from observation group "resrch18"    :   4.0093    
+   Contribution to phi from observation group "digress406"  :   5.4996    
+   All frozen parameters freed.
+
+   Parameter "pwqsop" has no effect on observations.
+   Parameter "fwqsop" has no effect on observations.
+   Parameter "stracfcc02" has no effect on observations.
+   Parameter "stracfcc04" has no effect on observations.
+   Parameter "stracfcc06" has no effect on observations.
+   Parameter "stracfcc07" has no effect on observations.
+   Parameter "stracfcc18" has no effect on observations.
+   Parameter "fr7486osp" has no effect on observations.
+   Parameter "dtstosp04" has no effect on observations.
+   Parameter "dtstosp10" has no effect on observations.
+   Parameter "dtstosp11" has no effect on observations.
+   Parameter "dtstosp16" has no effect on observations.
+   Parameter "instrcoyt" has no effect on observations.
+   Parameter "baccoyt" has no effect on observations.
+   Parameter "stracdeer" has no effect on observations.
+   Parameter "instrdeer" has no effect on observations.
+   Parameter "bacduck" has no effect on observations.
+   Parameter "bacgese" has no effect on observations.
+   Parameter "instrgull" has no effect on observations.
+   Parameter "bacgull" has no effect on observations.
+       param "instrfcc" frozen: gradient and update vectors out of bounds
+       param "bacposp" frozen: gradient and update vectors out of bounds
+       param "frpr74osp" frozen: gradient and update vectors out of bounds
+       param "dtstosp06" frozen: gradient and update vectors out of bounds
+       param "dtstosp07" frozen: gradient and update vectors out of bounds
+       param "dtstosp17" frozen: gradient and update vectors out of bounds
+       param "dtstosp18" frozen: gradient and update vectors out of bounds
+       param "bacbeav" frozen: gradient and update vectors out of bounds
+       param "pps1elk" frozen: gradient and update vectors out of bounds
+       param "pps2elk" frozen: gradient and update vectors out of bounds
+       param "pfs2elk" frozen: gradient and update vectors out of bounds
+       param "ads2gese" frozen: gradient and update vectors out of bounds
+       param "instrgese" frozen: gradient and update vectors out of bounds
+       param "adotter" frozen: gradient and update vectors out of bounds
+       param "bacracn" frozen: gradient and update vectors out of bounds
+       param "stracpcc05" frozen: gradient and update vectors out of bounds
+       param "stracpcc06" frozen: gradient and update vectors out of bounds
+       param "stracpcc07" frozen: gradient and update vectors out of bounds
+       param "stracpcc08" frozen: gradient and update vectors out of bounds
+       param "stracpcc13" frozen: gradient and update vectors out of bounds
+       param "stracpcc14" frozen: gradient and update vectors out of bounds
+       param "stracpcc16" frozen: gradient and update vectors out of bounds
+       param "stracpcc17" frozen: gradient and update vectors out of bounds
+       param "instrpcc" frozen: gradient and update vectors out of bounds
+       param "bachosp" frozen: gradient and update vectors out of bounds
+       param "instrduck" frozen: gradient and update vectors out of bounds
+       param "ads2elk" frozen: gradient and update vectors out of bounds
+       param "bacelk" frozen: gradient and update vectors out of bounds
+       param "ads1gese" frozen: gradient and update vectors out of bounds
+       param "bacotter" frozen: gradient and update vectors out of bounds
+       param "stckdncc" frozen: gradient and update vectors out of bounds
+       param "baccc" frozen: gradient and update vectors out of bounds
+       param "stracpcc01" frozen: - update vector out of bounds
+       param "stracpcc02" frozen: - update vector out of bounds
+       param "stracpcc04" frozen: - update vector out of bounds
+       param "frpt86osp" frozen: - update vector out of bounds
+       param "instrbeav" frozen: - update vector out of bounds
+       param "addeer" frozen: - update vector out of bounds
+       param "ads1duck" frozen: - update vector out of bounds
+       param "ads2duck" frozen: - update vector out of bounds
+       param "bacheeg" frozen: - update vector out of bounds
+       param "rwqsop" frozen: - update vector out of bounds
+       param "stracpcc09" frozen: - update vector out of bounds
+
+       Lambda =   59.948     ----->
+          Phi =   50.506      (  0.966 of starting phi)
+
+       Broyden's update of Jacobian matrix undertaken.
+       param "bacdeer" frozen: - update vector out of bounds
+
+       Lambda =   15.317     ----->
+          Phi =   49.580      (  0.948 of starting phi)
+
+       Broyden's update of Jacobian matrix undertaken.
+
+       Lambda =   3.9137     ----->
+          Phi =   49.597      (  0.949 of starting phi)
+
+       Broyden's update of Jacobian matrix undertaken.
+       param "adbeav" frozen: - update vector out of bounds
+
+       Lambda =   59.948     ----->
+          Phi =   49.823      (  0.953 of starting phi)
+
+       Broyden's update of Jacobian matrix undertaken.
+
+       Lambda =   15.317     ----->
+          Phi =   49.984      (  0.956 of starting phi)
+
+       Broyden's update of Jacobian matrix undertaken.
+
+       Lambda =   234.62     ----->
+          Phi =   49.860      (  0.954 of starting phi)
+
+   No more lambdas: phi rising
+   Lowest phi this iteration:   49.580    
+
+      Current parameter values                 Previous parameter values
+      pwqsop           1.50000                 pwqsop            1.50000    
+      fwqsop           3.00000                 fwqsop            3.00000    
+      rwqsop           1.87500                 rwqsop            1.87500    
+      fstdec           1.15000                 fstdec            1.15000    
+      stckdncc         10.0000                 stckdncc          10.0000    
+      baccc           2.565000E+09             baccc            2.565000E+09
+      stracfcc01      8.454400E-03             stracfcc01       8.454400E-03
+      stracfcc02      4.342600E-03             stracfcc02       4.342600E-03
+      stracfcc04      7.264200E-04             stracfcc04       7.264200E-04
+      stracfcc05      1.651729E-02             stracfcc05       1.651717E-02
+      stracfcc06      7.949426E-02             stracfcc06       7.949426E-02
+      stracfcc07      3.264901E-02             stracfcc07       3.264901E-02
+      stracfcc08      2.190678E-02             stracfcc08       2.190678E-02
+      stracfcc09       1.61265                 stracfcc09        1.61273    
+      stracfcc10      0.636771                 stracfcc10       0.636767    
+      stracfcc11      0.219961                 stracfcc11       0.219969    
+      stracfcc12       1.01211                 stracfcc12        1.01211    
+      stracfcc13      0.189279                 stracfcc13       0.189291    
+      stracfcc14      0.147834                 stracfcc14       0.147839    
+      stracfcc16      0.516351                 stracfcc16       0.516385    
+      stracfcc17      0.218377                 stracfcc17       0.218385    
+      stracfcc18       10.0130                 stracfcc18        10.0130    
+      stracpcc01       80.0000                 stracpcc01        80.0000    
+      stracpcc02       31.0000                 stracpcc02        31.0000    
+      stracpcc04       54.0000                 stracpcc04        54.0000    
+      stracpcc05       61.0000                 stracpcc05        61.0000    
+      stracpcc06       31.0000                 stracpcc06        31.0000    
+      stracpcc07       71.0000                 stracpcc07        71.0000    
+      stracpcc08       32.0000                 stracpcc08        32.0000    
+      stracpcc09       7.00000                 stracpcc09        7.00000    
+      stracpcc10       12.4972                 stracpcc10        12.4984    
+      stracpcc11       7.86854                 stracpcc11        7.87363    
+      stracpcc12       53.4422                 stracpcc12        53.4670    
+      stracpcc13       25.0000                 stracpcc13        25.0000    
+      stracpcc14       5.00000                 stracpcc14        5.00000    
+      stracpcc16       32.0000                 stracpcc16        32.0000    
+      stracpcc17       49.0000                 stracpcc17        49.0000    
+      stracpcc18       15.0169                 stracpcc18        15.0169    
+      instrpcc         12.5000                 instrpcc          12.5000    
+      instrfcc         37.5000                 instrfcc          37.5000    
+      bachosp         7.600000E+11             bachosp          7.600000E+11
+      bacposp         4.750000E+09             bacposp          4.750000E+09
+      frpr74osp        22.5000                 frpr74osp         22.5000    
+      fr7486osp        15.0000                 fr7486osp         15.0000    
+      frpt86osp        3.75000                 frpt86osp         3.75000    
+      dtstosp01        93.2838                 dtstosp01         29.8320    
+      dtstosp02        10.7088                 dtstosp02         48.0178    
+      dtstosp04        100.000                 dtstosp04         100.000    
+      dtstosp05       1.002809E-04             dtstosp05        1.002787E-04
+      dtstosp06       1.000000E-04             dtstosp06        1.000000E-04
+      dtstosp07       1.000000E-04             dtstosp07        1.000000E-04
+      dtstosp08       2.430604E-04             dtstosp08        2.430586E-04
+      dtstosp09       0.142861                 dtstosp09        0.143416    
+      dtstosp10        50.0000                 dtstosp10         50.0000    
+      dtstosp11        50.0000                 dtstosp11         50.0000    
+      dtstosp12       2.399105E-04             dtstosp12        2.399168E-04
+      dtstosp13        4.18891                 dtstosp13         14.0254    
+      dtstosp14       5.087900E-02             dtstosp14        5.087900E-02
+      dtstosp16       4.114500E-02             dtstosp16        4.114500E-02
+      dtstosp17       1.000000E-04             dtstosp17        1.000000E-04
+      dtstosp18        100.000                 dtstosp18         100.000    
+      adbeav          7.500000E-03             adbeav           7.500000E-03
+      instrbeav        31.2500                 instrbeav         31.2500    
+      bacbeav          196650.                 bacbeav           196650.    
+      adcoyt          3.606300E-06             adcoyt           3.606300E-06
+      instrcoyt        1.00000                 instrcoyt         1.00000    
+      baccoyt         9.000012E+08             baccoyt          9.000012E+08
+      stracdeer        50.0000                 stracdeer         50.0000    
+      addeer          4.700000E-04             addeer           4.700000E-04
+      instrdeer        1.00000                 instrdeer         1.00000    
+      bacdeer         1.837500E+08             bacdeer          1.837500E+08
+      ads1duck        2.500000E-02             ads1duck         2.500000E-02
+      ads2duck        2.500000E-04             ads2duck         2.500000E-04
+      instrduck        99.9999                 instrduck         99.9999    
+      bacduck         8.000000E+08             bacduck          8.000000E+08
+      ads1elk         3.007431E-03             ads1elk          3.000000E-03
+      ads2elk         4.500000E-02             ads2elk          4.500000E-02
+      pps1elk          9.95000                 pps1elk           9.95000    
+      pfs1elk          1.92089                 pfs1elk           1.92089    
+      pps2elk          9.95000                 pps2elk           9.95000    
+      pfs2elk          9.95000                 pfs2elk           9.95000    
+      bacelk          6.650000E+08             bacelk           6.650000E+08
+      ads1gese        1.388890E-02             ads1gese         1.388890E-02
+      ads2gese        1.851850E-06             ads2gese         1.851850E-06
+      instrgese        93.7500                 instrgese         93.7500    
+      bacgese         8.000000E+08             bacgese          8.000000E+08
+      adgull          4.545500E-05             adgull           4.545500E-05
+      instrgull        47.5000                 instrgull         47.5000    
+      bacgull         2.390001E+09             bacgull          2.390001E+09
+      adheeg          1.379400E-05             adheeg           1.379400E-05
+      instrheeg        99.0000                 instrheeg         99.0000    
+      bacheeg         4.302000E+09             bacheeg          4.302000E+09
+      adotter         0.300000                 adotter          0.300000    
+      instrotter       31.2118                 instrotter        31.2500    
+      bacotter        1.966500E+07             bacotter         1.966500E+07
+      adracn          4.483634E-03             adracn           4.496421E-03
+      instrracn        5.55266                 instrracn         5.55266    
+      bacracn         4.750000E+07             bacracn          4.750000E+07
+   Maximum   factor change:  4.484     ["dtstosp02"]
+   Maximum relative change:  2.127     ["dtstosp01"]
+
+
+OPTIMISATION ITERATION NO.        : 4
+   Model calls so far             : 503
+   Starting phi for this iteration                          :   49.580    
+   Contribution to phi from observation group "resrch04"    :   11.507    
+   Contribution to phi from observation group "resrch09"    :   5.6017    
+   Contribution to phi from observation group "resrch12"    :   8.3832    
+   Contribution to phi from observation group "resrch17"    :   13.432    
+   Contribution to phi from observation group "resrch18"    :   3.8480    
+   Contribution to phi from observation group "digress406"  :   6.8078    
+   All frozen parameters freed.
+
+   Parameter "pwqsop" has no effect on observations.
+   Parameter "fwqsop" has no effect on observations.
+   Parameter "stracfcc02" has no effect on observations.
+   Parameter "stracfcc04" has no effect on observations.
+   Parameter "stracfcc06" has no effect on observations.
+   Parameter "stracfcc07" has no effect on observations.
+   Parameter "stracfcc18" has no effect on observations.
+   Parameter "fr7486osp" has no effect on observations.
+   Parameter "dtstosp04" has no effect on observations.
+   Parameter "dtstosp10" has no effect on observations.
+   Parameter "dtstosp11" has no effect on observations.
+   Parameter "dtstosp16" has no effect on observations.
+   Parameter "instrcoyt" has no effect on observations.
+   Parameter "baccoyt" has no effect on observations.
+   Parameter "stracdeer" has no effect on observations.
+   Parameter "instrdeer" has no effect on observations.
+   Parameter "bacduck" has no effect on observations.
+   Parameter "bacgese" has no effect on observations.
+   Parameter "instrgull" has no effect on observations.
+   Parameter "bacgull" has no effect on observations.
+       param "bachosp" frozen: gradient and update vectors out of bounds
+       param "dtstosp18" frozen: gradient and update vectors out of bounds
+       param "bacbeav" frozen: gradient and update vectors out of bounds
+       param "ads2elk" frozen: gradient and update vectors out of bounds
+       param "ads2gese" frozen: gradient and update vectors out of bounds
+       param "instrgese" frozen: gradient and update vectors out of bounds
+       param "adotter" frozen: gradient and update vectors out of bounds
+       param "stckdncc" frozen: gradient and update vectors out of bounds
+       param "baccc" frozen: gradient and update vectors out of bounds
+       param "bacposp" frozen: gradient and update vectors out of bounds
+       param "frpr74osp" frozen: gradient and update vectors out of bounds
+       param "ads2duck" frozen: gradient and update vectors out of bounds
+       param "bacelk" frozen: gradient and update vectors out of bounds
+       param "ads1gese" frozen: gradient and update vectors out of bounds
+       param "stracpcc05" frozen: gradient and update vectors out of bounds
+       param "stracpcc06" frozen: gradient and update vectors out of bounds
+       param "stracpcc07" frozen: gradient and update vectors out of bounds
+       param "stracpcc08" frozen: gradient and update vectors out of bounds
+       param "stracpcc09" frozen: gradient and update vectors out of bounds
+       param "bacotter" frozen: gradient and update vectors out of bounds
+       param "bacracn" frozen: gradient and update vectors out of bounds
+       param "instrpcc" frozen: gradient and update vectors out of bounds
+       param "stracpcc13" frozen: gradient and update vectors out of bounds
+       param "stracpcc16" frozen: gradient and update vectors out of bounds
+       param "stracpcc17" frozen: gradient and update vectors out of bounds
+       param "stracpcc14" frozen: - update vector out of bounds
+       param "adbeav" frozen: - update vector out of bounds
+       param "bacdeer" frozen: - update vector out of bounds
+       param "bacheeg" frozen: - update vector out of bounds
+       param "rwqsop" frozen: - update vector out of bounds
+
+       Lambda =   15.317     ----->
+          Phi =   49.600      (  1.000 times starting phi)
+
+       Broyden's update of Jacobian matrix undertaken.
+
+       Lambda =   6.1677     ----->
+          Phi =   49.602      (  1.000 times starting phi)
+
+       Broyden's update of Jacobian matrix undertaken.
+
+       Lambda =   38.041     ----->
+          Phi =   49.602      (  1.000 times starting phi)
+
+   No more lambdas: phi rising
+   Lowest phi this iteration:   49.600    
+
+      Current parameter values                 Previous parameter values
+      pwqsop           1.50000                 pwqsop            1.50000    
+      fwqsop           3.00000                 fwqsop            3.00000    
+      rwqsop           1.87500                 rwqsop            1.87500    
+      fstdec           1.15000                 fstdec            1.15000    
+      stckdncc         10.0000                 stckdncc          10.0000    
+      baccc           2.565000E+09             baccc            2.565000E+09
+      stracfcc01      8.454400E-03             stracfcc01       8.454400E-03
+      stracfcc02      4.342600E-03             stracfcc02       4.342600E-03
+      stracfcc04      7.264200E-04             stracfcc04       7.264200E-04
+      stracfcc05      1.651729E-02             stracfcc05       1.651729E-02
+      stracfcc06      7.949426E-02             stracfcc06       7.949426E-02
+      stracfcc07      3.264901E-02             stracfcc07       3.264901E-02
+      stracfcc08      2.190678E-02             stracfcc08       2.190678E-02
+      stracfcc09       1.60947                 stracfcc09        1.61265    
+      stracfcc10      0.636688                 stracfcc10       0.636771    
+      stracfcc11      0.219866                 stracfcc11       0.219961    
+      stracfcc12       1.01211                 stracfcc12        1.01211    
+      stracfcc13      0.189024                 stracfcc13       0.189279    
+      stracfcc14      0.147814                 stracfcc14       0.147834    
+      stracfcc16      0.515844                 stracfcc16       0.516351    
+      stracfcc17      0.218331                 stracfcc17       0.218377    
+      stracfcc18       10.0130                 stracfcc18        10.0130    
+      stracpcc01       48.0000                 stracpcc01        80.0000    
+      stracpcc02       19.3634                 stracpcc02        31.0000    
+      stracpcc04       32.2968                 stracpcc04        54.0000    
+      stracpcc05       61.0000                 stracpcc05        61.0000    
+      stracpcc06       31.0000                 stracpcc06        31.0000    
+      stracpcc07       71.0000                 stracpcc07        71.0000    
+      stracpcc08       32.0000                 stracpcc08        32.0000    
+      stracpcc09       7.00000                 stracpcc09        7.00000    
+      stracpcc10       12.4265                 stracpcc10        12.4972    
+      stracpcc11       7.72017                 stracpcc11        7.86854    
+      stracpcc12       52.7261                 stracpcc12        53.4422    
+      stracpcc13       25.0000                 stracpcc13        25.0000    
+      stracpcc14       5.00000                 stracpcc14        5.00000    
+      stracpcc16       32.0000                 stracpcc16        32.0000    
+      stracpcc17       49.0000                 stracpcc17        49.0000    
+      stracpcc18       15.0169                 stracpcc18        15.0169    
+      instrpcc         12.5000                 instrpcc          12.5000    
+      instrfcc         37.2400                 instrfcc          37.5000    
+      bachosp         7.600000E+11             bachosp          7.600000E+11
+      bacposp         4.750000E+09             bacposp          4.750000E+09
+      frpr74osp        22.5000                 frpr74osp         22.5000    
+      fr7486osp        15.0000                 fr7486osp         15.0000    
+      frpt86osp        3.75000                 frpt86osp         3.75000    
+      dtstosp01        93.2996                 dtstosp01         93.2838    
+      dtstosp02        11.5312                 dtstosp02         10.7088    
+      dtstosp04        100.000                 dtstosp04         100.000    
+      dtstosp05       1.002809E-04             dtstosp05        1.002809E-04
+      dtstosp06       1.000000E-04             dtstosp06        1.000000E-04
+      dtstosp07       1.000000E-04             dtstosp07        1.000000E-04
+      dtstosp08       2.430604E-04             dtstosp08        2.430604E-04
+      dtstosp09       0.132988                 dtstosp09        0.142861    
+      dtstosp10        50.0000                 dtstosp10         50.0000    
+      dtstosp11        50.0000                 dtstosp11         50.0000    
+      dtstosp12       2.399105E-04             dtstosp12        2.399105E-04
+      dtstosp13        4.21890                 dtstosp13         4.18891    
+      dtstosp14       5.087900E-02             dtstosp14        5.087900E-02
+      dtstosp16       4.114500E-02             dtstosp16        4.114500E-02
+      dtstosp17       1.000000E-04             dtstosp17        1.000000E-04
+      dtstosp18        100.000                 dtstosp18         100.000    
+      adbeav          7.500000E-03             adbeav           7.500000E-03
+      instrbeav        31.2236                 instrbeav         31.2500    
+      bacbeav          196650.                 bacbeav           196650.    
+      adcoyt          3.606300E-06             adcoyt           3.606300E-06
+      instrcoyt        1.00000                 instrcoyt         1.00000    
+      baccoyt         9.000012E+08             baccoyt          9.000012E+08
+      stracdeer        50.0000                 stracdeer         50.0000    
+      addeer          4.700000E-04             addeer           4.700000E-04
+      instrdeer        1.00000                 instrdeer         1.00000    
+      bacdeer         1.837500E+08             bacdeer          1.837500E+08
+      ads1duck        2.500000E-02             ads1duck         2.500000E-02
+      ads2duck        2.500000E-04             ads2duck         2.500000E-04
+      instrduck        99.9999                 instrduck         99.9999    
+      bacduck         8.000000E+08             bacduck          8.000000E+08
+      ads1elk         3.000000E-03             ads1elk          3.007431E-03
+      ads2elk         4.500000E-02             ads2elk          4.500000E-02
+      pps1elk          9.95000                 pps1elk           9.95000    
+      pfs1elk          1.92089                 pfs1elk           1.92089    
+      pps2elk          9.95000                 pps2elk           9.95000    
+      pfs2elk          9.95000                 pfs2elk           9.95000    
+      bacelk          6.650000E+08             bacelk           6.650000E+08
+      ads1gese        1.388890E-02             ads1gese         1.388890E-02
+      ads2gese        1.851850E-06             ads2gese         1.851850E-06
+      instrgese        93.7500                 instrgese         93.7500    
+      bacgese         8.000000E+08             bacgese          8.000000E+08
+      adgull          4.545500E-05             adgull           4.545500E-05
+      instrgull        47.5000                 instrgull         47.5000    
+      bacgull         2.390001E+09             bacgull          2.390001E+09
+      adheeg          1.379400E-05             adheeg           1.379400E-05
+      instrheeg        99.0000                 instrheeg         99.0000    
+      bacheeg         4.302000E+09             bacheeg          4.302000E+09
+      adotter         0.300000                 adotter          0.300000    
+      instrotter       31.2500                 instrotter        31.2118    
+      bacotter        1.966500E+07             bacotter         1.966500E+07
+      adracn          4.685541E-03             adracn           4.483634E-03
+      instrracn        5.55266                 instrracn         5.55266    
+      bacracn         4.750000E+07             bacracn          4.750000E+07
+   Maximum   factor change:  1.672     ["stracpcc04"]
+   Maximum relative change: 0.4019     ["stracpcc04"]
+
+
+OPTIMISATION ITERATION NO.        : 5
+   Model calls so far             : 702
+   Starting phi for this iteration                          :   49.600    
+   Contribution to phi from observation group "resrch04"    :   11.463    
+   Contribution to phi from observation group "resrch09"    :   5.6251    
+   Contribution to phi from observation group "resrch12"    :   8.4279    
+   Contribution to phi from observation group "resrch17"    :   13.434    
+   Contribution to phi from observation group "resrch18"    :   3.8569    
+   Contribution to phi from observation group "digress406"  :   6.7930    
+   All frozen parameters freed.
+
+   Parameter "pwqsop" has no effect on observations.
+   Parameter "fwqsop" has no effect on observations.
+   Parameter "stracfcc02" has no effect on observations.
+   Parameter "stracfcc04" has no effect on observations.
+   Parameter "stracfcc06" has no effect on observations.
+   Parameter "stracfcc07" has no effect on observations.
+   Parameter "stracfcc10" has no effect on observations.
+   Parameter "stracfcc18" has no effect on observations.
+   Parameter "fr7486osp" has no effect on observations.
+   Parameter "dtstosp04" has no effect on observations.
+   Parameter "dtstosp10" has no effect on observations.
+   Parameter "dtstosp11" has no effect on observations.
+   Parameter "dtstosp16" has no effect on observations.
+   Parameter "instrcoyt" has no effect on observations.
+   Parameter "baccoyt" has no effect on observations.
+   Parameter "stracdeer" has no effect on observations.
+   Parameter "instrdeer" has no effect on observations.
+   Parameter "bacduck" has no effect on observations.
+   Parameter "bacgese" has no effect on observations.
+   Parameter "instrgull" has no effect on observations.
+   Parameter "bacgull" has no effect on observations.
+       param "bachosp" frozen: gradient and update vectors out of bounds
+       param "dtstosp06" frozen: gradient and update vectors out of bounds
+       param "dtstosp07" frozen: gradient and update vectors out of bounds
+       param "dtstosp18" frozen: gradient and update vectors out of bounds
+       param "ads2elk" frozen: gradient and update vectors out of bounds
+       param "instrgese" frozen: gradient and update vectors out of bounds
+       param "adotter" frozen: gradient and update vectors out of bounds
+       param "stckdncc" frozen: gradient and update vectors out of bounds
+       param "baccc" frozen: gradient and update vectors out of bounds
+       param "stracpcc01" frozen: gradient and update vectors out of bounds
+       param "bacposp" frozen: gradient and update vectors out of bounds
+       param "frpr74osp" frozen: gradient and update vectors out of bounds
+       param "bacbeav" frozen: gradient and update vectors out of bounds
+       param "bacelk" frozen: gradient and update vectors out of bounds
+       param "bacheeg" frozen: gradient and update vectors out of bounds
+       param "stracpcc05" frozen: gradient and update vectors out of bounds
+       param "stracpcc06" frozen: gradient and update vectors out of bounds
+       param "stracpcc07" frozen: gradient and update vectors out of bounds
+       param "stracpcc08" frozen: gradient and update vectors out of bounds
+       param "stracpcc09" frozen: gradient and update vectors out of bounds
+       param "stracpcc13" frozen: gradient and update vectors out of bounds
+       param "stracpcc17" frozen: gradient and update vectors out of bounds
+       param "instrpcc" frozen: gradient and update vectors out of bounds
+       param "ads2duck" frozen: gradient and update vectors out of bounds
+       param "bacotter" frozen: gradient and update vectors out of bounds
+       param "bacracn" frozen: gradient and update vectors out of bounds
+       param "stracpcc14" frozen: - update vector out of bounds
+       param "stracpcc16" frozen: - update vector out of bounds
+       param "adbeav" frozen: - update vector out of bounds
+       param "instrduck" frozen: - update vector out of bounds
+       param "pps1elk" frozen: - update vector out of bounds
+       param "pps2elk" frozen: - update vector out of bounds
+       param "pfs2elk" frozen: - update vector out of bounds
+       param "ads1gese" frozen: - update vector out of bounds
+
+       Lambda =   15.317     ----->
+          Phi =   49.397      (  0.996 of starting phi)
+
+       Broyden's update of Jacobian matrix undertaken.
+       param "rwqsop" frozen: - update vector out of bounds
+
+       Lambda =   6.1677     ----->
+          Phi =   49.394      (  0.996 of starting phi)
+
+       Broyden's update of Jacobian matrix undertaken.
+
+       Lambda =   2.4835     ----->
+          Phi =   49.394      (  0.996 of starting phi)
+
+       Broyden's update of Jacobian matrix undertaken.
+
+       Lambda =   15.317     ----->
+          Phi =   49.394      (  0.996 of starting phi)
+
+   No more lambdas: phi rising
+   Lowest phi this iteration:   49.394    
+
+      Current parameter values                 Previous parameter values
+      pwqsop           1.50000                 pwqsop            1.50000    
+      fwqsop           3.00000                 fwqsop            3.00000    
+      rwqsop           1.87500                 rwqsop            1.87500    
+      fstdec           1.15000                 fstdec            1.15000    
+      stckdncc         10.0000                 stckdncc          10.0000    
+      baccc           2.565000E+09             baccc            2.565000E+09
+      stracfcc01      8.454400E-03             stracfcc01       8.454400E-03
+      stracfcc02      4.342600E-03             stracfcc02       4.342600E-03
+      stracfcc04      7.264200E-04             stracfcc04       7.264200E-04
+      stracfcc05      1.651729E-02             stracfcc05       1.651729E-02
+      stracfcc06      7.949426E-02             stracfcc06       7.949426E-02
+      stracfcc07      3.264901E-02             stracfcc07       3.264901E-02
+      stracfcc08      2.190678E-02             stracfcc08       2.190678E-02
+      stracfcc09       1.60941                 stracfcc09        1.60947    
+      stracfcc10      0.636688                 stracfcc10       0.636688    
+      stracfcc11      0.219866                 stracfcc11       0.219866    
+      stracfcc12       1.01211                 stracfcc12        1.01211    
+      stracfcc13      0.189023                 stracfcc13       0.189024    
+      stracfcc14      0.147813                 stracfcc14       0.147814    
+      stracfcc16      0.515836                 stracfcc16       0.515844    
+      stracfcc17      0.218330                 stracfcc17       0.218331    
+      stracfcc18       10.0130                 stracfcc18        10.0130    
+      stracpcc01       48.0000                 stracpcc01        48.0000    
+      stracpcc02       19.2335                 stracpcc02        19.3634    
+      stracpcc04       32.0749                 stracpcc04        32.2968    
+      stracpcc05       61.0000                 stracpcc05        61.0000    
+      stracpcc06       31.0000                 stracpcc06        31.0000    
+      stracpcc07       71.0000                 stracpcc07        71.0000    
+      stracpcc08       32.0000                 stracpcc08        32.0000    
+      stracpcc09       7.00000                 stracpcc09        7.00000    
+      stracpcc10       12.4255                 stracpcc10        12.4265    
+      stracpcc11       7.71749                 stracpcc11        7.72017    
+      stracpcc12       52.7159                 stracpcc12        52.7261    
+      stracpcc13       25.0000                 stracpcc13        25.0000    
+      stracpcc14       5.00000                 stracpcc14        5.00000    
+      stracpcc16       32.0000                 stracpcc16        32.0000    
+      stracpcc17       49.0000                 stracpcc17        49.0000    
+      stracpcc18       15.0169                 stracpcc18        15.0169    
+      instrpcc         12.5000                 instrpcc          12.5000    
+      instrfcc         37.2359                 instrfcc          37.2400    
+      bachosp         7.600000E+11             bachosp          7.600000E+11
+      bacposp         4.750000E+09             bacposp          4.750000E+09
+      frpr74osp        22.5000                 frpr74osp         22.5000    
+      fr7486osp        15.0000                 fr7486osp         15.0000    
+      frpt86osp        3.75000                 frpt86osp         3.75000    
+      dtstosp01        100.000                 dtstosp01         93.2996    
+      dtstosp02        2.30624                 dtstosp02         11.5312    
+      dtstosp04        100.000                 dtstosp04         100.000    
+      dtstosp05       1.002809E-04             dtstosp05        1.002809E-04
+      dtstosp06       1.000000E-04             dtstosp06        1.000000E-04
+      dtstosp07       1.000000E-04             dtstosp07        1.000000E-04
+      dtstosp08       2.430604E-04             dtstosp08        2.430604E-04
+      dtstosp09       0.132661                 dtstosp09        0.132988    
+      dtstosp10        50.0000                 dtstosp10         50.0000    
+      dtstosp11        50.0000                 dtstosp11         50.0000    
+      dtstosp12       2.399105E-04             dtstosp12        2.399105E-04
+      dtstosp13        3.91425                 dtstosp13         4.21890    
+      dtstosp14       5.087900E-02             dtstosp14        5.087900E-02
+      dtstosp16       4.114500E-02             dtstosp16        4.114500E-02
+      dtstosp17       1.000015E-04             dtstosp17        1.000000E-04
+      dtstosp18        100.000                 dtstosp18         100.000    
+      adbeav          7.500000E-03             adbeav           7.500000E-03
+      instrbeav        31.2456                 instrbeav         31.2236    
+      bacbeav          196650.                 bacbeav           196650.    
+      adcoyt          3.606300E-06             adcoyt           3.606300E-06
+      instrcoyt        1.00000                 instrcoyt         1.00000    
+      baccoyt         9.000012E+08             baccoyt          9.000012E+08
+      stracdeer        50.0000                 stracdeer         50.0000    
+      addeer          4.700000E-04             addeer           4.700000E-04
+      instrdeer        1.00000                 instrdeer         1.00000    
+      bacdeer         1.837329E+08             bacdeer          1.837500E+08
+      ads1duck        2.500000E-02             ads1duck         2.500000E-02
+      ads2duck        2.500000E-04             ads2duck         2.500000E-04
+      instrduck        99.9999                 instrduck         99.9999    
+      bacduck         8.000000E+08             bacduck          8.000000E+08
+      ads1elk         3.007290E-03             ads1elk          3.000000E-03
+      ads2elk         4.500000E-02             ads2elk          4.500000E-02
+      pps1elk          9.95000                 pps1elk           9.95000    
+      pfs1elk          1.92089                 pfs1elk           1.92089    
+      pps2elk          9.95000                 pps2elk           9.95000    
+      pfs2elk          9.95000                 pfs2elk           9.95000    
+      bacelk          6.650000E+08             bacelk           6.650000E+08
+      ads1gese        1.388890E-02             ads1gese         1.388890E-02
+      ads2gese        1.851850E-06             ads2gese         1.851850E-06
+      instrgese        93.7500                 instrgese         93.7500    
+      bacgese         8.000000E+08             bacgese          8.000000E+08
+      adgull          4.545500E-05             adgull           4.545500E-05
+      instrgull        47.5000                 instrgull         47.5000    
+      bacgull         2.390001E+09             bacgull          2.390001E+09
+      adheeg          1.379400E-05             adheeg           1.379400E-05
+      instrheeg        99.0000                 instrheeg         99.0000    
+      bacheeg         4.302000E+09             bacheeg          4.302000E+09
+      adotter         0.300000                 adotter          0.300000    
+      instrotter       31.2131                 instrotter        31.2500    
+      bacotter        1.966500E+07             bacotter         1.966500E+07
+      adracn          4.683976E-03             adracn           4.685541E-03
+      instrracn        5.55266                 instrracn         5.55266    
+      bacracn         4.750000E+07             bacracn          4.750000E+07
+   Maximum   factor change:  5.000     ["dtstosp02"]
+   Maximum relative change: 0.8000     ["dtstosp02"]
+
+   Optimisation complete: optimisation iteration limit of   5 realized.
+   Total model calls:    902
+
+   The model has been run one final time using best parameters. 
+   Thus all model input files contain best parameter values, and model 
+   output files contain model results based on these parameters.
+
+
+                            OPTIMISATION RESULTS
+
+Covariance matrix and parameter confidence intervals cannot be determined:-
+Some form or regularisation was implemented so these are not applicable.
+
+
+Parameters ----->
+
+Parameter      Estimated value
+ pwqsop          1.50000    
+ fwqsop          3.00000    
+ rwqsop          1.87500    
+ fstdec          1.15000    
+ stckdncc        10.0000    
+ baccc          2.565000E+09
+ stracfcc01     8.454400E-03
+ stracfcc02     4.342600E-03
+ stracfcc04     7.264200E-04
+ stracfcc05     1.651729E-02
+ stracfcc06     7.949426E-02
+ stracfcc07     3.264901E-02
+ stracfcc08     2.190678E-02
+ stracfcc09      1.60941    
+ stracfcc10     0.636688    
+ stracfcc11     0.219866    
+ stracfcc12      1.01211    
+ stracfcc13     0.189023    
+ stracfcc14     0.147813    
+ stracfcc16     0.515836    
+ stracfcc17     0.218330    
+ stracfcc18      10.0130    
+ stracpcc01      48.0000    
+ stracpcc02      19.2335    
+ stracpcc04      32.0749    
+ stracpcc05      61.0000    
+ stracpcc06      31.0000    
+ stracpcc07      71.0000    
+ stracpcc08      32.0000    
+ stracpcc09      7.00000    
+ stracpcc10      12.4255    
+ stracpcc11      7.71749    
+ stracpcc12      52.7159    
+ stracpcc13      25.0000    
+ stracpcc14      5.00000    
+ stracpcc16      32.0000    
+ stracpcc17      49.0000    
+ stracpcc18      15.0169    
+ instrpcc        12.5000    
+ instrfcc        37.2359    
+ bachosp        7.600000E+11
+ bacposp        4.750000E+09
+ frpr74osp       22.5000    
+ fr7486osp       15.0000    
+ frpt86osp       3.75000    
+ dtstosp01       100.000    
+ dtstosp02       2.30624    
+ dtstosp04       100.000    
+ dtstosp05      1.002809E-04
+ dtstosp06      1.000000E-04
+ dtstosp07      1.000000E-04
+ dtstosp08      2.430604E-04
+ dtstosp09      0.132661    
+ dtstosp10       50.0000    
+ dtstosp11       50.0000    
+ dtstosp12      2.399105E-04
+ dtstosp13       3.91425    
+ dtstosp14      5.087900E-02
+ dtstosp16      4.114500E-02
+ dtstosp17      1.000015E-04
+ dtstosp18       100.000    
+ adbeav         7.500000E-03
+ instrbeav       31.2456    
+ bacbeav         196650.    
+ adcoyt         3.606300E-06
+ instrcoyt       1.00000    
+ baccoyt        9.000012E+08
+ stracdeer       50.0000    
+ addeer         4.700000E-04
+ instrdeer       1.00000    
+ bacdeer        1.837329E+08
+ ads1duck       2.500000E-02
+ ads2duck       2.500000E-04
+ instrduck       99.9999    
+ bacduck        8.000000E+08
+ ads1elk        3.007290E-03
+ ads2elk        4.500000E-02
+ pps1elk         9.95000    
+ pfs1elk         1.92089    
+ pps2elk         9.95000    
+ pfs2elk         9.95000    
+ bacelk         6.650000E+08
+ ads1gese       1.388890E-02
+ ads2gese       1.851850E-06
+ instrgese       93.7500    
+ bacgese        8.000000E+08
+ adgull         4.545500E-05
+ instrgull       47.5000    
+ bacgull        2.390001E+09
+ adheeg         1.379400E-05
+ instrheeg       99.0000    
+ bacheeg        4.302000E+09
+ adotter        0.300000    
+ instrotter      31.2131    
+ bacotter       1.966500E+07
+ adracn         4.683976E-03
+ instrracn       5.55266    
+ bacracn        4.750000E+07
+
+See file bigelkwq.sen for parameter sensitivities.
+
+
+Observations ----->
+
+Observation            Measured       Calculated     Residual       Weight     Group
+                       value          value
+rch0420070621          2.44716        2.07158       0.375578        1.000      resrch04    
+rch0420070719          2.59107        2.50064       9.043000E-02    1.000      resrch04    
+rch0420070817          2.64345        2.87610      -0.232651        1.000      resrch04    
+rch0420070913          2.83885        3.13621      -0.297358        1.000      resrch04    
+rch0420071016          2.41497        2.42887      -1.389600E-02    1.000      resrch04    
+rch0420071114          2.04139        1.89638       0.145011        1.000      resrch04    
+rch0420080104          2.07918        2.04840       3.078400E-02    1.000      resrch04    
+rch0420080206          1.41497        1.80701      -0.392035        1.000      resrch04    
+rch0420080304          1.63347        1.89821      -0.264738        1.000      resrch04    
+rch0420080408          1.39794        1.53599      -0.138047        1.000      resrch04    
+rch0420080506          2.14613        1.54648       0.599649        1.000      resrch04    
+rch0420080613          2.99123        1.71499        1.27623        1.000      resrch04    
+rch0420080707          3.04139        2.04357       0.997827        1.000      resrch04    
+rch0420080728          2.35218        2.38278      -3.059300E-02    1.000      resrch04    
+rch0420080818          2.63849        2.65143      -1.294500E-02    1.000      resrch04    
+rch0420080908          2.71600        2.68308       3.292000E-02    1.000      resrch04    
+rch0420080930          2.69020        2.84019      -0.149998        1.000      resrch04    
+rch0420091019          1.85126        2.49437      -0.643116        1.000      resrch04    
+rch0420091116          1.56820        2.15363      -0.585425        1.000      resrch04    
+rch0420091214          1.36173        1.97139      -0.609662        1.000      resrch04    
+rch0420100104         0.778151        1.76393      -0.985783        1.000      resrch04    
+rch0420100124          1.17609        1.58649      -0.410403        1.000      resrch04    
+rch0420100218         0.792392        1.55445      -0.762062        1.000      resrch04    
+rch0420100308          1.47712        1.94107      -0.463948        1.000      resrch04    
+rch0420100329          2.88649        2.25907       0.627421        1.000      resrch04    
+rch0420100419          1.62325        1.46327       0.159984        1.000      resrch04    
+rch0420100510          2.14613        1.53615       0.609975        1.000      resrch04    
+rch0420100602          2.93952        2.09566       0.843856        1.000      resrch04    
+rch0420100621          1.82608        1.72735       9.872200E-02    1.000      resrch04    
+rch0420100712          2.30103        1.93430       0.366730        1.000      resrch04    
+rch0420100802          3.23045        2.13373        1.09672        1.000      resrch04    
+rch0420100823          2.51851        2.45375       6.476600E-02    1.000      resrch04    
+rch0420100913          2.66276        2.54335       0.119411        1.000      resrch04    
+rch0420101004          2.27875        2.56910      -0.290342        1.000      resrch04    
+rch0420101025          2.75588        2.05775       0.698127        1.000      resrch04    
+rch0420101117          1.61278        2.24849      -0.635703        1.000      resrch04    
+rch0420101206          1.46240        1.48917      -2.677000E-02    1.000      resrch04    
+rch0420101227          1.34242        2.36709       -1.02467        1.000      resrch04    
+rch0920080408          1.41497        1.53340      -0.118427        1.000      resrch09    
+rch0920080506          1.83251        1.27006       0.562448        1.000      resrch09    
+rch0920080613          1.79934        1.43434       0.364997        1.000      resrch09    
+rch0920080707          1.80618        1.71331       9.287000E-02    1.000      resrch09    
+rch0920080728          1.38021        2.02548      -0.645272        1.000      resrch09    
+rch0920080818          1.75588        2.41314      -0.657269        1.000      resrch09    
+rch0920080908         0.954243        2.43289       -1.47865        1.000      resrch09    
+rch0920080930          1.20412        2.60681       -1.40269        1.000      resrch09    
+rch1220070621          1.36173        1.63480      -0.273070        1.000      resrch12    
+rch1220070719          1.71600        2.06998      -0.353978        1.000      resrch12    
+rch1220070817          1.47712        2.60604       -1.12891        1.000      resrch12    
+rch1220070913          1.69020        2.86918       -1.17898        1.000      resrch12    
+rch1220071016          1.41497        2.00804      -0.593062        1.000      resrch12    
+rch1220071114          1.66276        1.64753       1.522800E-02    1.000      resrch12    
+rch1220080104          2.20412        2.03905       0.165075        1.000      resrch12    
+rch1220080206          1.04139        1.75076      -0.709367        1.000      resrch12    
+rch1220080304          1.27875        1.78663      -0.507875        1.000      resrch12    
+rch1220080408          1.20412        1.48255      -0.278426        1.000      resrch12    
+rch1220080506          1.50515        1.19216       0.312991        1.000      resrch12    
+rch1220080613          1.51851        1.35298       0.165536        1.000      resrch12    
+rch1220080707          1.77085        1.61396       0.156896        1.000      resrch12    
+rch1220080728          1.07918        1.91758      -0.838401        1.000      resrch12    
+rch1220080818          1.69020        2.36165      -0.671457        1.000      resrch12    
+rch1220080908          1.74036        2.37527      -0.634907        1.000      resrch12    
+rch1220080930          1.04139        2.56476       -1.52336        1.000      resrch12    
+rch1720070621          1.74819        1.43089       0.317295        1.000      resrch17    
+rch1720070719          1.64345        1.84997      -0.206516        1.000      resrch17    
+rch1720070817          1.99564        2.52732      -0.531681        1.000      resrch17    
+rch1720070913          1.91908        2.77983      -0.860748        1.000      resrch17    
+rch1720071016          1.44716        1.82132      -0.374163        1.000      resrch17    
+rch1720071114          1.59107        1.50521       8.586000E-02    1.000      resrch17    
+rch1720071204          1.74819        2.36185      -0.613660        1.000      resrch17    
+rch1720071205          1.76343        2.25578      -0.492356        1.000      resrch17    
+rch1720071206          1.63347        2.07114      -0.437675        1.000      resrch17    
+rch1720080104          2.41497        1.98345       0.431519        1.000      resrch17    
+rch1720080206          1.25527        1.70731      -0.452036        1.000      resrch17    
+rch1720080304          1.14613        1.76862      -0.622493        1.000      resrch17    
+rch1720080408          1.49136        1.43135       6.001200E-02    1.000      resrch17    
+rch1720080506          1.30103        1.04614       0.254892        1.000      resrch17    
+rch1720081111          1.93450        2.15829      -0.223794        1.000      resrch17    
+rch1720081112          2.14613        2.27524      -0.129116        1.000      resrch17    
+rch1720081113          2.61278        2.27125       0.341534        1.000      resrch17    
+rch1720091019          1.27875        1.84036      -0.561608        1.000      resrch17    
+rch1720091116          1.27875        2.16868      -0.889929        1.000      resrch17    
+rch1720091214          1.30103        2.11692      -0.815886        1.000      resrch17    
+rch1720100104         0.716003        1.57517      -0.859166        1.000      resrch17    
+rch1720100124          1.17609        1.71862      -0.542530        1.000      resrch17    
+rch1720100218          1.49136        1.29986       0.191498        1.000      resrch17    
+rch1720100308         0.986772        1.70669      -0.719921        1.000      resrch17    
+rch1720100329          2.66276        2.19828       0.464475        1.000      resrch17    
+rch1720100419          1.57978        1.05641       0.523374        1.000      resrch17    
+rch1720100510          1.43136        1.04003       0.391337        1.000      resrch17    
+rch1720100602          3.04139        2.18056       0.860832        1.000      resrch17    
+rch1720100621          1.81954        1.20138       0.618165        1.000      resrch17    
+rch1720100712          1.95424        1.35585       0.598397        1.000      resrch17    
+rch1720100802          1.98227        1.47237       0.509898        1.000      resrch17    
+rch1720100823          1.67210        1.77546      -0.103358        1.000      resrch17    
+rch1720100913          1.53148        1.87469      -0.343215        1.000      resrch17    
+rch1720101004         0.477121        1.92191       -1.44479        1.000      resrch17    
+rch1720101025          2.69897        1.97670       0.722270        1.000      resrch17    
+rch1720101117          1.38021        2.18612      -0.805910        1.000      resrch17    
+rch1720101206          1.44716        1.54101      -9.385400E-02    1.000      resrch17    
+rch1720101227          1.27875        2.29070       -1.01194        1.000      resrch17    
+rch1820070621          1.39794        1.36792       3.001700E-02    1.000      resrch18    
+rch1820070719          1.44716        1.78013      -0.332975        1.000      resrch18    
+rch1820070817          1.74819        2.51378      -0.765596        1.000      resrch18    
+rch1820070913          1.41497        2.76688       -1.35191        1.000      resrch18    
+rch1820071016          2.04139        1.76009       0.281302        1.000      resrch18    
+rch1820071114          1.43136        1.45127      -1.990800E-02    1.000      resrch18    
+rch1820080104          1.69020        1.95099      -0.260798        1.000      resrch18    
+rch1820080206          1.00000        1.67873      -0.678726        1.000      resrch18    
+rch1820080304          1.14613        1.75129      -0.605163        1.000      resrch18    
+rch1820080408          1.59107        1.40410       0.186968        1.000      resrch18    
+rch1820080506          1.49136        1.00727       0.484094        1.000      resrch18    
+rch0420070817dig       2.64345        2.87610      -0.232651        1.000      digress406  
+rch0420070913dig       2.83885        3.13621      -0.297358        1.000      digress406  
+rch0420080613dig       2.99123        1.71499        1.27623        1.000      digress406  
+rch0420080707dig       3.04139        2.04357       0.997827        1.000      digress406  
+rch0420080818dig       2.63849        2.65143      -1.294500E-02    1.000      digress406  
+rch0420080908dig       2.71600        2.68308       3.292000E-02    1.000      digress406  
+rch0420080930dig       2.69020        2.84019      -0.149998        1.000      digress406  
+rch0420100329dig       2.88649        2.25907       0.627421        1.000      digress406  
+rch0420100602dig       2.93952        2.09566       0.843856        1.000      digress406  
+rch0420100802dig       3.23045        2.13373        1.09672        1.000      digress406  
+rch0420100913dig       2.66276        2.54335       0.119411        1.000      digress406  
+rch0420101025dig       2.75588        2.05775       0.698127        1.000      digress406  
+rch1720081113dig       2.61278        2.27125       0.341534        1.000      digress406  
+rch1720100329dig       2.66276        2.19828       0.464475        1.000      digress406  
+rch1720100602dig       3.04139        2.18056       0.860832        1.000      digress406  
+rch1720101025dig       2.69897        1.97670       0.722270        1.000      digress406  
+
+See file bigelkwq.res for more details of residuals in graph-ready format.
+
+See file bigelkwq.seo for composite observation sensitivities.
+
+
+Objective function ----->
+
+  Sum of squared weighted residuals (ie phi)                =   49.394    
+  Contribution to phi from observation group "resrch04"     =   11.525    
+  Contribution to phi from observation group "resrch09"     =   5.4746    
+  Contribution to phi from observation group "resrch12"     =   8.1097    
+  Contribution to phi from observation group "resrch17"     =   13.319    
+  Contribution to phi from observation group "resrch18"     =   3.7693    
+  Contribution to phi from observation group "digress406"   =   7.1960    
+
+
+Correlation Coefficient ----->
+
+  Correlation coefficient                                   =  0.43346    
+
+
+Analysis of residuals ----->
+
+  All residuals:-
+     Number of residuals with non-zero weight                       =   128
+     Mean value of non-zero weighted residuals                      = -0.1039    
+     Maximum weighted residual [observation "rch0420080613"]        =   1.276    
+     Minimum weighted residual [observation "rch1220080930"]        =  -1.523    
+     Standard variance of weighted residuals                        =   1.646    
+     Standard error of weighted residuals                           =   1.283    
+
+     Note: the above variance was obtained by dividing the objective 
+     function by the number of system degrees of freedom (ie. number of 
+     observations with non-zero weight plus number of prior information 
+     articles with non-zero weight minus the number of adjustable parameters.)
+     If the degrees of freedom is negative the divisor becomes 
+     the number of observations with non-zero weight plus the number of 
+     prior information items with non-zero weight.
+
+  Residuals for observation group "resrch04":-
+     Number of residuals with non-zero weight                       =    38
+     Mean value of non-zero weighted residuals                      =  6.9474E-03
+     Maximum weighted residual [observation "rch0420080613"]        =   1.276    
+     Minimum weighted residual [observation "rch0420101227"]        =  -1.025    
+     "Variance" of weighted residuals                               =  0.3033    
+     "Standard error" of weighted residuals                         =  0.5507    
+
+     Note: the above "variance" was obtained by dividing the sum of squared 
+     residuals by the number of items with non-zero weight.
+
+  Residuals for observation group "resrch09":-
+     Number of residuals with non-zero weight                       =     8
+     Mean value of non-zero weighted residuals                      = -0.4102    
+     Maximum weighted residual [observation "rch0920080506"]        =  0.5624    
+     Minimum weighted residual [observation "rch0920080908"]        =  -1.479    
+     "Variance" of weighted residuals                               =  0.6843    
+     "Standard error" of weighted residuals                         =  0.8272    
+
+     Note: the above "variance" was obtained by dividing the sum of squared 
+     residuals by the number of items with non-zero weight.
+
+  Residuals for observation group "resrch12":-
+     Number of residuals with non-zero weight                       =    17
+     Mean value of non-zero weighted residuals                      = -0.4633    
+     Maximum weighted residual [observation "rch1220080506"]        =  0.3130    
+     Minimum weighted residual [observation "rch1220080930"]        =  -1.523    
+     "Variance" of weighted residuals                               =  0.4770    
+     "Standard error" of weighted residuals                         =  0.6907    
+
+     Note: the above "variance" was obtained by dividing the sum of squared 
+     residuals by the number of items with non-zero weight.
+
+  Residuals for observation group "resrch17":-
+     Number of residuals with non-zero weight                       =    38
+     Mean value of non-zero weighted residuals                      = -0.1780    
+     Maximum weighted residual [observation "rch1720100602"]        =  0.8608    
+     Minimum weighted residual [observation "rch1720101004"]        =  -1.445    
+     "Variance" of weighted residuals                               =  0.3505    
+     "Standard error" of weighted residuals                         =  0.5920    
+
+     Note: the above "variance" was obtained by dividing the sum of squared 
+     residuals by the number of items with non-zero weight.
+
+  Residuals for observation group "resrch18":-
+     Number of residuals with non-zero weight                       =    11
+     Mean value of non-zero weighted residuals                      = -0.2757    
+     Maximum weighted residual [observation "rch1820080506"]        =  0.4841    
+     Minimum weighted residual [observation "rch1820070913"]        =  -1.352    
+     "Variance" of weighted residuals                               =  0.3427    
+     "Standard error" of weighted residuals                         =  0.5854    
+
+     Note: the above "variance" was obtained by dividing the sum of squared 
+     residuals by the number of items with non-zero weight.
+
+  Residuals for observation group "digress406":-
+     Number of residuals with non-zero weight                       =    16
+     Mean value of non-zero weighted residuals                      =  0.4618    
+     Maximum weighted residual [observation "rch0420080613dig"]     =   1.276    
+     Minimum weighted residual [observation "rch0420070913dig"]     = -0.2974    
+     "Variance" of weighted residuals                               =  0.4498    
+     "Standard error" of weighted residuals                         =  0.6706    
+
+     Note: the above "variance" was obtained by dividing the sum of squared 
+     residuals by the number of items with non-zero weight.
+
+
+Covariance and other statistical matrices cannot be determined:-
+Some form or regularisation was implemented so these are not applicable.
+
