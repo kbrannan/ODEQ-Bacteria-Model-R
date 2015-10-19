@@ -61,6 +61,9 @@ cow.calf <- function(chr.wrkdir="E:/PEST/BigElk/Sub_Models",
                                      "Sep","Oct","Nov","Dec"),
                              stringsAsFactors=FALSE
                              )
+  # print out the matrix readed into the Cow-Calf model
+  fname <- paste0(chr.wrkdir,"/input_",chr.input)
+  write.csv(SubModelData,fname)
   
   tmp.PastureArea <- as.numeric(SubModelData[10,2])
   tmp.NumOfPairs <- tmp.PastureArea / as.numeric(SubModelData[12,2])
@@ -142,6 +145,11 @@ cow.calf <- function(chr.wrkdir="E:/PEST/BigElk/Sub_Models",
   SubModelOutput$AccumForRow <- rep(tmp.ACCUM.Forest.Row,12)
   SubModelOutput$LimPasRow <- rep(tmp.SQOLIM.Pasture.Row,12)
   SubModelOutput$LimForRow <- rep(tmp.SQOLIM.Forest.Row,12)
+  
+  # print the output dataframe
+  foname <- paste0(chr.wrkdir,"/output_",chr.input)
+  write.csv(SubModelOutput, foname)
+  
   return(SubModelOutput)
 
   #rm(list=ls(pattern="tmp.*"))
