@@ -4,6 +4,11 @@ onsite_pets <- function(chr.input="OnSitePetsxx.txt",chr.wrkdir=getwd()) {
   SubModelFile <- paste0(chr.wrkdir,"/",chr.input)
   SubModelData <- read.delim(SubModelFile, sep=":",comment.char="*",stringsAsFactors=FALSE, header=FALSE)
   names(SubModelData) <- c("parameter","value(s)")
+  
+  # print out the matrix readed into the Cow-Calf model
+  fname <- paste0(chr.wrkdir,"/input_",chr.input)
+  write.csv(SubModelData,fname)
+  
   ##
   ### Getting input parameter values
   ### HSPF related information
@@ -79,6 +84,10 @@ onsite_pets <- function(chr.input="OnSitePetsxx.txt",chr.wrkdir=getwd()) {
                                LimRAOCUTRow=tmp.HdrSQLIMRAOCUT,
                                stringsAsFactors=FALSE)
   ##
+  # print the output dataframe
+  foname <- paste0(chr.wrkdir,"/output_",chr.input)
+  write.csv(SubModelOutput, foname)
+  
   ### return results
   return(SubModelOutput)
 }

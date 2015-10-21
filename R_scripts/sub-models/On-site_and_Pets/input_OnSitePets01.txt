@@ -1,0 +1,19 @@
+"","parameter","value(s)"
+"1","MUTSIN Start Year",1995
+"2","MUTSIN End Year",2010
+"3","HSPF-Sup File Header Number for Residential/Agricultural Operration Area/Commercial/Urban/Transportation in MON-ACCUM Table",26
+"4","HSPF-Sup File Header Number for Residential/Agricultural Operration Area/Commercial/Urban/Transportation in MON-SQOLIM Table",78
+"5","SQOLIM multiplcation factor",9
+"6","On-site systems (orgs/system-day)",7.6e+11
+"7","Pet (orgs/pet-day)",4.75e+09
+"8","Number of House-Holds",259
+"9","Pets per House-Hold",1
+"10","Residential/Agricultural Operration Area/Commercial/Urban/Transportation (ac)",435.5
+"11","Number of near-stream structures",23
+"12","Structures for house age pre-1974  (%)",47
+"13","Structures for house age 1974-1986 (%)",21
+"14","Structures for house age post-1986 (%)",33
+"15","Failure rate for house age pre-1974  (%)",22.5
+"16","Failure rate for house age 1974-1986 (%)",15
+"17","Failure rate for house age post-1986 (%)",3.75
+"18","On-site Failure directly to stream (%)",25.55319
