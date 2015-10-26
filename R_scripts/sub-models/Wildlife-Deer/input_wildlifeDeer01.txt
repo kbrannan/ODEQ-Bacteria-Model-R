@@ -11,5 +11,5 @@
 "10","Forest Area in Watershed (ac)",8790.81
 "11","Percent of Habitat with stream access",50
 "12","Percent of animals in and around streams",1
-"13","Animal Density for Habitat in watershed (animal/ac)",0.00047
-"14","Bacteria Production of animal per day (orgs/day)",183750000
+"13","Animal Density for Habitat in watershed (animal/ac)",0.047
+"14","Bacteria Production of animal per day (orgs/day)",183732860

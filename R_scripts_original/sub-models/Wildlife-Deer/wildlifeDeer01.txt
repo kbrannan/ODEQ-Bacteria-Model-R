@@ -17,5 +17,5 @@ Forest Area in Watershed (ac):  8790.81
 Percent of Habitat with stream access:    5.0000000E+01
 *** General parameters
 Percent of animals in and around streams:     1.0000000E+00
-Animal Density for Habitat in watershed (animal/ac):     4.7000000E-04
+Animal Density for Habitat in watershed (animal/ac):     4.7000000E-02
 Bacteria Production of animal per day (orgs/day):     1.8373286E+08
