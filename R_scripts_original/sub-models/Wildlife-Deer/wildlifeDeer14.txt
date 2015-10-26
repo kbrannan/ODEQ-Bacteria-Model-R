@@ -1,0 +1,21 @@
+*** Wildlife Bacteria Source Model Input File
+*** Wildlife Species: Deer
+*** Watershed: Big Elk Creek Sub-Wtsd 14
+*** Date this Input File Created: 2014-01-10
+MUTSIN Start Year: 1995
+MUTSIN End Year: 2010
+HSPF-Sup File Header Number for Pasture in MON-ACCUM Table:  63
+HSPF-Sup File Header Number for Pasture in MON-SQOLIM Table: 115
+HSPF-Sup File Header Number for Forest in MON-ACCUM Table:   62
+HSPF-Sup File Header Number for Forest in MON-SQOLIM Table:  114
+SQOLIM multiplcation factor: 9
+*** Habitats
+Habitat Area in Watershed (ac): 2570.00
+Pasture Area in Watershed (ac): 642.50
+Forest Area in Watershed (ac):  2260.32
+*** Percent of Landuse with Stream access
+Percent of Habitat with stream access:    5.0000000E+01
+*** General parameters
+Percent of animals in and around streams:     1.0000000E+00
+Animal Density for Habitat in watershed (animal/ac):     4.7000000E-04
+Bacteria Production of animal per day (orgs/day):     1.8373286E+08

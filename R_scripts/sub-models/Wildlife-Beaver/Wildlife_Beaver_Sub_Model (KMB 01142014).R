@@ -1,11 +1,16 @@
 wildlifeBeaver <- function(chr.input="wildlifeBeaverxx.txt",chr.wrkdir=getwd()) {
-  setwd(chr.wrkdir)
+  #setwd(chr.wrkdir)
   
   SubModelFile <- paste0(chr.wrkdir,"/",chr.input)
   SubModelData <- read.delim(SubModelFile, sep=":",comment.char="*",stringsAsFactors=FALSE, header=FALSE)
   SubModelFilename <- strsplit(chr.input,".",fixed=TRUE)[[1]][[1]]
   
   names(SubModelData) <- c("parameter","value(s)")
+  
+  # print out the matrix readed into the Cow-Calf model
+  fname <- paste0(chr.wrkdir,"/input_",chr.input)
+  write.csv(SubModelData,fname)
+  
   
   ##
   ### Getting input parameter values
@@ -54,6 +59,11 @@ wildlifeBeaver <- function(chr.input="wildlifeBeaverxx.txt",chr.wrkdir=getwd()) 
                                SUP.SQLIM.forest.line=tmp.HdrSQLIMForest,
                                stringsAsFactors=FALSE)
 
+  
+  # print the output dataframe
+  foname <- paste0(chr.wrkdir,"/output_",chr.input)
+  write.csv(SubModelOutput, foname)
+  
   
   return(SubModelOutput)
 }
