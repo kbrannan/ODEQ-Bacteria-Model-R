@@ -1,0 +1,12 @@
+"","parameter","value(s)"
+"1","MUTSIN Start Year",1995
+"2","MUTSIN End Year",2010
+"3","HSPF-Sup File Header Number for Pasture in MON-ACCUM Table",25
+"4","HSPF-Sup File Header Number for Pasture in MON-SQOLIM Table",77
+"5","HSPF-Sup File Header Number for Forest in MON-ACCUM Table",24
+"6","HSPF-Sup File Header Number for Forest in MON-SQOLIM Table",76
+"7","SQOLIM multiplcation factor",9
+"8","Forest Area in Watershed (ac)",1034.01
+"9","Animal Densities in buffer around streams/rivers (animal/ac)",0.0075
+"10","Percent of time defecating in streams",31.25
+"11","bacteria Production of adult per day (orgs/day)",196650
