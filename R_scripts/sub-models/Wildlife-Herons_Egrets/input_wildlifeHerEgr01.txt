@@ -11,6 +11,6 @@
 "10","Pasture Area in Watershed (ac)",323.06
 "11","Forest Area in Watershed (ac)",2030.6
 "12","Residential/Agricultural Operration Area/Commercial/Urban/Transportation (ac)",168.44
-"13","Animal Density (animal/ac)",1.3794e-05
+"13","Animal Density (animal/ac)",0.013794
 "14","Percent of animals in and around streams",99
 "15","Bacteria Production of animal per day (orgs/day)",4.302e+09

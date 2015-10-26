@@ -1,2 +1,2 @@
 "","pop.total","pop.total.on.land","pop.total.on.pasture","pop.total.in.forest","pop.total.on.RAOCUT","pop.total.in.stream","bac.total.on.land","bac.total.in.stream","bac.pasture.on.land","bac.forest.on.land","bac.RAOCUT.on.land","Accum.Pasture","Accum.Forest","Accum.RAOCUT","SQLIM.factor","MUTSIN.Start.Year","MUTSIN.End.Year","SUP.ACCUM.pastrure.line","SUP.SQLIM.pastrure.line","SUP.ACCUM.forest.line","SUP.SQLIM.forest.line","SUP.ACCUM.RAOCUT.line","SUP.SQLIM.RAOCUT.line"
-"1",0,0,0,0,0,0,0,0,0,0,0,0,0,0,9,1995,2010,25,77,24,76,26,78
+"1",115,60,8,48,4,54,2.7273,129060037800,0.36364,2.18184,0.18182,59184070,56495634,56756132,9,1995,2010,25,77,24,76,26,78

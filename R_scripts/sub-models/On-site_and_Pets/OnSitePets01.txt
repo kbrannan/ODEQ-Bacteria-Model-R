@@ -21,4 +21,4 @@ Structures for house age post-1986 (%): 33
 Failure rate for house age pre-1974  (%):     2.2500000E+01
 Failure rate for house age 1974-1986 (%):     1.5000000E+01
 Failure rate for house age post-1986 (%):     3.7500000E+00
-On-site Failure directly to stream (%):   2.5553190E+01
+On-site Failure directly to stream (%):   1.0000000E+02

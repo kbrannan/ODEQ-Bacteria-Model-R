@@ -15,9 +15,9 @@ SQOLIM multiplcation factor: 9
 Season 1 Months (numbers): 11,12,1,5,6,7
 Season 2 Months (numbers): 2,3,4,8,9,10
 *** Habitats
-Pasture Area in Watershed (ac): 0
-Forest Area in Watershed (ac): 0
-Residential/Agricultural Operration Area/Commercial/Urban/Transportation (ac): 0
+Pasture Area in Watershed (ac): 40
+Forest Area in Watershed (ac): 30
+Residential/Agricultural Operration Area/Commercial/Urban/Transportation (ac): 20
 *** Percent of Landuse with Stream access
 *** all landuse has stream access for Ducks
 *** Animal Densities

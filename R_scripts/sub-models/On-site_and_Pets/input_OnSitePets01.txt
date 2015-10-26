@@ -16,4 +16,4 @@
 "15","Failure rate for house age pre-1974  (%)",22.5
 "16","Failure rate for house age 1974-1986 (%)",15
 "17","Failure rate for house age post-1986 (%)",3.75
-"18","On-site Failure directly to stream (%)",25.55319
+"18","On-site Failure directly to stream (%)",100
