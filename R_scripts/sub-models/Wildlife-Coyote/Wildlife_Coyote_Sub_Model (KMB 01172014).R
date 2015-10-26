@@ -5,6 +5,12 @@ wildlifeCoyote <- function(chr.input="wildlifeCoyotexx.txt",chr.wrkdir=getwd()) 
   SubModelData <- read.delim(SubModelFile, sep=":",comment.char="*",stringsAsFactors=FALSE, header=FALSE)
   names(SubModelData) <- c("parameter","value(s)")
   ##
+  
+  # print out the matrix readed into the Cow-Calf model
+  fname <- paste0(chr.wrkdir,"/input_",chr.input)
+  write.csv(SubModelData,fname)
+  
+  
   ### Getting input parameter values
   ### HSPF related information
   tmp.MUTSINStartYr <- as.numeric(SubModelData[1,2])
@@ -72,6 +78,11 @@ wildlifeCoyote <- function(chr.input="wildlifeCoyotexx.txt",chr.wrkdir=getwd()) 
                                SUP.SQLIM.RAOCUT.line=tmp.HdrSQLIMRAOCUT,
                                stringsAsFactors=FALSE)
   ##
+  
+  # print the output dataframe
+  foname <- paste0(chr.wrkdir,"/output_",chr.input)
+  write.csv(SubModelOutput, foname)
+  
   ### return results
   return(SubModelOutput)
 }
