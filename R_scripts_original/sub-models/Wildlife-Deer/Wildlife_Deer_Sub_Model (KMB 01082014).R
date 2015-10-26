@@ -9,6 +9,10 @@ wildlifeDeer <- function(chr.input="wildlifeDeerxx.txt", chr.wrkdir=getwd()) {
   SubModelFilename <- strsplit(chr.input,".",fixed=TRUE)[[1]][[1]]
   names(SubModelData) <- c("parameter","value(s)")
   
+  # print out the matrix readed into the sub-model
+  fname <- paste0(chr.wrkdir,"/input_",chr.input)
+  write.csv(SubModelData,fname)
+  
   ##
   ### Getting input parameter values
   ### HSPF related information
@@ -71,6 +75,9 @@ wildlifeDeer <- function(chr.input="wildlifeDeerxx.txt", chr.wrkdir=getwd()) {
                                SUP.SQLIM.forest.line=tmp.HdrSQLIMForest,
                                stringsAsFactors=FALSE)
 
+  # print the output dataframe
+  foname <- paste0(chr.wrkdir,"/output_",chr.input)
+  write.csv(SubModelOutput, foname)
   
   return(SubModelOutput)
 }

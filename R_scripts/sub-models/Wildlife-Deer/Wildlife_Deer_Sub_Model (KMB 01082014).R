@@ -9,6 +9,10 @@ wildlifeDeer <- function(chr.input="wildlifeDeerxx.txt", chr.wrkdir=getwd()) {
   #SubModelFilename <- strsplit(chr.input,".",fixed=TRUE)[[1]][[1]]
   names(SubModelData) <- c("parameter","value(s)")
   
+  # print out the matrix readed into the sub-model
+  fname <- paste0(chr.wrkdir,"/input_",chr.input)
+  write.csv(SubModelData,fname)
+  
   ##
   ### Getting input parameter values
   ### HSPF related information
@@ -47,8 +51,8 @@ wildlifeDeer <- function(chr.input="wildlifeDeerxx.txt", chr.wrkdir=getwd()) {
   tmp.bacteria.OnPasture    <- round(tmp.bac.prod * tmp.PopOnPasture ,digits=0)
 
   ### accum values
-  tmp.accum.pasture <- round(tmp.bacteria.OnPasture / tmp. PastureArea,digits=0)
-  tmp.accum.forest  <- round(tmp.bacteria.OnForest / tmp. ForestArea,digits=0)
+  tmp.accum.pasture <- round(tmp.bacteria.OnPasture / tmp.PastureArea,digits=0)
+  tmp.accum.forest  <- round(tmp.bacteria.OnForest / tmp.ForestArea,digits=0)
 
   
   ##
@@ -72,7 +76,10 @@ wildlifeDeer <- function(chr.input="wildlifeDeerxx.txt", chr.wrkdir=getwd()) {
                                SUP.ACCUM.forest.line=tmp.HdrACCUMForest,
                                SUP.SQLIM.forest.line=tmp.HdrSQLIMForest,
                                stringsAsFactors=FALSE)
-
+  
+  # print the output dataframe
+  foname <- paste0(chr.wrkdir,"/output_",chr.input)
+  write.csv(SubModelOutput, foname)
   
   return(SubModelOutput)
 }
