@@ -1,0 +1,2 @@
+"","pop.total","pop.total.on.land","pop.total.on.pasture","pop.total.in.forest","pop.total.in.stream","bac.total.on.land","bac.total.in.stream","bac.pasture.on.land","bac.forest.on.land","Accum.Pasture","Accum.Forest","SQLIM.factor","MUTSIN.Start.Year","MUTSIN.End.Year","SUP.ACCUM.pastrure.line","SUP.SQLIM.pastrure.line","SUP.ACCUM.forest.line","SUP.SQLIM.forest.line"
+"1",5,4,0,4,0,7.35e+08,0,0,7.35e+08,0,83610,9,1995,2010,25,77,24,76
