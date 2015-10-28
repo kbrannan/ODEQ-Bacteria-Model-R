@@ -1,14 +1,13 @@
 wildlifeDeer <- function(chr.input="wildlifeDeerxx.txt", chr.wrkdir=getwd()) {
 
-  setwd(chr.wrkdir)
+  #setwd(chr.wrkdir)
   
   ##
   ## Read input file
   SubModelFile <- paste0(chr.wrkdir,"/",chr.input)
   SubModelData <- read.delim(SubModelFile, sep=":",comment.char="*",stringsAsFactors=FALSE, header=FALSE)
-  SubModelFilename <- strsplit(chr.input,".",fixed=TRUE)[[1]][[1]]
+  #SubModelFilename <- strsplit(chr.input,".",fixed=TRUE)[[1]][[1]]
   names(SubModelData) <- c("parameter","value(s)")
-  
   ##
   ### Getting input parameter values
   ### HSPF related information
@@ -36,18 +35,20 @@ wildlifeDeer <- function(chr.input="wildlifeDeerxx.txt", chr.wrkdir=getwd()) {
   ### Populations
   tmp.PopTotal  <- round(tmp.HabitatArea * tmp.ADHabitat,digits=0)
   tmp.PopOnLand <- round((1 - tmp.HabitatAreaWStreamAcess) * tmp.HabitatArea * tmp.ADHabitat,digits=0) + round((1 - tmp.PercentStrmTime) * tmp.HabitatAreaWStreamAcess * tmp.HabitatArea * tmp.ADHabitat,digits=0)
-  tmp.PopOnForest     <- round(tmp.PopOnLand * (tmp.ForestArea / (tmp.ForestArea + tmp.PastureArea)),digits=0)
-  tmp.PopOnPasture    <- round(tmp.PopOnLand * (tmp.PastureArea / (tmp.ForestArea + tmp.PastureArea)),digits=0)
+  tmp.PopOnForest     <- round(tmp.PopOnLand * (tmp.ForestArea / tmp.HabitatArea),digits=0)
+  tmp.PopOnPasture    <- round(tmp.PopOnLand * (tmp.PastureArea / tmp.HabitatArea),digits=0)
   tmp.PopInStream  <- round(tmp.PercentStrmTime * tmp.HabitatAreaWStreamAcess * tmp.HabitatArea * tmp.ADHabitat,digits=0)
   ### bacteria loads
   tmp.bacteria.Total    <- round(tmp.bac.prod * tmp.PopTotal,digits=0)
   tmp.bacteria.TotalOnLand  <- round(tmp.bac.prod * tmp.PopOnLand,digits=0)
-  tmp.bacteria.TotalInStream  <- round(tmp.bac.prod * tmp.PopInStream,digits=0)
-  tmp.bacteria.OnForest     <- round(tmp.bacteria.TotalOnLand * (tmp.ForestArea / (tmp.ForestArea + tmp.PastureArea)),digits=0)
-  tmp.bacteria.OnPasture    <- round(tmp.bacteria.TotalOnLand * (tmp.PastureArea / (tmp.ForestArea + tmp.PastureArea)),digits=0)
+  tmp.bacteria.TotalInStream  <- round(tmp.bac.prod * tmp.PopInStream,digits=0)/24
+  tmp.bacteria.OnForest     <- round(tmp.bac.prod * tmp.PopOnForest,digits=0)
+  tmp.bacteria.OnPasture    <- round(tmp.bac.prod * tmp.PopOnPasture ,digits=0)
+
   ### accum values
-  tmp.accum.pasture <- round(tmp.bacteria.OnPasture / tmp.HabitatArea,digits=0)
-  tmp.accum.forest  <- round(tmp.bacteria.OnForest / tmp.HabitatArea,digits=0)
+  tmp.accum.pasture <- round(tmp.bacteria.OnPasture / tmp.PastureArea,digits=0)
+  tmp.accum.forest  <- round(tmp.bacteria.OnForest / tmp.ForestArea,digits=0)
+
   
   ##
   ## Assemble output data frame
@@ -71,6 +72,5 @@ wildlifeDeer <- function(chr.input="wildlifeDeerxx.txt", chr.wrkdir=getwd()) {
                                SUP.SQLIM.forest.line=tmp.HdrSQLIMForest,
                                stringsAsFactors=FALSE)
 
-  
   return(SubModelOutput)
 }
