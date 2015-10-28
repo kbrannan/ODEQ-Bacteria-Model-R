@@ -28,8 +28,8 @@ Season 2 Percent of Pasture with stream access: 0
 Season 2 Percent of Forest with stream access: 19
 Season 2 Percent of Residential/Agriculture Operation/Commercial/Urban/Transportation with stream access with stream access: 0
 *** Animal Densities
-Season 1 Animal Density for Pasture in watershed (animal/ac):     3.0000000E-03
-Season 1 Animal Density for Forest in watershed (animal/ac):      3.0000000E-03
+Season 1 Animal Density for Pasture in watershed (animal/ac):     3.0072900E-03
+Season 1 Animal Density for Forest in watershed (animal/ac):      3.0072900E-03
 Season 1 Animal Density for Residential/Agricultural Operations/Commercial/Urban/Transportation in watershed (animal/ac): 0.0
 Season 2 Animal Density for Pasture in watershed (animal/ac):     4.5000000E-02
 Season 2 Animal Density for Forest in watershed (animal/ac):      4.5000000E-02

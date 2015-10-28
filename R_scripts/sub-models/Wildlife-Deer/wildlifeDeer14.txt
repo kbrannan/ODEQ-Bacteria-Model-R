@@ -18,4 +18,4 @@ Percent of Habitat with stream access:    5.0000000E+01
 *** General parameters
 Percent of animals in and around streams:     1.0000000E+00
 Animal Density for Habitat in watershed (animal/ac):     4.7000000E-04
-Bacteria Production of animal per day (orgs/day):     1.8375000E+08
+Bacteria Production of animal per day (orgs/day):     1.8373286E+08
