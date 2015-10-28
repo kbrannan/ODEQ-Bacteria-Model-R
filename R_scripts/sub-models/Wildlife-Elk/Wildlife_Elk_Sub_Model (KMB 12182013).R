@@ -4,6 +4,7 @@ wildlifeElk <- function(chr.input="wildlifeElkxx.txt",chr.wrkdir=getwd()) {
   SubModelFile <- paste0(chr.wrkdir,"/",chr.input)
   SubModelData <- read.delim(SubModelFile, sep=":",comment.char="*",stringsAsFactors=FALSE, header=FALSE)
   names(SubModelData) <- c("parameter","value(s)")
+  
   ##
   ### Getting input parameter values
   ### HSPF related information
@@ -156,9 +157,9 @@ wildlifeElk <- function(chr.input="wildlifeElkxx.txt",chr.wrkdir=getwd()) {
                                pop.total=tmp.ElkTotal,
                                pop.total.on.land=tmp.ElkTotal - tmp.ElkInStream,
                                pop.total.in.stream=tmp.ElkInStream,
-                               pop.total.on.pasture=(tmp.ElkOnPastureWOStreamAcess+tmp.ElkOnPastureWStreamAcess),
-                               pop.total.in.forest=(tmp.ElkOnForestWOStreamAcess+tmp.ElkOnForestWStreamAcess),
-                               pop.total.on.RAOCUT=(tmp.ElkOnRAOCUTWOStreamAcess+tmp.ElkOnRAOCUTWStreamAcess),
+                               pop.total.on.pasture= tmp.ElkOnPasture,
+                               pop.total.in.forest= tmp.ElkOnForest,                               
+                               pop.total.on.RAOCUT= tmp.ElkOnRAOCUT,
                                pop.on.pasture.wo.stream.access=tmp.ElkOnPastureWOStreamAcess,
                                pop.on.pasture.w.stream.access=tmp.ElkOnPastureWStreamAcess,
                                pop.from.pasture.in.stream=tmp.ElkOnPastureInStream,
@@ -170,7 +171,7 @@ wildlifeElk <- function(chr.input="wildlifeElkxx.txt",chr.wrkdir=getwd()) {
                                pop.from.raocut.in.stream=tmp.ElkOnRAOCUTInStream,
                                bac.total= tmp.ElkBacteriaOnLand + tmp.ElkBacteriaInStream,
                                bac.total.to.land=tmp.ElkBacteriaOnLand,
-                               bac.total.in.stream=tmp.ElkBacteriaInStream,
+                               bac.total.in.stream=tmp.ElkBacteriaInStream/24,
                                bac.on.pasture.wo.stream.access=tmp.ElkBacteriaOnPastureWOStreamAcess,
                                bac.on.pasture.w.stream.access=tmp.ElkBacteriaOnPastureWStreamAcess,
                                bac.from.pasture.in.stream=tmp.ElkNacteriaOnPastureInStream,
