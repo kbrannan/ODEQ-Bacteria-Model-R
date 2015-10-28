@@ -2,15 +2,14 @@ wildlifeOtter <- function(chr.input="wildlifeOtterxx.txt",
                      R.output=FALSE,
                      check.file=FALSE,
                      chr.wrkdir=getwd()) {
-  setwd(chr.wrkdir)
+  #setwd(chr.wrkdir)
   
   SubModelFile <- paste0(chr.wrkdir,"/",chr.input)
   SubModelData <- read.delim(SubModelFile, sep=":",comment.char="*",
                              stringsAsFactors=FALSE, header=FALSE)
-  SubModelFilename <- strsplit(chr.input,".",fixed=TRUE)[[1]][[1]]
+  #SubModelFilename <- strsplit(chr.input,".",fixed=TRUE)[[1]][[1]]
   
   names(SubModelData) <- c("parameter","value(s)")
-  
   ##
   ### Getting input parameter values
   ### HSPF related information
@@ -48,9 +47,9 @@ wildlifeOtter <- function(chr.input="wildlifeOtterxx.txt",
   tmp.bacteria.OnPasture    <- round(tmp.bac.prod * tmp.PopOnPasture,digits=0)
   tmp.bacteria.OnForest     <- round(tmp.bac.prod * tmp.PopOnForest,digits=0)
   tmp.bacteria.TotalOnLand  <- round(tmp.bac.prod * tmp.PopTotalOnLand,digits=0)
-  tmp.bacteria.Pasture.InStrm <- round(tmp.bac.prod * tmp.PopPastureInStrm,digits=0)
-  tmp.bacteria.Forest.InStrm  <- round(tmp.bac.prod * tmp.PopForestInStrm,digits=0)
-  tmp.bacteria.Total.InStrm   <- round(tmp.bac.prod * tmp.PopTotalInStrm,digits=0)
+  tmp.bacteria.Pasture.InStrm <- round(tmp.bac.prod * tmp.PopPastureInStrm,digits=0)/24
+  tmp.bacteria.Forest.InStrm  <- round(tmp.bac.prod * tmp.PopForestInStrm,digits=0)/24
+  tmp.bacteria.Total.InStrm   <- round(tmp.bac.prod * tmp.PopTotalInStrm,digits=0)/24
   ### accum values
   tmp.accum.pasture <- round(tmp.bacteria.OnPasture / tmp.PastureArea,digits=0)
   tmp.accum.forest  <- round(tmp.bacteria.OnForest / tmp.ForestArea,digits=0)
@@ -85,6 +84,5 @@ wildlifeOtter <- function(chr.input="wildlifeOtterxx.txt",
                                SUP.SQLIM.forest.line=tmp.HdrSQLIMForest,
                                stringsAsFactors=FALSE)
 
-  
   return(SubModelOutput)
 }
