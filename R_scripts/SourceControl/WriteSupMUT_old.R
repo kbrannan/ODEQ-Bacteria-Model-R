@@ -15,14 +15,14 @@ WriteSup <- function(sub.wtsd.num=sub.wtsd.N,sub.model.dirs=chr.sub.model.dirs,s
   options(warn=-1)
 
   ## generate numbers for sub-wtsds 
-  sub.wtsds <- formatC(1:sub.wtsd.num, width = 2, format = "d", flag = "0")
+  sub.wtsds <- formatC(1:sub.wtsd.N, width = 2, format = "d", flag = "0")
   sub.wtsds <- sub.wtsds[-c(3,15)]
   
 	# load sup file
   chr.sup.file <- scan(paste0(PEST.dir,"/",sup.file), what = character(0), sep = "\n", quiet = TRUE)
 
   ## Update PERLND QUAL-INPUT Table
-  plq.file <- paste0(grep("General",sub.model.dirs,value=TRUE),"/",grep("^per{1}",sub.model.input,value=TRUE))
+  plq.file <- paste0(grep("General",chr.sub.model.dirs,value=TRUE),"/",grep("^per{1}",chr.sub.model.input.files,value=TRUE))
 	plq.input <- read.delim(plq.file, sep=":",comment.char="*",stringsAsFactors=FALSE, header=FALSE)
 	
   FWSQOP.line <- 2*as.numeric(strsplit(plq.input[3,2],",")[[1]])

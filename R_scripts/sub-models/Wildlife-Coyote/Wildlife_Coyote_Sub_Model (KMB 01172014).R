@@ -5,12 +5,6 @@ wildlifeCoyote <- function(chr.input="wildlifeCoyotexx.txt",chr.wrkdir=getwd()) 
   SubModelData <- read.delim(SubModelFile, sep=":",comment.char="*",stringsAsFactors=FALSE, header=FALSE)
   names(SubModelData) <- c("parameter","value(s)")
   ##
-  
-  # print out the matrix readed into the Cow-Calf model
-  fname <- paste0(chr.wrkdir,"/input_",chr.input)
-  write.csv(SubModelData,fname)
-  
-  
   ### Getting input parameter values
   ### HSPF related information
   tmp.MUTSINStartYr <- as.numeric(SubModelData[1,2])
@@ -45,7 +39,7 @@ wildlifeCoyote <- function(chr.input="wildlifeCoyotexx.txt",chr.wrkdir=getwd()) 
   ### Bacteria Production and Location
   ###
   ### Instream
-  tmp.BacteriaInStream <- tmp.bac.prod * tmp.PopInStream/24
+  tmp.BacteriaInStream <- tmp.bac.prod * tmp.PopInStream
   ###
   ### Accume table values
   tmp.Accum.Pasture <- round(tmp.bac.prod * tmp.PopOnPasture / tmp.PastureArea,0)
@@ -59,11 +53,11 @@ wildlifeCoyote <- function(chr.input="wildlifeCoyotexx.txt",chr.wrkdir=getwd()) 
                                pop.total.on.forest=tmp.PopOnForest,
                                pop.total.on.RAOCUT=tmp.PopOnRAOCUT,
                                pop.total.in.stream=tmp.PopInStream,
-                               bac.total.on.land=tmp.PopOnLand * tmp.bac.prod,
+                               bac.total.on.land=tmp.PopOnLand * tmp.AD,
                                bac.total.in.stream=tmp.BacteriaInStream,
-                               bac.pasture.on.land=tmp.PopOnPasture * tmp.bac.prod,
-                               bac.forest.on.land=tmp.PopOnForest * tmp.bac.prod,
-                               bac.RAOCUT.on.land=tmp.PopOnRAOCUT * tmp.bac.prod,
+                               bac.pasture.on.land=tmp.PopOnPasture * tmp.AD,
+                               bac.forest.on.land=tmp.PopOnForest * tmp.AD,
+                               bac.RAOCUT.on.land=tmp.PopOnRAOCUT * tmp.AD,
                                Accum.Pasture=tmp.Accum.Pasture,
                                Accum.Forest=tmp.Accum.Forest,
                                Accum.RAOCUT=tmp.Accum.RAOCUT,
@@ -78,11 +72,6 @@ wildlifeCoyote <- function(chr.input="wildlifeCoyotexx.txt",chr.wrkdir=getwd()) 
                                SUP.SQLIM.RAOCUT.line=tmp.HdrSQLIMRAOCUT,
                                stringsAsFactors=FALSE)
   ##
-  
-  # print the output dataframe
-  foname <- paste0(chr.wrkdir,"/output_",chr.input)
-  write.csv(SubModelOutput, foname)
-  
   ### return results
   return(SubModelOutput)
 }

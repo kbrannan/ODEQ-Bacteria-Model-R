@@ -15,6 +15,6 @@ Forest Area in Watershed (ac): 134.34
 ***All habitat has stream access for beaver
 ***Animal Densities
 Animal Densities in buffer around streams/rivers (animal/ac):      7.5000000E-03
-Percent of time defecating in streams:     3.1250000E+01
+Percent of time defecating in streams:     3.1245634E+01
 ***Scat and bacteria parameters
 bacteria Production of adult per day (orgs/day):     1.9665000E+05

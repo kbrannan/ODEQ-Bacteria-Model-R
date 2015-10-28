@@ -4,11 +4,6 @@ onsite_pets <- function(chr.input="OnSitePetsxx.txt",chr.wrkdir=getwd()) {
   SubModelFile <- paste0(chr.wrkdir,"/",chr.input)
   SubModelData <- read.delim(SubModelFile, sep=":",comment.char="*",stringsAsFactors=FALSE, header=FALSE)
   names(SubModelData) <- c("parameter","value(s)")
-  
-  # print out the matrix readed into the Cow-Calf model
-  fname <- paste0(chr.wrkdir,"/input_",chr.input)
-  write.csv(SubModelData,fname)
-  
   ##
   ### Getting input parameter values
   ### HSPF related information
@@ -28,7 +23,7 @@ onsite_pets <- function(chr.input="OnSitePetsxx.txt",chr.wrkdir=getwd()) {
   tmp.onsite.NumNearStrmStrct  <- as.numeric(SubModelData[11,2])
   tmp.onsite.StrctPre1974      <- as.numeric(SubModelData[12,2])/100
   tmp.onsite.Strct1974to1986   <- as.numeric(SubModelData[13,2])/100
-  tmp.onsite.StrctPost1986     <- 1- tmp.onsite.StrctPre1974- tmp.onsite.Strct1974to1986
+  tmp.onsite.StrctPost1986     <- as.numeric(SubModelData[14,2])/100
   tmp.onsite.FailRatePre1974      <- as.numeric(SubModelData[15,2])/100
   tmp.onsite.FailRate1974to1986   <- as.numeric(SubModelData[16,2])/100
   tmp.onsite.FailRatePost1986     <- as.numeric(SubModelData[17,2])/100
@@ -43,20 +38,20 @@ onsite_pets <- function(chr.input="OnSitePetsxx.txt",chr.wrkdir=getwd()) {
   tmp.onsite.NearStrmStrctPre1974    <- round(tmp.onsite.NumNearStrmStrct * tmp.onsite.StrctPre1974,digits=0)
   tmp.onsite.NearStrmStrct1974to1986 <- round(tmp.onsite.NumNearStrmStrct * tmp.onsite.Strct1974to1986,digits=0)
   tmp.onsite.NearStrmStrctPost1986   <- round(tmp.onsite.NumNearStrmStrct * tmp.onsite.StrctPost1986,digits=0)
-  tmp.onsite.NearStrmStrct <- tmp.onsite.NumNearStrmStrct
+  tmp.onsite.NearStrmStrct <- tmp.onsite.NearStrmStrctPre1974 + tmp.onsite.NearStrmStrct1974to1986 + tmp.onsite.NearStrmStrctPost1986
   tmp.onsite.NearStrmStrctFailurePre1974    <- round(tmp.onsite.NearStrmStrctPre1974 * tmp.onsite.FailRatePre1974,digits=0)
   tmp.onsite.NearStrmStrctFailure1974to1986 <- round(tmp.onsite.NearStrmStrct1974to1986 * tmp.onsite.FailRate1974to1986,digits=0)
   tmp.onsite.NearStrmStrctFailurePost1986   <- round(tmp.onsite.NearStrmStrctPost1986 * tmp.onsite.FailRatePost1986,digits=0)
   tmp.onsite.NearStrmStrctFailure <- tmp.onsite.NearStrmStrctFailurePre1974 + tmp.onsite.NearStrmStrctFailure1974to1986 + tmp.onsite.NearStrmStrctFailurePost1986
   ## adjust for structures near stream that may not have toilet facilities
   tmp.onsite.NearStrmStrctFailureInStream <- tmp.percent.in.stream * tmp.onsite.NearStrmStrctFailure
-  tmp.onsite.NearStrmStrctFailurePre1974.load    <- tmp.onsite.NearStrmStrctFailurePre1974 * tmp.onsite.bac.prod 
-  tmp.onsite.NearStrmStrctFailure1974to1986.load <- tmp.onsite.NearStrmStrctFailure1974to1986 * tmp.onsite.bac.prod 
-  tmp.onsite.NearStrmStrctFailurePost1986.load   <- tmp.onsite.NearStrmStrctFailurePost1986 * tmp.onsite.bac.prod
+  tmp.onsite.NearStrmStrctFailurePre1974.load    <- tmp.onsite.NearStrmStrctFailurePre1974 * tmp.onsite.bac.prod / 24
+  tmp.onsite.NearStrmStrctFailure1974to1986.load <- tmp.onsite.NearStrmStrctFailure1974to1986 * tmp.onsite.bac.prod / 24
+  tmp.onsite.NearStrmStrctFailurePost1986.load   <- tmp.onsite.NearStrmStrctFailurePost1986 * tmp.onsite.bac.prod / 24
   tmp.onsite.NearStrmStrctFailure.load <- tmp.onsite.NearStrmStrctFailurePre1974.load + tmp.onsite.NearStrmStrctFailure1974to1986.load + tmp.onsite.NearStrmStrctFailurePost1986.load
   ## adjust for structures near stream that may not have toilet facilities
-  tmp.onsite.NearStrmStrctFailure.to.stream.load <- tmp.percent.in.stream * tmp.onsite.NearStrmStrctFailure.load/24
-  tmp.Accum.RAOCUT <- (1- tmp.percent.in.stream) * tmp.onsite.NearStrmStrctFailure.load/ tmp.RAOCUTArea + tmp.Accum.RAOCUT
+  tmp.onsite.NearStrmStrctFailure.to.stream.load <- tmp.percent.in.stream * tmp.onsite.NearStrmStrctFailure.load
+  tmp.Accum.RAOCUT <- (1- tmp.percent.in.stream) * tmp.onsite.NearStrmStrctFailure.load + tmp.Accum.RAOCUT
   ##
   ### Assemble output data frame
   SubModelOutput <- data.frame(Month=c("Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"),
@@ -74,7 +69,7 @@ onsite_pets <- function(chr.input="OnSitePetsxx.txt",chr.wrkdir=getwd()) {
 							                 bac.onsite.NearStrmStrctFailurePre1974=tmp.onsite.NearStrmStrctFailurePre1974.load,
 							                 bac.onsite.NearStrmStrctFailure1974to1986=tmp.onsite.NearStrmStrctFailure1974to1986.load,
 							                 bac.onsite.NearStrmStrctFailurePost1986=tmp.onsite.NearStrmStrctFailurePost1986.load,
-							                 bac.onsite.NearStrmStrctFailure=tmp.onsite.NearStrmStrctFailure.load,
+							                 bac.onsite.NearStrmStrctFailure=tmp.onsite.NearStrmStrctFailure.to.stream.load,
 					              		   bac.onsite.NearStrmStrctFailure.to.stream.load=tmp.onsite.NearStrmStrctFailure.to.stream.load,
                                Accum.RAOCUT=tmp.Accum.RAOCUT,
                                SQLIM.factor=tmp.SQLIMFactor,
@@ -84,10 +79,6 @@ onsite_pets <- function(chr.input="OnSitePetsxx.txt",chr.wrkdir=getwd()) {
                                LimRAOCUTRow=tmp.HdrSQLIMRAOCUT,
                                stringsAsFactors=FALSE)
   ##
-  # print the output dataframe
-  foname <- paste0(chr.wrkdir,"/output_",chr.input)
-  write.csv(SubModelOutput, foname)
-  
   ### return results
   return(SubModelOutput)
 }

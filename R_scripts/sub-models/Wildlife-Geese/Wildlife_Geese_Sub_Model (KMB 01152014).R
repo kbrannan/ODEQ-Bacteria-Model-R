@@ -4,11 +4,6 @@ wildlifeGeese <- function(chr.input="wildlifeGeesexx.txt",chr.wrkdir=getwd()) {
   SubModelFile <- paste0(chr.wrkdir,"/",chr.input)
   SubModelData <- read.delim(SubModelFile, sep=":",comment.char="*",stringsAsFactors=FALSE, header=FALSE)
   names(SubModelData) <- c("parameter","value(s)")
-  
-# print out the matrix readed into the submodel
-  fname <- paste0(chr.wrkdir,"/input_",chr.input)
-  write.csv(SubModelData,fname)
-  
   ##
   ### Getting input parameter values
   ### HSPF related information
@@ -55,7 +50,7 @@ wildlifeGeese <- function(chr.input="wildlifeGeesexx.txt",chr.wrkdir=getwd()) {
   ### Bacteria Production and Location
   ###
   ### Instream
-  tmp.BacteriaInStream <- tmp.bac.prod * tmp.PopInStream/24
+  tmp.BacteriaInStream <- tmp.bac.prod * tmp.PopInStream
   ###
   ### Accume table values
   tmp.Accum.Pasture <- round(tmp.bac.prod * tmp.PopOnPasture / tmp.PastureArea,0)
@@ -68,8 +63,8 @@ wildlifeGeese <- function(chr.input="wildlifeGeesexx.txt",chr.wrkdir=getwd()) {
                                pop.total.on.land=tmp.PopOnPasture + tmp.PopOnForest + tmp.PopOnRAOCUT,
                                pop.total.in.stream=tmp.PopInStream,
                                pop.total.on.pasture=tmp.PopOnPasture,
-                               pop.total.on.forest=tmp.PopOnForest,
-                               pop.total.on.RAOCUT=tmp.PopOnRAOCUT,
+                               pop.total.in.forest=tmp.PopOnForest,
+                               pop.total.on.raocut=tmp.PopOnRAOCUT,
                                bac.total.in.stream=tmp.BacteriaInStream,
                                Accum.Pasture=tmp.Accum.Pasture,
                                Accum.Forest=tmp.Accum.Forest,
@@ -84,11 +79,6 @@ wildlifeGeese <- function(chr.input="wildlifeGeesexx.txt",chr.wrkdir=getwd()) {
                                SUP.ACCUM.RAOCUT.line=tmp.HdrACCUMRAOCUT,
                                SUP.SQLIM.RAOCUT.line=tmp.HdrSQLIMRAOCUT,
                                stringsAsFactors=FALSE)
-  
-  # print the output dataframe
-  foname <- paste0(chr.wrkdir,"/output_",chr.input)
-  write.csv(SubModelOutput, foname)
-  
   ##
   ### return results
   return(SubModelOutput)

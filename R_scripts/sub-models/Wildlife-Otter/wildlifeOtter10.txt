@@ -18,6 +18,6 @@ Stream Habitat in Forest (mile): 2
 ***All habitat has stream access for otter
 ***Animal Densities
 Animal Densities in or around streams/rivers (animal/mile):     3.0000000E-01
-Percent of time defecating in streams:      3.1163970E+01
+Percent of time defecating in streams:      3.1213069E+01
 ***Scat and bacteria parameters
 bacteria Production of adult per day (orgs/day):     1.9665000E+07

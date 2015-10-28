@@ -41,7 +41,7 @@ cow.calf <- function(chr.wrkdir="E:/PEST/BigElk/Sub_Models",
 #   Confinement: #.#, #.#, #.#, #.#, #.#, #.#, #.#, #.#, #.#, #.#, #.#, #.#
 #   Forest: #.#, #.#, #.#, #.#, #.#, #.#, #.#, #.#, #.#, #.#, #.#, #.#
 #   Manure Production of Cow-Calf Pair Animal Unit (AU) per day (Manure lbs/(AU day): #.#
-#   Fecal Coliform in Manure (org/lbs):   #.#E+##
+#   Fecal Coliform in Manure (org/(day-AU)):   #.#E+##
 #   Percent of pasture with stream access: ##
 #   Percent of animals on pasture in and around streams: #
 #   Percent of animals on forest in and around streams: #
@@ -51,7 +51,8 @@ cow.calf <- function(chr.wrkdir="E:/PEST/BigElk/Sub_Models",
 #   SubModelData <- read.delim(SubModelFile, sep=":",comment.char="*",
 #                    stringsAsFactors=FALSE, header=FALSE)
   SubModelData <- read.delim(paste0(chr.wrkdir,"/",SubModelFile)
-, sep=":",comment.char="*",stringsAsFactors=FALSE, header=FALSE)
+, sep=":",comment.char="*",
+                             stringsAsFactors=FALSE, header=FALSE)
   SubModelFilename <- strsplit(chr.input,".",fixed=TRUE)[[1]][[1]]
   
   names(SubModelData) <- c("parameter","value(s)")
@@ -61,9 +62,6 @@ cow.calf <- function(chr.wrkdir="E:/PEST/BigElk/Sub_Models",
                                      "Sep","Oct","Nov","Dec"),
                              stringsAsFactors=FALSE
                              )
-  # print out the matrix readed into the Cow-Calf model
-  fname <- paste0(chr.wrkdir,"/input_",chr.input)
-  write.csv(SubModelData,fname)
   
   tmp.PastureArea <- as.numeric(SubModelData[10,2])
   tmp.NumOfPairs <- tmp.PastureArea / as.numeric(SubModelData[12,2])
@@ -77,7 +75,7 @@ cow.calf <- function(chr.wrkdir="E:/PEST/BigElk/Sub_Models",
   tmp.PasturevsTime <- as.numeric(strsplit(SubModelData[15,2],",")[[1]])
   tmp.ConfinementvsTime <- as.numeric(strsplit(SubModelData[16,2],",")[[1]])
   tmp.ForestvsTime <- as.numeric(strsplit(SubModelData[17,2],",")[[1]])
-  tmp.BacteriaPerManurePerDay <- as.numeric(SubModelData[19,2])
+  tmp.BacteriaPerAUperDay <- as.numeric(SubModelData[19,2])
   tmp.ManurePerDay <- as.numeric(SubModelData[18,2])
 
 ### Edit: KMB 2014-02-11 removed tmp.AUvsTime with for pairs distribution calculations
@@ -105,20 +103,20 @@ cow.calf <- function(chr.wrkdir="E:/PEST/BigElk/Sub_Models",
                              AU.OnPastureWStreamAccess=tmp.OnPastureWStreamAccess*tmp.AU,
                              AU.OnPastureInStream=tmp.OnPastureInStream*tmp.AU,
                              AU.InConfinementvsTime=tmp.InConfinementvsTime*tmp.AU,
-                             AU.InForest=(tmp.InForestWOStreamAccess+tmp.InForestWStreamAccess)*tmp.AU,
+                             AU.InForest=(tmp.InForestWOStreamAccess+tmp.InForestWOStreamAccess)*tmp.AU,
                              AU.InForestInStream=tmp.InForestInStream*tmp.AU,
-                             Manure.OnPastureWOStreamAccess=tmp.ManurePerDay*tmp.OnPastureWOStreamAccess*tmp.AU,
-                             Manure.OnPastureWStreamAccess=tmp.ManurePerDay*tmp.OnPastureWStreamAccess*tmp.AU,
-                             Manure.OnPastureInStream=tmp.ManurePerDay*tmp.OnPastureInStream*tmp.AU,
-                             Manure.InConfinementvsTime=tmp.ManurePerDay*tmp.InConfinementvsTime*tmp.AU,
-                             Manure.InForest=tmp.ManurePerDay*(tmp.InForestWOStreamAccess+tmp.InForestWStreamAccess)*tmp.AU,
-                             Manure.InForestInStream=tmp.ManurePerDay*tmp.InForestInStream*tmp.AU,
-                             Bacteria.OnPastureWOStreamAccess=tmp.BacteriaPerManurePerDay*tmp.OnPastureWOStreamAccess*tmp.ManurePerDay*tmp.AU,
-                             Bacteria.OnPastureWStreamAccess=tmp.BacteriaPerManurePerDay*tmp.OnPastureWStreamAccess*tmp.ManurePerDay*tmp.AU,
-                             Bacteria.OnPastureInStream=tmp.BacteriaPerManurePerDay*tmp.OnPastureInStream/24*tmp.ManurePerDay*tmp.AU,
-                             Bacteria.InConfinementvsTime=tmp.BacteriaPerManurePerDay*tmp.InConfinementvsTime*tmp.ManurePerDay*tmp.AU,
-                             Bacteria.InForest=tmp.BacteriaPerManurePerDay*(tmp.InForestWOStreamAccess+tmp.InForestWStreamAccess)*tmp.ManurePerDay*tmp.AU,
-                             Bacteria.InForestInStream=tmp.BacteriaPerManurePerDay*tmp.InForestInStream/24*tmp.ManurePerDay*tmp.AU,
+                             Manure.OnPastureWOStreamAccess=tmp.ManurePerDay*tmp.OnPastureWOStreamAccess,
+                             Manure.OnPastureWStreamAccess=tmp.ManurePerDay*tmp.OnPastureWStreamAccess,
+                             Manure.OnPastureInStream=tmp.ManurePerDay*tmp.OnPastureInStream,
+                             Manure.InConfinementvsTime=tmp.ManurePerDay*tmp.InConfinementvsTime,
+                             Manure.InForest=tmp.ManurePerDay*(tmp.InForestWOStreamAccess+tmp.InForestWOStreamAccess)*tmp.AU,
+                             Manure.InForestInStream=tmp.ManurePerDay*tmp.InForestInStream,
+                             Bacteria.OnPastureWOStreamAccess=tmp.BacteriaPerAUperDay*tmp.OnPastureWOStreamAccess,
+                             Bacteria.OnPastureWStreamAccess=tmp.BacteriaPerAUperDay*tmp.OnPastureWStreamAccess,
+                             Bacteria.OnPastureInStream=tmp.BacteriaPerAUperDay*tmp.OnPastureInStream/24,
+                             Bacteria.InConfinementvsTime=tmp.BacteriaPerAUperDay*tmp.InConfinementvsTime,
+                             Bacteria.InForest=tmp.BacteriaPerAUperDay*(tmp.InForestWOStreamAccess+tmp.InForestWOStreamAccess),
+                             Bacteria.InForestInStream=tmp.BacteriaPerAUperDay*tmp.InForestInStream/24,
                              stringsAsFactors=FALSE)
   
   tmp.Bacteria.InStream <- (SubModelOutput$Bacteria.OnPastureInStream+SubModelOutput$Bacteria.InForestInStream)
@@ -145,11 +143,6 @@ cow.calf <- function(chr.wrkdir="E:/PEST/BigElk/Sub_Models",
   SubModelOutput$AccumForRow <- rep(tmp.ACCUM.Forest.Row,12)
   SubModelOutput$LimPasRow <- rep(tmp.SQOLIM.Pasture.Row,12)
   SubModelOutput$LimForRow <- rep(tmp.SQOLIM.Forest.Row,12)
-  
-  # print the output dataframe
-  foname <- paste0(chr.wrkdir,"/output_",chr.input)
-  write.csv(SubModelOutput, foname)
-  
   return(SubModelOutput)
 
   #rm(list=ls(pattern="tmp.*"))

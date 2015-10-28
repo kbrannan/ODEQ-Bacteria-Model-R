@@ -18,7 +18,7 @@ Residential/Agricultural Operration Area/Commercial/Urban/Transportation (ac): 4
 *** Percent of Landuse with Stream access
 *** all landuse has stream access for Racoons
 *** Animal Densities
-Animal Density (animal/ac):     4.7296819E-03
+Animal Density (animal/ac):     4.6839755E-03
 *** General parameters
-Percent of animals in and around streams:     5.0003900E+00
+Percent of animals in and around streams:     5.5526555E+00
 Bacteria Production of animal per day (orgs/day):     4.7500000E+07

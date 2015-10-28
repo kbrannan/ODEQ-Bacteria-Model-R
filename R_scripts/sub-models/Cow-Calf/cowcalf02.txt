@@ -22,8 +22,8 @@ Pasture: 0.25,0.25,0.75,0.75,0.75,1,0.75,0.75,0.75,0.25,0.25,0.25
 Confinement: 0.75,0.75,0.25,0.25,0.25,0,0,0,0,0.75,0.75,0.75
 Forest: 0,0,0,0,0,0,0.25,0.25,0.25,0,0,0
 Manure Production of Cow-Calf Pair Animal Unit (AU) per day (Manure lbs/(AU day): 30
-Fecal Coliform in Manure (org/(day-AU)):     2.8350000E+09
-Percent of pasture with stream access:     3.1000000E+01
+Fecal Coliform in Manure (org/(day-AU)):     2.5650000E+09
+Percent of pasture with stream access:     1.9233492E+01
 Percent of forest with stream access:      4.3426000E-03
 Percent of animals on pasture in and around streams:    1.2500000E+01
-Percent of animals on forest in and around streams:     3.7500000E+01
+Percent of animals on forest in and around streams:     3.7235884E+01
