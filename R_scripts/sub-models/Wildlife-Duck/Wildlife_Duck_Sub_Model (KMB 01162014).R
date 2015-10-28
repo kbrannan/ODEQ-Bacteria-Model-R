@@ -50,7 +50,7 @@ wildlifeDuck <- function(chr.input="wildlifeDuckxx.txt",chr.wrkdir=getwd()) {
   ### Bacteria Production and Location
   ###
   ### Instream
-  tmp.BacteriaInStream <- tmp.bac.prod * tmp.PopInStream
+  tmp.BacteriaInStream <- tmp.bac.prod * tmp.PopInStream/24
   ###
   ### Accume table values
   tmp.Accum.Pasture <- round(tmp.bac.prod * tmp.PopOnPasture / tmp.PastureArea,0)
@@ -63,7 +63,7 @@ wildlifeDuck <- function(chr.input="wildlifeDuckxx.txt",chr.wrkdir=getwd()) {
                                pop.total.on.land=tmp.PopOnPasture + tmp.PopOnForest + tmp.PopOnRAOCUT,
                                pop.total.in.stream=tmp.PopInStream,
                                pop.total.on.pasture=tmp.PopOnPasture,
-                               pop.total.in.forest=tmp.PopOnForest,
+                               pop.total.on.forest=tmp.PopOnForest,
                                pop.total.on.RAOCUT=tmp.PopOnRAOCUT,
                                bac.total.in.stream=tmp.BacteriaInStream,
                                Accum.Pasture=tmp.Accum.Pasture,
