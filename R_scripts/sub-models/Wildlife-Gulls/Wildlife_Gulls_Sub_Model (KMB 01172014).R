@@ -39,7 +39,7 @@ wildlifeGulls <- function(chr.input="wildlifeGullsxx.txt",chr.wrkdir=getwd()) {
   ### Bacteria Production and Location
   ###
   ### Instream
-  tmp.BacteriaInStream <- tmp.bac.prod * tmp.PopInStream
+  tmp.BacteriaInStream <- tmp.bac.prod * tmp.PopInStream/24
   ###
   ### Accume table values
   tmp.Accum.Pasture <- round(tmp.bac.prod * tmp.PopOnPasture / tmp.PastureArea,0)
@@ -50,14 +50,14 @@ wildlifeGulls <- function(chr.input="wildlifeGullsxx.txt",chr.wrkdir=getwd()) {
   SubModelOutput <- data.frame(pop.total=tmp.PopTotal,
                                pop.total.on.land=tmp.PopOnLand,
                                pop.total.on.pasture=tmp.PopOnPasture,
-                               pop.total.in.forest=tmp.PopOnForest,
+                               pop.total.on.forest=tmp.PopOnForest,
                                pop.total.on.RAOCUT=tmp.PopOnRAOCUT,
                                pop.total.in.stream=tmp.PopInStream,
-                               bac.total.on.land=tmp.PopOnLand * tmp.AD,
+                               bac.total.on.land=tmp.PopOnLand * tmp.bac.prod,
                                bac.total.in.stream=tmp.BacteriaInStream,
-                               bac.pasture.on.land=tmp.PopOnPasture * tmp.AD,
-                               bac.forest.on.land=tmp.PopOnForest * tmp.AD,
-                               bac.RAOCUT.on.land=tmp.PopOnRAOCUT * tmp.AD,
+                               bac.pasture.on.land=tmp.PopOnPasture * tmp.bac.prod,
+                               bac.forest.on.land=tmp.PopOnForest * tmp.bac.prod,
+                               bac.RAOCUT.on.land=tmp.PopOnRAOCUT * tmp.bac.prod,
                                Accum.Pasture=tmp.Accum.Pasture,
                                Accum.Forest=tmp.Accum.Forest,
                                Accum.RAOCUT=tmp.Accum.RAOCUT,

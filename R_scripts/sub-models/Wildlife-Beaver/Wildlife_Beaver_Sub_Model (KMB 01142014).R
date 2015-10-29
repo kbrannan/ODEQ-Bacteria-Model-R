@@ -1,12 +1,11 @@
 wildlifeBeaver <- function(chr.input="wildlifeBeaverxx.txt",chr.wrkdir=getwd()) {
-  setwd(chr.wrkdir)
+  #setwd(chr.wrkdir)
   
   SubModelFile <- paste0(chr.wrkdir,"/",chr.input)
   SubModelData <- read.delim(SubModelFile, sep=":",comment.char="*",stringsAsFactors=FALSE, header=FALSE)
   SubModelFilename <- strsplit(chr.input,".",fixed=TRUE)[[1]][[1]]
   
   names(SubModelData) <- c("parameter","value(s)")
-  
   ##
   ### Getting input parameter values
   ### HSPF related information
@@ -33,7 +32,7 @@ wildlifeBeaver <- function(chr.input="wildlifeBeaverxx.txt",chr.wrkdir=getwd()) 
   tmp.PopInStrm <- round((tmp.PercentStrmTime * tmp.PopTotal),digits=0)
   ### bacteria loads
   tmp.bacteria.TotalOnLand  <- round(tmp.bac.prod * tmp.PopOnLand,digits=0)
-  tmp.bacteria.Total.InStrm   <- round(tmp.bac.prod * tmp.PopInStrm,digits=0)
+  tmp.bacteria.Total.InStrm   <- round(tmp.bac.prod * tmp.PopInStrm,digits=0)/24
   ### accum values
   tmp.accum.forest  <- round(tmp.bacteria.TotalOnLand / tmp.HabitatArea,digits=0)
   
@@ -54,6 +53,5 @@ wildlifeBeaver <- function(chr.input="wildlifeBeaverxx.txt",chr.wrkdir=getwd()) 
                                SUP.SQLIM.forest.line=tmp.HdrSQLIMForest,
                                stringsAsFactors=FALSE)
 
-  
   return(SubModelOutput)
 }
