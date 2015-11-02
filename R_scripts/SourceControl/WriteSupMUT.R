@@ -15,7 +15,7 @@ WriteSup <- function(sub.wtsd.num=sub.wtsd.N,sub.model.dirs=chr.sub.model.dirs,s
   options(warn=-1)
 
   ## generate numbers for sub-wtsds 
-  sub.wtsds <- formatC(1:sub.wtsd.num, width = 2, format = "d", flag = "0")
+  sub.wtsds <- formatC(1:sub.wtsd.N, width = 2, format = "d", flag = "0")
   sub.wtsds <- sub.wtsds[-c(3,15)]
   
 	# load sup file
@@ -34,7 +34,7 @@ WriteSup <- function(sub.wtsd.num=sub.wtsd.N,sub.model.dirs=chr.sub.model.dirs,s
   if(nchar(gsub("^[0-9 ]{1,}","",chr.sup.file[RWSQOP.line-1]))>0) n.hdr <- RWSQOP.line-1
 
   PQUAL.INPUT.hdr <- chr.sup.file[n.hdr]
-  PQUAL.INPUT.names <- do.call(cbind,strsplit(PQUAL.INPUT.hdr,split=" {1,}"))[-c(1,2,3)]
+  PQUAL.INPUT.names <- do.call(cbind,strsplit(PQUAL.INPUT.hdr,split=" {1,}"))[-c(1,2)]
   
   rpl.val <- grep("WSQOP",PQUAL.INPUT.names)
 
@@ -89,7 +89,7 @@ WriteSup <- function(sub.wtsd.num=sub.wtsd.N,sub.model.dirs=chr.sub.model.dirs,s
 	  # Change NaN & Inf to 0 in onsite.pets.out
 	  onsite.pets.out$Accum.RAOCUT[!is.finite(onsite.pets.out$Accum.RAOCUT)] <- 0
 	  onsite.pets.out$bac.onsite.NearStrmStrctFailure[!is.finite(onsite.pets.out$bac.onsite.NearStrmStrctFailure)] <- 0
-	  onsite.pets.out <- data.frame(onsite.pets.out,bac.total.in.stream=onsite.pets.out$bac.onsite.NearStrmStrctFailure)
+	  onsite.pets.out <- data.frame(onsite.pets.out,bac.total.in.stream=onsite.pets.out$bac.onsite. NearStrmStrctFailure.to.stream.load)
 	# Run Wildlife-Beaver model
 	  beaver.in <- paste0(grep("[Bb]eaver",sub.model.input,value=TRUE),sub.wtsds[ii],".txt")
 	  beaver.out <- wildlifeBeaver(chr.input=beaver.in,chr.wrkdir=grep("Wildlife-[Bb]eaver",sub.model.dirs,value=TRUE))
