@@ -1,0 +1,92 @@
+Cow_Calf Submodel Key Variables:
+Bacteria.Instream
+Accum.Pasture
+Accum.Forest
+Different Key Variables:
+Bacteria.Instream
+Accum.Pasture
+Accum.Forest
+
+Onsite Pets Submodel Key Variables:
+bac.onsite.NearStrmStrctFailure.to.stream.load
+Accum.RAOCUT
+Different Key Variables:
+
+
+Wildlife-Beaver Submodel Key Variables:
+bac.total.in.stream
+Accum.Forest
+Different Key Variables:
+bac.total.in.stream
+
+Wildlife-Coyote Submodel Key Variables:
+bac.total.in.stream
+Accum.Pasture
+Accum.Forest
+Accum.RAOCUT
+Different Key Variables:
+bac.total.in.stream
+
+Wildlife-Deer Submodel Key Variables:
+bac.total.in.stream
+Accum.Pasture
+Accum.Forest
+Different Key Variables:
+bac.total.in.stream
+Accum.Pasture
+Accum.Forest
+
+Wildlife-Duck Submodel Key Variables:
+bac.total.in.stream
+Accum.Pasture
+Accum.Forest
+Accum.RAOCUT
+Different Key Variables:
+bac.total.in.stream
+
+Wildlife-Elk Submodel Key Variables:
+bac.total.in.stream
+Accum.Pasture
+Accum.Forest
+Accum.RAOCUT
+Different Key Variables:
+bac.total.in.stream
+
+Wildlife-Geese Submodel Key Variables:
+bac.total.in.stream
+Accum.Pasture
+Accum.Forest
+Accum.RAOCUT
+Different Key Variables:
+bac.total.in.stream
+
+Wildlife-Gulls Submodel Key Variables:
+bac.total.in.stream
+Accum.Pasture
+Accum.Forest
+Accum.RAOCUT
+Different Key Variables:
+bac.total.in.stream
+
+Wildlife-Herons_Egrets Submodel Key Variables:
+bac.total.in.stream
+Accum.Pasture
+Accum.Forest
+Accum.RAOCUT
+Different Key Variables:
+bac.total.in.stream
+
+Wildlife-Otter Submodel Key Variables:
+bac.total.in.stream
+Accum.Pasture
+Accum.Forest
+Different Key Variables:
+bac.total.in.stream
+
+Wildlife-Raccoon Submodel Key Variables:
+bac.total.in.stream
+Accum.Pasture
+Accum.Forest
+Accum.RAOCUT
+Different Key Variables:
+bac.total.in.stream
