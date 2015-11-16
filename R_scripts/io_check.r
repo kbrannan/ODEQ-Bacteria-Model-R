@@ -3,6 +3,8 @@
 # Last Updated: 2015/11/1
 # This script runs original sub-models and modified ones, and then compares the outputs of each sub-model pair, prints out the different key variables.
 
+
+
 io_check<- function(ori.model.wrkdir,mod.model.wrkdir,output.compare.wrkdir=ori.model.wrkdir){
 # Load Original SubModel
 ## Get the path
@@ -181,13 +183,27 @@ write(colnames( cow.calf.ori.out)[29:31],fileCom,append=TRUE)
 a<-data.matrix(cow.calf.ori.out)[,29:31]
 b<-data.matrix(cow.calf.mod.out)[,29:31]
 test<-which(a != b, arr.ind=TRUE)
+
 if (!is.null(dim(test))){
 col<-unique(test[,2])
+write("Different Key Variables:", fileCom, append=TRUE)
+
+for (i in 1:length(col)){
+write(colnames(a)[col][i],fileCom,append=TRUE)
+write(cbind("Original_Output","Modified_Output","Change_Ratio"), fileCom, ncolumns=3,append=TRUE)
+write.table(cbind(a[,col[i]],b[,col[i]],a[,col[i]]/b[,col[i]]),fileCom, row.names=FALSE, col.names=FALSE, append=TRUE)
+}
 }else{
 col<-test
-}
 write("Different Key Variables:", fileCom, append=TRUE)
-write(colnames(a)[col],fileCom,append=TRUE)
+#write(names(a)[col],fileCom,append=TRUE)
+for (i in 1:length(col)){
+write(names(a)[col][i],fileCom,append=TRUE)
+write(cbind("Original_Output","Modified_Output","Change_Ratio"), fileCom,ncolumns=3, append=TRUE)
+write.table(cbind(a[col[i]],b[col[i]],a[col[i]]/b[col[i]]),fileCom,row.names=FALSE, col.names=FALSE,append=TRUE)
+}
+}
+
 
 # onsite-pet
 write("", fileCom, append=TRUE)
@@ -199,11 +215,22 @@ test<-which(a != b, arr.ind=TRUE)
 if (!is.null(dim(test))){
 col<-unique(test[,2])
 write("Different Key Variables:", fileCom, append=TRUE)
-write(colnames(a)[col],fileCom,append=TRUE)
+#write(colnames(a)[col],fileCom,append=TRUE)
+for (i in 1:length(col)){
+write(colnames(a)[col][i],fileCom,append=TRUE)
+write(cbind("Original_Output","Modified_Output","Change_Ratio"), fileCom, ncolumns=3,append=TRUE)
+write.table(cbind(a[,col[i]],b[,col[i]],a[,col[i]]/b[,col[i]]),fileCom, row.names=FALSE, col.names=FALSE, append=TRUE)
+}
+
 }else{
 col<-test
 write("Different Key Variables:", fileCom, append=TRUE)
-write(names(a)[col],fileCom,append=TRUE)
+#write(names(a)[col],fileCom,append=TRUE)
+for (i in 1:length(col)){
+write(names(a)[col][i],fileCom,append=TRUE)
+write(cbind("Original_Output","Modified_Output","Change_Ratio"), fileCom,ncolumns=3, append=TRUE)
+write.table(cbind(a[col[i]],b[col[i]],a[col[i]]/b[col[i]]),fileCom, row.names=FALSE, col.names=FALSE, append=TRUE)
+}
 }
 
 # Beaver
@@ -217,10 +244,20 @@ if (!is.null(dim(test))){
 col<-unique(test[,2])
 write("Different Key Variables:", fileCom, append=TRUE)
 write(colnames(a)[col],fileCom,append=TRUE)
+for (i in 1:length(col)){
+write(colnames(a)[col][i],fileCom,append=TRUE)
+write(cbind("Original_Output","Modified_Output","Change_Ratio"), fileCom, ncolumns=3,append=TRUE)
+write.table(cbind(a[,col[i]],b[,col[i]],a[,col[i]]/b[,col[i]]),fileCom, row.names=FALSE, col.names=FALSE, append=TRUE)
+}
 }else{
 col<-test
 write("Different Key Variables:", fileCom, append=TRUE)
-write(names(a)[col],fileCom,append=TRUE)
+
+for (i in 1:length(col)){
+write(names(a)[col][i],fileCom,append=TRUE)
+write(cbind("Original_Output","Modified_Output","Change_Ratio"), fileCom,ncolumns=3, append=TRUE)
+write.table(cbind(a[col[i]],b[col[i]],a[col[i]]/b[col[i]]),fileCom, row.names=FALSE, col.names=FALSE, append=TRUE)
+}
 }
 
 
@@ -234,11 +271,21 @@ test<-which(a != b, arr.ind=TRUE)
 if (!is.null(dim(test))){
 col<-unique(test[,2])
 write("Different Key Variables:", fileCom, append=TRUE)
-write(colnames(a)[col],fileCom,append=TRUE)
+#write(colnames(a)[col],fileCom,append=TRUE)
+for (i in 1:length(col)){
+write(colnames(a)[col][i],fileCom,append=TRUE)
+write(cbind("Original_Output","Modified_Output","Change_Ratio"), fileCom, ncolumns=3,append=TRUE)
+write.table(cbind(a[,col[i]],b[,col[i]],a[,col[i]]/b[,col[i]]),fileCom, row.names=FALSE, col.names=FALSE, append=TRUE)
+}
 }else{
 col<-test
 write("Different Key Variables:", fileCom, append=TRUE)
-write(names(a)[col],fileCom,append=TRUE)
+#write(names(a)[col],fileCom,append=TRUE)
+for (i in 1:length(col)){
+write(names(a)[col][i],fileCom,append=TRUE)
+write(cbind("Original_Output","Modified_Output","Change_Ratio"), fileCom,ncolumns=3, append=TRUE)
+write.table(cbind(a[col[i]],b[col[i]],a[col[i]]/b[col[i]]),fileCom, row.names=FALSE, col.names=FALSE, append=TRUE)
+}
 }
 
 # Deer
@@ -251,11 +298,21 @@ test<-which(a != b, arr.ind=TRUE)
 if (!is.null(dim(test))){
 col<-unique(test[,2])
 write("Different Key Variables:", fileCom, append=TRUE)
-write(colnames(a)[col],fileCom,append=TRUE)
+#write(colnames(a)[col],fileCom,append=TRUE)
+for (i in 1:length(col)){
+write(colnames(a)[col][i],fileCom,append=TRUE)
+write(cbind("Original_Output","Modified_Output","Change_Ratio"), fileCom, ncolumns=3,append=TRUE)
+write.table(cbind(a[,col[i]],b[,col[i]],a[,col[i]]/b[,col[i]]),fileCom, row.names=FALSE, col.names=FALSE, append=TRUE)
+}
 }else{
 col<-test
 write("Different Key Variables:", fileCom, append=TRUE)
-write(names(a)[col],fileCom,append=TRUE)
+#write(names(a)[col],fileCom,append=TRUE)
+for (i in 1:length(col)){
+write(names(a)[col][i],fileCom,append=TRUE)
+write(cbind("Original_Output","Modified_Output","Change_Ratio"), fileCom,ncolumns=3, append=TRUE)
+write.table(cbind(a[col[i]],b[col[i]],a[col[i]]/b[col[i]]),fileCom, row.names=FALSE, col.names=FALSE, append=TRUE)
+}
 }
 
 # Duck
@@ -268,11 +325,21 @@ test<-which(a != b, arr.ind=TRUE)
 if (!is.null(dim(test))){
 col<-unique(test[,2])
 write("Different Key Variables:", fileCom, append=TRUE)
-write(colnames(a)[col],fileCom,append=TRUE)
+#write(colnames(a)[col],fileCom,append=TRUE)
+for (i in 1:length(col)){
+write(colnames(a)[col][i],fileCom,append=TRUE)
+write(cbind("Original_Output","Modified_Output","Change_Ratio"), fileCom, ncolumns=3,append=TRUE)
+write.table(cbind(a[,col[i]],b[,col[i]],a[,col[i]]/b[,col[i]]),fileCom, row.names=FALSE, col.names=FALSE, append=TRUE)
+}
 }else{
 col<-test
 write("Different Key Variables:", fileCom, append=TRUE)
-write(names(a)[col],fileCom,append=TRUE)
+#write(names(a)[col],fileCom,append=TRUE)
+for (i in 1:length(col)){
+write(names(a)[col][i],fileCom,append=TRUE)
+write(cbind("Original_Output","Modified_Output","Change_Ratio"), fileCom,ncolumns=3, append=TRUE)
+write.table(cbind(a[col[i]],b[col[i]],a[col[i]]/b[col[i]]),fileCom, row.names=FALSE, col.names=FALSE, append=TRUE)
+}
 }
 
 # Elk
@@ -285,11 +352,21 @@ test<-which(a != b, arr.ind=TRUE)
 if (!is.null(dim(test))){
 col<-unique(test[,2])
 write("Different Key Variables:", fileCom, append=TRUE)
-write(colnames(a)[col],fileCom,append=TRUE)
+#write(colnames(a)[col],fileCom,append=TRUE)
+for (i in 1:length(col)){
+write(colnames(a)[col][i],fileCom,append=TRUE)
+write(cbind("Original_Output","Modified_Output","Change_Ratio"), fileCom, ncolumns=3,append=TRUE)
+write.table(cbind(a[,col[i]],b[,col[i]],a[,col[i]]/b[,col[i]]),fileCom, row.names=FALSE, col.names=FALSE, append=TRUE)
+}
 }else{
 col<-test
 write("Different Key Variables:", fileCom, append=TRUE)
-write(names(a)[col],fileCom,append=TRUE)
+#write(names(a)[col],fileCom,append=TRUE)
+for (i in 1:length(col)){
+write(names(a)[col][i],fileCom,append=TRUE)
+write(cbind("Original_Output","Modified_Output","Change_Ratio"), fileCom,ncolumns=3, append=TRUE)
+write.table(cbind(a[col[i]],b[col[i]],a[col[i]]/b[col[i]]),fileCom, row.names=FALSE, col.names=FALSE, append=TRUE)
+}
 }
 
 # Geese
@@ -302,11 +379,21 @@ test<-which(a != b, arr.ind=TRUE)
 if (!is.null(dim(test))){
 col<-unique(test[,2])
 write("Different Key Variables:", fileCom, append=TRUE)
-write(colnames(a)[col],fileCom,append=TRUE)
+#write(colnames(a)[col],fileCom,append=TRUE)
+for (i in 1:length(col)){
+write(colnames(a)[col][i],fileCom,append=TRUE)
+write(cbind("Original_Output","Modified_Output","Change_Ratio"), fileCom, ncolumns=3,append=TRUE)
+write.table(cbind(a[,col[i]],b[,col[i]],a[,col[i]]/b[,col[i]]),fileCom, row.names=FALSE, col.names=FALSE, append=TRUE)
+}
 }else{
 col<-test
 write("Different Key Variables:", fileCom, append=TRUE)
-write(names(a)[col],fileCom,append=TRUE)
+#write(names(a)[col],fileCom,append=TRUE)
+for (i in 1:length(col)){
+write(names(a)[col][i],fileCom,append=TRUE)
+write(cbind("Original_Output","Modified_Output","Change_Ratio"), fileCom,ncolumns=3, append=TRUE)
+write.table(cbind(a[col[i]],b[col[i]],a[col[i]]/b[col[i]]),fileCom, row.names=FALSE, col.names=FALSE, append=TRUE)
+}
 }
 
 # Gulls
@@ -319,11 +406,21 @@ test<-which(a != b, arr.ind=TRUE)
 if (!is.null(dim(test))){
 col<-unique(test[,2])
 write("Different Key Variables:", fileCom, append=TRUE)
-write(colnames(a)[col],fileCom,append=TRUE)
+#write(colnames(a)[col],fileCom,append=TRUE)
+for (i in 1:length(col)){
+write(colnames(a)[col][i],fileCom,append=TRUE)
+write(cbind("Original_Output","Modified_Output","Change_Ratio"), fileCom, ncolumns=3,append=TRUE)
+write.table(cbind(a[,col[i]],b[,col[i]],a[,col[i]]/b[,col[i]]),fileCom, row.names=FALSE, col.names=FALSE, append=TRUE)
+}
 }else{
 col<-test
 write("Different Key Variables:", fileCom, append=TRUE)
-write(names(a)[col],fileCom,append=TRUE)
+#write(names(a)[col],fileCom,append=TRUE)
+for (i in 1:length(col)){
+write(names(a)[col][i],fileCom,append=TRUE)
+write(cbind("Original_Output","Modified_Output","Change_Ratio"), fileCom,ncolumns=3, append=TRUE)
+write.table(cbind(a[col[i]],b[col[i]],a[col[i]]/b[col[i]]),fileCom, row.names=FALSE, col.names=FALSE, append=TRUE)
+}
 }
 
 # Herons_Egrets
@@ -336,11 +433,21 @@ test<-which(a != b, arr.ind=TRUE)
 if (!is.null(dim(test))){
 col<-unique(test[,2])
 write("Different Key Variables:", fileCom, append=TRUE)
-write(colnames(a)[col],fileCom,append=TRUE)
+#write(colnames(a)[col],fileCom,append=TRUE)
+for (i in 1:length(col)){
+write(colnames(a)[col][i],fileCom,append=TRUE)
+write(cbind("Original_Output","Modified_Output","Change_Ratio"), fileCom, ncolumns=3,append=TRUE)
+write.table(cbind(a[,col[i]],b[,col[i]],a[,col[i]]/b[,col[i]]),fileCom, row.names=FALSE, col.names=FALSE, append=TRUE)
+}
 }else{
 col<-test
 write("Different Key Variables:", fileCom, append=TRUE)
-write(names(a)[col],fileCom,append=TRUE)
+#write(names(a)[col],fileCom,append=TRUE)
+for (i in 1:length(col)){
+write(names(a)[col][i],fileCom,append=TRUE)
+write(cbind("Original_Output","Modified_Output","Change_Ratio"), fileCom,ncolumns=3, append=TRUE)
+write.table(cbind(a[col[i]],b[col[i]],a[col[i]]/b[col[i]]),fileCom, row.names=FALSE, col.names=FALSE, append=TRUE)
+}
 }
 
 # Otter
@@ -353,11 +460,21 @@ test<-which(a != b, arr.ind=TRUE)
 if (!is.null(dim(test))){
 col<-unique(test[,2])
 write("Different Key Variables:", fileCom, append=TRUE)
-write(colnames(a)[col],fileCom,append=TRUE)
+#write(colnames(a)[col][i],fileCom,append=TRUE)
+for (i in 1:length(col)){
+write(colnames(a)[col][i],fileCom,append=TRUE)
+write(cbind("Original_Output","Modified_Output","Change_Ratio"), fileCom, ncolumns=3,append=TRUE)
+write.table(cbind(a[,col[i]],b[,col[i]],a[,col[i]]/b[,col[i]]),fileCom, row.names=FALSE, col.names=FALSE, append=TRUE)
+}
 }else{
 col<-test
 write("Different Key Variables:", fileCom, append=TRUE)
-write(names(a)[col],fileCom,append=TRUE)
+#write(names(a)[col],fileCom,append=TRUE)
+for (i in 1:length(col)){
+write(names(a)[col][i],fileCom,append=TRUE)
+write(cbind("Original_Output","Modified_Output","Change_Ratio"), fileCom,ncolumns=3, append=TRUE)
+write.table(cbind(a[col[i]],b[col[i]],a[col[i]]/b[col[i]]),fileCom, row.names=FALSE, col.names=FALSE, append=TRUE)
+}
 }
 
 # Raccoon
@@ -370,11 +487,21 @@ test<-which(a != b, arr.ind=TRUE)
 if (!is.null(dim(test))){
 col<-unique(test[,2])
 write("Different Key Variables:", fileCom, append=TRUE)
-write(colnames(a)[col],fileCom,append=TRUE)
+#write(colnames(a)[col],fileCom,append=TRUE)
+for (i in 1:length(col)){
+write(colnames(a)[col][i],fileCom,append=TRUE)
+write(cbind("Original_Output","Modified_Output","Change_Ratio"), fileCom, ncolumns=3,append=TRUE)
+write.table(cbind(a[,col[i]],b[,col[i]],a[,col[i]]/b[,col[i]]),fileCom, row.names=FALSE, col.names=FALSE, append=TRUE)
+}
 }else{
 col<-test
 write("Different Key Variables:", fileCom, append=TRUE)
-write(names(a)[col],fileCom,append=TRUE)
+#write(names(a)[col],fileCom,append=TRUE)
+for (i in 1:length(col)){
+write(names(a)[col][i],fileCom,append=TRUE)
+write(cbind("Original_Output","Modified_Output","Change_Ratio"), fileCom,ncolumns=3, append=TRUE)
+write.table(cbind(a[col[i]],b[col[i]],a[col[i]]/b[col[i]]),fileCom, row.names=FALSE, col.names=FALSE, append=TRUE)
+}
 }
 
 close(fileCom)
