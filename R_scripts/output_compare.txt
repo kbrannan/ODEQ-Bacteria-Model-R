@@ -49,35 +49,7 @@ Original_Output Modified_Output Change_Ratio
 Onsite Pets Submodel Key Variables:
 bac.onsite.NearStrmStrctFailure.to.stream.load
 Accum.RAOCUT
-Different Key Variables:
-NA
-Original_Output Modified_Output Change_Ratio
-NA NA NA
-NA NA NA
-NA NA NA
-NA NA NA
-NA NA NA
-NA NA NA
-NA NA NA
-NA NA NA
-NA NA NA
-NA NA NA
-NA NA NA
-NA NA NA
-
-Original_Output Modified_Output Change_Ratio
-
-
-
-
-
-
-
-
-
-
-
-
+No Different Key Variables
 
 Wildlife-Beaver Submodel Key Variables:
 bac.total.in.stream

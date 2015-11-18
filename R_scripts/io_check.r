@@ -183,7 +183,7 @@ write(colnames( cow.calf.ori.out)[29:31],fileCom,append=TRUE)
 a<-data.matrix(cow.calf.ori.out)[,29:31]
 b<-data.matrix(cow.calf.mod.out)[,29:31]
 test<-which(a != b, arr.ind=TRUE)
-
+if (length(test)>0){
 if (!is.null(dim(test))){
 col<-unique(test[,2])
 write("Different Key Variables:", fileCom, append=TRUE)
@@ -203,6 +203,9 @@ write(cbind("Original_Output","Modified_Output","Change_Ratio"), fileCom,ncolumn
 write.table(cbind(a[col[i]],b[col[i]],a[col[i]]/b[col[i]]),fileCom,row.names=FALSE, col.names=FALSE,append=TRUE)
 }
 }
+}else{
+write("No Different Key Variables", fileCom, append=TRUE)
+}
 
 
 # onsite-pet
@@ -212,6 +215,7 @@ write(colnames(onsite.pets.ori.out)[17:18],fileCom,append=TRUE)
 a<-data.matrix(onsite.pets.ori.out)[,17:18]
 b<-data.matrix(onsite.pets.mod.out)[,17:18]
 test<-which(a != b, arr.ind=TRUE)
+if (length(test)>0){
 if (!is.null(dim(test))){
 col<-unique(test[,2])
 write("Different Key Variables:", fileCom, append=TRUE)
@@ -232,6 +236,9 @@ write(cbind("Original_Output","Modified_Output","Change_Ratio"), fileCom,ncolumn
 write.table(cbind(a[col[i]],b[col[i]],a[col[i]]/b[col[i]]),fileCom, row.names=FALSE, col.names=FALSE, append=TRUE)
 }
 }
+}else{
+write("No Different Key Variables", fileCom, append=TRUE)
+}
 
 # Beaver
 write("", fileCom, append=TRUE)
@@ -240,6 +247,7 @@ write(colnames(beaver.ori.out)[5:6],fileCom,append=TRUE)
 a<-data.matrix(beaver.ori.out)[,5:6]
 b<-data.matrix(beaver.mod.out)[,5:6]
 test<-which(a != b, arr.ind=TRUE)
+if (length(test)>0){
 if (!is.null(dim(test))){
 col<-unique(test[,2])
 write("Different Key Variables:", fileCom, append=TRUE)
@@ -259,6 +267,9 @@ write(cbind("Original_Output","Modified_Output","Change_Ratio"), fileCom,ncolumn
 write.table(cbind(a[col[i]],b[col[i]],a[col[i]]/b[col[i]]),fileCom, row.names=FALSE, col.names=FALSE, append=TRUE)
 }
 }
+}else{
+write("No Different Key Variables", fileCom, append=TRUE)
+}
 
 
 # Coyote
@@ -268,6 +279,7 @@ write(colnames(coyote.ori.out)[cbind(8,12,13,14)],fileCom,append=TRUE)
 a<-data.matrix(coyote.ori.out)[,cbind(8,12,13,14)]
 b<-data.matrix(coyote.mod.out)[,cbind(8,12,13,14)]
 test<-which(a != b, arr.ind=TRUE)
+if (length(test)>0){
 if (!is.null(dim(test))){
 col<-unique(test[,2])
 write("Different Key Variables:", fileCom, append=TRUE)
@@ -286,6 +298,9 @@ write(names(a)[col][i],fileCom,append=TRUE)
 write(cbind("Original_Output","Modified_Output","Change_Ratio"), fileCom,ncolumns=3, append=TRUE)
 write.table(cbind(a[col[i]],b[col[i]],a[col[i]]/b[col[i]]),fileCom, row.names=FALSE, col.names=FALSE, append=TRUE)
 }
+}
+}else{
+write("No Different Key Variables", fileCom, append=TRUE)
 }
 
 # Deer
@@ -295,6 +310,7 @@ write(colnames(deer.ori.out)[cbind(7,10,11)],fileCom,append=TRUE)
 a<-data.matrix(deer.ori.out)[,cbind(7,10,11)]
 b<-data.matrix(deer.mod.out)[,cbind(7,10,11)]
 test<-which(a != b, arr.ind=TRUE)
+if (length(test)>0){
 if (!is.null(dim(test))){
 col<-unique(test[,2])
 write("Different Key Variables:", fileCom, append=TRUE)
@@ -313,6 +329,9 @@ write(names(a)[col][i],fileCom,append=TRUE)
 write(cbind("Original_Output","Modified_Output","Change_Ratio"), fileCom,ncolumns=3, append=TRUE)
 write.table(cbind(a[col[i]],b[col[i]],a[col[i]]/b[col[i]]),fileCom, row.names=FALSE, col.names=FALSE, append=TRUE)
 }
+}
+}else{
+write("No Different Key Variables", fileCom, append=TRUE)
 }
 
 # Duck
@@ -322,6 +341,7 @@ write(colnames(duck.ori.out)[8:11],fileCom,append=TRUE)
 a<-data.matrix(duck.ori.out)[,8:11]
 b<-data.matrix(duck.mod.out)[,8:11]
 test<-which(a != b, arr.ind=TRUE)
+if (length(test)>0){
 if (!is.null(dim(test))){
 col<-unique(test[,2])
 write("Different Key Variables:", fileCom, append=TRUE)
@@ -340,6 +360,9 @@ write(names(a)[col][i],fileCom,append=TRUE)
 write(cbind("Original_Output","Modified_Output","Change_Ratio"), fileCom,ncolumns=3, append=TRUE)
 write.table(cbind(a[col[i]],b[col[i]],a[col[i]]/b[col[i]]),fileCom, row.names=FALSE, col.names=FALSE, append=TRUE)
 }
+}
+}else{
+write("No Different Key Variables", fileCom, append=TRUE)
 }
 
 # Elk
@@ -349,6 +372,7 @@ write(colnames(elk.ori.out)[cbind(19,32,33,34)],fileCom,append=TRUE)
 a<-data.matrix(elk.ori.out)[,cbind(19,32,33,34)]
 b<-data.matrix(elk.mod.out)[,cbind(19,32,33,34)]
 test<-which(a != b, arr.ind=TRUE)
+if (length(test)>0){
 if (!is.null(dim(test))){
 col<-unique(test[,2])
 write("Different Key Variables:", fileCom, append=TRUE)
@@ -367,6 +391,9 @@ write(names(a)[col][i],fileCom,append=TRUE)
 write(cbind("Original_Output","Modified_Output","Change_Ratio"), fileCom,ncolumns=3, append=TRUE)
 write.table(cbind(a[col[i]],b[col[i]],a[col[i]]/b[col[i]]),fileCom, row.names=FALSE, col.names=FALSE, append=TRUE)
 }
+}
+}else{
+write("No Different Key Variables", fileCom, append=TRUE)
 }
 
 # Geese
@@ -376,6 +403,7 @@ write(colnames(geese.ori.out)[8:11],fileCom,append=TRUE)
 a<-data.matrix(geese.ori.out)[,8:11]
 b<-data.matrix(geese.mod.out)[,8:11]
 test<-which(a != b, arr.ind=TRUE)
+if (length(test)>0){
 if (!is.null(dim(test))){
 col<-unique(test[,2])
 write("Different Key Variables:", fileCom, append=TRUE)
@@ -394,6 +422,9 @@ write(names(a)[col][i],fileCom,append=TRUE)
 write(cbind("Original_Output","Modified_Output","Change_Ratio"), fileCom,ncolumns=3, append=TRUE)
 write.table(cbind(a[col[i]],b[col[i]],a[col[i]]/b[col[i]]),fileCom, row.names=FALSE, col.names=FALSE, append=TRUE)
 }
+}
+}else{
+write("No Different Key Variables", fileCom, append=TRUE)
 }
 
 # Gulls
@@ -403,6 +434,7 @@ write(colnames(gulls.ori.out)[cbind(8,12,13,14)],fileCom,append=TRUE)
 a<-data.matrix(gulls.ori.out)[,cbind(8,12,13,14)]
 b<-data.matrix(gulls.mod.out)[,cbind(8,12,13,14)]
 test<-which(a != b, arr.ind=TRUE)
+if (length(test)>0){
 if (!is.null(dim(test))){
 col<-unique(test[,2])
 write("Different Key Variables:", fileCom, append=TRUE)
@@ -421,6 +453,9 @@ write(names(a)[col][i],fileCom,append=TRUE)
 write(cbind("Original_Output","Modified_Output","Change_Ratio"), fileCom,ncolumns=3, append=TRUE)
 write.table(cbind(a[col[i]],b[col[i]],a[col[i]]/b[col[i]]),fileCom, row.names=FALSE, col.names=FALSE, append=TRUE)
 }
+}
+}else{
+write("No Different Key Variables", fileCom, append=TRUE)
 }
 
 # Herons_Egrets
@@ -430,6 +465,7 @@ write(colnames(heregr.ori.out)[cbind(8,12,13,14)],fileCom,append=TRUE)
 a<-data.matrix(heregr.ori.out)[,cbind(8,12,13,14)]
 b<-data.matrix(heregr.mod.out)[,cbind(8,12,13,14)]
 test<-which(a != b, arr.ind=TRUE)
+if (length(test)>0){
 if (!is.null(dim(test))){
 col<-unique(test[,2])
 write("Different Key Variables:", fileCom, append=TRUE)
@@ -449,6 +485,9 @@ write(cbind("Original_Output","Modified_Output","Change_Ratio"), fileCom,ncolumn
 write.table(cbind(a[col[i]],b[col[i]],a[col[i]]/b[col[i]]),fileCom, row.names=FALSE, col.names=FALSE, append=TRUE)
 }
 }
+}else{
+write("No Different Key Variables", fileCom, append=TRUE)
+}
 
 # Otter
 write("", fileCom, append=TRUE)
@@ -457,6 +496,7 @@ write(colnames(otter.ori.out)[cbind(11,16,17)],fileCom,append=TRUE)
 a<-data.matrix(otter.ori.out)[,cbind(11,16,17)]
 b<-data.matrix(otter.mod.out)[,cbind(11,16,17)]
 test<-which(a != b, arr.ind=TRUE)
+if (length(test)>0){
 if (!is.null(dim(test))){
 col<-unique(test[,2])
 write("Different Key Variables:", fileCom, append=TRUE)
@@ -476,6 +516,9 @@ write(cbind("Original_Output","Modified_Output","Change_Ratio"), fileCom,ncolumn
 write.table(cbind(a[col[i]],b[col[i]],a[col[i]]/b[col[i]]),fileCom, row.names=FALSE, col.names=FALSE, append=TRUE)
 }
 }
+}else{
+write("No Different Key Variables", fileCom, append=TRUE)
+}
 
 # Raccoon
 write("", fileCom, append=TRUE)
@@ -484,6 +527,7 @@ write(colnames(racoon.ori.out)[cbind(8,12,13,14)],fileCom,append=TRUE)
 a<-data.matrix(racoon.ori.out)[,cbind(8,12,13,14)]
 b<-data.matrix(racoon.mod.out)[,cbind(8,12,13,14)]
 test<-which(a != b, arr.ind=TRUE)
+if (length(test)>0){
 if (!is.null(dim(test))){
 col<-unique(test[,2])
 write("Different Key Variables:", fileCom, append=TRUE)
@@ -502,6 +546,9 @@ write(names(a)[col][i],fileCom,append=TRUE)
 write(cbind("Original_Output","Modified_Output","Change_Ratio"), fileCom,ncolumns=3, append=TRUE)
 write.table(cbind(a[col[i]],b[col[i]],a[col[i]]/b[col[i]]),fileCom, row.names=FALSE, col.names=FALSE, append=TRUE)
 }
+}
+}else{
+write("No Different Key Variables", fileCom, append=TRUE)
 }
 
 close(fileCom)
