@@ -5,7 +5,7 @@
 
 
 
-io_check<- function(ori.model.wrkdir,mod.model.wrkdir,output.compare.wrkdir=ori.model.wrkdir){
+io_check<- function(subwat_num,ori.model.wrkdir,mod.model.wrkdir,output.compare.wrkdir=ori.model.wrkdir){
 # Load Original SubModel
 ## Get the path
 setwd(ori.model.wrkdir)
@@ -26,70 +26,70 @@ rm(ii)
 
 
 # Run Each Original SubModel
-cow.calf.in <- "cowcalf01.txt"
+cow.calf.in <- paste0("cowcalf",sprintf("%02.0f",subwat_num),".txt")
 cow.calf.ori.out<-cow.calf(chr.input=cow.calf.in,chr.wrkdir=grep("[Cc]ow",chr.sub.model.ori.dirs,value=TRUE))
 # print the cowcalf output
 foname <- paste0(grep("[Cc]ow",chr.sub.model.ori.dirs,value=TRUE),"/ori_output_",cow.calf.in)
 write.table(cow.calf.ori.out, foname, row.names = FALSE, col.names = T, sep = ",")
 
-onsite.pets.in <- "OnSitePets01.txt"
+onsite.pets.in <- paste0("OnSitePets",sprintf("%02.0f",subwat_num),".txt")
 onsite.pets.ori.out <- onsite_pets(chr.input=onsite.pets.in,chr.wrkdir=grep("[Ss]ite",chr.sub.model.ori.dirs,value=TRUE))# 
 #print the onsite pets output 
 foname <- paste0(grep("[Ss]ite",chr.sub.model.ori.dirs,value=TRUE),"/ori_output_",onsite.pets.in)
 write.table(onsite.pets.ori.out, foname, row.names = FALSE, col.names = T, sep = ",")
 
-beaver.in <- "wildlifeBeaver01.txt"
+beaver.in <- paste0("wildlifeBeaver",sprintf("%02.0f",subwat_num),".txt")
 beaver.ori.out <- wildlifeBeaver(chr.input=beaver.in,chr.wrkdir=grep("Wildlife-[Bb]eaver",chr.sub.model.ori.dirs,value=TRUE))
 #print the beaver output 
 foname <- paste0(grep("Wildlife-[Bb]eaver",chr.sub.model.ori.dirs,value=TRUE),"/ori_output_",beaver.in)
 write.table(beaver.ori.out, foname, row.names = FALSE, col.names = T, sep = ",")
 
-coyote.in <- "wildlifeCoyote01.txt"
+coyote.in <- paste0("wildlifeCoyote",sprintf("%02.0f",subwat_num),".txt")
 coyote.ori.out <- wildlifeCoyote(chr.input=coyote.in,chr.wrkdir=grep("Wildlife-[Cc]oyote",chr.sub.model.ori.dirs,value=TRUE))
 #print the coyote output 
 foname <- paste0(grep("Wildlife-[Cc]oyote",chr.sub.model.ori.dirs,value=TRUE),"/ori_output_",coyote.in)
 write.table(coyote.ori.out, foname, row.names = FALSE, col.names = T, sep = ",")
 
-deer.in <- "wildlifeDeer01.txt"
+deer.in <- paste0("wildlifeDeer",sprintf("%02.0f",subwat_num),".txt")
 deer.ori.out <- wildlifeDeer(chr.input=deer.in,chr.wrkdir=grep("Wildlife-[Dd]eer",chr.sub.model.ori.dirs,value=TRUE))
 #print the deer output 
 foname <- paste0(grep("Wildlife-[Dd]eer",chr.sub.model.ori.dirs,value=TRUE),"/ori_output_",deer.in)
 write.table(deer.ori.out, foname, row.names = FALSE, col.names = T, sep = ",")
 
-duck.in <- "wildlifeDuck01.txt"
+duck.in <- paste0("wildlifeDuck",sprintf("%02.0f",subwat_num),".txt")
 duck.ori.out <- wildlifeDuck(chr.input=duck.in,chr.wrkdir=grep("Wildlife-[Dd]uck",chr.sub.model.ori.dirs,value=TRUE))
 #print the duck output 
 foname <- paste0(grep("Wildlife-[Dd]uck",chr.sub.model.ori.dirs,value=TRUE),"/ori_output_",duck.in)
 write.table(duck.ori.out, foname, row.names = FALSE, col.names = T, sep = ",")
 
-elk.in <- "wildlifeElk01.txt"
+elk.in <- paste0("wildlifeElk",sprintf("%02.0f",subwat_num),".txt")
 elk.ori.out <- wildlifeElk(chr.input=elk.in,chr.wrkdir=grep("Wildlife-[Ee]lk",chr.sub.model.ori.dirs,value=TRUE))
 #print the elk output 
 foname <- paste0(grep("Wildlife-[Ee]lk",chr.sub.model.ori.dirs,value=TRUE),"/ori_output_",elk.in)
 write.table(elk.ori.out, foname, row.names = FALSE, col.names = T, sep = ",")
 
-geese.in <- "wildlifeGeese01.txt"
+geese.in <- paste0("wildlifeGeese",sprintf("%02.0f",subwat_num),".txt")
 geese.ori.out <- wildlifeGeese(chr.input=geese.in,chr.wrkdir=grep("Wildlife-[Gg]eese",chr.sub.model.ori.dirs,value=TRUE))#print the geese output 
 foname <- paste0(grep("Wildlife-[Gg]eese",chr.sub.model.ori.dirs,value=TRUE),"/ori_output_",geese.in)
 write.table(geese.ori.out, foname, row.names = FALSE, col.names = T, sep = ",")
 
-gulls.in <- "wildlifeGulls01.txt"
+gulls.in <- paste0("wildlifeGulls",sprintf("%02.0f",subwat_num),".txt")
 gulls.ori.out <- wildlifeGulls(chr.input=gulls.in,chr.wrkdir=grep("Wildlife-[Gg]ulls",chr.sub.model.ori.dirs,value=TRUE))#print the gulls output 
 foname <- paste0(grep("Wildlife-[Gg]ulls",chr.sub.model.ori.dirs,value=TRUE),"/ori_output_",gulls.in)
 write.table(gulls.ori.out, foname, row.names = FALSE, col.names = T, sep = ",")
 
-heregr.in <- "wildlifeHerEgr01.txt"
+heregr.in <- paste0("wildlifeHerEgr",sprintf("%02.0f",subwat_num),".txt")
 heregr.ori.out <- wildlifeHerEgr(chr.input=heregr.in,chr.wrkdir=grep("Wildlife-[Hh]erons_[Ee]grets",chr.sub.model.ori.dirs,value=TRUE))
 #print the Herons_Egrets output 
 foname <- paste0(grep("Wildlife-[Hh]erons_[Ee]grets",chr.sub.model.ori.dirs,value=TRUE),"/ori_output_",heregr.in)
 write.table(heregr.ori.out, foname, row.names = FALSE, col.names = T, sep = ",")
 
-otter.in <- "wildlifeOtter01.txt"
+otter.in <- paste0("wildlifeOtter",sprintf("%02.0f",subwat_num),".txt")
 otter.ori.out <- wildlifeOtter(chr.input=otter.in,chr.wrkdir=grep("Wildlife-[Oo]tter",chr.sub.model.ori.dirs,value=TRUE))#print the Otters output 
 foname <- paste0(grep("Wildlife-[Oo]tter",chr.sub.model.ori.dirs,value=TRUE),"/ori_output_",otter.in)
 write.table(otter.ori.out, foname, row.names = FALSE, col.names = T, sep = ",")
 
-racoon.in <- "wildlifeRacoon01.txt"
+racoon.in <- paste0("wildlifeRacoon",sprintf("%02.0f",subwat_num),".txt")
 racoon.ori.out <- wildlifeRacoon(chr.input=racoon.in,chr.wrkdir=grep("Wildlife-[Rr]acoon",chr.sub.model.ori.dirs,value=TRUE))
 #print the Racoon output 
 foname <- paste0(grep("Wildlife-[Rr]acoon",chr.sub.model.ori.dirs,value=TRUE),"/ori_output_",racoon.in)
@@ -176,7 +176,8 @@ write.table(racoon.mod.out,foname, row.names = FALSE, col.names = T, sep = ",")
 
 #compare outputs
 setwd(output.compare.wrkdir)
-fileCom<-file("output_compare.txt",'a')
+outputcompare_fn <- paste0("output_compare",sprintf("%02.0f",subwat_num),".txt")
+fileCom<-file(outputcompare_fn,'a')
 #Cow_calf
 write("Cow_Calf Submodel Key Variables:", fileCom, append=TRUE)
 write(colnames( cow.calf.ori.out)[29:31],fileCom,append=TRUE)
