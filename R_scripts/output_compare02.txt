@@ -1,0 +1,172 @@
+Cow_Calf Submodel Key Variables:
+Bacteria.Instream
+Accum.Pasture
+Accum.Forest
+Different Key Variables:
+Bacteria.Instream
+Original_Output Modified_Output Percent_Change
+"2.087e+07" "6.261e+11" "3.000e+06"
+"2.087e+07" "6.261e+11" "3.000e+06"
+"6.261e+07" "1.878e+12" "3.000e+06"
+"6.261e+07" "1.878e+12" "3.000e+06"
+"6.261e+07" "1.878e+12" "3.000e+06"
+"8.348e+07" "2.504e+12" "3.000e+06"
+"6.263e+07" "1.879e+12" "3.000e+06"
+"6.263e+07" "1.879e+12" "3.000e+06"
+"6.263e+07" "1.879e+12" "3.000e+06"
+"2.087e+07" "6.261e+11" "3.000e+06"
+"2.087e+07" "6.261e+11" "3.000e+06"
+"2.087e+07" "6.261e+11" "3.000e+06"
+Accum.Pasture
+Original_Output Modified_Output Percent_Change
+"6.258e+07" "1.877e+12" "3.000e+06"
+"6.258e+07" "1.877e+12" "3.000e+06"
+"1.877e+08" "5.632e+12" "3.000e+06"
+"1.877e+08" "5.632e+12" "3.000e+06"
+"1.877e+08" "5.632e+12" "3.000e+06"
+"2.503e+08" "7.510e+12" "3.000e+06"
+"1.877e+08" "5.632e+12" "3.000e+06"
+"1.877e+08" "5.632e+12" "3.000e+06"
+"1.877e+08" "5.632e+12" "3.000e+06"
+"6.258e+07" "1.877e+12" "3.000e+06"
+"6.258e+07" "1.877e+12" "3.000e+06"
+"6.258e+07" "1.877e+12" "3.000e+06"
+Accum.Forest
+Original_Output Modified_Output Percent_Change
+"0.000e+00" "0.000e+00" "      NaN"
+"0.000e+00" "0.000e+00" "      NaN"
+"0.000e+00" "0.000e+00" "      NaN"
+"0.000e+00" "0.000e+00" "      NaN"
+"0.000e+00" "0.000e+00" "      NaN"
+"0.000e+00" "0.000e+00" "      NaN"
+"6.605e+06" "9.908e+10" "1.500e+06"
+"6.605e+06" "9.908e+10" "1.500e+06"
+"6.605e+06" "9.908e+10" "1.500e+06"
+"0.000e+00" "0.000e+00" "      NaN"
+"0.000e+00" "0.000e+00" "      NaN"
+"0.000e+00" "0.000e+00" "      NaN"
+
+Onsite Pets Submodel Key Variables:
+bac.onsite.NearStrmStrctFailure.to.stream.load
+Accum.RAOCUT
+Different Key Variables:
+bac.onsite.NearStrmStrctFailure.to.stream.load
+Original_Output Modified_Output Percent_Change
+" 2.921e+09" " 2.921e+09" "-1.632e-14"
+" 2.921e+09" " 2.921e+09" "-1.632e-14"
+" 2.921e+09" " 2.921e+09" "-1.632e-14"
+" 2.921e+09" " 2.921e+09" "-1.632e-14"
+" 2.921e+09" " 2.921e+09" "-1.632e-14"
+" 2.921e+09" " 2.921e+09" "-1.632e-14"
+" 2.921e+09" " 2.921e+09" "-1.632e-14"
+" 2.921e+09" " 2.921e+09" "-1.632e-14"
+" 2.921e+09" " 2.921e+09" "-1.632e-14"
+" 2.921e+09" " 2.921e+09" "-1.632e-14"
+" 2.921e+09" " 2.921e+09" "-1.632e-14"
+" 2.921e+09" " 2.921e+09" "-1.632e-14"
+Accum.RAOCUT
+Original_Output Modified_Output Percent_Change
+" 1.266e+11" " 1.238e+10" "-9.022e+01"
+" 1.266e+11" " 1.238e+10" "-9.022e+01"
+" 1.266e+11" " 1.238e+10" "-9.022e+01"
+" 1.266e+11" " 1.238e+10" "-9.022e+01"
+" 1.266e+11" " 1.238e+10" "-9.022e+01"
+" 1.266e+11" " 1.238e+10" "-9.022e+01"
+" 1.266e+11" " 1.238e+10" "-9.022e+01"
+" 1.266e+11" " 1.238e+10" "-9.022e+01"
+" 1.266e+11" " 1.238e+10" "-9.022e+01"
+" 1.266e+11" " 1.238e+10" "-9.022e+01"
+" 1.266e+11" " 1.238e+10" "-9.022e+01"
+" 1.266e+11" " 1.238e+10" "-9.022e+01"
+
+Wildlife-Beaver Submodel Key Variables:
+bac.total.in.stream
+Accum.Forest
+Different Key Variables:
+bac.total.in.stream
+Original_Output Modified_Output Percent_Change
+"393300.00" " 16387.50" "   -95.83"
+
+Wildlife-Coyote Submodel Key Variables:
+bac.total.in.stream
+Accum.Pasture
+Accum.Forest
+Accum.RAOCUT
+No Different Key Variables
+
+Wildlife-Deer Submodel Key Variables:
+bac.total.in.stream
+Accum.Pasture
+Accum.Forest
+Different Key Variables:
+Accum.Pasture
+Original_Output Modified_Output Percent_Change
+"5102" "   0" "-100"
+Accum.Forest
+Original_Output Modified_Output Percent_Change
+"100874.00" "116049.00" "    15.04"
+
+Wildlife-Duck Submodel Key Variables:
+bac.total.in.stream
+Accum.Pasture
+Accum.Forest
+Accum.RAOCUT
+No Different Key Variables
+
+Wildlife-Elk Submodel Key Variables:
+bac.total.in.stream
+Accum.Pasture
+Accum.Forest
+Accum.RAOCUT
+Different Key Variables:
+bac.total.in.stream
+Original_Output Modified_Output Percent_Change
+" 0.000e+00" " 0.000e+00" "       NaN"
+" 0.000e+00" " 0.000e+00" "       NaN"
+" 0.000e+00" " 0.000e+00" "       NaN"
+" 1.330e+09" " 5.542e+07" "-9.583e+01"
+" 1.330e+09" " 5.542e+07" "-9.583e+01"
+" 1.330e+09" " 5.542e+07" "-9.583e+01"
+" 1.330e+09" " 5.542e+07" "-9.583e+01"
+" 1.330e+09" " 5.542e+07" "-9.583e+01"
+" 1.330e+09" " 5.542e+07" "-9.583e+01"
+" 1.330e+09" " 5.542e+07" "-9.583e+01"
+" 0.000e+00" " 0.000e+00" "       NaN"
+" 0.000e+00" " 0.000e+00" "       NaN"
+
+Wildlife-Geese Submodel Key Variables:
+bac.total.in.stream
+Accum.Pasture
+Accum.Forest
+Accum.RAOCUT
+No Different Key Variables
+
+Wildlife-Gulls Submodel Key Variables:
+bac.total.in.stream
+Accum.Pasture
+Accum.Forest
+Accum.RAOCUT
+No Different Key Variables
+
+Wildlife-Herons_Egrets Submodel Key Variables:
+bac.total.in.stream
+Accum.Pasture
+Accum.Forest
+Accum.RAOCUT
+No Different Key Variables
+
+Wildlife-Otter Submodel Key Variables:
+bac.total.in.stream
+Accum.Pasture
+Accum.Forest
+Different Key Variables:
+bac.total.in.stream
+Original_Output Modified_Output Percent_Change
+" 3.933e+07" " 1.639e+06" "-9.583e+01"
+
+Wildlife-Raccoon Submodel Key Variables:
+bac.total.in.stream
+Accum.Pasture
+Accum.Forest
+Accum.RAOCUT
+No Different Key Variables

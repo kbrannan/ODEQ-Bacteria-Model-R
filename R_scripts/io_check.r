@@ -191,8 +191,8 @@ write("Different Key Variables:", fileCom, append=TRUE)
 
 for (i in 1:length(col)){
 write(colnames(a)[col][i],fileCom,append=TRUE)
-write(cbind("Original_Output","Modified_Output","Change_Ratio"), fileCom, ncolumns=3,append=TRUE)
-write.table(cbind(a[,col[i]],b[,col[i]],a[,col[i]]/b[,col[i]]),fileCom, row.names=FALSE, col.names=FALSE, append=TRUE)
+write(cbind("Original_Output","Modified_Output","Percent_Change"), fileCom, ncolumns=3,append=TRUE)
+write.table(format(cbind(a[,col[i]],b[,col[i]],100 * (b[,col[i]] - a[,col[i]]) / a[,col[i]]),digits=4),fileCom, row.names=FALSE, col.names=FALSE, append=TRUE)
 }
 }else{
 col<-test
@@ -200,8 +200,8 @@ write("Different Key Variables:", fileCom, append=TRUE)
 #write(names(a)[col],fileCom,append=TRUE)
 for (i in 1:length(col)){
 write(names(a)[col][i],fileCom,append=TRUE)
-write(cbind("Original_Output","Modified_Output","Change_Ratio"), fileCom,ncolumns=3, append=TRUE)
-write.table(cbind(a[col[i]],b[col[i]],a[col[i]]/b[col[i]]),fileCom,row.names=FALSE, col.names=FALSE,append=TRUE)
+write(cbind("Original_Output","Modified_Output","Percent_Change"), fileCom,ncolumns=3, append=TRUE)
+write.table(format(cbind(a[col[i]],b[col[i]],100 * (b[col[i]] - a[col[i]]) / a[col[i]]),digits=4),fileCom, row.names=FALSE, col.names=FALSE, append=TRUE)
 }
 }
 }else{
@@ -223,8 +223,8 @@ write("Different Key Variables:", fileCom, append=TRUE)
 #write(colnames(a)[col],fileCom,append=TRUE)
 for (i in 1:length(col)){
 write(colnames(a)[col][i],fileCom,append=TRUE)
-write(cbind("Original_Output","Modified_Output","Change_Ratio"), fileCom, ncolumns=3,append=TRUE)
-write.table(cbind(a[,col[i]],b[,col[i]],a[,col[i]]/b[,col[i]]),fileCom, row.names=FALSE, col.names=FALSE, append=TRUE)
+write(cbind("Original_Output","Modified_Output","Percent_Change"), fileCom, ncolumns=3,append=TRUE)
+write.table(format(cbind(a[,col[i]],b[,col[i]],100 * (b[,col[i]] - a[,col[i]]) / a[,col[i]]),digits=4),fileCom, row.names=FALSE, col.names=FALSE, append=TRUE)
 }
 
 }else{
@@ -233,8 +233,8 @@ write("Different Key Variables:", fileCom, append=TRUE)
 #write(names(a)[col],fileCom,append=TRUE)
 for (i in 1:length(col)){
 write(names(a)[col][i],fileCom,append=TRUE)
-write(cbind("Original_Output","Modified_Output","Change_Ratio"), fileCom,ncolumns=3, append=TRUE)
-write.table(cbind(a[col[i]],b[col[i]],a[col[i]]/b[col[i]]),fileCom, row.names=FALSE, col.names=FALSE, append=TRUE)
+write(cbind("Original_Output","Modified_Output","Percent_Change"), fileCom,ncolumns=3, append=TRUE)
+write.table(format(cbind(a[col[i]],b[col[i]],100 * (b[col[i]] - a[col[i]]) / a[col[i]]),digits=4),fileCom, row.names=FALSE, col.names=FALSE, append=TRUE)
 }
 }
 }else{
@@ -255,8 +255,8 @@ write("Different Key Variables:", fileCom, append=TRUE)
 write(colnames(a)[col],fileCom,append=TRUE)
 for (i in 1:length(col)){
 write(colnames(a)[col][i],fileCom,append=TRUE)
-write(cbind("Original_Output","Modified_Output","Change_Ratio"), fileCom, ncolumns=3,append=TRUE)
-write.table(cbind(a[,col[i]],b[,col[i]],a[,col[i]]/b[,col[i]]),fileCom, row.names=FALSE, col.names=FALSE, append=TRUE)
+write(cbind("Original_Output","Modified_Output","Percent_Change"), fileCom, ncolumns=3,append=TRUE)
+write.table(format(cbind(a[,col[i]],b[,col[i]],100 * (b[,col[i]] - a[,col[i]]) / a[,col[i]]),digits=4),fileCom, row.names=FALSE, col.names=FALSE, append=TRUE)
 }
 }else{
 col<-test
@@ -264,8 +264,8 @@ write("Different Key Variables:", fileCom, append=TRUE)
 
 for (i in 1:length(col)){
 write(names(a)[col][i],fileCom,append=TRUE)
-write(cbind("Original_Output","Modified_Output","Change_Ratio"), fileCom,ncolumns=3, append=TRUE)
-write.table(cbind(a[col[i]],b[col[i]],a[col[i]]/b[col[i]]),fileCom, row.names=FALSE, col.names=FALSE, append=TRUE)
+write(cbind("Original_Output","Modified_Output","Percent_Change"), fileCom,ncolumns=3, append=TRUE)
+write.table(format(cbind(a[col[i]],b[col[i]],100 * (b[col[i]] - a[col[i]]) / a[col[i]]),digits=4),fileCom, row.names=FALSE, col.names=FALSE, append=TRUE)
 }
 }
 }else{
@@ -287,8 +287,8 @@ write("Different Key Variables:", fileCom, append=TRUE)
 #write(colnames(a)[col],fileCom,append=TRUE)
 for (i in 1:length(col)){
 write(colnames(a)[col][i],fileCom,append=TRUE)
-write(cbind("Original_Output","Modified_Output","Change_Ratio"), fileCom, ncolumns=3,append=TRUE)
-write.table(cbind(a[,col[i]],b[,col[i]],a[,col[i]]/b[,col[i]]),fileCom, row.names=FALSE, col.names=FALSE, append=TRUE)
+write(cbind("Original_Output","Modified_Output","Percent_Change"), fileCom, ncolumns=3,append=TRUE)
+write.table(format(cbind(a[,col[i]],b[,col[i]],100 * (b[,col[i]] - a[,col[i]]) / a[,col[i]]),digits=4),fileCom, row.names=FALSE, col.names=FALSE, append=TRUE)
 }
 }else{
 col<-test
@@ -296,9 +296,8 @@ write("Different Key Variables:", fileCom, append=TRUE)
 #write(names(a)[col],fileCom,append=TRUE)
 for (i in 1:length(col)){
 write(names(a)[col][i],fileCom,append=TRUE)
-write(cbind("Original_Output","Modified_Output","Change_Ratio"), fileCom,ncolumns=3, append=TRUE)
-write.table(cbind(a[col[i]],b[col[i]],a[col[i]]/b[col[i]]),fileCom, row.names=FALSE, col.names=FALSE, append=TRUE)
-}
+write(cbind("Original_Output","Modified_Output","Percent_Change"), fileCom,ncolumns=3, append=TRUE)
+write.table(format(cbind(a[col[i]],b[col[i]],100 * (b[col[i]] - a[col[i]]) / a[col[i]]),digits=4),fileCom, row.names=FALSE, col.names=FALSE, append=TRUE)}
 }
 }else{
 write("No Different Key Variables", fileCom, append=TRUE)
@@ -318,8 +317,8 @@ write("Different Key Variables:", fileCom, append=TRUE)
 #write(colnames(a)[col],fileCom,append=TRUE)
 for (i in 1:length(col)){
 write(colnames(a)[col][i],fileCom,append=TRUE)
-write(cbind("Original_Output","Modified_Output","Change_Ratio"), fileCom, ncolumns=3,append=TRUE)
-write.table(cbind(a[,col[i]],b[,col[i]],a[,col[i]]/b[,col[i]]),fileCom, row.names=FALSE, col.names=FALSE, append=TRUE)
+write(cbind("Original_Output","Modified_Output","Percent_Change"), fileCom, ncolumns=3,append=TRUE)
+write.table(format(cbind(a[,col[i]],b[,col[i]],100 * (b[,col[i]] - a[,col[i]]) / a[,col[i]]),digits=4),fileCom, row.names=FALSE, col.names=FALSE, append=TRUE)
 }
 }else{
 col<-test
@@ -327,8 +326,8 @@ write("Different Key Variables:", fileCom, append=TRUE)
 #write(names(a)[col],fileCom,append=TRUE)
 for (i in 1:length(col)){
 write(names(a)[col][i],fileCom,append=TRUE)
-write(cbind("Original_Output","Modified_Output","Change_Ratio"), fileCom,ncolumns=3, append=TRUE)
-write.table(cbind(a[col[i]],b[col[i]],a[col[i]]/b[col[i]]),fileCom, row.names=FALSE, col.names=FALSE, append=TRUE)
+write(cbind("Original_Output","Modified_Output","Percent_Change"), fileCom,ncolumns=3, append=TRUE)
+write.table(format(cbind(a[col[i]],b[col[i]],100 * (b[col[i]] - a[col[i]]) / a[col[i]]),digits=4),fileCom, row.names=FALSE, col.names=FALSE, append=TRUE)
 }
 }
 }else{
@@ -349,8 +348,8 @@ write("Different Key Variables:", fileCom, append=TRUE)
 #write(colnames(a)[col],fileCom,append=TRUE)
 for (i in 1:length(col)){
 write(colnames(a)[col][i],fileCom,append=TRUE)
-write(cbind("Original_Output","Modified_Output","Change_Ratio"), fileCom, ncolumns=3,append=TRUE)
-write.table(cbind(a[,col[i]],b[,col[i]],a[,col[i]]/b[,col[i]]),fileCom, row.names=FALSE, col.names=FALSE, append=TRUE)
+write(cbind("Original_Output","Modified_Output","Percent_Change"), fileCom, ncolumns=3,append=TRUE)
+write.table(format(cbind(a[,col[i]],b[,col[i]],100 * (b[,col[i]] - a[,col[i]]) / a[,col[i]]),digits=4),fileCom, row.names=FALSE, col.names=FALSE, append=TRUE)
 }
 }else{
 col<-test
@@ -358,8 +357,8 @@ write("Different Key Variables:", fileCom, append=TRUE)
 #write(names(a)[col],fileCom,append=TRUE)
 for (i in 1:length(col)){
 write(names(a)[col][i],fileCom,append=TRUE)
-write(cbind("Original_Output","Modified_Output","Change_Ratio"), fileCom,ncolumns=3, append=TRUE)
-write.table(cbind(a[col[i]],b[col[i]],a[col[i]]/b[col[i]]),fileCom, row.names=FALSE, col.names=FALSE, append=TRUE)
+write(cbind("Original_Output","Modified_Output","Percent_Change"), fileCom,ncolumns=3, append=TRUE)
+write.table(format(cbind(a[col[i]],b[col[i]],100 * (b[col[i]] - a[col[i]]) / a[col[i]]),digits=4),fileCom, row.names=FALSE, col.names=FALSE, append=TRUE)
 }
 }
 }else{
@@ -380,8 +379,8 @@ write("Different Key Variables:", fileCom, append=TRUE)
 #write(colnames(a)[col],fileCom,append=TRUE)
 for (i in 1:length(col)){
 write(colnames(a)[col][i],fileCom,append=TRUE)
-write(cbind("Original_Output","Modified_Output","Change_Ratio"), fileCom, ncolumns=3,append=TRUE)
-write.table(cbind(a[,col[i]],b[,col[i]],a[,col[i]]/b[,col[i]]),fileCom, row.names=FALSE, col.names=FALSE, append=TRUE)
+write(cbind("Original_Output","Modified_Output","Percent_Change"), fileCom, ncolumns=3,append=TRUE)
+write.table(format(cbind(a[,col[i]],b[,col[i]],100 * (b[,col[i]] - a[,col[i]]) / a[,col[i]]),digits=4),fileCom, row.names=FALSE, col.names=FALSE, append=TRUE)
 }
 }else{
 col<-test
@@ -389,8 +388,8 @@ write("Different Key Variables:", fileCom, append=TRUE)
 #write(names(a)[col],fileCom,append=TRUE)
 for (i in 1:length(col)){
 write(names(a)[col][i],fileCom,append=TRUE)
-write(cbind("Original_Output","Modified_Output","Change_Ratio"), fileCom,ncolumns=3, append=TRUE)
-write.table(cbind(a[col[i]],b[col[i]],a[col[i]]/b[col[i]]),fileCom, row.names=FALSE, col.names=FALSE, append=TRUE)
+write(cbind("Original_Output","Modified_Output","Percent_Change"), fileCom,ncolumns=3, append=TRUE)
+write.table(format(cbind(a[col[i]],b[col[i]],100 * (b[col[i]] - a[col[i]]) / a[col[i]]),digits=4),fileCom, row.names=FALSE, col.names=FALSE, append=TRUE)
 }
 }
 }else{
@@ -411,8 +410,8 @@ write("Different Key Variables:", fileCom, append=TRUE)
 #write(colnames(a)[col],fileCom,append=TRUE)
 for (i in 1:length(col)){
 write(colnames(a)[col][i],fileCom,append=TRUE)
-write(cbind("Original_Output","Modified_Output","Change_Ratio"), fileCom, ncolumns=3,append=TRUE)
-write.table(cbind(a[,col[i]],b[,col[i]],a[,col[i]]/b[,col[i]]),fileCom, row.names=FALSE, col.names=FALSE, append=TRUE)
+write(cbind("Original_Output","Modified_Output","Percent_Change"), fileCom, ncolumns=3,append=TRUE)
+write.table(format(cbind(a[,col[i]],b[,col[i]],100 * (b[,col[i]] - a[,col[i]]) / a[,col[i]]),digits=4),fileCom, row.names=FALSE, col.names=FALSE, append=TRUE)
 }
 }else{
 col<-test
@@ -420,8 +419,8 @@ write("Different Key Variables:", fileCom, append=TRUE)
 #write(names(a)[col],fileCom,append=TRUE)
 for (i in 1:length(col)){
 write(names(a)[col][i],fileCom,append=TRUE)
-write(cbind("Original_Output","Modified_Output","Change_Ratio"), fileCom,ncolumns=3, append=TRUE)
-write.table(cbind(a[col[i]],b[col[i]],a[col[i]]/b[col[i]]),fileCom, row.names=FALSE, col.names=FALSE, append=TRUE)
+write(cbind("Original_Output","Modified_Output","Percent_Change"), fileCom,ncolumns=3, append=TRUE)
+write.table(format(cbind(a[col[i]],b[col[i]],100 * (b[col[i]] - a[col[i]]) / a[col[i]]),digits=4),fileCom, row.names=FALSE, col.names=FALSE, append=TRUE)
 }
 }
 }else{
@@ -442,8 +441,8 @@ write("Different Key Variables:", fileCom, append=TRUE)
 #write(colnames(a)[col],fileCom,append=TRUE)
 for (i in 1:length(col)){
 write(colnames(a)[col][i],fileCom,append=TRUE)
-write(cbind("Original_Output","Modified_Output","Change_Ratio"), fileCom, ncolumns=3,append=TRUE)
-write.table(cbind(a[,col[i]],b[,col[i]],a[,col[i]]/b[,col[i]]),fileCom, row.names=FALSE, col.names=FALSE, append=TRUE)
+write(cbind("Original_Output","Modified_Output","Percent_Change"), fileCom, ncolumns=3,append=TRUE)
+write.table(format(cbind(a[,col[i]],b[,col[i]],100 * (b[,col[i]] - a[,col[i]]) / a[,col[i]]),digits=4),fileCom, row.names=FALSE, col.names=FALSE, append=TRUE)
 }
 }else{
 col<-test
@@ -451,8 +450,8 @@ write("Different Key Variables:", fileCom, append=TRUE)
 #write(names(a)[col],fileCom,append=TRUE)
 for (i in 1:length(col)){
 write(names(a)[col][i],fileCom,append=TRUE)
-write(cbind("Original_Output","Modified_Output","Change_Ratio"), fileCom,ncolumns=3, append=TRUE)
-write.table(cbind(a[col[i]],b[col[i]],a[col[i]]/b[col[i]]),fileCom, row.names=FALSE, col.names=FALSE, append=TRUE)
+write(cbind("Original_Output","Modified_Output","Percent_Change"), fileCom,ncolumns=3, append=TRUE)
+write.table(format(cbind(a[col[i]],b[col[i]],100 * (b[col[i]] - a[col[i]]) / a[col[i]]),digits=4),fileCom, row.names=FALSE, col.names=FALSE, append=TRUE)
 }
 }
 }else{
@@ -473,8 +472,8 @@ write("Different Key Variables:", fileCom, append=TRUE)
 #write(colnames(a)[col],fileCom,append=TRUE)
 for (i in 1:length(col)){
 write(colnames(a)[col][i],fileCom,append=TRUE)
-write(cbind("Original_Output","Modified_Output","Change_Ratio"), fileCom, ncolumns=3,append=TRUE)
-write.table(cbind(a[,col[i]],b[,col[i]],a[,col[i]]/b[,col[i]]),fileCom, row.names=FALSE, col.names=FALSE, append=TRUE)
+write(cbind("Original_Output","Modified_Output","Percent_Change"), fileCom, ncolumns=3,append=TRUE)
+write.table(format(cbind(a[,col[i]],b[,col[i]],100 * (b[,col[i]] - a[,col[i]]) / a[,col[i]]),digits=4),fileCom, row.names=FALSE, col.names=FALSE, append=TRUE)
 }
 }else{
 col<-test
@@ -482,8 +481,8 @@ write("Different Key Variables:", fileCom, append=TRUE)
 #write(names(a)[col],fileCom,append=TRUE)
 for (i in 1:length(col)){
 write(names(a)[col][i],fileCom,append=TRUE)
-write(cbind("Original_Output","Modified_Output","Change_Ratio"), fileCom,ncolumns=3, append=TRUE)
-write.table(cbind(a[col[i]],b[col[i]],a[col[i]]/b[col[i]]),fileCom, row.names=FALSE, col.names=FALSE, append=TRUE)
+write(cbind("Original_Output","Modified_Output","Percent_Change"), fileCom,ncolumns=3, append=TRUE)
+write.table(format(cbind(a[col[i]],b[col[i]],100 * (b[col[i]] - a[col[i]]) / a[col[i]]),digits=4),fileCom, row.names=FALSE, col.names=FALSE, append=TRUE)
 }
 }
 }else{
@@ -504,8 +503,8 @@ write("Different Key Variables:", fileCom, append=TRUE)
 #write(colnames(a)[col][i],fileCom,append=TRUE)
 for (i in 1:length(col)){
 write(colnames(a)[col][i],fileCom,append=TRUE)
-write(cbind("Original_Output","Modified_Output","Change_Ratio"), fileCom, ncolumns=3,append=TRUE)
-write.table(cbind(a[,col[i]],b[,col[i]],a[,col[i]]/b[,col[i]]),fileCom, row.names=FALSE, col.names=FALSE, append=TRUE)
+write(cbind("Original_Output","Modified_Output","Percent_Change"), fileCom, ncolumns=3,append=TRUE)
+write.table(format(cbind(a[,col[i]],b[,col[i]],100 * (b[,col[i]] - a[,col[i]]) / a[,col[i]]),digits=4),fileCom, row.names=FALSE, col.names=FALSE, append=TRUE)
 }
 }else{
 col<-test
@@ -513,8 +512,8 @@ write("Different Key Variables:", fileCom, append=TRUE)
 #write(names(a)[col],fileCom,append=TRUE)
 for (i in 1:length(col)){
 write(names(a)[col][i],fileCom,append=TRUE)
-write(cbind("Original_Output","Modified_Output","Change_Ratio"), fileCom,ncolumns=3, append=TRUE)
-write.table(cbind(a[col[i]],b[col[i]],a[col[i]]/b[col[i]]),fileCom, row.names=FALSE, col.names=FALSE, append=TRUE)
+write(cbind("Original_Output","Modified_Output","Percent_Change"), fileCom,ncolumns=3, append=TRUE)
+write.table(format(cbind(a[col[i]],b[col[i]],100 * (b[col[i]] - a[col[i]]) / a[col[i]]),digits=4),fileCom, row.names=FALSE, col.names=FALSE, append=TRUE)
 }
 }
 }else{
@@ -535,8 +534,8 @@ write("Different Key Variables:", fileCom, append=TRUE)
 #write(colnames(a)[col],fileCom,append=TRUE)
 for (i in 1:length(col)){
 write(colnames(a)[col][i],fileCom,append=TRUE)
-write(cbind("Original_Output","Modified_Output","Change_Ratio"), fileCom, ncolumns=3,append=TRUE)
-write.table(cbind(a[,col[i]],b[,col[i]],a[,col[i]]/b[,col[i]]),fileCom, row.names=FALSE, col.names=FALSE, append=TRUE)
+write(cbind("Original_Output","Modified_Output","Percent_Change"), fileCom, ncolumns=3,append=TRUE)
+write.table(format(cbind(a[,col[i]],b[,col[i]],100 * (b[,col[i]] - a[,col[i]]) / a[,col[i]]),digits=4),fileCom, row.names=FALSE, col.names=FALSE, append=TRUE)
 }
 }else{
 col<-test
@@ -544,8 +543,8 @@ write("Different Key Variables:", fileCom, append=TRUE)
 #write(names(a)[col],fileCom,append=TRUE)
 for (i in 1:length(col)){
 write(names(a)[col][i],fileCom,append=TRUE)
-write(cbind("Original_Output","Modified_Output","Change_Ratio"), fileCom,ncolumns=3, append=TRUE)
-write.table(cbind(a[col[i]],b[col[i]],a[col[i]]/b[col[i]]),fileCom, row.names=FALSE, col.names=FALSE, append=TRUE)
+write(cbind("Original_Output","Modified_Output","Percent_Change"), fileCom,ncolumns=3, append=TRUE)
+write.table(format(cbind(a[col[i]],b[col[i]],100 * (b[col[i]] - a[col[i]]) / a[col[i]]),digits=4),fileCom, row.names=FALSE, col.names=FALSE, append=TRUE)
 }
 }
 }else{
