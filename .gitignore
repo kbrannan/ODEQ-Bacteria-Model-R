@@ -15,7 +15,6 @@ vignettes/*.pdf
 # intermediate PEST/HSPF/R files
 output_compare01.txt
 output_compare02.txt
-cowcalf01.txt
 cowcalf02.txt
 cowcalf04.txt
 cowcalf05.txt
