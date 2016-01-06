@@ -89,7 +89,7 @@ WriteSup <- function(sub.wtsd.num=sub.wtsd.N,sub.model.dirs=chr.sub.model.dirs,s
 	  # Change NaN & Inf to 0 in onsite.pets.out
 	  onsite.pets.out$Accum.RAOCUT[!is.finite(onsite.pets.out$Accum.RAOCUT)] <- 0
 	  onsite.pets.out$bac.onsite.NearStrmStrctFailure[!is.finite(onsite.pets.out$bac.onsite.NearStrmStrctFailure)] <- 0
-	  onsite.pets.out <- data.frame(onsite.pets.out,bac.total.in.stream=onsite.pets.out$bac.onsite. NearStrmStrctFailure.to.stream.load)
+	  onsite.pets.out <- data.frame(onsite.pets.out,bac.total.in.stream=onsite.pets.out$bac.onsite.NearStrmStrctFailure.to.stream.load)
 	# Run Wildlife-Beaver model
 	  beaver.in <- paste0(grep("[Bb]eaver",sub.model.input,value=TRUE),sub.wtsds[ii],".txt")
 	  beaver.out <- wildlifeBeaver(chr.input=beaver.in,chr.wrkdir=grep("Wildlife-[Bb]eaver",sub.model.dirs,value=TRUE))
