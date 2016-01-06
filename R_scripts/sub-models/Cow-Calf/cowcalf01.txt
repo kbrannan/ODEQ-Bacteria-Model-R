@@ -12,7 +12,7 @@ SQOLIM multiplcation factor: 9
 Pasture Area in Watershed (ac): 445.3
 Forest Area in Watershed (ac): 8739.8
 Average Stocking Density for Pasture in watershed (ac/Cow-Calf pair):     1.0000000E+01
-*** Temporal Distribution of Cow-Calf Pair weight with Calf Growth:
+*** Temporal Distribution of Pair size with Calf Growth:
 *** Month: Jan,Feb,Mar,Apr,May,Jun,Jul,Aug,Sep,Oct,Nov,Dec
 Adjusted animal size: 1.15,1.35,1.39,1.43,1.47,1.51,1.55,1.59,1.63,1,1.05,1.1
 *** Temporal Distribution grazing Schedule:
