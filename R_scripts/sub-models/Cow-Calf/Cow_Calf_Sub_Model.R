@@ -15,6 +15,12 @@ cow.calf <- function(chr.wrkdir="E:/PEST/BigElk/Sub_Models",
 #   #.# is a floating pint number, and #.#E+## is a number in 
 #   scientific notation
 
+  ## set roundicant digits to d.pr and use sigdf
+  d.pr <- 5
+  
+  # get machine floating point double precision
+  l.p <- 10^-d.pr
+  
   ## SubModelFile => chr.input.file
 
   ## set for testing code in side function
@@ -72,49 +78,64 @@ cow.calf <- function(chr.wrkdir="E:/PEST/BigElk/Sub_Models",
   loc.pasture <- amng.in.pasture * am.pairs.adj
   loc.confine <- amng.in.confine * am.pairs.adj
   loc.forest  <- amng.in.forest * am.pairs.adj
-  ## check am.pairs.adj == loc.pasture + loc.confine + loc.forest
+  abs(am.pairs.adj - (loc.pasture + loc.confine + loc.forest))
   
   ## with or without stream
   loc.pasture.w  <- lu.pasture.w * loc.pasture
   loc.pasture.wo <- (1 - lu.pasture.w) * loc.pasture
-  loc.forest.w  <- lu.forest.w * loc.forest
-  loc.forest.wo <- (1 - lu.forest.w) * loc.forest
-  ## check loc.pasture == loc.pasture.w + loc.pasture.wo
-  ## check loc.forest == loc.forest.w + loc.forest.wo
+  abs(loc.pasture - (loc.pasture.w + loc.pasture.wo))
+  
+  loc.forest.w   <- lu.forest.w * loc.forest
+  loc.forest.wo  <- (1 - lu.forest.w) * loc.forest
+  abs(loc.forest - (loc.forest.w + loc.forest.wo))
   
   ## in stream or not 
   loc.pasture.w.strm  <- loc.pasture.w * ainfo.pasture.in.strm
   loc.pasture.w.lnd   <- loc.pasture.w * (1 - ainfo.pasture.in.strm)
+  abs(loc.pasture.w - (loc.pasture.w.strm + loc.pasture.w.lnd))
+    
   loc.forest.w.strm   <- loc.forest.w * ainfo.forest.in.strm
-  loc.forest.w.lnd   <- loc.forest.w * (1 - ainfo.forest.in.strm)
-  ## check loc.pasture.w == loc.pasture.w.strm + loc.pasture.w.lnd
-  ## check loc.forest.w  == loc.forest.w.strm + loc.forest.w.lnd
+  loc.forest.w.lnd    <- loc.forest.w * (1 - ainfo.forest.in.strm)
+  abs(loc.forest.w - (loc.forest.w.strm + loc.forest.w.lnd))
 
-  am.pairs.adj == loc.pasture.wo + loc.pasture.w + loc.confine + 
-    loc.forest.wo + loc.forest.w
+  ## checks
+  abs(loc.pasture - (loc.pasture.wo + loc.pasture.w.strm + loc.pasture.w.lnd))
   
-  
-  
-  am.pairs.adj - (loc.pasture.wo + loc.pasture.w.strm + loc.pasture.w.lnd + 
-    loc.confine + loc.forest.wo + loc.forest.w.lnd + loc.forest.w.strm)
-  
+  abs(loc.forest - (loc.forest.wo + loc.forest.w.strm + loc.forest.w.lnd))
 
+  abs(am.pairs.adj - (loc.confine + 
+                        (loc.pasture.wo + loc.pasture.w.strm + loc.pasture.w.lnd) +
+                        (loc.forest.wo + loc.forest.w.strm + loc.forest.w.lnd)
+                      )
+      )
+  
+  
   ## bacteria loads
   bac.total <- am.pairs.adj * ainfo.bac.prod
   bac.confine <- loc.confine * ainfo.bac.prod
+  bac.pasture <- loc.pasture * ainfo.bac.prod
+  bac.forest <- loc.forest * ainfo.bac.prod
+  
+  abs(bac.total - (bac.pasture + bac.confine + bac.forest))
+  
   bac.pasture.wo <- loc.pasture.wo * ainfo.bac.prod
   bac.pasture.w.lnd <- loc.pasture.w.lnd * ainfo.bac.prod
   bac.pasture.w.strm <- loc.pasture.w.strm * ainfo.bac.prod
+
+  abs(bac.pasture - (bac.pasture.w.strm + bac.pasture.w.lnd + bac.pasture.wo ))
+  
   bac.forest.wo <- loc.forest.wo * ainfo.bac.prod
   bac.forest.w.lnd <- loc.forest.w.lnd * ainfo.bac.prod
   bac.forest.w.strm <- loc.forest.w.strm * ainfo.bac.prod
+  
+
   
   bac.pasture.lnd <- bac.pasture.wo + bac.pasture.w.lnd
   bac.forest.lnd <- bac.forest.wo + bac.forest.w.lnd
   
   bac.in.stream <- bac.pasture.w.strm + bac.forest.w.strm
   
-  bac.total == bac.pasture.lnd + bac.forest.lnd +bac.confine + bac.in.stream
+  abs(bac.total - (bac.pasture.lnd + bac.forest.lnd +bac.confine + bac.in.stream))
   
 
   
