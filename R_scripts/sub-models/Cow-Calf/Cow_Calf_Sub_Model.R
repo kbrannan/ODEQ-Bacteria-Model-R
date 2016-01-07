@@ -80,66 +80,71 @@ cow.calf <- function(chr.wrkdir="E:/PEST/BigElk/Sub_Models",
   loc.forest  <- amng.in.forest * am.pairs.adj
   abs(am.pairs.adj - (loc.pasture + loc.confine + loc.forest))
   
-  ## with or without stream
+  ## pair location with or without stream
   loc.pasture.w  <- lu.pasture.w * loc.pasture
   loc.pasture.wo <- (1 - lu.pasture.w) * loc.pasture
-  abs(loc.pasture - (loc.pasture.w + loc.pasture.wo))
-  
   loc.forest.w   <- lu.forest.w * loc.forest
   loc.forest.wo  <- (1 - lu.forest.w) * loc.forest
+  # check
+  abs(loc.pasture - (loc.pasture.w + loc.pasture.wo))
   abs(loc.forest - (loc.forest.w + loc.forest.wo))
   
-  ## in stream or not 
-  loc.pasture.w.strm  <- loc.pasture.w * ainfo.pasture.in.strm
-  loc.pasture.w.lnd   <- loc.pasture.w * (1 - ainfo.pasture.in.strm)
-  abs(loc.pasture.w - (loc.pasture.w.strm + loc.pasture.w.lnd))
-    
+  ## pair location in stream or not 
+  bac.pasture.w.strm <- bac.pasture.w * ainfo.pasture.in.strm
+  loc.pasture.w.lnd  <- loc.pasture.w * (1 - ainfo.pasture.in.strm)
   loc.forest.w.strm   <- loc.forest.w * ainfo.forest.in.strm
   loc.forest.w.lnd    <- loc.forest.w * (1 - ainfo.forest.in.strm)
+  # check
+  abs(loc.pasture.w - (loc.pasture.w.strm + loc.pasture.w.lnd))
   abs(loc.forest.w - (loc.forest.w.strm + loc.forest.w.lnd))
 
-  ## checks
+  ## checks on pair calculations
   abs(loc.pasture - (loc.pasture.wo + loc.pasture.w.strm + loc.pasture.w.lnd))
-  
   abs(loc.forest - (loc.forest.wo + loc.forest.w.strm + loc.forest.w.lnd))
-
   abs(am.pairs.adj - (loc.confine + 
                         (loc.pasture.wo + loc.pasture.w.strm + loc.pasture.w.lnd) +
                         (loc.forest.wo + loc.forest.w.strm + loc.forest.w.lnd)
                       )
       )
-  
-  
-  ## bacteria loads
-  bac.total <- am.pairs.adj * ainfo.bac.prod
+
+  ##
+  ## bacteria load calculations
+  bac.total   <- am.pairs.adj * ainfo.bac.prod
   bac.confine <- loc.confine * ainfo.bac.prod
   bac.pasture <- loc.pasture * ainfo.bac.prod
-  bac.forest <- loc.forest * ainfo.bac.prod
-  
+  bac.forest  <- loc.forest * ainfo.bac.prod
+  # check
   abs(bac.total - (bac.pasture + bac.confine + bac.forest))
-  
-  bac.pasture.wo <- loc.pasture.wo * ainfo.bac.prod
-  bac.pasture.w.lnd <- loc.pasture.w.lnd * ainfo.bac.prod
-  bac.pasture.w.strm <- loc.pasture.w.strm * ainfo.bac.prod
 
-  abs(bac.pasture - (bac.pasture.w.strm + bac.pasture.w.lnd + bac.pasture.wo ))
+  ## bacteria loads with or without stream
+  bac.pasture.w  <- lu.pasture.w * bac.pasture
+  bac.pasture.wo <- (1 - lu.pasture.w) * bac.pasture
+  bac.forest.w   <- lu.forest.w * bac.forest
+  bac.forest.wo  <- (1 - lu.forest.w) * bac.forest
+  # check
+  abs(bac.pasture - (bac.pasture.w + bac.pasture.wo))
+  abs(bac.forest - (bac.forest.w + bac.forest.wo))
   
-  bac.forest.wo <- loc.forest.wo * ainfo.bac.prod
-  bac.forest.w.lnd <- loc.forest.w.lnd * ainfo.bac.prod
-  bac.forest.w.strm <- loc.forest.w.strm * ainfo.bac.prod
+  ## bacteria load in stream or not 
+  bac.pasture.w.strm  <- bac.pasture.w * ainfo.pasture.in.strm
+  bac.pasture.w.lnd   <- bac.pasture.w * (1 - ainfo.pasture.in.strm)
+  bac.forest.w.strm   <- bac.forest.w * ainfo.forest.in.strm
+  bac.forest.w.lnd    <- bac.forest.w * (1 - ainfo.forest.in.strm)
+  # checks
+  abs(bac.pasture.w - (bac.pasture.w.strm + bac.pasture.w.lnd))
+  abs(bac.forest.w - (bac.forest.w.strm + bac.forest.w.lnd))
   
-
-  
+  ## bacteria loads to end points (besides confinement)
   bac.pasture.lnd <- bac.pasture.wo + bac.pasture.w.lnd
-  bac.forest.lnd <- bac.forest.wo + bac.forest.w.lnd
-  
-  bac.in.stream <- bac.pasture.w.strm + bac.forest.w.strm
-  
-  abs(bac.total - (bac.pasture.lnd + bac.forest.lnd +bac.confine + bac.in.stream))
+  bac.forest.lnd  <- bac.forest.wo + bac.forest.w.lnd
+  bac.strm <- bac.pasture.w.strm + bac.forest.w.strm
+
+  # checks on bacteria loads 
+  abs(bac.pasture - (bac.pasture.w.strm + bac.pasture.lnd))
+  abs(bac.forest - (bac.forest.w.strm + bac.forest.lnd))
+  abs(bac.total - (bac.pasture.lnd + bac.confine + bac.forest.lnd + bac.strm))
   
 
-  
-  
   
     
   tmp.PastureArea <- as.numeric(SubModelData[10,2])
