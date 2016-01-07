@@ -44,8 +44,8 @@ cow.calf <- function(chr.wrkdir="E:/PEST/BigElk/Sub_Models",
   ## land use information
   lu.pasture.area <- as.numeric(df.input$value[9])
   lu.forest.area  <- as.numeric(df.input$value[10])
-  lu.pasture.w    <- as.numeric(df.input$value[11])
-  lu.forest.w     <- as.numeric(df.input$value[12])
+  lu.pasture.w    <- as.numeric(df.input$value[11]) / 100
+  lu.forest.w     <- as.numeric(df.input$value[12]) / 100
   
   ## animal management information
   amng.sd         <- as.numeric(df.input$value[13])
@@ -54,15 +54,44 @@ cow.calf <- function(chr.wrkdir="E:/PEST/BigElk/Sub_Models",
   amng.in.confine <- as.numeric(strsplit(df.input$value[16],",")[[1]])
   amng.in.forest  <- as.numeric(strsplit(df.input$value[17],",")[[1]])
   
-  # animal information
-  ainfo.bac.prod <- as.numeric(df.input$value[18])
-  ainfo.sqolim.fac <- as.numeric(df.input$value[19])
-  ainfo.pasture.in.strm <- as.numeric(df.input$value[20])
-  ainfo.pasture.in.strm <- as.numeric(df.input$value[21])
+  ## animal information
+  ainfo.bac.prod        <- as.numeric(df.input$value[18])
+  ainfo.sqolim.fac      <- as.numeric(df.input$value[19])
+  ainfo.pasture.in.strm <- as.numeric(df.input$value[20]) / 100
+  ainfo.forest.in.strm  <- as.numeric(df.input$value[21]) / 100
   
 
   
-      
+  ## calculations
+  
+  ## pairs
+  am.pairs     <- lu.pasture.area / amng.sd
+  am.pairs.adj <- am.pairs * amng.adj.size
+  
+  ## pair location
+  loc.pasture <- amng.in.pasture * am.pairs.adj
+  loc.confine <- amng.in.confine * am.pairs.adj
+  loc.forest  <- amng.in.forest * am.pairs.adj
+  ## check am.pairs.adj == loc.pasture + loc.confine + loc.forest
+  
+  ## with or without stream
+  loc.pasture.w  <- lu.pasture.w * loc.pasture
+  loc.pasture.wo <- (1 - lu.pasture.w) * loc.pasture
+  loc.forest.w  <- lu.forest.w * loc.forest
+  loc.forest.wo <- (1 - lu.forest.w) * loc.pasture
+  ## checkloc.pasture == loc.pasture.w + loc.pasture.wo
+  ## check loc.forest == loc.forest.w + loc.forest.w
+  
+  
+  ## in stream or not 
+  loc.pasture.w.strm  <- loc.pasture.w * ainfo.pasture.in.strm
+  loc.pasture.w.lnd   <- loc.pasture.w * (1 - ainfo.pasture.in.strm)
+  loc.forest.w.strm   <- loc.forest.w * ainfo.forest.in.strm
+  loc.forest.w.lnd   <- loc.forest.w * (1 - ainfo.forest.in.strm)
+  ## check loc.pasture.w == loc.pasture.w.strm + loc.pasture.w.lnd
+  ## check loc.forest.w  == loc.forest.w.strm + loc.forest.w.lnd
+  
+  
   tmp.PastureArea <- as.numeric(SubModelData[10,2])
   tmp.NumOfPairs <- tmp.PastureArea / as.numeric(SubModelData[12,2])
   tmp.PastureWStreamAcess <- as.numeric(SubModelData[20,2])
