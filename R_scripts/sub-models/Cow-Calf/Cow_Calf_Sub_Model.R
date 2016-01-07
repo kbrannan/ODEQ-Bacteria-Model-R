@@ -78,9 +78,9 @@ cow.calf <- function(chr.wrkdir="E:/PEST/BigElk/Sub_Models",
   loc.pasture.w  <- lu.pasture.w * loc.pasture
   loc.pasture.wo <- (1 - lu.pasture.w) * loc.pasture
   loc.forest.w  <- lu.forest.w * loc.forest
-  loc.forest.wo <- (1 - lu.forest.w) * loc.pasture
-  ## checkloc.pasture == loc.pasture.w + loc.pasture.wo
-  ## check loc.forest == loc.forest.w + loc.forest.w
+  loc.forest.wo <- (1 - lu.forest.w) * loc.forest
+  ## check loc.pasture == loc.pasture.w + loc.pasture.wo
+  ## check loc.forest == loc.forest.w + loc.forest.wo
   
   ## in stream or not 
   loc.pasture.w.strm  <- loc.pasture.w * ainfo.pasture.in.strm
@@ -90,8 +90,13 @@ cow.calf <- function(chr.wrkdir="E:/PEST/BigElk/Sub_Models",
   ## check loc.pasture.w == loc.pasture.w.strm + loc.pasture.w.lnd
   ## check loc.forest.w  == loc.forest.w.strm + loc.forest.w.lnd
 
-  am.pairs.adj == loc.pasture.wo + loc.pasture.w.lnd + loc.forest.w.strm + 
-    loc.confine + loc.forest.wo + loc.forest.w.lnd + loc.forest.w.strm
+  am.pairs.adj == loc.pasture.wo + loc.pasture.w + loc.confine + 
+    loc.forest.wo + loc.forest.w
+  
+  
+  
+  am.pairs.adj - (loc.pasture.wo + loc.pasture.w.strm + loc.pasture.w.lnd + 
+    loc.confine + loc.forest.wo + loc.forest.w.lnd + loc.forest.w.strm)
   
 
   ## bacteria loads

@@ -14,7 +14,7 @@ HSPF-Sup File Header Number for Forest in MON-SQOLIM Table:  76
 Pasture Area in Watershed (ac): 445.3
 Forest Area in Watershed (ac): 8739.8
 Percent of pasture with stream access:     4.8000000E+01
-Percent of forest with stream access:      8.4544000E-03
+Percent of forest with stream access:      3.7235884E+01
 *** Animal Management Information
 Average Stocking Density for Pasture in watershed (ac/Cow-Calf pair):     1.0000000E+01
 *** Temporal Distribution of Pair size with Calf Growth:
