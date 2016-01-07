@@ -82,7 +82,6 @@ cow.calf <- function(chr.wrkdir="E:/PEST/BigElk/Sub_Models",
   ## checkloc.pasture == loc.pasture.w + loc.pasture.wo
   ## check loc.forest == loc.forest.w + loc.forest.w
   
-  
   ## in stream or not 
   loc.pasture.w.strm  <- loc.pasture.w * ainfo.pasture.in.strm
   loc.pasture.w.lnd   <- loc.pasture.w * (1 - ainfo.pasture.in.strm)
@@ -90,8 +89,33 @@ cow.calf <- function(chr.wrkdir="E:/PEST/BigElk/Sub_Models",
   loc.forest.w.lnd   <- loc.forest.w * (1 - ainfo.forest.in.strm)
   ## check loc.pasture.w == loc.pasture.w.strm + loc.pasture.w.lnd
   ## check loc.forest.w  == loc.forest.w.strm + loc.forest.w.lnd
+
+  am.pairs.adj == loc.pasture.wo + loc.pasture.w.lnd + loc.forest.w.strm + 
+    loc.confine + loc.forest.wo + loc.forest.w.lnd + loc.forest.w.strm
+  
+
+  ## bacteria loads
+  bac.total <- am.pairs.adj * ainfo.bac.prod
+  bac.confine <- loc.confine * ainfo.bac.prod
+  bac.pasture.wo <- loc.pasture.wo * ainfo.bac.prod
+  bac.pasture.w.lnd <- loc.pasture.w.lnd * ainfo.bac.prod
+  bac.pasture.w.strm <- loc.pasture.w.strm * ainfo.bac.prod
+  bac.forest.wo <- loc.forest.wo * ainfo.bac.prod
+  bac.forest.w.lnd <- loc.forest.w.lnd * ainfo.bac.prod
+  bac.forest.w.strm <- loc.forest.w.strm * ainfo.bac.prod
+  
+  bac.pasture.lnd <- bac.pasture.wo + bac.pasture.w.lnd
+  bac.forest.lnd <- bac.forest.wo + bac.forest.w.lnd
+  
+  bac.in.stream <- bac.pasture.w.strm + bac.forest.w.strm
+  
+  bac.total == bac.pasture.lnd + bac.forest.lnd +bac.confine + bac.in.stream
+  
+
   
   
+  
+    
   tmp.PastureArea <- as.numeric(SubModelData[10,2])
   tmp.NumOfPairs <- tmp.PastureArea / as.numeric(SubModelData[12,2])
   tmp.PastureWStreamAcess <- as.numeric(SubModelData[20,2])
