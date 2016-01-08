@@ -145,8 +145,43 @@ cow.calf <- function(chr.wrkdir="E:/PEST/BigElk/Sub_Models",
   abs(bac.total - (bac.pasture.lnd + bac.confine + bac.forest.lnd + bac.strm))
   
 
-  
+  ## SubModelOutput => df.output  
+  df.output <- data.frame(
+    Month = c("Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep",
+            "Oct","Nov","Dec"),
+    NumOfPairs = am.pairs * rep(1,12),
+    AUvsTime = am.pairs.adj,
+    pairs.OnPastureWOStreamAccess = loc.pasture.wo,
+    pairs.OnPastureWStreamAccess = loc.pasture.w,
+    pairs.OnPastureInStream = loc.pasture.w.strm,
+    pairs.InConfinementvsTime = loc.confine,
+    pairs.InForestWOStreamAccess = loc.forest.wo,
+    pairs.InForestWStreamAccess = loc.forest.w,
+    pairs.InForestInStream = loc.forest.w.strm,
+
+    Bacteria.OnPastureWOStreamAccess = bac.pasture.wo,
+    Bacteria.OnPastureWStreamAccess = bac.pasture.w,
+    Bacteria.OnPastureInStream = bac.pasture.w.strm,
+    Bacteria.InConfinementvsTime = bac.confine,
+    Bacteria.InForest = bac.forest.lnd,
+    Bacteria.InForestInStream = bac.forest.w.strm,
+
+    Bacteria.Instream = bac.in.stream,
+    Accum.Pasture = bac.pasture.lnd / lu.pasture.area,
+    Accum.Forest = bac.forest.lnd / lu.forest.area,
     
+    Lim.Pasture = ainfo.sqolim.fac * bac.pasture.lnd / lu.pasture.area,
+    Lim.Forest = ainfo.sqolim.fac * bac.pasture.lnd / lu.forest.area,
+    stringsAsFactors = FALSE)
+    
+  
+
+  
+  
+  
+  
+  
+      
   tmp.PastureArea <- as.numeric(SubModelData[10,2])
   tmp.NumOfPairs <- tmp.PastureArea / as.numeric(SubModelData[12,2])
   tmp.PastureWStreamAcess <- as.numeric(SubModelData[20,2])
@@ -180,9 +215,7 @@ cow.calf <- function(chr.wrkdir="E:/PEST/BigElk/Sub_Models",
   )
   
   
-  
-  
-  
+
 ### Edit: KMB 2013-12-03 removed the AU weight from calculation of manure and bacteria produced becuase the AU versus time are directly calculated in tmp.AUvsTime
   SubModelOutput <- data.frame(SubModelOutput,
                              AUvsTime=tmp.AUvsTime,
@@ -237,6 +270,4 @@ cow.calf <- function(chr.wrkdir="E:/PEST/BigElk/Sub_Models",
   
   return(SubModelOutput)
 
-  #rm(list=ls(pattern="tmp.*"))
-  #write.csv(SubModelOutput,file=paste0(SubModelFilename,sub(".","",format(Sys.time(), "%Y%m%d%H%M%OS4"),fixed=TRUE),".csv"))
 }
