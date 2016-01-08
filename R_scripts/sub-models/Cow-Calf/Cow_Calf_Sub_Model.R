@@ -15,17 +15,10 @@ cow.calf <- function(chr.wrkdir="E:/PEST/BigElk/Sub_Models",
 #   #.# is a floating pint number, and #.#E+## is a number in 
 #   scientific notation
 
-  ## set roundicant digits to d.pr and use sigdf
-  d.pr <- 5
-  
-  # get machine floating point double precision
-  l.p <- 10^-d.pr
-  
-  ## SubModelFile => chr.input.file
 
   ## set for testing code in side function
-  chr.wrkdir <- getwd()
-  chr.input.file <- "cowcalf01.txt"
+##  chr.wrkdir <- getwd()
+##  chr.input.file <- "cowcalf01.txt"
   
   ## read input file
   ## SubModelData => df.input 
@@ -90,7 +83,7 @@ cow.calf <- function(chr.wrkdir="E:/PEST/BigElk/Sub_Models",
   abs(loc.forest - (loc.forest.w + loc.forest.wo))
   
   ## pair location in stream or not 
-  bac.pasture.w.strm <- bac.pasture.w * ainfo.pasture.in.strm
+  loc.pasture.w.strm <- loc.pasture.w * ainfo.pasture.in.strm
   loc.pasture.w.lnd  <- loc.pasture.w * (1 - ainfo.pasture.in.strm)
   loc.forest.w.strm   <- loc.forest.w * ainfo.forest.in.strm
   loc.forest.w.lnd    <- loc.forest.w * (1 - ainfo.forest.in.strm)
@@ -166,7 +159,7 @@ cow.calf <- function(chr.wrkdir="E:/PEST/BigElk/Sub_Models",
     Bacteria.InForest = bac.forest.lnd,
     Bacteria.InForestInStream = bac.forest.w.strm,
 
-    Bacteria.Instream = bac.in.stream,
+    Bacteria.Instream = bac.strm,
     Accum.Pasture = bac.pasture.lnd / lu.pasture.area,
     Accum.Forest = bac.forest.lnd / lu.forest.area,
     
@@ -174,100 +167,8 @@ cow.calf <- function(chr.wrkdir="E:/PEST/BigElk/Sub_Models",
     Lim.Forest = ainfo.sqolim.fac * bac.pasture.lnd / lu.forest.area,
     stringsAsFactors = FALSE)
     
-  
 
   
-  
-  
-  
-  
-      
-  tmp.PastureArea <- as.numeric(SubModelData[10,2])
-  tmp.NumOfPairs <- tmp.PastureArea / as.numeric(SubModelData[12,2])
-  tmp.PastureWStreamAcess <- as.numeric(SubModelData[20,2])
-  tmp.PastureInStream <- as.numeric(SubModelData[22,2])
-  tmp.ForestArea <- as.numeric(SubModelData[11,2])
-  tmp.ForestWStreamAcess <- as.numeric(SubModelData[21,2])
-  tmp.ForestInStream <- as.numeric(SubModelData[23,2])
-  tmp.AU <- as.numeric(SubModelData[14,2])
-  tmp.AUvsTime <- tmp.NumOfPairs*as.numeric(strsplit(SubModelData[13,2],",")[[1]])
-  tmp.PasturevsTime <- as.numeric(strsplit(SubModelData[15,2],",")[[1]])
-  tmp.ConfinementvsTime <- as.numeric(strsplit(SubModelData[16,2],",")[[1]])
-  tmp.ForestvsTime <- as.numeric(strsplit(SubModelData[17,2],",")[[1]])
-  tmp.BacteriaPerManurePerDay <- as.numeric(SubModelData[19,2])
-  tmp.ManurePerDay <- as.numeric(SubModelData[18,2])
-
-### Edit: KMB 2014-02-11 removed tmp.AUvsTime with for pairs distribution calculations
-  tmp.OnPastureWOStreamAccess <- tmp.NumOfPairs*tmp.PasturevsTime*(1-tmp.PastureWStreamAcess/100)
-  tmp.OnPastureWStreamAccess <- tmp.NumOfPairs*tmp.PasturevsTime*(tmp.PastureWStreamAcess/100)*(1-tmp.PastureInStream/100)
-  tmp.OnPastureInStream <- tmp.NumOfPairs*tmp.PasturevsTime*(tmp.PastureWStreamAcess/100)*tmp.PastureInStream/100
-  tmp.InConfinementvsTime <- tmp.NumOfPairs*tmp.ConfinementvsTime
-  tmp.InForestWOStreamAccess <- tmp.NumOfPairs*(1-tmp.ForestWStreamAcess/100)*tmp.ForestvsTime
-  tmp.InForestWStreamAccess <- tmp.NumOfPairs*(tmp.ForestWStreamAcess/100)*(1-tmp.ForestInStream/100)*tmp.ForestvsTime
-  tmp.InForestInStream <- tmp.NumOfPairs*(tmp.ForestWStreamAcess/100)*(tmp.ForestInStream/100)*tmp.ForestvsTime
-
-  
-  ## SubModelOutput => df.output  
-  df.output <- data.frame(Month=c("Jan","Feb","Mar","Apr",
-                                  "May","Jun","Jul","Aug",
-                                  "Sep","Oct","Nov","Dec"),
-                          stringsAsFactors=FALSE
-  )
-  
-  
-
-### Edit: KMB 2013-12-03 removed the AU weight from calculation of manure and bacteria produced becuase the AU versus time are directly calculated in tmp.AUvsTime
-  SubModelOutput <- data.frame(SubModelOutput,
-                             AUvsTime=tmp.AUvsTime,
-                             NumOfPairs=tmp.NumOfPairs*rep(1,12),
-                             pairs.OnPastureWOStreamAccess=tmp.OnPastureWOStreamAccess, 
-                             pairs.OnPastureWStreamAccess=tmp.OnPastureWStreamAccess,
-                             pairs.OnPastureInStream=tmp.OnPastureInStream,
-                             pairs.InConfinementvsTime=tmp.InConfinementvsTime,
-                             pairs.InForestWOStreamAccess=tmp.InForestWOStreamAccess,
-                             pairs.InForestWStreamAccess=tmp.InForestWStreamAccess,
-                             pairs.InForestInStream=tmp.InForestInStream,
-                             AU.OnPastureWOStreamAccess=tmp.OnPastureWOStreamAccess*tmp.AU,
-                             AU.OnPastureWStreamAccess=tmp.OnPastureWStreamAccess*tmp.AU,
-                             AU.OnPastureInStream=tmp.OnPastureInStream*tmp.AU,
-                             AU.InConfinementvsTime=tmp.InConfinementvsTime*tmp.AU,
-                             AU.InForest=(tmp.InForestWOStreamAccess+tmp.InForestWStreamAccess)*tmp.AU,
-                             AU.InForestInStream=tmp.InForestInStream*tmp.AU,
-                             Manure.OnPastureWOStreamAccess=tmp.ManurePerDay*tmp.OnPastureWOStreamAccess*tmp.AU,
-                             Manure.OnPastureWStreamAccess=tmp.ManurePerDay*tmp.OnPastureWStreamAccess*tmp.AU,
-                             Manure.OnPastureInStream=tmp.ManurePerDay*tmp.OnPastureInStream*tmp.AU,
-                             Manure.InConfinementvsTime=tmp.ManurePerDay*tmp.InConfinementvsTime*tmp.AU,
-                             Manure.InForest=tmp.ManurePerDay*(tmp.InForestWOStreamAccess+tmp.InForestWStreamAccess)*tmp.AU,
-                             Manure.InForestInStream=tmp.ManurePerDay*tmp.InForestInStream*tmp.AU,
-                             Bacteria.OnPastureWOStreamAccess=tmp.BacteriaPerManurePerDay*tmp.OnPastureWOStreamAccess*tmp.ManurePerDay*tmp.AU,
-                             Bacteria.OnPastureWStreamAccess=tmp.BacteriaPerManurePerDay*tmp.OnPastureWStreamAccess*tmp.ManurePerDay*tmp.AU,
-                             Bacteria.OnPastureInStream=tmp.BacteriaPerManurePerDay*tmp.OnPastureInStream/24*tmp.ManurePerDay*tmp.AU,
-                             Bacteria.InConfinementvsTime=tmp.BacteriaPerManurePerDay*tmp.InConfinementvsTime*tmp.ManurePerDay*tmp.AU,
-                             Bacteria.InForest=tmp.BacteriaPerManurePerDay*(tmp.InForestWOStreamAccess+tmp.InForestWStreamAccess)*tmp.ManurePerDay*tmp.AU,
-                             Bacteria.InForestInStream=tmp.BacteriaPerManurePerDay*tmp.InForestInStream/24*tmp.ManurePerDay*tmp.AU,
-                             stringsAsFactors=FALSE)
-  
-  tmp.Bacteria.InStream <- (SubModelOutput$Bacteria.OnPastureInStream+SubModelOutput$Bacteria.InForestInStream)
-  tmp.Accum.Pasture <- (SubModelOutput$Bacteria.OnPastureWOStreamAccess+
-                          SubModelOutput$Bacteria.OnPastureWStreamAccess)/tmp.PastureArea
-  tmp.Accum.Forest <- SubModelOutput$Bacteria.InForest/tmp.ForestArea
-
-  SubModelOutput <- data.frame(SubModelOutput,
-                             Bacteria.Instream=tmp.Bacteria.InStream,
-                             Accum.Pasture=tmp.Accum.Pasture,
-                             Accum.Forest=tmp.Accum.Forest,
-                             stringsAsFactors=FALSE)
-
-  # NEW LINES
-  tmp.SQOLIM.mult.fac <- as.numeric(SubModelData[9,2])
-  tmp.ACCUM.Pasture.Row <- as.numeric(SubModelData[5,2])
-  tmp.SQOLIM.Pasture.Row <- as.numeric(SubModelData[6,2])
-  tmp.ACCUM.Forest.Row <- as.numeric(SubModelData[7,2])
-  tmp.SQOLIM.Forest.Row <- as.numeric(SubModelData[8,2])
-
-  SubModelOutput$Lim.Pasture <- tmp.Accum.Pasture * tmp.SQOLIM.mult.fac
-  SubModelOutput$Lim.Forest  <- tmp.Accum.Forest  * tmp.SQOLIM.mult.fac
-  
-  return(SubModelOutput)
+  return(df.output)
 
 }
