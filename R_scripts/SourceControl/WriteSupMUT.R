@@ -75,8 +75,8 @@ WriteSup <- function(sub.wtsd.num=sub.wtsd.N,sub.model.dirs=chr.sub.model.dirs,s
 	# Run source models, update SUP file, and create MUTSIN file for each subwatershed
 	for (ii in 1:length(sub.wtsds)) {
 	# Run CowCalf model
-	  cow.calf.in <- paste0(grep("[Cc]ow",sub.model.input,value=TRUE),sub.wtsds[ii],".txt")
-		cow.calf.out <- cow.calf(chr.input=cow.calf.in,chr.wrkdir=grep("[Cc]ow",sub.model.dirs,value=TRUE))
+	  cow.calf.in <- paste0(grep("^[Cc]ow",sub.model.input,value=TRUE),sub.wtsds[ii],".txt")
+		cow.calf.out <- cow.calf(chr.input.file=cow.calf.in,chr.wrkdir=grep("[Cc]ow",sub.model.dirs,value=TRUE))
 		# Change NaN & Inf to 0 in cow.calf.out
 	  cow.calf.out$Accum.Pasture[!is.finite(cow.calf.out$Accum.Pasture)] <- 0
 	  cow.calf.out$Accum.Forest[!is.finite(cow.calf.out$Accum.Forest)] <- 0
@@ -84,20 +84,20 @@ WriteSup <- function(sub.wtsd.num=sub.wtsd.N,sub.model.dirs=chr.sub.model.dirs,s
 	  cow.calf.out$Bacteria.OnPastureInStream[!is.finite(cow.calf.out$Bacteria.OnPastureInStream)] <- 0
 	  cow.calf.out <- data.frame(cow.calf.out,bac.total.in.stream=(cow.calf.out$Bacteria.InForestInStream + cow.calf.out$Bacteria.OnPastureInStream))
 	# Run onsite_pets model
-	  onsite.pets.in <- paste0(grep("[Oo]n[Ss]ite",sub.model.input,value=TRUE),sub.wtsds[ii],".txt")
+	  onsite.pets.in <- paste0(grep("^[Oo]n[Ss]ite",sub.model.input,value=TRUE),sub.wtsds[ii],".txt")
 	  onsite.pets.out <- onsite_pets(chr.input=onsite.pets.in,chr.wrkdir=grep("[Ss]ite",sub.model.dirs,value=TRUE))
 	  # Change NaN & Inf to 0 in onsite.pets.out
 	  onsite.pets.out$Accum.RAOCUT[!is.finite(onsite.pets.out$Accum.RAOCUT)] <- 0
 	  onsite.pets.out$bac.onsite.NearStrmStrctFailure[!is.finite(onsite.pets.out$bac.onsite.NearStrmStrctFailure)] <- 0
 	  onsite.pets.out <- data.frame(onsite.pets.out,bac.total.in.stream=onsite.pets.out$bac.onsite.NearStrmStrctFailure.to.stream.load)
 	# Run Wildlife-Beaver model
-	  beaver.in <- paste0(grep("[Bb]eaver",sub.model.input,value=TRUE),sub.wtsds[ii],".txt")
+	  beaver.in <- paste0(grep("^[Bb]eaver",sub.model.input,value=TRUE),sub.wtsds[ii],".txt")
 	  beaver.out <- wildlifeBeaver(chr.input=beaver.in,chr.wrkdir=grep("Wildlife-[Bb]eaver",sub.model.dirs,value=TRUE))
 	  # Change NaN & Inf to 0 in beaver.out
 	  beaver.out$Accum.Forest[!is.finite(beaver.out$Accum.Forest)] <- 0
 	  beaver.out$bac.total.in.stream[!is.finite(beaver.out$bac.total.in.stream)] <- 0
 	# Run Wildlife-Coyote model
-	  coyote.in <- paste0(grep("[Cc]oyote",sub.model.input,value=TRUE),sub.wtsds[ii],".txt")
+	  coyote.in <- paste0(grep("^[Cc]oyote",sub.model.input,value=TRUE),sub.wtsds[ii],".txt")
 	  coyote.out <- wildlifeCoyote(chr.input=coyote.in,chr.wrkdir=grep("Wildlife-[Cc]oyote",sub.model.dirs,value=TRUE))
 	  # Change NaN & Inf to 0 in coyote.out
 	  coyote.out$Accum.Pasture[!is.finite(coyote.out$Accum.Pasture)] <- 0
@@ -105,7 +105,7 @@ WriteSup <- function(sub.wtsd.num=sub.wtsd.N,sub.model.dirs=chr.sub.model.dirs,s
 	  coyote.out$Accum.RAOCUT[!is.finite(coyote.out$Accum.RAOCUT)] <- 0
 	  coyote.out$bac.total.in.stream[!is.finite(coyote.out$bac.total.in.stream)] <- 0
 	# Run Wildlife-Deer model
-	  deer.in <- paste0(grep("[Dd]eer",sub.model.input,value=TRUE),sub.wtsds[ii],".txt")
+	  deer.in <- paste0(grep("^[Dd]eer",sub.model.input,value=TRUE),sub.wtsds[ii],".txt")
 	  deer.out <- wildlifeDeer(chr.input=deer.in,chr.wrkdir=grep("Wildlife-[Dd]eer",sub.model.dirs,value=TRUE))
 	  # Change NaN & Inf to 0 in deer.out
 	  deer.out$Accum.Pasture[!is.finite(deer.out$Accum.Pasture)] <- 0
@@ -120,7 +120,7 @@ WriteSup <- function(sub.wtsd.num=sub.wtsd.N,sub.model.dirs=chr.sub.model.dirs,s
 	  duck.out$Accum.RAOCUT[!is.finite(duck.out$Accum.RAOCUT)] <- 0
 	  duck.out$bac.total.in.stream[!is.finite(duck.out$bac.total.in.stream)] <- 0
   # Run Wildlife-Elk model
-	  elk.in <- paste0(grep("[Ee]lk",sub.model.input,value=TRUE),sub.wtsds[ii],".txt")
+	  elk.in <- paste0(grep("^[Ee]lk",sub.model.input,value=TRUE),sub.wtsds[ii],".txt")
 		elk.out <- wildlifeElk(chr.input=elk.in,chr.wrkdir=grep("Wildlife-[Ee]lk",sub.model.dirs,value=TRUE))
 		# Change NaN & Inf to 0 in elk.out
 	  elk.out$Accum.Pasture[!is.finite(elk.out$Accum.Pasture)] <- 0
@@ -136,7 +136,7 @@ WriteSup <- function(sub.wtsd.num=sub.wtsd.N,sub.model.dirs=chr.sub.model.dirs,s
 	  geese.out$Accum.RAOCUT[!is.finite(geese.out$Accum.RAOCUT)] <- 0
 	  geese.out$bac.total.in.stream[!is.finite(geese.out$bac.total.in.stream)] <- 0
   # Run Wildlife-Gulls model
-	  gulls.in <- paste0(grep("[Gg]ulls",sub.model.input,value=TRUE),sub.wtsds[ii],".txt")
+	  gulls.in <- paste0(grep("^[Gg]ulls",sub.model.input,value=TRUE),sub.wtsds[ii],".txt")
 	  gulls.out <- wildlifeGulls(chr.input=gulls.in,chr.wrkdir=grep("Wildlife-[Gg]ulls",sub.model.dirs,value=TRUE))
 	  # Change NaN & Inf to 0 in gulls.out
 	  gulls.out$Accum.Pasture[!is.finite(gulls.out$Accum.Pasture)] <- 0
@@ -159,7 +159,7 @@ WriteSup <- function(sub.wtsd.num=sub.wtsd.N,sub.model.dirs=chr.sub.model.dirs,s
 	  otter.out$Accum.Forest[!is.finite(otter.out$Accum.Forest)] <- 0
 	  otter.out$bac.total.in.stream[!is.finite(otter.out$bac.total.in.stream)] <- 0
   # Run Wildlife-Racoon model
-	  racoon.in <- paste0(grep("[Rr]acoon",sub.model.input,value=TRUE),sub.wtsds[ii],".txt")
+	  racoon.in <- paste0(grep("^[Rr]acoon",sub.model.input,value=TRUE),sub.wtsds[ii],".txt")
 	  racoon.out <- wildlifeRacoon(chr.input=racoon.in,chr.wrkdir=grep("Wildlife-[Rr]acoon",sub.model.dirs,value=TRUE))
 	  # Change NaN & Inf to 0 in heregr.out
 	  racoon.out$Accum.Pasture[!is.finite(racoon.out$Accum.Pasture)] <- 0
