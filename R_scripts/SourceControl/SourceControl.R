@@ -16,10 +16,11 @@ chr.source.control.dir <- paste0(chr.PEST.dir,"/SourceControl")
 ## get sub-model folders
 ##chr.sub.model.dirs <- paste0(chr.sub.models.dir,"/",list.dirs(path=chr.sub.models.dir))
 chr.sub.model.dirs <- list.dirs(path=chr.sub.models.dir)
+chr.sub.model.dirs <- chr.sub.model.dirs[ -grep("Rproj", chr.sub.model.dirs)]
 ## exclude chr.sub.models.dir and the "General" folder because that does not have a sub-model, yet
 tmp.dirs <- chr.sub.model.dirs[-grep(paste0("(./General)|(",chr.sub.models.dir,"$)"),chr.sub.model.dirs)]
 ## get sub-model files 
-chr.sub.model.files <- paste0(tmp.dirs,"/",list.files(path=tmp.dirs,pattern="\\.R"))
+chr.sub.model.files <- paste0(tmp.dirs,"/",list.files(path=tmp.dirs,pattern="\\.R$"))
 rm(tmp.dirs)
 
 ## load sub-model functions
