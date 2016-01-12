@@ -71,6 +71,7 @@ cow.calf <- function(chr.wrkdir="E:/PEST/BigElk/Sub_Models",
   loc.pasture <- amng.in.pasture * am.pairs.adj
   loc.confine <- amng.in.confine * am.pairs.adj
   loc.forest  <- amng.in.forest * am.pairs.adj
+  # check
   abs(am.pairs.adj - (loc.pasture + loc.confine + loc.forest))
   
   ## pair location with or without stream
