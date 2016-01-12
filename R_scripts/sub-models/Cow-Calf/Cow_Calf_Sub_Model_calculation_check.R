@@ -72,3 +72,11 @@ chk.Accum.forest <- chk.bac.forest.lnd / chk.lu.forest.area
 # sqolim
 chk.Lim.Pasture <- chk.ainfo.sqolim.fac * chk.Accum.Pasture
 chk.Lim.Forest <- chk.ainfo.sqolim.fac * chk.Accum.forest
+
+
+# compare manual bacteria loads to function outputs
+chk.bac.strm - df.output$Bacteria.Instream
+
+chk.Accum.Pasture - df.output$Accum.Pasture
+
+chk.Accum.forest - df.output$Accum.Forest
