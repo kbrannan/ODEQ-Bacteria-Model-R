@@ -56,3 +56,19 @@ chk.loc.forest.w.strm <- (chk.ainfo.forest.in.strm / 100) *
   chk.loc.forest.w
 chk.loc.forest.w.lnd <- (1 - (chk.ainfo.forest.in.strm / 100)) * 
   chk.loc.forest.w
+
+# bacteria loads
+chk.bac.strm <- (chk.loc.pasture.w.strm + chk.loc.forest.w.strm) * 
+  chk.ainfo.bac.prod
+chk.bac.pasture.lnd <- (chk.loc.pasture.wo + chk.loc.pasture.w.lnd) * 
+  chk.ainfo.bac.prod
+chk.bac.forest.lnd <- (chk.loc.forest.wo + chk.loc.forest.w.lnd) * 
+  chk.ainfo.bac.prod
+
+# accum
+chk.Accum.Pasture <- chk.bac.pasture.lnd / chk.lu.pasture.area
+chk.Accum.forest <- chk.bac.forest.lnd / chk.lu.forest.area
+
+# sqolim
+chk.Lim.Pasture <- chk.ainfo.sqolim.fac * chk.Accum.Pasture
+chk.Lim.Forest <- chk.ainfo.sqolim.fac * chk.Accum.forest
