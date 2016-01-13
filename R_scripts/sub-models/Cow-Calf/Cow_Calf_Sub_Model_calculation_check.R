@@ -88,8 +88,19 @@ chk.Lim.Forest <- chk.ainfo.sqolim.fac * chk.Accum.forest
 
 
 # compare manual bacteria loads to function outputs
-chk.bac.strm - df.output$Bacteria.Instream
+sum((chk.bac.strm - df.output$Bacteria.Instream)^2)/12
 
-chk.Accum.Pasture - df.output$Accum.Pasture
+sum((chk.Accum.Pasture - df.output$Accum.Pasture)^2)/12
 
-chk.Accum.forest - df.output$Accum.Forest
+sum((chk.Accum.forest - df.output$Accum.Forest)^2)/12
+
+# write average error to file "cow-calf-std-error.txt"
+
+chr.chk <- c(paste0("Standard Error for In-Stream     = ", 
+                    sum((chk.bac.strm - df.output$Bacteria.Instream)^2)/12),
+             paste0("Standard Error for Pasture Accum = ", 
+                    sum((chk.Accum.Pasture - df.output$Accum.Pasture)^2)/12),
+             paste0("Standard Error for Forest Accum  = ", 
+                    sum((chk.Accum.forest - df.output$Accum.Forest)^2)/12))
+
+cat(chr.chk, file = "cow-calf-std-error.txt", sep="\n")
