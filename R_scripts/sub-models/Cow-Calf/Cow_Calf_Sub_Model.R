@@ -103,21 +103,30 @@ cow.calf <- function(chr.wrkdir="E:/PEST/BigElk/Sub_Models",
 
   ##
   ## bacteria load calculations
-  bac.total   <- am.pairs.adj * ainfo.bac.prod
+  bac.total.adj   <- am.pairs.adj * ainfo.bac.prod
+  bac.total <- sum(bac.total.adj)
   bac.confine <- loc.confine * ainfo.bac.prod
   bac.pasture <- loc.pasture * ainfo.bac.prod
   bac.forest  <- loc.forest * ainfo.bac.prod
   # check
-  abs(bac.total - (bac.pasture + bac.confine + bac.forest))
+  abs(bac.total.adj - (bac.pasture + bac.confine + bac.forest))
 
   ## bacteria loads with or without stream
-  bac.pasture.w  <- lu.pasture.w * bac.pasture
-  bac.pasture.wo <- (1 - lu.pasture.w) * bac.pasture
-  bac.forest.w   <- lu.forest.w * bac.forest
-  bac.forest.wo  <- (1 - lu.forest.w) * bac.forest
+#   bac.pasture.w  <- lu.pasture.w * bac.pasture
+#   bac.pasture.wo <- (1 - lu.pasture.w) * bac.pasture
+#   bac.forest.w   <- lu.forest.w * bac.forest
+#   bac.forest.wo  <- (1 - lu.forest.w) * bac.forest
+#   # check
+#   abs(bac.pasture - (bac.pasture.w + bac.pasture.wo))
+#   abs(bac.forest - (bac.forest.w + bac.forest.wo))
+  bac.pasture.w  <- loc.pasture.w * ainfo.bac.prod
+  bac.pasture.wo <- loc.pasture.wo * ainfo.bac.prod
+  bac.forest.w   <- loc.forest.w * ainfo.bac.prod
+  bac.forest.wo  <- loc.forest.wo * ainfo.bac.prod
   # check
   abs(bac.pasture - (bac.pasture.w + bac.pasture.wo))
   abs(bac.forest - (bac.forest.w + bac.forest.wo))
+  
   
   ## bacteria load in stream or not 
   bac.pasture.w.strm  <- bac.pasture.w * ainfo.pasture.in.strm

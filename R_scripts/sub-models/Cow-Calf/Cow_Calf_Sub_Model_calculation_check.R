@@ -75,8 +75,8 @@ chk.bac.forest.lnd <- (chk.loc.forest.wo + chk.loc.forest.w.lnd) *
 chk.bac.confine <- chk.loc.confine * chk.ainfo.bac.prod
 
 # check bacteria loads to total
-sum(chk.am.pairs.adj * chk.ainfo.bac.prod) - 
-  sum(chk.bac.strm + chk.bac.pasture.lnd + chk.bac.forest.lnd + chk.bac.confine)
+sum((chk.am.pairs.adj * chk.ainfo.bac.prod) - 
+  sum(chk.bac.strm + chk.bac.pasture.lnd + chk.bac.forest.lnd + chk.bac.confine))
 
 # accum
 chk.Accum.Pasture <- chk.bac.pasture.lnd / chk.lu.pasture.area
