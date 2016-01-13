@@ -41,6 +41,9 @@ chk.loc.pasture <- chk.am.pairs.adj * chk.amng.in.pasture
 chk.loc.forest <- chk.am.pairs.adj * chk.amng.in.forest
 chk.loc.confine <- chk.am.pairs.adj * chk.amng.in.confine
 
+# check location of pairs to total
+chk.am.pairs - sum((chk.loc.pasture + chk.loc.forest + chk.loc.confine) / chk.amng.adj.size) / 12
+
 # distribute pairs on forest or pasture with or without stream access
 chk.loc.pasture.w <- (chk.lu.pasture.w / 100) * chk.loc.pasture
 chk.loc.pasture.wo <- (1 - (chk.lu.pasture.w / 100)) * chk.loc.pasture
@@ -57,6 +60,11 @@ chk.loc.forest.w.strm <- (chk.ainfo.forest.in.strm / 100) *
 chk.loc.forest.w.lnd <- (1 - (chk.ainfo.forest.in.strm / 100)) * 
   chk.loc.forest.w
 
+# check all location end points comapred to total pairs
+chk.am.pairs - sum((chk.loc.confine + chk.loc.pasture.wo + chk.loc.forest.wo +
+  chk.loc.pasture.w.strm + chk.loc.pasture.w.lnd + 
+  chk.loc.forest.w.strm + chk.loc.forest.w.lnd) / chk.amng.adj.size) / 12
+
 # bacteria loads
 chk.bac.strm <- (chk.loc.pasture.w.strm + chk.loc.forest.w.strm) * 
   chk.ainfo.bac.prod
@@ -64,6 +72,11 @@ chk.bac.pasture.lnd <- (chk.loc.pasture.wo + chk.loc.pasture.w.lnd) *
   chk.ainfo.bac.prod
 chk.bac.forest.lnd <- (chk.loc.forest.wo + chk.loc.forest.w.lnd) * 
   chk.ainfo.bac.prod
+chk.bac.confine <- chk.loc.confine * chk.ainfo.bac.prod
+
+# check bacteria loads to total
+sum(chk.am.pairs.adj * chk.ainfo.bac.prod) - 
+  sum(chk.bac.strm + chk.bac.pasture.lnd + chk.bac.forest.lnd + chk.bac.confine)
 
 # accum
 chk.Accum.Pasture <- chk.bac.pasture.lnd / chk.lu.pasture.area
