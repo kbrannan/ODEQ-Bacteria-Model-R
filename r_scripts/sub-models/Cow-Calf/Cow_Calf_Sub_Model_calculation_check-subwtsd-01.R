@@ -2,6 +2,11 @@
 ## cowcalf01.txt file
 
 
+source("Cow_Calf_Sub_Model.R")
+
+df.output <- cow.calf(chr.wrkdir=getwd(),chr.input.file="cowcalf01.txt")
+
+
 
 ## land use information
 chk.lu.pasture.area <- 445.3 # in acres
@@ -103,4 +108,4 @@ chr.chk <- c(paste0("Standard Error for In-Stream     = ",
              paste0("Standard Error for Forest Accum  = ", 
                     sum((chk.Accum.forest - df.output$Accum.Forest)^2)/12))
 
-cat(chr.chk, file = "cow-calf-std-error.txt", sep="\n")
+cat(chr.chk, file = "cow-calf-std-error-cowcalf01.txt", sep="\n")
