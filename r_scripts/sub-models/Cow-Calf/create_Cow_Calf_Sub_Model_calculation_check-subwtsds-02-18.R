@@ -13,13 +13,16 @@ chr.subwtsd <- gsub("[^0-9]","",chr.new.f[ii])
 
 tmp.scpt <- gsub("01", chr.subwtsd, chr.chk.01)
 
-grep("^chk\\.lu", chr.chk.01)
+lng.rp <- grep("^chk\\.lu", chr.chk.01)
 
 tmp.in <- scan(file = chr.new.f[ii],
                what = "character", sep = "\n")
 
-as.numeric(gsub("Pasture Area in Watershed \\(ac\\)\\:", "", 
-     grep("Pasture Area in Watershed \\(ac\\)\\:",tmp.in, value = TRUE)))
+
+
+gsub("[0-9]{1,}",as.numeric(gsub("Pasture Area in Watershed \\(ac\\)\\:", "", 
+     grep("Pasture Area in Watershed \\(ac\\)\\:",tmp.in, value = TRUE))),
+     chr.chk.01[lng.rp[1]])
 
 as.numeric(gsub("Forest Area in Watershed \\(ac\\)\\:", "", 
                 grep("Forest Area in Watershed \\(ac\\)\\:",tmp.in, value = TRUE)))
