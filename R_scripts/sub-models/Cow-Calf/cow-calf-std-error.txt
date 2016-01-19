@@ -1,3 +1,0 @@
-Standard Error for In-Stream     = 3.03164900590976e-13
-Standard Error for Pasture Accum = 4.6721885619642e-16
-Standard Error for Forest Accum  = 0
