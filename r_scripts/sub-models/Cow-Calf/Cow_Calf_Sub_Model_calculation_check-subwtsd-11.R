@@ -1,12 +1,12 @@
 ## step bt step calculation check for cow_calf_sub_model using input from
-## cowcalf01.txt file
+## cowcalf11.txt file
 source("Cow_Calf_Sub_Model.R")
-df.output <- cow.calf(chr.wrkdir=getwd(),chr.input.file="cowcalf01.txt")
+df.output <- cow.calf(chr.wrkdir=getwd(),chr.input.file="cowcalf11.txt")
 ## land use information
-chk.lu.pasture.area <- 445.3 # in acres
-chk.lu.forest.area  <- 8739.8 # in acres
-chk.lu.pasture.w    <- 48 # as percent
-chk.lu.forest.w     <- 37.235884 # as percent
+chk.lu.pasture.area <- 92.5 # in acres
+chk.lu.forest.area  <- 3916.2 # in acres
+chk.lu.pasture.w    <- 7.7174911 # as percent
+chk.lu.forest.w     <- 0.21986574 # as percent
 ## animal management information
 chk.amng.sd         <- 1.0000000E+01 # as acres per animal
 # next 4 variables are by month
@@ -82,4 +82,4 @@ chr.chk <- c(paste0("Standard Error for In-Stream     = ",
                     sum((chk.Accum.Pasture - df.output$Accum.Pasture)^2)/12),
              paste0("Standard Error for Forest Accum  = ", 
                     sum((chk.Accum.forest - df.output$Accum.Forest)^2)/12))
-cat(chr.chk, file = "cow-calf-std-error-cowcalf01.txt", sep="\n")
+cat(chr.chk, file = "cow-calf-std-error-cowcalf11.txt", sep="\n")

@@ -1,5 +1,5 @@
 ## get new input file names
-chr.new.f <- list.files(pattern = "*.new\\.txt")
+chr.new.f <- list.files(pattern = "cowcalf.*\\.txt")
 
 ## get calc check script for subwtsd 01
 chr.chk.01 <- scan(file = "Cow_Calf_Sub_Model_calculation_check-subwtsd-01.R",
