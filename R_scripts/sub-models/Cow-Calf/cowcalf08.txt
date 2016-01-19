@@ -1,29 +1,32 @@
 *** Cow-Calf Bacteria Source Model Input File
 *** Program Version 3.1.12102012
+*** Gerneral Information
 Watershed: Big Elk Creek Sub-Wtsd 08
 Date this Input File Created: 2013-05-10
+*** HSPF Information
 MUTSIN Start Year: 1995
 MUTSIN End Year: 2010
 HSPF-Sup File Header Number for Pasture in MON-ACCUM Table:  45
 HSPF-Sup File Header Number for Pasture in MON-SQOLIM Table: 97
 HSPF-Sup File Header Number for Forest in MON-ACCUM Table:   44
 HSPF-Sup File Header Number for Forest in MON-SQOLIM Table:  96
-SQOLIM multiplcation factor: 9
+*** Land Use Information
 Pasture Area in Watershed (ac): 116.1
 Forest Area in Watershed (ac): 3585.7
+Percent of pasture with stream access:     3.2000000E+01
+Percent of forest with stream access:      2.1906780E-02
+*** Animal Management Information
 Average Stocking Density for Pasture in watershed (ac/Cow-Calf pair):     1.0000000E+01
-*** Temporal Distribution of Cow-Calf Pair weight with Calf Growth:
+*** Temporal Distribution of Pair size with Calf Growth:
 *** Month: Jan,Feb,Mar,Apr,May,Jun,Jul,Aug,Sep,Oct,Nov,Dec
-Adjusted AU: 1.15,1.35,1.39,1.43,1.47,1.51,1.55,1.59,1.63,1,1.05,1.1
-Cow Animal Unit Size (lbs): 1000
+Adjusted animal size: 1.15,1.35,1.39,1.43,1.47,1.51,1.55,1.59,1.63,1,1.05,1.1
 *** Temporal Distribution grazing Schedule:
 *** Month: Jan,Feb,Mar,Apr,May,Jun,Jul,Aug,Sep,Oct,Nov,Dec
 Pasture: 0.25,0.25,0.75,0.75,0.75,1,0.75,0.75,0.75,0.25,0.25,0.25
 Confinement: 0.75,0.75,0.25,0.25,0.25,0,0,0,0,0.75,0.75,0.75
 Forest: 0,0,0,0,0,0,0.25,0.25,0.25,0,0,0
-Manure Production of Cow-Calf Pair Animal Unit (AU) per day (Manure lbs/(AU day):  30
-Fecal Coliform in Manure (org/(day-AU)):     2.5650000E+09
-Percent of pasture with stream access:     3.2000000E+01
-Percent of forest with stream access:      2.1906780E-02
+*** Animal Information
+Fecal Coliform production by animal (org/(day-animal)):     2.5650000E+09
+SQOLIM multiplcation factor: 9
 Percent of animals on pasture in and around streams:    1.2500000E+01
 Percent of animals on forest in and around streams:     3.7235884E+01
