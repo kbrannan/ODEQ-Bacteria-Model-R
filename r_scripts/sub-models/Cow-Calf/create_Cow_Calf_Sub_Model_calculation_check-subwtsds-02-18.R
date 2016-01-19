@@ -19,6 +19,19 @@ tmp.in <- scan(file = chr.new.f[ii],
                what = "character", sep = "\n")
 
 
+grep("[0-9.]{1,}", chr.chk.01[lng.rp[1]], value=TRUE)
+
+
+gsub("\\-.*[0-9]{1,}.*\\#","-  #",chr.chk.01[lng.rp[1]])
+
+gsub("\\-.*[0-9]{1,}.*\\#",
+     paste0("- ",
+            as.numeric(gsub("Pasture Area in Watershed \\(ac\\)\\:", "",
+                            grep("Pasture Area in Watershed \\(ac\\)\\:",
+                                 tmp.in, value = TRUE))), " #"),
+            chr.chk.01[lng.rp[1]])
+
+
 
 gsub("[0-9]{1,}",as.numeric(gsub("Pasture Area in Watershed \\(ac\\)\\:", "", 
      grep("Pasture Area in Watershed \\(ac\\)\\:",tmp.in, value = TRUE))),
