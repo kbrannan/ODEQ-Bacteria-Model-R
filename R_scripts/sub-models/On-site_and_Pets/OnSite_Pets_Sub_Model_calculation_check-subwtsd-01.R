@@ -4,7 +4,7 @@ chr.onsite.pets.dir <- "M:/Models/Bacteria/HSPF/ODEQ-Bacteria-Model-R/R_scripts/
 source(paste0(chr.onsite.pets.dir,"/OnSite_Pets_Sub_Model.R"))
 df.output <- onsite_pets(chr.wrkdir=chr.onsite.pets.dir,chr.input="OnSitePets01.txt")
 ## land use information
-chk.lu.racut.area <- 435.5 # in acres
+chk.lu.RAOCUT.area <- 435.5 # in acres
 ## general
 chk.sqolim.fac      <- 9 # unitless
 ## onsite information
@@ -46,13 +46,30 @@ chk.failure.post.1986.to.land <- chk.failure.post.1986 * (100 - chk.onsite.to.st
 ## to stream
 chk.bac.strm <- (chk.failure.pre.1974.to.stream + 
                    chk.failure.1974.1986.to.stream + 
-                   chk.failure.post.1986.to.stream) * chk.onsite.bac.prod
+                   chk.failure.post.1986.to.stream) * chk.onsite.bac.prod /24
 ## to land 
 chk.bac.land <- (chk.failure.pre.1974.to.land + 
                    chk.failure.1974.1986.to.land + 
                    chk.failure.post.1986.to.land) * chk.onsite.bac.prod +
   chk.bact.pets
 
+
+## accum and sqlim
+chk.accum.RAOCUT <- chk.bac.land / chk.lu.RAOCUT.area
+chk.sqlim.RAOCUT <- chk.accum.RAOCUT * chk.sqolim.fac
+
+
+# compare manual bacteria loads to function outputs
+sum((chk.bac.strm - df.output$bac.onsite.NearStrmStrctFailure.to.stream.load)^2)/12
+sum((chk.bac.land - df.output$Accum.RAOCUT)^2)/12
+# write average error to file "cow-calf-std-error.txt"
+chr.chk <- c(paste0("Standard Error for In-Stream     = ", 
+                    sum((chk.bac.strm - df.output$Bacteria.Instream)^2)/12),
+             paste0("Standard Error for Pasture Accum = ", 
+                    sum((chk.Accum.Pasture - df.output$Accum.Pasture)^2)/12),
+             paste0("Standard Error for Forest Accum  = ", 
+                    sum((chk.Accum.forest - df.output$Accum.Forest)^2)/12))
+cat(chr.chk, file = "cow-calf-std-error-cowcalf01.txt", sep="\n")
 
 
 # Number of pairs is rea of pasture divided by stocking density
