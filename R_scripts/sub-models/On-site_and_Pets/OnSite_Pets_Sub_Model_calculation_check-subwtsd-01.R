@@ -46,7 +46,7 @@ chk.failure.post.1986.to.land <- chk.failure.post.1986 * (100 - chk.onsite.to.st
 ## to stream
 chk.bac.strm <- (chk.failure.pre.1974.to.stream + 
                    chk.failure.1974.1986.to.stream + 
-                   chk.failure.post.1986.to.stream) * chk.onsite.bac.prod /24
+                   chk.failure.post.1986.to.stream) * chk.onsite.bac.prod
 ## to land 
 chk.bac.land <- (chk.failure.pre.1974.to.land + 
                    chk.failure.1974.1986.to.land + 
@@ -55,13 +55,13 @@ chk.bac.land <- (chk.failure.pre.1974.to.land +
 
 
 ## accum and sqlim
-chk.accum.RAOCUT <- chk.bac.land / chk.lu.RAOCUT.area
+chk.accum.RAOCUT <- rep(chk.bac.land / chk.lu.RAOCUT.area, 12)
 chk.sqlim.RAOCUT <- chk.accum.RAOCUT * chk.sqolim.fac
 
 
 # compare manual bacteria loads to function outputs
 sum((chk.bac.strm - df.output$bac.onsite.NearStrmStrctFailure.to.stream.load)^2)/12
-sum((chk.bac.land - df.output$Accum.RAOCUT)^2)/12
+sum((chk.accum.RAOCUT - df.output$Accum.RAOCUT)^2)/12
 # write average error to file "cow-calf-std-error.txt"
 chr.chk <- c(paste0("Standard Error for In-Stream     = ", 
                     sum((chk.bac.strm - df.output$Bacteria.Instream)^2)/12),
