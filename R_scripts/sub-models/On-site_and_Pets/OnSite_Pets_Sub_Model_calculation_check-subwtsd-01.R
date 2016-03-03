@@ -64,69 +64,9 @@ sum((chk.bac.strm - df.output$bac.onsite.NearStrmStrctFailure.to.stream.load)^2)
 sum((chk.accum.RAOCUT - df.output$Accum.RAOCUT)^2)/12
 # write average error to file "cow-calf-std-error.txt"
 chr.chk <- c(paste0("Standard Error for In-Stream     = ", 
-                    sum((chk.bac.strm - df.output$Bacteria.Instream)^2)/12),
-             paste0("Standard Error for Pasture Accum = ", 
-                    sum((chk.Accum.Pasture - df.output$Accum.Pasture)^2)/12),
-             paste0("Standard Error for Forest Accum  = ", 
-                    sum((chk.Accum.forest - df.output$Accum.Forest)^2)/12))
-cat(chr.chk, file = "cow-calf-std-error-cowcalf01.txt", sep="\n")
+                    sum((chk.bac.strm - df.output$bac.onsite.NearStrmStrctFailure.to.stream.load)^2)/12),
+             paste0("Standard Error for RAOCUT Accum = ", 
+                    sum((chk.accum.RAOCUT - df.output$Accum.RAOCUT)^2)/12))
+cat(chr.chk, file = paste0(chr.wrkdir, "/onsite-pets-std-error-cowcalf01.txt"), sep="\n")
 
 
-# Number of pairs is rea of pasture divided by stocking density
-chk.am.pairs     <- chk.lu.pasture.area / chk.amng.sd
-# adjust size of pairs for calf growth by multiplying number of pairs by monthly
-# growth vector to get number of pairs (adjusted) by month
-chk.am.pairs.adj <- chk.am.pairs * chk.amng.adj.size
-# distribute the pairs among pasture, forest or confinement across months
-chk.loc.pasture <- chk.am.pairs.adj * chk.amng.in.pasture
-chk.loc.forest <- chk.am.pairs.adj * chk.amng.in.forest
-chk.loc.confine <- chk.am.pairs.adj * chk.amng.in.confine
-# check location of pairs to total
-chk.am.pairs - sum((chk.loc.pasture + chk.loc.forest + chk.loc.confine) / chk.amng.adj.size) / 12
-# distribute pairs on forest or pasture with or without stream access
-chk.loc.pasture.w <- (chk.lu.pasture.w / 100) * chk.loc.pasture
-chk.loc.pasture.wo <- (1 - (chk.lu.pasture.w / 100)) * chk.loc.pasture
-chk.loc.forest.w <- (chk.lu.forest.w / 100) * chk.loc.forest
-chk.loc.forest.wo <- (1 - (chk.lu.forest.w / 100)) * chk.loc.forest
-# distribute pairs on lu with stream access between in stream and land
-chk.loc.pasture.w.strm <- (chk.ainfo.pasture.in.strm / 100) * 
-  chk.loc.pasture.w
-chk.loc.pasture.w.lnd <- (1 - (chk.ainfo.pasture.in.strm / 100)) * 
-  chk.loc.pasture.w
-chk.loc.forest.w.strm <- (chk.ainfo.forest.in.strm / 100) * 
-  chk.loc.forest.w
-chk.loc.forest.w.lnd <- (1 - (chk.ainfo.forest.in.strm / 100)) * 
-  chk.loc.forest.w
-# check all location end points comapred to total pairs
-chk.am.pairs - sum((chk.loc.confine + chk.loc.pasture.wo + chk.loc.forest.wo +
-  chk.loc.pasture.w.strm + chk.loc.pasture.w.lnd + 
-  chk.loc.forest.w.strm + chk.loc.forest.w.lnd) / chk.amng.adj.size) / 12
-# bacteria loads
-chk.bac.strm <- (chk.loc.pasture.w.strm + chk.loc.forest.w.strm) * 
-  chk.ainfo.bac.prod
-chk.bac.pasture.lnd <- (chk.loc.pasture.wo + chk.loc.pasture.w.lnd) * 
-  chk.ainfo.bac.prod
-chk.bac.forest.lnd <- (chk.loc.forest.wo + chk.loc.forest.w.lnd) * 
-  chk.ainfo.bac.prod
-chk.bac.confine <- chk.loc.confine * chk.ainfo.bac.prod
-# check bacteria loads to total
-sum((chk.am.pairs.adj * chk.ainfo.bac.prod) - 
-  sum(chk.bac.strm + chk.bac.pasture.lnd + chk.bac.forest.lnd + chk.bac.confine))
-# accum
-chk.Accum.Pasture <- chk.bac.pasture.lnd / chk.lu.pasture.area
-chk.Accum.forest <- chk.bac.forest.lnd / chk.lu.forest.area
-# sqolim
-chk.Lim.Pasture <- chk.ainfo.sqolim.fac * chk.Accum.Pasture
-chk.Lim.Forest <- chk.ainfo.sqolim.fac * chk.Accum.forest
-# compare manual bacteria loads to function outputs
-sum((chk.bac.strm - df.output$Bacteria.Instream)^2)/12
-sum((chk.Accum.Pasture - df.output$Accum.Pasture)^2)/12
-sum((chk.Accum.forest - df.output$Accum.Forest)^2)/12
-# write average error to file "cow-calf-std-error.txt"
-chr.chk <- c(paste0("Standard Error for In-Stream     = ", 
-                    sum((chk.bac.strm - df.output$Bacteria.Instream)^2)/12),
-             paste0("Standard Error for Pasture Accum = ", 
-                    sum((chk.Accum.Pasture - df.output$Accum.Pasture)^2)/12),
-             paste0("Standard Error for Forest Accum  = ", 
-                    sum((chk.Accum.forest - df.output$Accum.Forest)^2)/12))
-cat(chr.chk, file = "cow-calf-std-error-cowcalf01.txt", sep="\n")
