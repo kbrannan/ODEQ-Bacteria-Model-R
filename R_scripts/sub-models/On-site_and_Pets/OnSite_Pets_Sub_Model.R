@@ -23,7 +23,7 @@ onsite_pets <- function(chr.input="OnSitePetsxx.txt",chr.wrkdir=getwd()) {
   tmp.onsite.NumNearStrmStrct  <- as.numeric(SubModelData[11,2])
   tmp.onsite.StrctPre1974      <- as.numeric(SubModelData[12,2])/100
   tmp.onsite.Strct1974to1986   <- as.numeric(SubModelData[13,2])/100
-  tmp.onsite.StrctPost1986     <- 1- tmp.onsite.StrctPre1974- tmp.onsite.Strct1974to1986
+  tmp.onsite.StrctPost1986     <- as.numeric(SubModelData[14,2])/100
   tmp.onsite.FailRatePre1974      <- as.numeric(SubModelData[15,2])/100
   tmp.onsite.FailRate1974to1986   <- as.numeric(SubModelData[16,2])/100
   tmp.onsite.FailRatePost1986     <- as.numeric(SubModelData[17,2])/100
@@ -35,13 +35,13 @@ onsite_pets <- function(chr.input="OnSitePetsxx.txt",chr.wrkdir=getwd()) {
   tmp.pets.bacteria.load <- tmp.pets.pop * tmp.pets.bac.prod
   tmp.Accum.RAOCUT <- tmp.pets.bacteria.load / tmp.RAOCUTArea
   ### On-stie
-  tmp.onsite.NearStrmStrctPre1974    <- round(tmp.onsite.NumNearStrmStrct * tmp.onsite.StrctPre1974,digits=0)
-  tmp.onsite.NearStrmStrct1974to1986 <- round(tmp.onsite.NumNearStrmStrct * tmp.onsite.Strct1974to1986,digits=0)
-  tmp.onsite.NearStrmStrctPost1986   <- round(tmp.onsite.NumNearStrmStrct * tmp.onsite.StrctPost1986,digits=0)
+  tmp.onsite.NearStrmStrctPre1974    <- tmp.onsite.NumNearStrmStrct * tmp.onsite.StrctPre1974
+  tmp.onsite.NearStrmStrct1974to1986 <- tmp.onsite.NumNearStrmStrct * tmp.onsite.Strct1974to1986
+  tmp.onsite.NearStrmStrctPost1986   <- tmp.onsite.NumNearStrmStrct * tmp.onsite.StrctPost1986
   tmp.onsite.NearStrmStrct <- tmp.onsite.NumNearStrmStrct
-  tmp.onsite.NearStrmStrctFailurePre1974    <- round(tmp.onsite.NearStrmStrctPre1974 * tmp.onsite.FailRatePre1974,digits=0)
-  tmp.onsite.NearStrmStrctFailure1974to1986 <- round(tmp.onsite.NearStrmStrct1974to1986 * tmp.onsite.FailRate1974to1986,digits=0)
-  tmp.onsite.NearStrmStrctFailurePost1986   <- round(tmp.onsite.NearStrmStrctPost1986 * tmp.onsite.FailRatePost1986,digits=0)
+  tmp.onsite.NearStrmStrctFailurePre1974    <- tmp.onsite.NearStrmStrctPre1974 * tmp.onsite.FailRatePre1974
+  tmp.onsite.NearStrmStrctFailure1974to1986 <- tmp.onsite.NearStrmStrct1974to1986 * tmp.onsite.FailRate1974to1986
+  tmp.onsite.NearStrmStrctFailurePost1986   <- tmp.onsite.NearStrmStrctPost1986 * tmp.onsite.FailRatePost1986
   tmp.onsite.NearStrmStrctFailure <- tmp.onsite.NearStrmStrctFailurePre1974 + tmp.onsite.NearStrmStrctFailure1974to1986 + tmp.onsite.NearStrmStrctFailurePost1986
   ## adjust for structures near stream that may not have toilet facilities
   tmp.onsite.NearStrmStrctFailureInStream <- tmp.percent.in.stream * tmp.onsite.NearStrmStrctFailure
@@ -50,8 +50,8 @@ onsite_pets <- function(chr.input="OnSitePetsxx.txt",chr.wrkdir=getwd()) {
   tmp.onsite.NearStrmStrctFailurePost1986.load   <- tmp.onsite.NearStrmStrctFailurePost1986 * tmp.onsite.bac.prod
   tmp.onsite.NearStrmStrctFailure.load <- tmp.onsite.NearStrmStrctFailurePre1974.load + tmp.onsite.NearStrmStrctFailure1974to1986.load + tmp.onsite.NearStrmStrctFailurePost1986.load
   ## adjust for structures near stream that may not have toilet facilities
-  tmp.onsite.NearStrmStrctFailure.to.stream.load <- tmp.percent.in.stream * tmp.onsite.NearStrmStrctFailure.load/24
-  tmp.Accum.RAOCUT <- (1- tmp.percent.in.stream) * tmp.onsite.NearStrmStrctFailure.load/ tmp.RAOCUTArea + tmp.Accum.RAOCUT
+  tmp.onsite.NearStrmStrctFailure.to.stream.load <- tmp.percent.in.stream * tmp.onsite.NearStrmStrctFailure.load / 24
+  tmp.Accum.RAOCUT <- tmp.Accum.RAOCUT + (1- tmp.percent.in.stream) * tmp.onsite.NearStrmStrctFailure.load / tmp.RAOCUTArea
   ##
   ### Assemble output data frame
   SubModelOutput <- data.frame(Month=c("Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"),
