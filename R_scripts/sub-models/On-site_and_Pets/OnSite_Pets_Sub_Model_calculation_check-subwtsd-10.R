@@ -1,23 +1,23 @@
 ## step bt step calculation check for cow_calf_sub_model using input from
-## OnSitePets01.txt file
+## OnSitePets10.txt file
 chr.onsite.pets.dir <- "M:/Models/Bacteria/HSPF/ODEQ-Bacteria-Model-R/R_scripts/sub-models/On-site_and_pets"
 source(paste0(chr.onsite.pets.dir,"/OnSite_Pets_Sub_Model.R"))
-df.output <- onsite_pets(chr.wrkdir=chr.onsite.pets.dir,chr.input="OnSitePets01.txt")
+df.output <- onsite_pets(chr.wrkdir=chr.onsite.pets.dir,chr.input="OnSitePets10.txt")
 ## land use information
-chk.lu.RAOCUT.area <- 435.5 # in acres
+chk.lu.RAOCUT.area <- 11.0 # in acres
 ## general
 chk.sqolim.fac      <- 9 # unitless
 ## onsite information
 chk.onsite.bac.prod        <- 7.6000000E+11 # orgs/sys-day
-chk.num.hh <- 259
-chk.near.stream.strc <- 23
+chk.num.hh <- 7
+chk.near.stream.strc <- 0
 chk.strc.age.pre.1974 <- 47 # in percent
 chk.strc.age.1974.1986 <- 21 # in percent
 chk.strc.age.post.1986 <- 33 # in percent
 chk.failure.rate.pre.1974 <- 22.5 # in percent
 chk.failure.rate.1974.1986 <- 15 # in percent
 chk.failure.rate.post.1986 <- 3.75 # in percent
-chk.onsite.to.stream <- 100 # in percent
+chk.onsite.to.stream <- 50 # in percent
 # pets
 chk.pets.hh <- 1
 chk.pets.bac.prod <- 4.7500000E+09 # orgs/sys-day
@@ -67,6 +67,6 @@ chr.chk <- c(paste0("Standard Error for In-Stream     = ",
                     sum((chk.bac.strm - df.output$bac.onsite.NearStrmStrctFailure.to.stream.load)^2)/12),
              paste0("Standard Error for RAOCUT Accum = ", 
                     sum((chk.accum.RAOCUT - df.output$Accum.RAOCUT)^2)/12))
-cat(chr.chk, file = paste0(chr.onsite.pets.dir, "/onsite-pets-std-error-cowcalf01.txt"), sep="\n")
+cat(chr.chk, file = paste0(chr.onsite.pets.dir, "/onsite-pets-std-error-cowcalf10.txt"), sep="\n")
 
 

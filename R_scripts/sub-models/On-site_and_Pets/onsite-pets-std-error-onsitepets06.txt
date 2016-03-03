@@ -1,0 +1,2 @@
+Standard Error for In-Stream     = 0
+Standard Error for RAOCUT Accum = 3.63797880709171e-12
