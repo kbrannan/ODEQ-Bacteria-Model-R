@@ -1,4 +1,4 @@
-## step bt step calculation check for cow_calf_sub_model using input from
+## step bt step calculation check for onsite_pets_sub_model using input from
 ## OnSitePets16.txt file
 chr.onsite.pets.dir <- "M:/Models/Bacteria/HSPF/ODEQ-Bacteria-Model-R/R_scripts/sub-models/On-site_and_pets"
 source(paste0(chr.onsite.pets.dir,"/OnSite_Pets_Sub_Model.R"))
