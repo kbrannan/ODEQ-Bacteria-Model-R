@@ -13,17 +13,17 @@ chk.Season.2.Months -> c(4,5,6,7,8,9,10)
 ### Habitats
 chk.Season.1.Pasture <- 365.29
 chk.Season.1.Forest <- 5700.35
-chk.Season1..RAOUT <- 1
+chk.Season1.RAOUT <- 1
 chk.Season.2.Pasture <- 64.55
 chk.Season.2.Fores <- 2135.41
-chk.Season.2,RAOUT <- 1
+chk.Season.2.RAOUT <- 1
 ### Percent of Landuse with Stream access
 chk.Season.1.Percent.Pasture.with.Stream.Access <- 25
 chk.Season.1.Percent.Forest.with.Stream.Access <- 50
 chk.Season.1.Percent.RAOUT.with.Stream.Access <- 0
 chk.Season.2.Percent.Pasture.with.Stream.Access <- 15
 chk.Season.2.Percent.Forest.with.Stream.Access <- 39
-chl.Season 2.Percent.RAOUT with stream.Access  - 0
+chk.Season 2.Percent.RAOUT.with.stream.Access <- 0
 *** Animal Densities
 Season 1 Animal Density for Pasture in watershed (animal/ac):     3.0072900E-03
 Season 1 Animal Density for Forest in watershed (animal/ac):      3.0072900E-03
