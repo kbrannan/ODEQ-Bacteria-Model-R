@@ -102,3 +102,45 @@ chk.season.2.Forest.elk.w.str.acc <-
 chk.season.2.RAOUT.elk.w.str.acc <- 
   (chk.Season.2.Percent.RAOUT.with.stream.Access / 100) * 
   chk.season.2.RAOUT.elk
+## with stream access on land
+## Season 1
+chk.season.1.Pasture.elk.w.str.acc.l <- 
+  (1 - chk.Season.1.Percent.Pasture.in.and.around.streams / 100) * 
+  chk.season.1.Pasture.elk.w.str.acc
+chk.season.1.Forest.elk.w.str.acc.l <- 
+  (1 - chk.Season.1.Percent.Pasture.in.and.around.streams / 100) * 
+  chk.season.1.Forest.elk.w.str.acc
+chk.season.1.RAOUT.elk.w.str.acc.l <- 
+  (1 - chk.Season.1.Percent.Pasture.in.and.around.streams / 100) * 
+  chk.season.1.RAOUT.elk.w.str.acc
+## Season 2
+chk.season.2.Pasture.elk.w.str.acc.l <- 
+  (1 - chk.Season.2.Percent.Pasture.in.and.around.streams / 100) * 
+  chk.season.2.Pasture.elk.w.str.acc
+chk.season.2.Forest.elk.w.str.acc.l <- 
+  (1 - chk.Season.2.Percent.Pasture.in.and.around.streams / 100) * 
+  chk.season.2.Forest.elk.w.str.acc
+chk.season.2.RAOUT.elk.w.str.acc.l <- 
+  (1 - chk.Season.2.Percent.Pasture.in.and.around.streams / 100) * 
+  chk.season.2.RAOUT.elk.w.str.acc
+## with stream access in/around stream
+## Season 1
+chk.season.1.Pasture.elk.w.str.acc.s <- 
+  (chk.Season.1.Percent.Pasture.in.and.around.streams / 100) * 
+  chk.season.1.Pasture.elk.w.str.acc
+chk.season.1.Forest.elk.w.str.acc.s <- 
+  (chk.Season.1.Percent.Pasture.in.and.around.streams / 100) * 
+  chk.season.1.Forest.elk.w.str.acc
+chk.season.1.RAOUT.elk.w.str.acc.s <- 
+  (chk.Season.1.Percent.Pasture.in.and.around.streams / 100) * 
+  chk.season.1.RAOUT.elk.w.str.acc
+## Season 2
+chk.season.2.Pasture.elk.w.str.acc.s <- 
+  (chk.Season.2.Percent.Pasture.in.and.around.streams / 100) * 
+  chk.season.2.Pasture.elk.w.str.acc
+chk.season.2.Forest.elk.w.str.acc.s <- 
+  (chk.Season.2.Percent.Pasture.in.and.around.streams / 100) * 
+  chk.season.2.Forest.elk.w.str.acc
+chk.season.2.RAOUT.elk.w.str.acc.s <- 
+  (chk.Season.2.Percent.Pasture.in.and.around.streams / 100) * 
+  chk.season.2.RAOUT.elk.w.str.acc
