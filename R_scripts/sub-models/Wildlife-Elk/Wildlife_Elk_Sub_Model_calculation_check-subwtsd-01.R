@@ -144,3 +144,21 @@ chk.season.2.Forest.elk.w.str.acc.s <-
 chk.season.2.RAOUT.elk.w.str.acc.s <- 
   (chk.Season.2.Percent.Pasture.in.and.around.streams / 100) * 
   chk.season.2.RAOUT.elk.w.str.acc
+## Elk on land
+chk.season.1.Pasture.elk <- chk.season.1.Pasture.elk.wo.str.acc +
+  chk.season.1.Pasture.elk.w.str.acc.l
+chk.season.1.Forest.elk <- chk.season.1.Forest.elk.wo.str.acc +
+  chk.season.1.Forest.elk.w.str.acc.l
+chk.season.1.RAOUT.elk <- chk.season.1.RAOUT.elk.wo.str.acc +
+  chk.season.1.RAOUT.elk.w.str.acc.l
+chk.season.2.Pasture.elk <- chk.season.2.Pasture.elk.wo.str.acc +
+  chk.season.2.Pasture.elk.w.str.acc.l
+chk.season.2.Forest.elk <- chk.season.2.Forest.elk.wo.str.acc +
+  chk.season.2.Forest.elk.w.str.acc.l
+chk.season.2.RAOUT.elk <- chk.season.2.RAOUT.elk.wo.str.acc +
+  chk.season.2.RAOUT.elk.w.str.acc.l
+## Elk in and around stream
+chk.season.1.elk.stream <- chk.season.1.Pasture.elk.w.str.acc.s + 
+  chk.season.1.Forest.elk.w.str.acc.s + chk.season.1.RAOUT.elk.w.str.acc.s
+chk.season.2.elk.stream <- chk.season.2.Pasture.elk.w.str.acc.s + 
+  chk.season.2.Forest.elk.w.str.acc.s + chk.season.2.RAOUT.elk.w.str.acc.s
