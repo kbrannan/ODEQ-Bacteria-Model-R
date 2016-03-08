@@ -237,18 +237,31 @@ chk.elk.bac <- data.frame(chk.elk.bac,
 
 ##
 ## check model output
-str(df.output)
-str(chk.elk)
+chk.dil <- 1E+06 # need to explain this
+## population total and by locations
+## total
+chk.total.pop <- data.frame(
+  manual.calc.pop.total = sum(chk.elk$elk),
+  model.pop.total = sum(df.output$pop.total),
+  dil = round(
+    chk.dil * ( sum(df.output$pop.total) - sum(chk.elk$elk)) /
+      sum(chk.elk$elk),
+    digits = 0))
 ## totals by month
-chk.total.pop <- merge(summaryBy(elk ~ month.chr, data = chk.elk, FUN = sum),
+chk.total.pop.by.month <- merge(summaryBy(elk ~ month.chr, data = chk.elk, FUN = sum),
       df.output[ , c("Month", "pop.total")],
       by.x = "month.chr", by.y = "Month")
+names(chk.total.pop.by.month) <- c("Month", "manual.calc.pop.total",
+                                   "model.pop.total")
+chk.total.pop.by.month <- 
+  data.frame(chk.total.pop.by.month,
+             dil = round(
+               chk.dil * ( chk.total.pop.by.month$model.pop.total -
+                                  chk.total.pop.by.month$manual.calc.pop.total) /
+               chk.total.pop.by.month$manual.calc.pop.total,
+               digits = 0))
 
-names(chk.total.pop) <- c("Month", "manual.calc.pop.total",
-                          "model.pop.total")
-chk.total.pop$Month <- factor(chk.total.pop$Month,
-                              levels = strftime(
-                                as.POSIXct(paste0("2016-",1:12,"-01")), "%b"))
+
 chk.total.pop
 ## pop in/around stream by month
 chk.str.pop <- merge(summaryBy(elk ~ month.chr, 
@@ -269,19 +282,6 @@ chk.str.pop
 
 
 
-## stream bac load by month
-str(chk.elk.bac)
 
-chk.elk.bac[chk.elk.bac$location == "stream", 
-             c("month.chr", "total.bac")]
-chk.stream.bac.load <- merge(summaryBy( ~ month.chr, data = chk.elk, FUN = sum),
-                       df.output[ , c("Month", "pop.total")],
-                       by.x = "month.chr", by.y = "Month")
-
-names(chk.total.pop) <- c("Month", "manual.calc.pop.total",
-                          "model.pop.total")
-chk.total.pop$Month <- factor(chk.total.pop$Month,
-                              levels = strftime(
-                                as.POSIXct(paste0("2016-",1:12,"-01")), "%b"))
 
 
