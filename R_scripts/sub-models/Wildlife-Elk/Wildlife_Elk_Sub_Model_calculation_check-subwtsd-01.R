@@ -247,7 +247,7 @@ chk.total.pop <- data.frame(
     chk.dil * ( sum(df.output$pop.total) - sum(chk.elk$elk)) /
       sum(chk.elk$elk),
     digits = 0))
-## totals by month
+## total by month
 chk.total.pop.by.month <- merge(summaryBy(elk ~ month.chr, data = chk.elk, FUN = sum),
       df.output[ , c("Month", "pop.total")],
       by.x = "month.chr", by.y = "Month")
@@ -262,20 +262,60 @@ chk.total.pop.by.month <-
                digits = 0))
 
 
-chk.total.pop
+## pop in/around stream
+chk.stream.pop <- data.frame(
+  manual.calc.pop.total = sum(chk.elk[chk.elk$location == "stream", "elk"]),
+  model.pop.total = sum(df.output[ , "pop.total.in.stream"]),
+  dil = round(
+    chk.dil * ( sum(df.output[ , "pop.total.in.stream"]) - 
+                  sum(chk.elk[chk.elk$location == "stream", "elk"])) /
+      sum(chk.elk[chk.elk$location == "stream", "elk"]),
+    digits = 0))
 ## pop in/around stream by month
-chk.str.pop <- merge(summaryBy(elk ~ month.chr, 
+chk.str.pop.by.month <- merge(summaryBy(elk ~ month.chr, 
                                data = chk.elk[chk.elk$location == "stream", ], 
                                FUN = sum),
                        df.output[ , c("Month", "pop.total.in.stream")],
                        by.x = "month.chr", by.y = "Month")
-
-names(chk.str.pop) <- c("Month", "manual.calc.pop.total",
+names(chk.str.pop.by.month) <- c("Month", "manual.calc.pop.total",
                           "model.pop.total")
-chk.str.pop$Month <- factor(chk.str.pop$Month,
+chk.str.pop.by.month$Month <- factor(chk.str.pop$Month,
                               levels = strftime(
                                 as.POSIXct(paste0("2016-",1:12,"-01")), "%b"))
-chk.str.pop
+chk.str.pop.by.month <- 
+  data.frame(chk.str.pop.by.month, 
+             dil = round(chk.dil * 
+                           (chk.str.pop.by.month$model.pop.total - 
+                              chk.str.pop.by.month$manual.calc.pop.total) /
+                           chk.str.pop.by.month$manual.calc.pop.total,
+                         digits = 0))
+## pop on pasture
+chk.pasture.pop <- data.frame(
+  manual.calc.pop.total = sum(chk.elk[chk.elk$location == "pasture", "elk"]),
+  model.pop.total = sum(df.output[ , "pop.total.on.pasture"]),
+  dil = round(
+    chk.dil * (sum(df.output[ , "pop.total.on.pasture"]) - 
+                  sum(chk.elk[chk.elk$location == "pasture", "elk"])) /
+      sum(chk.elk[chk.elk$location == "pasture", "elk"]),
+    digits = 0))
+## pop on pasture by month
+chk.pasture.pop.by.month <- merge(summaryBy(elk ~ month.chr, 
+                                        data = chk.elk[chk.elk$location == "pasture", ], 
+                                        FUN = sum),
+                              df.output[ , c("Month", "pop.total.on.pasture")],
+                              by.x = "month.chr", by.y = "Month")
+names(chk.pasture.pop.by.month) <- c("Month", "manual.calc.pop.total",
+                                 "model.pop.total")
+chk.pasture.pop.by.month$Month <- factor(chk.str.pop$Month,
+                                     levels = strftime(
+                                       as.POSIXct(paste0("2016-",1:12,"-01")), "%b"))
+chk.pasture.pop.by.month <- 
+  data.frame(chk.pasture.pop.by.month, 
+             dil = round(chk.dil * 
+                           (chk.pasture.pop.by.month$model.pop.total - 
+                              chk.pasture.pop.by.month$manual.calc.pop.total) /
+                           chk.pasture.pop.by.month$manual.calc.pop.total,
+                         digits = 0))
 
 
 
