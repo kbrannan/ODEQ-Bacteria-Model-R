@@ -164,8 +164,14 @@ chk.season.2.Stream.elk <- chk.season.2.Pasture.elk.w.str.acc.s +
   chk.season.2.Forest.elk.w.str.acc.s + chk.season.2.RAOUT.elk.w.str.acc.s
 ##
 ## combining results
+chk.months <- 
+  data.frame(month = 1:12, 
+             month.chr =  strftime(
+               as.POSIXct(paste0("2016-",1:12,"-01")), "%b"))
 chk.months.season <- rbind(data.frame(month = chk.Season.1.Months, season = 1),
                            data.frame(month = chk.Season.2.Months, season = 2))
+chk.months.season <- merge(chk.months.season, chk.months)
+
 chk.location.season.elk <- rbind(
   data.frame(season = 1, 
              location = c("pasture", "forest", "RAOUT","stream"),
@@ -225,4 +231,6 @@ chk.elk.bac[chk.elk.bac$location == "stream", "accum.bac"] = NA
 chk.elk.bac <- data.frame(chk.elk.bac, 
                           sqolim.bac = chk.elk.bac$accum.bac * chk.sqolim)
 
-
+##
+## check model output
+str(df.output)
