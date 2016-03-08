@@ -3,6 +3,8 @@
 chr.wildlife.elk.dir <- "M:/Models/Bacteria/HSPF/ODEQ-Bacteria-Model-R/R_scripts/sub-models/wildlife-elk"
 source(paste0(chr.wildlife.elk.dir,"/Wildlife_Elk_Sub_Model.R"))
 df.output <- wildlifeElk(chr.wrkdir=chr.wildlife.elk.dir,chr.input="wildlifeelk01.txt")
+## packages
+library(doBy)
 ##
 ## get input
 ## SQOLIM multiplcation factor: 
@@ -166,8 +168,10 @@ chk.season.2.Stream.elk <- chk.season.2.Pasture.elk.w.str.acc.s +
 ## combining results
 chk.months <- 
   data.frame(month = 1:12, 
-             month.chr =  strftime(
-               as.POSIXct(paste0("2016-",1:12,"-01")), "%b"))
+             month.chr =  factor(strftime(
+               as.POSIXct(paste0("2016-",1:12,"-01")), "%b"),
+               levels = strftime(
+                 as.POSIXct(paste0("2016-",1:12,"-01")), "%b")))
 chk.months.season <- rbind(data.frame(month = chk.Season.1.Months, season = 1),
                            data.frame(month = chk.Season.2.Months, season = 2))
 chk.months.season <- merge(chk.months.season, chk.months)
@@ -234,3 +238,50 @@ chk.elk.bac <- data.frame(chk.elk.bac,
 ##
 ## check model output
 str(df.output)
+str(chk.elk)
+## totals by month
+chk.total.pop <- merge(summaryBy(elk ~ month.chr, data = chk.elk, FUN = sum),
+      df.output[ , c("Month", "pop.total")],
+      by.x = "month.chr", by.y = "Month")
+
+names(chk.total.pop) <- c("Month", "manual.calc.pop.total",
+                          "model.pop.total")
+chk.total.pop$Month <- factor(chk.total.pop$Month,
+                              levels = strftime(
+                                as.POSIXct(paste0("2016-",1:12,"-01")), "%b"))
+chk.total.pop
+## pop in/around stream by month
+chk.str.pop <- merge(summaryBy(elk ~ month.chr, 
+                               data = chk.elk[chk.elk$location == "stream", ], 
+                               FUN = sum),
+                       df.output[ , c("Month", "pop.total.in.stream")],
+                       by.x = "month.chr", by.y = "Month")
+
+names(chk.str.pop) <- c("Month", "manual.calc.pop.total",
+                          "model.pop.total")
+chk.str.pop$Month <- factor(chk.str.pop$Month,
+                              levels = strftime(
+                                as.POSIXct(paste0("2016-",1:12,"-01")), "%b"))
+chk.str.pop
+
+
+
+
+
+
+## stream bac load by month
+str(chk.elk.bac)
+
+chk.elk.bac[chk.elk.bac$location == "stream", 
+             c("month.chr", "total.bac")]
+chk.stream.bac.load <- merge(summaryBy( ~ month.chr, data = chk.elk, FUN = sum),
+                       df.output[ , c("Month", "pop.total")],
+                       by.x = "month.chr", by.y = "Month")
+
+names(chk.total.pop) <- c("Month", "manual.calc.pop.total",
+                          "model.pop.total")
+chk.total.pop$Month <- factor(chk.total.pop$Month,
+                              levels = strftime(
+                                as.POSIXct(paste0("2016-",1:12,"-01")), "%b"))
+
+
