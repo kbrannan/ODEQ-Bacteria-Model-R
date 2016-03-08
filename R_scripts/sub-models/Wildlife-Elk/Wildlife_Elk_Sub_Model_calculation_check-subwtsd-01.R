@@ -316,8 +316,60 @@ chk.pasture.pop.by.month <-
                               chk.pasture.pop.by.month$manual.calc.pop.total) /
                            chk.pasture.pop.by.month$manual.calc.pop.total,
                          digits = 0))
-
-
+## pop on forest
+chk.forest.pop <- data.frame(
+  manual.calc.pop.total = sum(chk.elk[chk.elk$location == "forest", "elk"]),
+  model.pop.total = sum(df.output[ , "pop.total.in.forest"]),
+  dil = round(
+    chk.dil * (sum(df.output[ , "pop.total.in.forest"]) - 
+                 sum(chk.elk[chk.elk$location == "forest", "elk"])) /
+      sum(chk.elk[chk.elk$location == "forest", "elk"]),
+    digits = 0))
+## pop on forest by month
+chk.forest.pop.by.month <- merge(summaryBy(elk ~ month.chr, 
+                                            data = chk.elk[chk.elk$location == "forest", ], 
+                                            FUN = sum),
+                                  df.output[ , c("Month", "pop.total.in.forest")],
+                                  by.x = "month.chr", by.y = "Month")
+names(chk.forest.pop.by.month) <- c("Month", "manual.calc.pop.total",
+                                     "model.pop.total")
+chk.forest.pop.by.month$Month <- factor(chk.str.pop$Month,
+                                         levels = strftime(
+                                           as.POSIXct(paste0("2016-",1:12,"-01")), "%b"))
+chk.forest.pop.by.month <- 
+  data.frame(chk.forest.pop.by.month, 
+             dil = round(chk.dil * 
+                           (chk.forest.pop.by.month$model.pop.total - 
+                              chk.forest.pop.by.month$manual.calc.pop.total) /
+                           chk.forest.pop.by.month$manual.calc.pop.total,
+                         digits = 0))
+## pop on RAOCUT
+chk.RAOCUT.pop <- data.frame(
+  manual.calc.pop.total = sum(chk.elk[chk.elk$location == "RAOCUT", "elk"]),
+  model.pop.total = sum(df.output[ , "pop.total.on.RAOCUT"]),
+  dil = round(
+    chk.dil * (sum(df.output[ , "pop.total.on.RAOCUT"]) - 
+                 sum(chk.elk[chk.elk$location == "RAOCUT", "elk"])) /
+      sum(chk.elk[chk.elk$location == "RAOCUT", "elk"]),
+    digits = 0))
+## pop on RAOCUT by month
+chk.RAOCUT.pop.by.month <- merge(summaryBy(elk ~ month.chr, 
+                                           data = chk.elk[chk.elk$location == "RAOCUT", ], 
+                                           FUN = sum),
+                                 df.output[ , c("Month", "pop.total.on.RAOCUT")],
+                                 by.x = "month.chr", by.y = "Month")
+names(chk.RAOCUT.pop.by.month) <- c("Month", "manual.calc.pop.total",
+                                    "model.pop.total")
+chk.RAOCUT.pop.by.month$Month <- factor(chk.str.pop$Month,
+                                        levels = strftime(
+                                          as.POSIXct(paste0("2016-",1:12,"-01")), "%b"))
+chk.RAOCUT.pop.by.month <- 
+  data.frame(chk.RAOCUT.pop.by.month, 
+             dil = round(chk.dil * 
+                           (chk.RAOCUT.pop.by.month$model.pop.total - 
+                              chk.RAOCUT.pop.by.month$manual.calc.pop.total) /
+                           chk.RAOCUT.pop.by.month$manual.calc.pop.total,
+                         digits = 0))
 
 
 
