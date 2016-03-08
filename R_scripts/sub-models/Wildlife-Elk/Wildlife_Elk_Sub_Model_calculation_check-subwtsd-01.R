@@ -9,8 +9,8 @@ df.output <- wildlifeElk(chr.wrkdir=chr.wildlife.elk.dir,chr.input="wildlifeelk0
 chk.sqolim <- 9
 chk.Bacteria.Prod <- 6.6500000E+08
 ### two seasons
-chk.Season.1.Months -> c(11,12,1,2,3)
-chk.Season.2.Months -> c(4,5,6,7,8,9,10)
+chk.Season.1.Months <- c(11,12,1,2,3)
+chk.Season.2.Months <- c(4,5,6,7,8,9,10)
 ### Animal Densities
 chk.Season.1.Animal.Density.Pasture <- 3.0072900E-03
 chk.Season.1.Animal.Density.Forest  <- 3.0072900E-03
@@ -158,7 +158,71 @@ chk.season.2.Forest.elk <- chk.season.2.Forest.elk.wo.str.acc +
 chk.season.2.RAOUT.elk <- chk.season.2.RAOUT.elk.wo.str.acc +
   chk.season.2.RAOUT.elk.w.str.acc.l
 ## Elk in and around stream
-chk.season.1.elk.stream <- chk.season.1.Pasture.elk.w.str.acc.s + 
+chk.season.1.Stream.elk <- chk.season.1.Pasture.elk.w.str.acc.s + 
   chk.season.1.Forest.elk.w.str.acc.s + chk.season.1.RAOUT.elk.w.str.acc.s
-chk.season.2.elk.stream <- chk.season.2.Pasture.elk.w.str.acc.s + 
+chk.season.2.Stream.elk <- chk.season.2.Pasture.elk.w.str.acc.s + 
   chk.season.2.Forest.elk.w.str.acc.s + chk.season.2.RAOUT.elk.w.str.acc.s
+##
+## combining results
+chk.months.season <- rbind(data.frame(month = chk.Season.1.Months, season = 1),
+                           data.frame(month = chk.Season.2.Months, season = 2))
+chk.location.season.elk <- rbind(
+  data.frame(season = 1, 
+             location = c("pasture", "forest", "RAOUT","stream"),
+             elk = c(chk.season.1.Pasture.elk,
+                     chk.season.1.Forest.elk,
+                     chk.season.1.RAOUT.elk,
+                     chk.season.1.Stream.elk)),
+  data.frame(season = 2, 
+             location = c("pasture", "forest", "RAOUT","stream"),
+             elk = c(chk.season.2.Pasture.elk,
+                     chk.season.2.Forest.elk,
+                     chk.season.2.RAOUT.elk,
+                     chk.season.2.Stream.elk)))
+## populations
+chk.elk <- merge(chk.months.season,chk.location.season.elk)
+## bacteria loads
+chk.elk.bac <- data.frame(chk.elk, total.bac = chk.elk$elk * chk.Bacteria.Prod)
+chk.elk.bac <- data.frame(chk.elk.bac, accum.bac = -1)
+
+## accum
+## season 1
+## on pasture
+tmp.rows <- grep("TRUE", with(chk.elk.bac, 
+                              c(season == 1 & location == "pasture")))
+chk.elk.bac[tmp.rows, "accum.bac"] <- 
+  chk.elk.bac[tmp.rows, "total.bac"] / chk.Season.1.Pasture
+## on forest
+tmp.rows <- grep("TRUE", with(chk.elk.bac, 
+                              c(season == 1 & location == "forest")))
+chk.elk.bac[tmp.rows, "accum.bac"] <- 
+  chk.elk.bac[tmp.rows, "total.bac"] / chk.Season.1.Forest
+## on RAOUT
+tmp.rows <- grep("TRUE", with(chk.elk.bac, 
+                              c(season == 1 & location == "RAOUT")))
+chk.elk.bac[tmp.rows, "accum.bac"] <- 
+  chk.elk.bac[tmp.rows, "total.bac"] / chk.Season.1.RAOUT
+## season 2
+## on pasture
+tmp.rows <- grep("TRUE", with(chk.elk.bac, 
+                              c(season == 2 & location == "pasture")))
+chk.elk.bac[tmp.rows, "accum.bac"] <- 
+  chk.elk.bac[tmp.rows, "total.bac"] / chk.Season.2.Pasture
+## on forest
+tmp.rows <- grep("TRUE", with(chk.elk.bac, 
+                              c(season == 2 & location == "forest")))
+chk.elk.bac[tmp.rows, "accum.bac"] <- 
+  chk.elk.bac[tmp.rows, "total.bac"] / chk.Season.2.Forest
+## on RAOUT
+tmp.rows <- grep("TRUE", with(chk.elk.bac, 
+                              c(season == 2 & location == "RAOUT")))
+chk.elk.bac[tmp.rows, "accum.bac"] <- 
+  chk.elk.bac[tmp.rows, "total.bac"] / chk.Season.2.RAOUT
+## for stream 
+chk.elk.bac[chk.elk.bac$location == "stream", "accum.bac"] = NA
+
+## sqolim
+chk.elk.bac <- data.frame(chk.elk.bac, 
+                          sqolim.bac = chk.elk.bac$accum.bac * chk.sqolim)
+
+
