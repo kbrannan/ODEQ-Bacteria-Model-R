@@ -4,7 +4,8 @@ chr.wildlife.elk.dir <- "M:/Models/Bacteria/HSPF/ODEQ-Bacteria-Model-R/R_scripts
 source(paste0(chr.wildlife.elk.dir,"/Wildlife_Elk_Sub_Model.R"))
 df.output <- wildlifeElk(chr.wrkdir=chr.wildlife.elk.dir,chr.input="wildlifeelk01.txt")
 ## packages
-library(doBy)
+library(doBy, quietly = TRUE)
+library(gridExtra, quietly = TRUE)
 ##
 ## get input
 ## SQOLIM multiplcation factor: 
@@ -272,22 +273,22 @@ chk.stream.pop <- data.frame(
       sum(chk.elk[chk.elk$location == "stream", "elk"]),
     digits = 0))
 ## pop in/around stream by month
-chk.str.pop.by.month <- merge(summaryBy(elk ~ month.chr, 
+chk.stream.pop.by.month <- merge(summaryBy(elk ~ month.chr, 
                                data = chk.elk[chk.elk$location == "stream", ], 
                                FUN = sum),
                        df.output[ , c("Month", "pop.total.in.stream")],
                        by.x = "month.chr", by.y = "Month")
-names(chk.str.pop.by.month) <- c("Month", "manual.calc.pop.total",
+names(chk.stream.pop.by.month) <- c("Month", "manual.calc.pop.total",
                           "model.pop.total")
-chk.str.pop.by.month$Month <- factor(chk.str.pop$Month,
+chk.stream.pop.by.month$Month <- factor(chk.stream.pop.by.month$Month,
                               levels = strftime(
                                 as.POSIXct(paste0("2016-",1:12,"-01")), "%b"))
-chk.str.pop.by.month <- 
-  data.frame(chk.str.pop.by.month, 
+chk.stream.pop.by.month <- 
+  data.frame(chk.stream.pop.by.month, 
              dil = round(chk.dil * 
-                           (chk.str.pop.by.month$model.pop.total - 
-                              chk.str.pop.by.month$manual.calc.pop.total) /
-                           chk.str.pop.by.month$manual.calc.pop.total,
+                           (chk.stream.pop.by.month$model.pop.total - 
+                              chk.stream.pop.by.month$manual.calc.pop.total) /
+                           chk.stream.pop.by.month$manual.calc.pop.total,
                          digits = 0))
 ## pop on pasture
 chk.pasture.pop <- data.frame(
@@ -373,7 +374,122 @@ chk.RAOCUT.pop.by.month <-
 
 
 
+## output results in tables to pdf
+pdf(file = paste0(chr.wildlife.elk.dir, "/elk-bacteria-model-calc-check", 
+                  strftime(Sys.time(), format = "%Y%m%d%H%M"), ".pdf"),
+    height = 8.5, width = 11, onefile = TRUE)
+## total population
+tmp.table <- tableGrob(chk.total.pop, show.rownames = FALSE)
+tmp.h <- grobHeight(tmp.table)
+tmp.w <- grobWidth(tmp.table)
+tmp.title <- textGrob(label = paste0("Total Elk Population (dil = ", sprintf("%1.0E", chk.dil), ")"),
+                      y=unit(0.5,"npc") + 0.5*tmp.h, 
+                      vjust=0, gp=gpar(fontsize=20))
+tmp.gt <- gTree(children=gList(tmp.table, tmp.title))
+grid.draw(tmp.gt)
+grid.newpage()
+rm(list = ls(pattern = "tmp\\.*"))
+## total population by month
+tmp.table <- tableGrob(chk.total.pop.by.month, show.rownames = FALSE)
+tmp.h <- grobHeight(tmp.table)
+tmp.w <- grobWidth(tmp.table)
+tmp.title <- textGrob(label = paste0("Total Elk Population by month (dil = ", sprintf("%1.0E", chk.dil), ")"),
+                      y=unit(0.5,"npc") + 0.5*tmp.h, 
+                      vjust=0, gp=gpar(fontsize=20))
+tmp.gt <- gTree(children=gList(tmp.table, tmp.title))
+grid.draw(tmp.gt)
+grid.newpage()
+rm(list = ls(pattern = "tmp\\.*"))
+## population in/around stream
+tmp.table <- tableGrob(chk.stream.pop, show.rownames = FALSE)
+tmp.h <- grobHeight(tmp.table)
+tmp.w <- grobWidth(tmp.table)
+tmp.title <- textGrob(label = paste0("Total Elk Population in/around stream (dil = ", sprintf("%1.0E", chk.dil), ")"),
+                      y=unit(0.5,"npc") + 0.5*tmp.h, 
+                      vjust=0, gp=gpar(fontsize=20))
+tmp.gt <- gTree(children=gList(tmp.table, tmp.title))
+grid.draw(tmp.gt)
+grid.newpage()
+rm(list = ls(pattern = "tmp\\.*"))
+## population in/around stream by month
+tmp.table <- tableGrob(chk.stream.pop.by.month, show.rownames = FALSE)
+tmp.h <- grobHeight(tmp.table)
+tmp.w <- grobWidth(tmp.table)
+tmp.title <- textGrob(label = paste0("Total Elk Population in/around stream by month (dil = ", sprintf("%1.0E", chk.dil), ")"),
+                      y=unit(0.5,"npc") + 0.5*tmp.h, 
+                      vjust=0, gp=gpar(fontsize=20))
+tmp.gt <- gTree(children=gList(tmp.table, tmp.title))
+grid.draw(tmp.gt)
+grid.newpage()
+rm(list = ls(pattern = "tmp\\.*"))
 
+## population on pasture
+tmp.table <- tableGrob(chk.pasture.pop, show.rownames = FALSE)
+tmp.h <- grobHeight(tmp.table)
+tmp.w <- grobWidth(tmp.table)
+tmp.title <- textGrob(label = paste0("Total Elk Population on pasture (dil = ", sprintf("%1.0E", chk.dil), ")"),
+                      y=unit(0.5,"npc") + 0.5*tmp.h, 
+                      vjust=0, gp=gpar(fontsize=20))
+tmp.gt <- gTree(children=gList(tmp.table, tmp.title))
+grid.draw(tmp.gt)
+grid.newpage()
+rm(list = ls(pattern = "tmp\\.*"))
+## population in/around stream by month
+tmp.table <- tableGrob(chk.pasture.pop.by.month, show.rownames = FALSE)
+tmp.h <- grobHeight(tmp.table)
+tmp.w <- grobWidth(tmp.table)
+tmp.title <- textGrob(label = paste0("Total Elk Population on pasture by month (dil = ", sprintf("%1.0E", chk.dil), ")"),
+                      y=unit(0.5,"npc") + 0.5*tmp.h, 
+                      vjust=0, gp=gpar(fontsize=20))
+tmp.gt <- gTree(children=gList(tmp.table, tmp.title))
+grid.draw(tmp.gt)
+grid.newpage()
+rm(list = ls(pattern = "tmp\\.*"))
 
+## population in forest
+tmp.table <- tableGrob(chk.forest.pop, show.rownames = FALSE)
+tmp.h <- grobHeight(tmp.table)
+tmp.w <- grobWidth(tmp.table)
+tmp.title <- textGrob(label = paste0("Total Elk Population in forest (dil = ", sprintf("%1.0E", chk.dil), ")"),
+                      y=unit(0.5,"npc") + 0.5*tmp.h, 
+                      vjust=0, gp=gpar(fontsize=20))
+tmp.gt <- gTree(children=gList(tmp.table, tmp.title))
+grid.draw(tmp.gt)
+grid.newpage()
+rm(list = ls(pattern = "tmp\\.*"))
+## population in forest stream by month
+tmp.table <- tableGrob(chk.forest.pop.by.month, show.rownames = FALSE)
+tmp.h <- grobHeight(tmp.table)
+tmp.w <- grobWidth(tmp.table)
+tmp.title <- textGrob(label = paste0("Total Elk Population in forest by month (dil = ", sprintf("%1.0E", chk.dil), ")"),
+                      y=unit(0.5,"npc") + 0.5*tmp.h, 
+                      vjust=0, gp=gpar(fontsize=20))
+tmp.gt <- gTree(children=gList(tmp.table, tmp.title))
+grid.draw(tmp.gt)
+grid.newpage()
+rm(list = ls(pattern = "tmp\\.*"))
 
+## population on RAOCUT
+tmp.table <- tableGrob(chk.RAOCUT.pop, show.rownames = FALSE)
+tmp.h <- grobHeight(tmp.table)
+tmp.w <- grobWidth(tmp.table)
+tmp.title <- textGrob(label = paste0("Total Elk Population on RAOCUT (dil = ", sprintf("%1.0E", chk.dil), ")"),
+                      y=unit(0.5,"npc") + 0.5*tmp.h, 
+                      vjust=0, gp=gpar(fontsize=20))
+tmp.gt <- gTree(children=gList(tmp.table, tmp.title))
+grid.draw(tmp.gt)
+grid.newpage()
+rm(list = ls(pattern = "tmp\\.*"))
+## population on RAOCUT by month
+tmp.table <- tableGrob(chk.RAOCUT.pop.by.month, show.rownames = FALSE)
+tmp.h <- grobHeight(tmp.table)
+tmp.w <- grobWidth(tmp.table)
+tmp.title <- textGrob(label = paste0("Total Elk Population on RAOCUT by month (dil = ", sprintf("%1.0E", chk.dil), ")"),
+                      y=unit(0.5,"npc") + 0.5*tmp.h, 
+                      vjust=0, gp=gpar(fontsize=20))
+tmp.gt <- gTree(children=gList(tmp.table, tmp.title))
+grid.draw(tmp.gt)
+rm(list = ls(pattern = "tmp\\.*"))
 
+## close the pdf file
+dev.off()
