@@ -307,7 +307,7 @@ chk.pasture.pop.by.month <- merge(summaryBy(elk ~ month.chr,
                               by.x = "month.chr", by.y = "Month")
 names(chk.pasture.pop.by.month) <- c("Month", "manual.calc.pop.total",
                                  "model.pop.total")
-chk.pasture.pop.by.month$Month <- factor(chk.str.pop$Month,
+chk.pasture.pop.by.month$Month <- factor(chk.pasture.pop.by.month$Month,
                                      levels = strftime(
                                        as.POSIXct(paste0("2016-",1:12,"-01")), "%b"))
 chk.pasture.pop.by.month <- 
@@ -334,7 +334,7 @@ chk.forest.pop.by.month <- merge(summaryBy(elk ~ month.chr,
                                   by.x = "month.chr", by.y = "Month")
 names(chk.forest.pop.by.month) <- c("Month", "manual.calc.pop.total",
                                      "model.pop.total")
-chk.forest.pop.by.month$Month <- factor(chk.str.pop$Month,
+chk.forest.pop.by.month$Month <- factor(chk.forest.pop.by.month$Month,
                                          levels = strftime(
                                            as.POSIXct(paste0("2016-",1:12,"-01")), "%b"))
 chk.forest.pop.by.month <- 
@@ -361,7 +361,7 @@ chk.RAOCUT.pop.by.month <- merge(summaryBy(elk ~ month.chr,
                                  by.x = "month.chr", by.y = "Month")
 names(chk.RAOCUT.pop.by.month) <- c("Month", "manual.calc.pop.total",
                                     "model.pop.total")
-chk.RAOCUT.pop.by.month$Month <- factor(chk.str.pop$Month,
+chk.RAOCUT.pop.by.month$Month <- factor(chk.RAOCUT.pop.by.month$Month,
                                         levels = strftime(
                                           as.POSIXct(paste0("2016-",1:12,"-01")), "%b"))
 chk.RAOCUT.pop.by.month <- 
