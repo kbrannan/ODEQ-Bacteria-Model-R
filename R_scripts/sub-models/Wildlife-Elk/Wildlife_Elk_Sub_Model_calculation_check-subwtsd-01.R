@@ -248,12 +248,17 @@ chk.total.pop <- data.frame(
     chk.dil * ( sum(df.output$pop.total) - sum(chk.elk$elk)) /
       sum(chk.elk$elk),
     digits = 0))
+
 ## total by month
 chk.total.pop.by.month <- merge(summaryBy(elk ~ month.chr, data = chk.elk, FUN = sum),
       df.output[ , c("Month", "pop.total")],
       by.x = "month.chr", by.y = "Month")
 names(chk.total.pop.by.month) <- c("Month", "manual.calc.pop.total",
                                    "model.pop.total")
+tmp.month.num <- data.frame(Month = chk.total.pop.by.month$Month,
+                            num = match(chk.total.pop.by.month$Month, month.abb))
+chk.total.pop.by.month <- 
+  chk.total.pop.by.month[with(tmp.month.num,order(num)),]
 chk.total.pop.by.month <- 
   data.frame(chk.total.pop.by.month,
              dil = round(
@@ -261,8 +266,9 @@ chk.total.pop.by.month <-
                                   chk.total.pop.by.month$manual.calc.pop.total) /
                chk.total.pop.by.month$manual.calc.pop.total,
                digits = 0))
-
-
+chk.stream.pop.by.month$Month <- factor(strftime(as.POSIXct(paste0("2016-",1:12,"-01")), "%b"),
+                                          levels = strftime(
+                                            as.POSIXct(paste0("2016-",1:12,"-01")), "%b"))
 ## pop in/around stream
 chk.stream.pop <- data.frame(
   manual.calc.pop.total = sum(chk.elk[chk.elk$location == "stream", "elk"]),
@@ -290,6 +296,8 @@ chk.stream.pop.by.month <-
                               chk.stream.pop.by.month$manual.calc.pop.total) /
                            chk.stream.pop.by.month$manual.calc.pop.total,
                          digits = 0))
+chk.stream.pop.by.month <- 
+  chk.stream.pop.by.month[with(tmp.month.num,order(num)),]
 ## pop on pasture
 chk.pasture.pop <- data.frame(
   manual.calc.pop.total = sum(chk.elk[chk.elk$location == "pasture", "elk"]),
@@ -317,6 +325,8 @@ chk.pasture.pop.by.month <-
                               chk.pasture.pop.by.month$manual.calc.pop.total) /
                            chk.pasture.pop.by.month$manual.calc.pop.total,
                          digits = 0))
+chk.pasture.pop.by.month <- 
+  chk.pasture.pop.by.month[with(tmp.month.num,order(num)),]
 ## pop on forest
 chk.forest.pop <- data.frame(
   manual.calc.pop.total = sum(chk.elk[chk.elk$location == "forest", "elk"]),
@@ -344,6 +354,8 @@ chk.forest.pop.by.month <-
                               chk.forest.pop.by.month$manual.calc.pop.total) /
                            chk.forest.pop.by.month$manual.calc.pop.total,
                          digits = 0))
+chk.forest.pop.by.month <- 
+  chk.forest.pop.by.month[with(tmp.month.num,order(num)),]
 ## pop on RAOCUT
 chk.RAOCUT.pop <- data.frame(
   manual.calc.pop.total = sum(chk.elk[chk.elk$location == "RAOCUT", "elk"]),
@@ -371,9 +383,8 @@ chk.RAOCUT.pop.by.month <-
                               chk.RAOCUT.pop.by.month$manual.calc.pop.total) /
                            chk.RAOCUT.pop.by.month$manual.calc.pop.total,
                          digits = 0))
-
-
-
+chk.RAOCUT.pop.by.month <- 
+  chk.RAOCUT.pop.by.month[with(tmp.month.num,order(num)),]
 ## output results in tables to pdf
 pdf(file = paste0(chr.wildlife.elk.dir, "/elk-bacteria-model-calc-check", 
                   strftime(Sys.time(), format = "%Y%m%d%H%M"), ".pdf"),
