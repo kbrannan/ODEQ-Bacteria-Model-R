@@ -417,23 +417,24 @@ chk.total.bac.by.month <-
 chk.total.bac.by.month$Month <- factor(strftime(as.POSIXct(paste0("2016-",1:12,"-01")), "%b"),
                                         levels = strftime(
                                           as.POSIXct(paste0("2016-",1:12,"-01")), "%b"))
-## pop in/around stream
-chk.stream.pop <- data.frame(
-  manual.calc.bac.total = sum(chk.elk[chk.elk$location == "stream", "elk"]),
-  model.bac.total = sum(df.output[ , "bac.total.in.stream"]),
+## bac in/around stream
+chk.stream.bac <- data.frame(
+  manual.calc.bac.total = sum(chk.elk.bac[chk.elk.bac$location == "stream", "total.bac"]),
+  model.bac.total = 24 * sum(df.output[ , "bac.total.in.stream"]),
   dil = round(
-    chk.dil * ( sum(df.output[ , "bac.total.in.stream"]) - 
-                  sum(chk.elk[chk.elk$location == "stream", "elk"])) /
-      sum(chk.elk[chk.elk$location == "stream", "elk"]),
+    chk.dil * ( 24 * sum(df.output[ , "bac.total.in.stream"]) - 
+                  sum(chk.elk.bac[chk.elk.bac$location == "stream", "total.bac"])) /
+      sum(chk.elk.bac[chk.elk.bac$location == "stream", "total.bac"]),
     digits = 0))
-## pop in/around stream by month
-chk.stream.bac.by.month <- merge(summaryBy(elk ~ month.chr, 
-                                           data = chk.elk[chk.elk$location == "stream", ], 
+## bac in/around stream by month
+chk.stream.bac.by.month <- merge(summaryBy(total.bac ~ month.chr, 
+                                           data = chk.elk.bac[chk.elk.bac$location == "stream", ], 
                                            FUN = sum),
                                  df.output[ , c("Month", "bac.total.in.stream")],
                                  by.x = "month.chr", by.y = "Month")
 names(chk.stream.bac.by.month) <- c("Month", "manual.calc.bac.total",
                                     "model.bac.total")
+chk.stream.bac.by.month$model.bac.total <- 24 * chk.stream.bac.by.month$model.bac.total
 chk.stream.bac.by.month$Month <- factor(chk.stream.bac.by.month$Month,
                                         levels = strftime(
                                           as.POSIXct(paste0("2016-",1:12,"-01")), "%b"))
@@ -448,18 +449,18 @@ chk.stream.bac.by.month <-
   chk.stream.bac.by.month[with(tmp.month.num,order(num)),]
 ## pop on pasture
 chk.pasture.pop <- data.frame(
-  manual.calc.bac.total = sum(chk.elk[chk.elk$location == "pasture", "elk"]),
-  model.bac.total = sum(df.output[ , "bac.total.on.pasture"]),
+  manual.calc.bac.total = sum(chk.elk.bac[chk.elk.bac$location == "pasture", "total.bac"]),
+  model.bac.total = sum(df.output[ , "bac.Pasture"]),
   dil = round(
-    chk.dil * (sum(df.output[ , "bac.total.on.pasture"]) - 
-                 sum(chk.elk[chk.elk$location == "pasture", "elk"])) /
-      sum(chk.elk[chk.elk$location == "pasture", "elk"]),
+    chk.dil * (sum(df.output[ , "bac.Pasture"]) - 
+                 sum(chk.elk.bac[chk.elk$location == "pasture", "total.bac"])) /
+      sum(chk.elk.bac[chk.elk.bac$location == "pasture", "total.bac"]),
     digits = 0))
 ## pop on pasture by month
-chk.pasture.bac.by.month <- merge(summaryBy(elk ~ month.chr, 
-                                            data = chk.elk[chk.elk$location == "pasture", ], 
+chk.pasture.bac.by.month <- merge(summaryBy(total.bac ~ month.chr, 
+                                            data = chk.elk.bac[chk.elk.bac$location == "pasture", ], 
                                             FUN = sum),
-                                  df.output[ , c("Month", "bac.total.on.pasture")],
+                                  df.output[ , c("Month", "bac.Pasture")],
                                   by.x = "month.chr", by.y = "Month")
 names(chk.pasture.bac.by.month) <- c("Month", "manual.calc.bac.total",
                                      "model.bac.total")
@@ -477,18 +478,18 @@ chk.pasture.bac.by.month <-
   chk.pasture.bac.by.month[with(tmp.month.num,order(num)),]
 ## pop on forest
 chk.forest.pop <- data.frame(
-  manual.calc.bac.total = sum(chk.elk[chk.elk$location == "forest", "elk"]),
-  model.bac.total = sum(df.output[ , "bac.total.in.forest"]),
+  manual.calc.bac.total = sum(chk.elk.bac[chk.elk.bac$location == "forest", "total.bac"]),
+  model.bac.total = sum(df.output[ , "bac.Forest"]),
   dil = round(
-    chk.dil * (sum(df.output[ , "bac.total.in.forest"]) - 
-                 sum(chk.elk[chk.elk$location == "forest", "elk"])) /
-      sum(chk.elk[chk.elk$location == "forest", "elk"]),
+    chk.dil * (sum(df.output[ , "bac.Forest"]) - 
+                 sum(chk.elk.bac[chk.elk.bac$location == "forest", "total.bac"])) /
+      sum(chk.elk.bac[chk.elk.bac$location == "forest", "total.bac"]),
     digits = 0))
 ## pop on forest by month
-chk.forest.bac.by.month <- merge(summaryBy(elk ~ month.chr, 
-                                           data = chk.elk[chk.elk$location == "forest", ], 
+chk.forest.bac.by.month <- merge(summaryBy(total.bac ~ month.chr, 
+                                           data = chk.elk.bac[chk.elk.bac$location == "forest", ], 
                                            FUN = sum),
-                                 df.output[ , c("Month", "bac.total.in.forest")],
+                                 df.output[ , c("Month", "bac.Forest")],
                                  by.x = "month.chr", by.y = "Month")
 names(chk.forest.bac.by.month) <- c("Month", "manual.calc.bac.total",
                                     "model.bac.total")
@@ -504,20 +505,20 @@ chk.forest.bac.by.month <-
                          digits = 0))
 chk.forest.bac.by.month <- 
   chk.forest.bac.by.month[with(tmp.month.num,order(num)),]
-## pop on RAOCUT
-chk.RAOCUT.pop <- data.frame(
-  manual.calc.bac.total = sum(chk.elk[chk.elk$location == "RAOCUT", "elk"]),
-  model.bac.total = sum(df.output[ , "bac.total.on.RAOCUT"]),
+## bac on RAOCUT
+chk.RAOCUT.bac <- data.frame(
+  manual.calc.bac.total = sum(chk.elk.bac[chk.elk.bac$location == "RAOCUT", "total.bac"]),
+  model.bac.total = sum(df.output[ , "bac.RAOCUT"]),
   dil = round(
-    chk.dil * (sum(df.output[ , "bac.total.on.RAOCUT"]) - 
-                 sum(chk.elk[chk.elk$location == "RAOCUT", "elk"])) /
-      sum(chk.elk[chk.elk$location == "RAOCUT", "elk"]),
+    chk.dil * (sum(df.output[ , "bac.RAOCUT"]) - 
+                 sum(chk.elk.bac[chk.elk.bac$location == "RAOCUT", "total.bac"])) /
+      sum(chk.elk.bac[chk.elk.bac$location == "RAOCUT", "total.bac"]),
     digits = 0))
-## pop on RAOCUT by month
-chk.RAOCUT.bac.by.month <- merge(summaryBy(elk ~ month.chr, 
-                                           data = chk.elk[chk.elk$location == "RAOCUT", ], 
+## bac on RAOCUT by month
+chk.RAOCUT.bac.by.month <- merge(summaryBy(total.bac ~ month.chr, 
+                                           data = chk.elk.bac[chk.elk.bac$location == "RAOCUT", ], 
                                            FUN = sum),
-                                 df.output[ , c("Month", "bac.total.on.RAOCUT")],
+                                 df.output[ , c("Month", "bac.RAOCUT")],
                                  by.x = "month.chr", by.y = "Month")
 names(chk.RAOCUT.bac.by.month) <- c("Month", "manual.calc.bac.total",
                                     "model.bac.total")
