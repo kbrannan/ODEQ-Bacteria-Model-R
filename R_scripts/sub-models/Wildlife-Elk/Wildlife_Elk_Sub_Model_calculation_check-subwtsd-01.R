@@ -114,7 +114,7 @@ chk.season.1.Forest.elk.w.str.acc.l <-
   (1 - chk.Season.1.Percent.Forest.in.and.around.streams / 100) * 
   chk.season.1.Forest.elk.w.str.acc
 chk.season.1.RAOCUT.elk.w.str.acc.l <- 
-  (1 - chk.Season.1.Percent.Pasture.in.and.around.streams / 100) * 
+  (1 - chk.Season.1.Percent.RAOCUT.in.and.around.streams / 100) * 
   chk.season.1.RAOCUT.elk.w.str.acc
 ## Season 2
 chk.season.2.Pasture.elk.w.str.acc.l <- 
@@ -132,10 +132,10 @@ chk.season.1.Pasture.elk.w.str.acc.s <-
   (chk.Season.1.Percent.Pasture.in.and.around.streams / 100) * 
   chk.season.1.Pasture.elk.w.str.acc
 chk.season.1.Forest.elk.w.str.acc.s <- 
-  (chk.Season.1.Percent.Pasture.in.and.around.streams / 100) * 
+  (chk.Season.1.Percent.Forest.in.and.around.streams / 100) * 
   chk.season.1.Forest.elk.w.str.acc
 chk.season.1.RAOCUT.elk.w.str.acc.s <- 
-  (chk.Season.1.Percent.Pasture.in.and.around.streams / 100) * 
+  (chk.Season.1.Percent.RAOCUT.in.and.around.streams / 100) * 
   chk.season.1.RAOCUT.elk.w.str.acc
 ## Season 2
 chk.season.2.Pasture.elk.w.str.acc.s <- 
