@@ -102,19 +102,19 @@ wildlifeElk <- function(chr.input="wildlifeElkxx.txt",chr.wrkdir=getwd()) {
   ### Animal Populations
   ###
   ### Land without Stream Access
-  tmp.ElkOnPastureWOStreamAcess <- round(tmp.ADOnPasture * tmp.PastureAreaWOStreamAcess)
-  tmp.ElkOnForestWOStreamAcess  <- round(tmp.ADOnForest  * tmp.ForestAreaWOStreamAcess)
-  tmp.ElkOnRAOCUTWOStreamAcess  <- round(tmp.ADOnRAOCUT  * tmp.RAOCUTAreaWOStreamAcess)
+  tmp.ElkOnPastureWOStreamAcess <- tmp.ADOnPasture * tmp.PastureAreaWOStreamAcess
+  tmp.ElkOnForestWOStreamAcess  <- tmp.ADOnForest  * tmp.ForestAreaWOStreamAcess
+  tmp.ElkOnRAOCUTWOStreamAcess  <- tmp.ADOnRAOCUT  * tmp.RAOCUTAreaWOStreamAcess
   ###
   ### Instream from Land with Stream Access
-  tmp.ElkOnPastureInStream <- round(tmp.ADOnPasture * tmp.PastureAreaWStreamAcess * tmp.PastureAreaWStreamAcessInStream)
-  tmp.ElkOnForestInStream  <- round(tmp.ADOnForest  * tmp.ForestAreaWStreamAcess  * tmp.ForestAreaWStreamAcessInStream)
-  tmp.ElkOnRAOCUTInStream  <- round(tmp.ADOnRAOCUT  * tmp.RAOCUTAreaWStreamAcess  * tmp.RAOCUTAreaWStreamAcessInStream)
+  tmp.ElkOnPastureInStream <- tmp.ADOnPasture * tmp.PastureAreaWStreamAcess * tmp.PastureAreaWStreamAcessInStream
+  tmp.ElkOnForestInStream  <- tmp.ADOnForest  * tmp.ForestAreaWStreamAcess  * tmp.ForestAreaWStreamAcessInStream
+  tmp.ElkOnRAOCUTInStream  <- tmp.ADOnRAOCUT  * tmp.RAOCUTAreaWStreamAcess  * tmp.RAOCUTAreaWStreamAcessInStream
   ###
   ### On Land with Stream Access and Not in Stream
-  tmp.ElkOnPastureWStreamAcess <- round(tmp.ADOnPasture * tmp.PastureAreaWStreamAcess) - tmp.ElkOnPastureInStream
-  tmp.ElkOnForestWStreamAcess  <- round(tmp.ADOnForest  * tmp.ForestAreaWStreamAcess)  - tmp.ElkOnForestInStream
-  tmp.ElkOnRAOCUTWStreamAcess  <- round(tmp.ADOnRAOCUT  * tmp.RAOCUTAreaWStreamAcess)  - tmp.ElkOnRAOCUTInStream
+  tmp.ElkOnPastureWStreamAcess <- tmp.ADOnPasture * tmp.PastureAreaWStreamAcess - tmp.ElkOnPastureInStream
+  tmp.ElkOnForestWStreamAcess  <- tmp.ADOnForest  * tmp.ForestAreaWStreamAcess  - tmp.ElkOnForestInStream
+  tmp.ElkOnRAOCUTWStreamAcess  <- tmp.ADOnRAOCUT  * tmp.RAOCUTAreaWStreamAcess  - tmp.ElkOnRAOCUTInStream
   ###
   ### General
   tmp.ElkOnPasture <- tmp.ElkOnPastureWOStreamAcess + tmp.ElkOnPastureWStreamAcess
