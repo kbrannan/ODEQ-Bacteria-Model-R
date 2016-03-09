@@ -385,6 +385,159 @@ chk.RAOCUT.pop.by.month <-
                          digits = 0))
 chk.RAOCUT.pop.by.month <- 
   chk.RAOCUT.pop.by.month[with(tmp.month.num,order(num)),]
+
+
+## bacteria loads total and by locations
+## total
+chk.total.bac <- data.frame(
+  manual.calc.bac.total = sum(chk.elk.bac$total.bac),
+  model.bac.total = sum(df.output$bac.total),
+  dil = round(
+    chk.dil * ( sum(df.output$bac.total) - sum(chk.elk.bac$total.bac)) /
+      sum(chk.elk.bac$total.bac),
+    digits = 0))
+
+## total by month
+chk.total.bac.by.month <- merge(summaryBy(total.bac ~ month.chr, data = chk.elk.bac, FUN = sum),
+                                df.output[ , c("Month", "bac.total")],
+                                by.x = "month.chr", by.y = "Month")
+names(chk.total.bac.by.month) <- c("Month", "manual.calc.bac.total",
+                                   "model.bac.total")
+tmp.month.num <- data.frame(Month = chk.total.bac.by.month$Month,
+                            num = match(chk.total.bac.by.month$Month, month.abb))
+chk.total.bac.by.month <- 
+  chk.total.bac.by.month[with(tmp.month.num,order(num)),]
+chk.total.bac.by.month <- 
+  data.frame(chk.total.bac.by.month,
+             dil = round(
+               chk.dil * ( chk.total.bac.by.month$model.bac.total -
+                             chk.total.bac.by.month$manual.calc.bac.total) /
+                 chk.total.bac.by.month$manual.calc.bac.total,
+               digits = 0))
+chk.total.bac.by.month$Month <- factor(strftime(as.POSIXct(paste0("2016-",1:12,"-01")), "%b"),
+                                        levels = strftime(
+                                          as.POSIXct(paste0("2016-",1:12,"-01")), "%b"))
+## pop in/around stream
+chk.stream.pop <- data.frame(
+  manual.calc.bac.total = sum(chk.elk[chk.elk$location == "stream", "elk"]),
+  model.bac.total = sum(df.output[ , "bac.total.in.stream"]),
+  dil = round(
+    chk.dil * ( sum(df.output[ , "bac.total.in.stream"]) - 
+                  sum(chk.elk[chk.elk$location == "stream", "elk"])) /
+      sum(chk.elk[chk.elk$location == "stream", "elk"]),
+    digits = 0))
+## pop in/around stream by month
+chk.stream.bac.by.month <- merge(summaryBy(elk ~ month.chr, 
+                                           data = chk.elk[chk.elk$location == "stream", ], 
+                                           FUN = sum),
+                                 df.output[ , c("Month", "bac.total.in.stream")],
+                                 by.x = "month.chr", by.y = "Month")
+names(chk.stream.bac.by.month) <- c("Month", "manual.calc.bac.total",
+                                    "model.bac.total")
+chk.stream.bac.by.month$Month <- factor(chk.stream.bac.by.month$Month,
+                                        levels = strftime(
+                                          as.POSIXct(paste0("2016-",1:12,"-01")), "%b"))
+chk.stream.bac.by.month <- 
+  data.frame(chk.stream.bac.by.month, 
+             dil = round(chk.dil * 
+                           (chk.stream.bac.by.month$model.bac.total - 
+                              chk.stream.bac.by.month$manual.calc.bac.total) /
+                           chk.stream.bac.by.month$manual.calc.bac.total,
+                         digits = 0))
+chk.stream.bac.by.month <- 
+  chk.stream.bac.by.month[with(tmp.month.num,order(num)),]
+## pop on pasture
+chk.pasture.pop <- data.frame(
+  manual.calc.bac.total = sum(chk.elk[chk.elk$location == "pasture", "elk"]),
+  model.bac.total = sum(df.output[ , "bac.total.on.pasture"]),
+  dil = round(
+    chk.dil * (sum(df.output[ , "bac.total.on.pasture"]) - 
+                 sum(chk.elk[chk.elk$location == "pasture", "elk"])) /
+      sum(chk.elk[chk.elk$location == "pasture", "elk"]),
+    digits = 0))
+## pop on pasture by month
+chk.pasture.bac.by.month <- merge(summaryBy(elk ~ month.chr, 
+                                            data = chk.elk[chk.elk$location == "pasture", ], 
+                                            FUN = sum),
+                                  df.output[ , c("Month", "bac.total.on.pasture")],
+                                  by.x = "month.chr", by.y = "Month")
+names(chk.pasture.bac.by.month) <- c("Month", "manual.calc.bac.total",
+                                     "model.bac.total")
+chk.pasture.bac.by.month$Month <- factor(chk.pasture.bac.by.month$Month,
+                                         levels = strftime(
+                                           as.POSIXct(paste0("2016-",1:12,"-01")), "%b"))
+chk.pasture.bac.by.month <- 
+  data.frame(chk.pasture.bac.by.month, 
+             dil = round(chk.dil * 
+                           (chk.pasture.bac.by.month$model.bac.total - 
+                              chk.pasture.bac.by.month$manual.calc.bac.total) /
+                           chk.pasture.bac.by.month$manual.calc.bac.total,
+                         digits = 0))
+chk.pasture.bac.by.month <- 
+  chk.pasture.bac.by.month[with(tmp.month.num,order(num)),]
+## pop on forest
+chk.forest.pop <- data.frame(
+  manual.calc.bac.total = sum(chk.elk[chk.elk$location == "forest", "elk"]),
+  model.bac.total = sum(df.output[ , "bac.total.in.forest"]),
+  dil = round(
+    chk.dil * (sum(df.output[ , "bac.total.in.forest"]) - 
+                 sum(chk.elk[chk.elk$location == "forest", "elk"])) /
+      sum(chk.elk[chk.elk$location == "forest", "elk"]),
+    digits = 0))
+## pop on forest by month
+chk.forest.bac.by.month <- merge(summaryBy(elk ~ month.chr, 
+                                           data = chk.elk[chk.elk$location == "forest", ], 
+                                           FUN = sum),
+                                 df.output[ , c("Month", "bac.total.in.forest")],
+                                 by.x = "month.chr", by.y = "Month")
+names(chk.forest.bac.by.month) <- c("Month", "manual.calc.bac.total",
+                                    "model.bac.total")
+chk.forest.bac.by.month$Month <- factor(chk.forest.bac.by.month$Month,
+                                        levels = strftime(
+                                          as.POSIXct(paste0("2016-",1:12,"-01")), "%b"))
+chk.forest.bac.by.month <- 
+  data.frame(chk.forest.bac.by.month, 
+             dil = round(chk.dil * 
+                           (chk.forest.bac.by.month$model.bac.total - 
+                              chk.forest.bac.by.month$manual.calc.bac.total) /
+                           chk.forest.bac.by.month$manual.calc.bac.total,
+                         digits = 0))
+chk.forest.bac.by.month <- 
+  chk.forest.bac.by.month[with(tmp.month.num,order(num)),]
+## pop on RAOCUT
+chk.RAOCUT.pop <- data.frame(
+  manual.calc.bac.total = sum(chk.elk[chk.elk$location == "RAOCUT", "elk"]),
+  model.bac.total = sum(df.output[ , "bac.total.on.RAOCUT"]),
+  dil = round(
+    chk.dil * (sum(df.output[ , "bac.total.on.RAOCUT"]) - 
+                 sum(chk.elk[chk.elk$location == "RAOCUT", "elk"])) /
+      sum(chk.elk[chk.elk$location == "RAOCUT", "elk"]),
+    digits = 0))
+## pop on RAOCUT by month
+chk.RAOCUT.bac.by.month <- merge(summaryBy(elk ~ month.chr, 
+                                           data = chk.elk[chk.elk$location == "RAOCUT", ], 
+                                           FUN = sum),
+                                 df.output[ , c("Month", "bac.total.on.RAOCUT")],
+                                 by.x = "month.chr", by.y = "Month")
+names(chk.RAOCUT.bac.by.month) <- c("Month", "manual.calc.bac.total",
+                                    "model.bac.total")
+chk.RAOCUT.bac.by.month$Month <- factor(chk.RAOCUT.bac.by.month$Month,
+                                        levels = strftime(
+                                          as.POSIXct(paste0("2016-",1:12,"-01")), "%b"))
+chk.RAOCUT.bac.by.month <- 
+  data.frame(chk.RAOCUT.bac.by.month, 
+             dil = round(chk.dil * 
+                           (chk.RAOCUT.bac.by.month$model.bac.total - 
+                              chk.RAOCUT.bac.by.month$manual.calc.bac.total) /
+                           chk.RAOCUT.bac.by.month$manual.calc.bac.total,
+                         digits = 0))
+chk.RAOCUT.bac.by.month <- 
+  chk.RAOCUT.bac.by.month[with(tmp.month.num,order(num)),]
+
+
+
+
+
 ## output results in tables to pdf
 pdf(file = paste0(chr.wildlife.elk.dir, "/elk-bacteria-model-calc-check", 
                   strftime(Sys.time(), format = "%Y%m%d%H%M"), ".pdf"),
