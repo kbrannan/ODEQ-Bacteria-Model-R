@@ -554,8 +554,8 @@ chk.pasture.accum.by.month <-
                               chk.pasture.accum.by.month$manual.calc.bac.total) /
                            chk.pasture.accum.by.month$manual.calc.bac.total,
                          digits = 0))
-tmp.month.num <- data.frame(Month = chk.total.bac.by.month$Month,
-                            num = match(chk.total.bac.by.month$Month, month.abb))
+tmp.month.num <- data.frame(Month = chk.pasture.accum.by.month$Month,
+                            num = match(chk.pasture.accum.by.month$Month, month.abb))
 chk.pasture.accum.by.month <- 
   chk.pasture.accum.by.month[with(tmp.month.num,order(num)),]
 ##
@@ -577,8 +577,8 @@ chk.forest.accum.by.month <-
                               chk.forest.accum.by.month$manual.calc.bac.total) /
                            chk.forest.accum.by.month$manual.calc.bac.total,
                          digits = 0))
-tmp.month.num <- data.frame(Month = chk.total.bac.by.month$Month,
-                            num = match(chk.total.bac.by.month$Month, month.abb))
+tmp.month.num <- data.frame(Month = chk.forest.accum.by.month$Month,
+                            num = match(chk.forest.accum.by.month$Month, month.abb))
 chk.forest.accum.by.month <- 
   chk.forest.accum.by.month[with(tmp.month.num,order(num)),]
 ##
@@ -600,8 +600,8 @@ chk.RAOCUT.accum.by.month <-
                               chk.RAOCUT.accum.by.month$manual.calc.bac.total) /
                            chk.RAOCUT.accum.by.month$manual.calc.bac.total,
                          digits = 0))
-tmp.month.num <- data.frame(Month = chk.total.bac.by.month$Month,
-                            num = match(chk.total.bac.by.month$Month, month.abb))
+tmp.month.num <- data.frame(Month = chk.RAOCUT.accum.by.month$Month,
+                            num = match(chk.RAOCUT.accum.by.month$Month, month.abb))
 chk.RAOCUT.accum.by.month <- 
   chk.RAOCUT.accum.by.month[with(tmp.month.num,order(num)),]
 
