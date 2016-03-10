@@ -447,7 +447,7 @@ chk.stream.bac.by.month <-
                          digits = 0))
 chk.stream.bac.by.month <- 
   chk.stream.bac.by.month[with(tmp.month.num,order(num)),]
-## pop on pasture
+## bac load on pasture
 chk.pasture.bac <- data.frame(
   manual.calc.bac.total = sum(chk.elk.bac[chk.elk.bac$location == "pasture", "total.bac"]),
   model.bac.total = sum(df.output[ , "bac.Pasture"]),
@@ -456,7 +456,7 @@ chk.pasture.bac <- data.frame(
                  sum(chk.elk.bac[chk.elk$location == "pasture", "total.bac"])) /
       sum(chk.elk.bac[chk.elk.bac$location == "pasture", "total.bac"]),
     digits = 0))
-## pop on pasture by month
+## bac load on pasture by month
 chk.pasture.bac.by.month <- merge(summaryBy(total.bac ~ month.chr, 
                                             data = chk.elk.bac[chk.elk.bac$location == "pasture", ], 
                                             FUN = sum),
@@ -485,7 +485,7 @@ chk.forest.bac <- data.frame(
                  sum(chk.elk.bac[chk.elk.bac$location == "forest", "total.bac"])) /
       sum(chk.elk.bac[chk.elk.bac$location == "forest", "total.bac"]),
     digits = 0))
-## pop on forest by month
+## bac load on forest by month
 chk.forest.bac.by.month <- merge(summaryBy(total.bac ~ month.chr, 
                                            data = chk.elk.bac[chk.elk.bac$location == "forest", ], 
                                            FUN = sum),
@@ -535,9 +535,75 @@ chk.RAOCUT.bac.by.month <-
 chk.RAOCUT.bac.by.month <- 
   chk.RAOCUT.bac.by.month[with(tmp.month.num,order(num)),]
 
-
-
-
+## accum loads
+## accum load on pasture by month
+chk.pasture.accum.by.month <- merge(summaryBy(accum.bac ~ month.chr, 
+                                           data = chk.elk.bac[chk.elk.bac$location == "pasture", ], 
+                                           FUN = sum),
+                                 df.output[ , c("Month", "Accum.Pasture")],
+                                 by.x = "month.chr", by.y = "Month")
+names(chk.pasture.accum.by.month) <- c("Month", "manual.calc.bac.total",
+                                    "model.bac.total")
+chk.pasture.accum.by.month$Month <- factor(chk.pasture.accum.by.month$Month,
+                                        levels = strftime(
+                                          as.POSIXct(paste0("2016-",1:12,"-01")), "%b"))
+chk.pasture.accum.by.month <- 
+  data.frame(chk.pasture.accum.by.month, 
+             dil = round(chk.dil * 
+                           (chk.pasture.accum.by.month$model.bac.total - 
+                              chk.pasture.accum.by.month$manual.calc.bac.total) /
+                           chk.pasture.accum.by.month$manual.calc.bac.total,
+                         digits = 0))
+tmp.month.num <- data.frame(Month = chk.total.bac.by.month$Month,
+                            num = match(chk.total.bac.by.month$Month, month.abb))
+chk.pasture.accum.by.month <- 
+  chk.pasture.accum.by.month[with(tmp.month.num,order(num)),]
+##
+## accum load on forest by month
+chk.forest.accum.by.month <- merge(summaryBy(accum.bac ~ month.chr, 
+                                              data = chk.elk.bac[chk.elk.bac$location == "forest", ], 
+                                              FUN = sum),
+                                    df.output[ , c("Month", "Accum.Forest")],
+                                    by.x = "month.chr", by.y = "Month")
+names(chk.forest.accum.by.month) <- c("Month", "manual.calc.bac.total",
+                                       "model.bac.total")
+chk.forest.accum.by.month$Month <- factor(chk.forest.accum.by.month$Month,
+                                           levels = strftime(
+                                             as.POSIXct(paste0("2016-",1:12,"-01")), "%b"))
+chk.forest.accum.by.month <- 
+  data.frame(chk.forest.accum.by.month, 
+             dil = round(chk.dil * 
+                           (chk.forest.accum.by.month$model.bac.total - 
+                              chk.forest.accum.by.month$manual.calc.bac.total) /
+                           chk.forest.accum.by.month$manual.calc.bac.total,
+                         digits = 0))
+tmp.month.num <- data.frame(Month = chk.total.bac.by.month$Month,
+                            num = match(chk.total.bac.by.month$Month, month.abb))
+chk.forest.accum.by.month <- 
+  chk.forest.accum.by.month[with(tmp.month.num,order(num)),]
+##
+## accum load on RAOCUT by month
+chk.RAOCUT.accum.by.month <- merge(summaryBy(accum.bac ~ month.chr, 
+                                             data = chk.elk.bac[chk.elk.bac$location == "RAOCUT", ], 
+                                             FUN = sum),
+                                   df.output[ , c("Month", "Accum.RAOCUT")],
+                                   by.x = "month.chr", by.y = "Month")
+names(chk.RAOCUT.accum.by.month) <- c("Month", "manual.calc.bac.total",
+                                      "model.bac.total")
+chk.RAOCUT.accum.by.month$Month <- factor(chk.RAOCUT.accum.by.month$Month,
+                                          levels = strftime(
+                                            as.POSIXct(paste0("2016-",1:12,"-01")), "%b"))
+chk.RAOCUT.accum.by.month <- 
+  data.frame(chk.RAOCUT.accum.by.month, 
+             dil = round(chk.dil * 
+                           (chk.RAOCUT.accum.by.month$model.bac.total - 
+                              chk.RAOCUT.accum.by.month$manual.calc.bac.total) /
+                           chk.RAOCUT.accum.by.month$manual.calc.bac.total,
+                         digits = 0))
+tmp.month.num <- data.frame(Month = chk.total.bac.by.month$Month,
+                            num = match(chk.total.bac.by.month$Month, month.abb))
+chk.RAOCUT.accum.by.month <- 
+  chk.RAOCUT.accum.by.month[with(tmp.month.num,order(num)),]
 
 ## output results in tables to pdf
 pdf(file = paste0(chr.wildlife.elk.dir, "/elk-bacteria-model-calc-check", 
