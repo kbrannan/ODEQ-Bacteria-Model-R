@@ -266,7 +266,7 @@ chk.total.pop.by.month <-
                                   chk.total.pop.by.month$manual.calc.pop.total) /
                chk.total.pop.by.month$manual.calc.pop.total,
                digits = 0))
-chk.stream.pop.by.month$Month <- factor(strftime(as.POSIXct(paste0("2016-",1:12,"-01")), "%b"),
+chk.total.pop.by.month$Month <- factor(strftime(as.POSIXct(paste0("2016-",1:12,"-01")), "%b"),
                                           levels = strftime(
                                             as.POSIXct(paste0("2016-",1:12,"-01")), "%b"))
 ## pop in/around stream
@@ -448,7 +448,7 @@ chk.stream.bac.by.month <-
 chk.stream.bac.by.month <- 
   chk.stream.bac.by.month[with(tmp.month.num,order(num)),]
 ## pop on pasture
-chk.pasture.pop <- data.frame(
+chk.pasture.bac <- data.frame(
   manual.calc.bac.total = sum(chk.elk.bac[chk.elk.bac$location == "pasture", "total.bac"]),
   model.bac.total = sum(df.output[ , "bac.Pasture"]),
   dil = round(
@@ -476,8 +476,8 @@ chk.pasture.bac.by.month <-
                          digits = 0))
 chk.pasture.bac.by.month <- 
   chk.pasture.bac.by.month[with(tmp.month.num,order(num)),]
-## pop on forest
-chk.forest.pop <- data.frame(
+## bac load in forest
+chk.forest.bac <- data.frame(
   manual.calc.bac.total = sum(chk.elk.bac[chk.elk.bac$location == "forest", "total.bac"]),
   model.bac.total = sum(df.output[ , "bac.Forest"]),
   dil = round(
@@ -654,7 +654,123 @@ tmp.title <- textGrob(label = paste0("Total Elk Population on RAOCUT by month (d
                       vjust=0, gp=gpar(fontsize=20))
 tmp.gt <- gTree(children=gList(tmp.table, tmp.title))
 grid.draw(tmp.gt)
+grid.newpage()
 rm(list = ls(pattern = "tmp\\.*"))
+
+
+## total bac load
+tmp.table <- tableGrob(chk.total.bac, show.rownames = FALSE)
+tmp.h <- grobHeight(tmp.table)
+tmp.w <- grobWidth(tmp.table)
+tmp.title <- textGrob(label = paste0("Total bacteria load from Elk (dil = ", sprintf("%1.0E", chk.dil), ")"),
+                      y=unit(0.5,"npc") + 0.5*tmp.h, 
+                      vjust=0, gp=gpar(fontsize=20))
+tmp.gt <- gTree(children=gList(tmp.table, tmp.title))
+grid.draw(tmp.gt)
+grid.newpage()
+rm(list = ls(pattern = "tmp\\.*"))
+## total bac load by month
+tmp.table <- tableGrob(chk.total.bac.by.month, show.rownames = FALSE)
+tmp.h <- grobHeight(tmp.table)
+tmp.w <- grobWidth(tmp.table)
+tmp.title <- textGrob(label = paste0("Total bacteria load from Elk by month (dil = ", sprintf("%1.0E", chk.dil), ")"),
+                      y=unit(0.5,"npc") + 0.5*tmp.h, 
+                      vjust=0, gp=gpar(fontsize=20))
+tmp.gt <- gTree(children=gList(tmp.table, tmp.title))
+grid.draw(tmp.gt)
+grid.newpage()
+rm(list = ls(pattern = "tmp\\.*"))
+## bac load in/around stream
+tmp.table <- tableGrob(chk.stream.bac, show.rownames = FALSE)
+tmp.h <- grobHeight(tmp.table)
+tmp.w <- grobWidth(tmp.table)
+tmp.title <- textGrob(label = paste0("Total bacteria load from Elk in/around stream (dil = ", sprintf("%1.0E", chk.dil), ")"),
+                      y=unit(0.5,"npc") + 0.5*tmp.h, 
+                      vjust=0, gp=gpar(fontsize=20))
+tmp.gt <- gTree(children=gList(tmp.table, tmp.title))
+grid.draw(tmp.gt)
+grid.newpage()
+rm(list = ls(pattern = "tmp\\.*"))
+## bac load in/around stream by month
+tmp.table <- tableGrob(chk.stream.bac.by.month, show.rownames = FALSE)
+tmp.h <- grobHeight(tmp.table)
+tmp.w <- grobWidth(tmp.table)
+tmp.title <- textGrob(label = paste0("Total bacteria load from Elk in/around stream by month (dil = ", sprintf("%1.0E", chk.dil), ")"),
+                      y=unit(0.5,"npc") + 0.5*tmp.h, 
+                      vjust=0, gp=gpar(fontsize=20))
+tmp.gt <- gTree(children=gList(tmp.table, tmp.title))
+grid.draw(tmp.gt)
+grid.newpage()
+rm(list = ls(pattern = "tmp\\.*"))
+
+## bac load on pasture
+tmp.table <- tableGrob(chk.pasture.bac, show.rownames = FALSE)
+tmp.h <- grobHeight(tmp.table)
+tmp.w <- grobWidth(tmp.table)
+tmp.title <- textGrob(label = paste0("Total bacteria load from Elk on pasture (dil = ", sprintf("%1.0E", chk.dil), ")"),
+                      y=unit(0.5,"npc") + 0.5*tmp.h, 
+                      vjust=0, gp=gpar(fontsize=20))
+tmp.gt <- gTree(children=gList(tmp.table, tmp.title))
+grid.draw(tmp.gt)
+grid.newpage()
+rm(list = ls(pattern = "tmp\\.*"))
+##  bac load on pasture by month
+tmp.table <- tableGrob(chk.pasture.bac.by.month, show.rownames = FALSE)
+tmp.h <- grobHeight(tmp.table)
+tmp.w <- grobWidth(tmp.table)
+tmp.title <- textGrob(label = paste0("Total bacteria laod from Elk on pasture by month (dil = ", sprintf("%1.0E", chk.dil), ")"),
+                      y=unit(0.5,"npc") + 0.5*tmp.h, 
+                      vjust=0, gp=gpar(fontsize=20))
+tmp.gt <- gTree(children=gList(tmp.table, tmp.title))
+grid.draw(tmp.gt)
+grid.newpage()
+rm(list = ls(pattern = "tmp\\.*"))
+
+## bac load in forest
+tmp.table <- tableGrob(chk.forest.bac, show.rownames = FALSE)
+tmp.h <- grobHeight(tmp.table)
+tmp.w <- grobWidth(tmp.table)
+tmp.title <- textGrob(label = paste0("Total bacteria load from Elk in forest (dil = ", sprintf("%1.0E", chk.dil), ")"),
+                      y=unit(0.5,"npc") + 0.5*tmp.h, 
+                      vjust=0, gp=gpar(fontsize=20))
+tmp.gt <- gTree(children=gList(tmp.table, tmp.title))
+grid.draw(tmp.gt)
+grid.newpage()
+rm(list = ls(pattern = "tmp\\.*"))
+## bac load in forest stream by month
+tmp.table <- tableGrob(chk.forest.bac.by.month, show.rownames = FALSE)
+tmp.h <- grobHeight(tmp.table)
+tmp.w <- grobWidth(tmp.table)
+tmp.title <- textGrob(label = paste0("Total bacteria load from Elk in forest by month (dil = ", sprintf("%1.0E", chk.dil), ")"),
+                      y=unit(0.5,"npc") + 0.5*tmp.h, 
+                      vjust=0, gp=gpar(fontsize=20))
+tmp.gt <- gTree(children=gList(tmp.table, tmp.title))
+grid.draw(tmp.gt)
+grid.newpage()
+rm(list = ls(pattern = "tmp\\.*"))
+
+## bac load on RAOCUT
+tmp.table <- tableGrob(chk.RAOCUT.pop, show.rownames = FALSE)
+tmp.h <- grobHeight(tmp.table)
+tmp.w <- grobWidth(tmp.table)
+tmp.title <- textGrob(label = paste0("Total bacteria load from Elk on RAOCUT (dil = ", sprintf("%1.0E", chk.dil), ")"),
+                      y=unit(0.5,"npc") + 0.5*tmp.h, 
+                      vjust=0, gp=gpar(fontsize=20))
+tmp.gt <- gTree(children=gList(tmp.table, tmp.title))
+grid.draw(tmp.gt)
+grid.newpage()
+rm(list = ls(pattern = "tmp\\.*"))
+## bac load on RAOCUT by month
+tmp.table <- tableGrob(chk.RAOCUT.bac.by.month, show.rownames = FALSE)
+tmp.h <- grobHeight(tmp.table)
+tmp.w <- grobWidth(tmp.table)
+tmp.title <- textGrob(label = paste0("Total bacteria load from Elk on RAOCUT by month (dil = ", sprintf("%1.0E", chk.dil), ")"),
+                      y=unit(0.5,"npc") + 0.5*tmp.h, 
+                      vjust=0, gp=gpar(fontsize=20))
+tmp.gt <- gTree(children=gList(tmp.table, tmp.title))
+grid.draw(tmp.gt)
+rm(list = ls(pattern = "tmp\\.*"))
+
 
 ## close the pdf file
 dev.off()
