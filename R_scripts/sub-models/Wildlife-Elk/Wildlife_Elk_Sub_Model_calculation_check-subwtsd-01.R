@@ -605,6 +605,10 @@ tmp.month.num <- data.frame(Month = chk.total.bac.by.month$Month,
 chk.RAOCUT.accum.by.month <- 
   chk.RAOCUT.accum.by.month[with(tmp.month.num,order(num)),]
 
+
+
+
+
 ## output results in tables to pdf
 pdf(file = paste0(chr.wildlife.elk.dir, "/elk-bacteria-model-calc-check", 
                   strftime(Sys.time(), format = "%Y%m%d%H%M"), ".pdf"),
@@ -826,16 +830,42 @@ tmp.gt <- gTree(children=gList(tmp.table, tmp.title))
 grid.draw(tmp.gt)
 grid.newpage()
 rm(list = ls(pattern = "tmp\\.*"))
-## bac load on RAOCUT by month
-tmp.table <- tableGrob(chk.RAOCUT.bac.by.month, show.rownames = FALSE)
+
+## accum load on pasture by month
+tmp.table <- tableGrob(chk.pasture.accum.by.month, show.rownames = FALSE)
 tmp.h <- grobHeight(tmp.table)
 tmp.w <- grobWidth(tmp.table)
-tmp.title <- textGrob(label = paste0("Total bacteria load from Elk on RAOCUT by month (dil = ", sprintf("%1.0E", chk.dil), ")"),
+tmp.title <- textGrob(label = paste0("Accum load from Elk on Pasture by month (dil = ", sprintf("%1.0E", chk.dil), ")"),
+                      y=unit(0.5,"npc") + 0.5*tmp.h, 
+                      vjust=0, gp=gpar(fontsize=20))
+tmp.gt <- gTree(children=gList(tmp.table, tmp.title))
+grid.draw(tmp.gt)
+grid.newpage()
+rm(list = ls(pattern = "tmp\\.*"))
+
+## accum load on forest by month
+tmp.table <- tableGrob(chk.forest.accum.by.month, show.rownames = FALSE)
+tmp.h <- grobHeight(tmp.table)
+tmp.w <- grobWidth(tmp.table)
+tmp.title <- textGrob(label = paste0("Accum load from Elk in Forest by month (dil = ", sprintf("%1.0E", chk.dil), ")"),
+                      y=unit(0.5,"npc") + 0.5*tmp.h, 
+                      vjust=0, gp=gpar(fontsize=20))
+tmp.gt <- gTree(children=gList(tmp.table, tmp.title))
+grid.draw(tmp.gt)
+grid.newpage()
+rm(list = ls(pattern = "tmp\\.*"))
+
+## accum load on RAOCUT by month
+tmp.table <- tableGrob(chk.RAOCUT.accum.by.month, show.rownames = FALSE)
+tmp.h <- grobHeight(tmp.table)
+tmp.w <- grobWidth(tmp.table)
+tmp.title <- textGrob(label = paste0("Accum load from Elk on RAOCUT by month (dil = ", sprintf("%1.0E", chk.dil), ")"),
                       y=unit(0.5,"npc") + 0.5*tmp.h, 
                       vjust=0, gp=gpar(fontsize=20))
 tmp.gt <- gTree(children=gList(tmp.table, tmp.title))
 grid.draw(tmp.gt)
 rm(list = ls(pattern = "tmp\\.*"))
+
 
 
 ## close the pdf file
