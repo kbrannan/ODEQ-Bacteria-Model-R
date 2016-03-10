@@ -1,8 +1,9 @@
 ## step bt step calculation check for wildlife_elk_sub_model using input from
 ## wildlifeelk01.txt file
 chr.wildlife.elk.dir <- "M:/Models/Bacteria/HSPF/ODEQ-Bacteria-Model-R/R_scripts/sub-models/wildlife-elk"
+chr.input <- "wildlifeelk01.txt"
 source(paste0(chr.wildlife.elk.dir,"/Wildlife_Elk_Sub_Model.R"))
-df.output <- wildlifeElk(chr.wrkdir=chr.wildlife.elk.dir,chr.input="wildlifeelk01.txt")
+df.output <- wildlifeElk(chr.wrkdir=chr.wildlife.elk.dir,chr.input=chr.input)
 ## packages
 library(doBy, quietly = TRUE)
 library(gridExtra, quietly = TRUE)
@@ -610,9 +611,10 @@ chk.RAOCUT.accum.by.month <-
 
 
 ## output results in tables to pdf
-pdf(file = paste0(chr.wildlife.elk.dir, "/elk-bacteria-model-calc-check", 
-                  strftime(Sys.time(), format = "%Y%m%d%H%M"), ".pdf"),
-    height = 8.5, width = 11, onefile = TRUE)
+pdf(file = paste0(chr.wildlife.elk.dir, "/elk-bacteria-model-calc-check-",
+                  gsub("\\.txt","-",chr.input) 
+                  ,strftime(Sys.time(), format = "%Y%m%d%H%M"),
+                  ".pdf"), height = 8.5, width = 11, onefile = TRUE)
 ## total population
 tmp.table <- tableGrob(chk.total.pop, show.rownames = FALSE)
 tmp.h <- grobHeight(tmp.table)
