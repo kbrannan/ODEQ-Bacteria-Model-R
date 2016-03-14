@@ -13,6 +13,7 @@ SQOLIM multiplcation factor: 9
 Habitat Area in Watershed (ac): 9777.00
 Pasture Area in Watershed (ac): 441.35
 Forest Area in Watershed (ac):  8790.81
+Residential/Agricultural Operration Area/Commercial/Urban/Transportation (ac): 435.5
 *** Percent of Landuse with Stream access
 Percent of Habitat with stream access:    5.0000000E+01
 *** General parameters

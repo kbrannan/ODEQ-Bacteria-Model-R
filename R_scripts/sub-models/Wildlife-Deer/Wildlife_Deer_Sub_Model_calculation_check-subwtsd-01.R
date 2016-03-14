@@ -15,7 +15,7 @@ chk.Bacteria.Prod <- 1.8373286E+08
 ### Animal Densities
 chk.Animal.Density <- 4.7000000E-02
 ### Habitats
-chk.habitat <- 9777.0
+chk.habitat <- 9777.0 # where does this number come from it's 545 ac greater than the sum of pasture and forest
 chk.habitat.pasture <- 441.35
 chk.habitat.forest   <- 8790.81
 ### Percent of Landuse with Stream access
@@ -25,70 +25,30 @@ chk.in.and.around.streams <- 1.0000000E+00
 ## calculations
 ## animal numbers
 chk.all.habitat.deer <- chk.Animal.Density *   chk.habitat
-chk.pasture.habitat.deer <- chk.Animal.Density *   chk.habitat.pasture
-chk.forest.habitat.deer <- chk.Animal.Density *   chk.habitat.forest
-## with.without stream access
+
+## with/without stream access
+
 ## without stream access
 chk.deer.wo.str.acc <- 
   (1 - chk.Percent.habitat.with.Stream.Access / 100) * 
   chk.all.habitat.deer
-chk.deer.pasture.wo.str.acc <- 
-  (1 - chk.Percent.habitat.with.Stream.Access / 100) * 
-  chk.habitat.pasture
-chk.deer.forest.wo.str.acc <- 
-  (1 - chk.Percent.habitat.with.Stream.Access / 100) * 
-  chk.habitat.forest
+
 ## with stream access
 chk.deer.w.str.acc <- 
   (chk.Percent.habitat.with.Stream.Access / 100) * 
   chk.all.habitat.deer
-chk.deer.pasture.w.str.acc <- 
-  (chk.Percent.habitat.with.Stream.Access / 100) * 
-  chk.habitat.pasture
-chk.deer.forest.w.str.acc <- 
-  (chk.Percent.habitat.with.Stream.Access / 100) * 
-  chk.habitat.forest
-
-
 
 ## with stream access on land
 chk.deer.w.str.acc.l <- (1 - chk.in.and.around.streams / 100) * 
   chk.deer.w.str.acc
-chk.deer.pasture.w.str.acc.l <- (1 - chk.in.and.around.streams / 100) * 
-  chk.deer.pasture.w.str.acc
-chk.deer.forest.w.str.acc.l <- (1 - chk.in.and.around.streams / 100) * 
-  chk.deer.forest.w.str.acc
 
 ## with stream access on in/around atream
 chk.deer.w.str.acc.s <- (chk.in.and.around.streams / 100) * 
   chk.deer.w.str.acc
-chk.deer.pasture.w.str.acc.s <- (chk.in.and.around.streams / 100) * 
-  chk.deer.pasture.w.str.acc
-chk.deer.forest.w.str.acc.s <- (chk.in.and.around.streams / 100) * 
-  chk.deer.forest.w.str.acc
 
 ## deer on land
-chk.deer.land <- 
+chk.deer.land <- chk.deer.wo.str.acc + chk.deer.w.str.acc.l
 
-
-## Elk on land
-chk.season.1.Pasture.elk <- chk.season.1.Pasture.elk.wo.str.acc +
-  chk.season.1.Pasture.elk.w.str.acc.l
-chk.season.1.Forest.elk <- chk.season.1.Forest.elk.wo.str.acc +
-  chk.season.1.Forest.elk.w.str.acc.l
-chk.season.1.RAOCUT.elk <- chk.season.1.RAOCUT.elk.wo.str.acc +
-  chk.season.1.RAOCUT.elk.w.str.acc.l
-chk.season.2.Pasture.elk <- chk.season.2.Pasture.elk.wo.str.acc +
-  chk.season.2.Pasture.elk.w.str.acc.l
-chk.season.2.Forest.elk <- chk.season.2.Forest.elk.wo.str.acc +
-  chk.season.2.Forest.elk.w.str.acc.l
-chk.season.2.RAOCUT.elk <- chk.season.2.RAOCUT.elk.wo.str.acc +
-  chk.season.2.RAOCUT.elk.w.str.acc.l
-## Elk in and around stream
-chk.season.1.Stream.elk <- chk.season.1.Pasture.elk.w.str.acc.s + 
-  chk.season.1.Forest.elk.w.str.acc.s + chk.season.1.RAOCUT.elk.w.str.acc.s
-chk.season.2.Stream.elk <- chk.season.2.Pasture.elk.w.str.acc.s + 
-  chk.season.2.Forest.elk.w.str.acc.s + chk.season.2.RAOCUT.elk.w.str.acc.s
 ##
 ## combining results
 chk.months <- 

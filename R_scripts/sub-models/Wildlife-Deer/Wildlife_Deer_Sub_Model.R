@@ -22,14 +22,15 @@ wildlifeDeer <- function(chr.input="wildlifeDeerxx.txt", chr.wrkdir=getwd()) {
   tmp.HabitatArea  <- as.numeric(SubModelData[8,2])
   tmp.PastureArea  <- as.numeric(SubModelData[9,2])
   tmp.ForestArea   <- as.numeric(SubModelData[10,2])
+  tmp.RAOCUTArea  <- as.numeric(SubModelData[11,2])
   ### percent of habitat with stream access
-  tmp.HabitatAreaWStreamAcess <- as.numeric(SubModelData[11,2])/100
+  tmp.HabitatAreaWStreamAcess <- as.numeric(SubModelData[12,2])/100
   ### percent time spent in around streams
-  tmp.PercentStrmTime <- as.numeric(SubModelData[12,2])/100
+  tmp.PercentStrmTime <- as.numeric(SubModelData[13,2])/100
   ### Animal Densities
-  tmp.ADHabitat <- as.numeric(SubModelData[13,2])
+  tmp.ADHabitat <- as.numeric(SubModelData[14,2])
   ### bacteria production per animal
-  tmp.bac.prod  <- as.numeric(SubModelData[14,2])
+  tmp.bac.prod  <- as.numeric(SubModelData[15,2])
   ##
   ### Calculations
   ### Populations
