@@ -8,6 +8,8 @@ HSPF-Sup File Header Number for Pasture in MON-ACCUM Table:  25
 HSPF-Sup File Header Number for Pasture in MON-SQOLIM Table: 77
 HSPF-Sup File Header Number for Forest in MON-ACCUM Table:   24
 HSPF-Sup File Header Number for Forest in MON-SQOLIM Table:  76
+HSPF-Sup File Header Number for Residential/Agricultural Operration Area/Commercial/Urban/Transportation in MON-ACCUM Table:  26
+HSPF-Sup File Header Number for Residential/Agricultural Operration Area/Commercial/Urban/Transportation in MON-SQOLIM Table: 78
 SQOLIM multiplcation factor: 9
 *** Habitats
 Habitat Area in Watershed (ac): 9777.00
