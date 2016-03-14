@@ -40,6 +40,7 @@ wildlifeDeer <- function(chr.input="wildlifeDeerxx.txt", chr.wrkdir=getwd()) {
   tmp.PopOnLand <- round((1 - tmp.HabitatAreaWStreamAcess) * tmp.HabitatArea * tmp.ADHabitat,digits=0) + round((1 - tmp.PercentStrmTime) * tmp.HabitatAreaWStreamAcess * tmp.HabitatArea * tmp.ADHabitat,digits=0)
   tmp.PopOnForest     <- round(tmp.PopOnLand * (tmp.ForestArea / tmp.HabitatArea),digits=0)
   tmp.PopOnPasture    <- round(tmp.PopOnLand * (tmp.PastureArea / tmp.HabitatArea),digits=0)
+  tmp.PopOnRAOCUT    <- round(tmp.PopOnLand * (tmp.RAOCUTArea / tmp.HabitatArea),digits=0)
   tmp.PopInStream  <- round(tmp.PercentStrmTime * tmp.HabitatAreaWStreamAcess * tmp.HabitatArea * tmp.ADHabitat,digits=0)
   ### bacteria loads
   tmp.bacteria.Total    <- round(tmp.bac.prod * tmp.PopTotal,digits=0)
@@ -47,32 +48,39 @@ wildlifeDeer <- function(chr.input="wildlifeDeerxx.txt", chr.wrkdir=getwd()) {
   tmp.bacteria.TotalInStream  <- round(tmp.bac.prod * tmp.PopInStream,digits=0)/24
   tmp.bacteria.OnForest     <- round(tmp.bac.prod * tmp.PopOnForest,digits=0)
   tmp.bacteria.OnPasture    <- round(tmp.bac.prod * tmp.PopOnPasture ,digits=0)
+  tmp.bacteria.OnRAOCUT    <- round(tmp.bac.prod * tmp.PopOnRAOCUT ,digits=0)
 
   ### accum values
-  tmp.accum.pasture <- round(tmp.bacteria.OnPasture / tmp.PastureArea,digits=0)
-  tmp.accum.forest  <- round(tmp.bacteria.OnForest / tmp.ForestArea,digits=0)
+  tmp.accum.Forest  <- round(tmp.bacteria.OnForest / tmp.ForestArea,digits=0)
+  tmp.accum.Pasture <- round(tmp.bacteria.OnPasture / tmp.PastureArea,digits=0)
+  tmp.accum.RAOCUT  <- round(tmp.bacteria.OnRAOCUT / tmp.RAOCUTArea,digits=0)
 
   
   ##
   ## Assemble output data frame
   SubModelOutput <- data.frame(pop.total=tmp.PopTotal,
                                pop.total.on.land=tmp.PopOnLand,
-                               pop.total.on.pasture=tmp.PopOnPasture,
-                               pop.total.in.forest=tmp.PopOnForest,
+                               pop.total.in.Forest=tmp.PopOnForest,
+                               pop.total.on.Pasture=tmp.PopOnPasture,
+                               pop.total.in.RAOCUT=tmp.PopOnRAOCUT,
                                pop.total.in.stream=tmp.PopInStream,
                                bac.total.on.land=tmp.bacteria.TotalOnLand,
                                bac.total.in.stream=tmp.bacteria.TotalInStream,
-                               bac.pasture.on.land=tmp.bacteria.OnPasture,
                                bac.forest.on.land=tmp.bacteria.OnForest,
-                               Accum.Pasture=tmp.accum.pasture,
-                               Accum.Forest=tmp.accum.forest,
+                               bac.pasture.on.land=tmp.bacteria.OnPasture,
+                               bac.RAOCUT.on.land=tmp.bacteria.OnRAOCUT,
+                               Accum.Forest=tmp.accum.Forest,
+                               Accum.Pasture=tmp.accum.Pasture,
+                               Accum.RAOCUT=tmp.accum.RAOCUT,
                                SQLIM.factor=tmp.SQLIMFactor,
                                MUTSIN.Start.Year=tmp.MUTSINStartYr,
                                MUTSIN.End.Year=tmp.MUTSINEndYr,
-                               SUP.ACCUM.pastrure.line=tmp.HdrACCUMPasture,
-                               SUP.SQLIM.pastrure.line=tmp.HdrSQLIMPasture,
-                               SUP.ACCUM.forest.line=tmp.HdrACCUMForest,
-                               SUP.SQLIM.forest.line=tmp.HdrSQLIMForest,
+                               SUP.ACCUM.Forest.line=tmp.HdrACCUMForest,
+                               SUP.SQLIM.Forest.line=tmp.HdrSQLIMForest,
+                               SUP.ACCUM.Pastrure.line=tmp.HdrACCUMPasture,
+                               SUP.SQLIM.Pastrure.line=tmp.HdrSQLIMPasture,
+                               SUP.ACCUM.RAOCUT.line=tmp.HdrACCUMRAOCUT,
+                               SUP.SQLIM.RAOCUT.line=tmp.HdrSQLIMRAOCUT,
                                stringsAsFactors=FALSE)
 
   return(SubModelOutput)
