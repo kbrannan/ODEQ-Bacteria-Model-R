@@ -34,496 +34,199 @@ chk.pop.w.stream.access <- chk.pop.total * (chk.Percent.habitat.with.Stream.Acce
 ## with stream access on in/around atream
 chk.pop.in.around.stream <- chk.pop.w.stream.access * (chk.in.and.around.streams / 100)
 ## deer on land
-chk.pop.on.land <- chk.pop.wo.sream.access +
+chk.pop.on.land <- chk.pop.wo.stream.access +
   chk.pop.w.stream.access * (1 - chk.in.and.around.streams / 100)
+chk.pop.on.land.Forest <- chk.pop.on.land * (chk.land.Forest / chk.land.Total)
+chk.pop.on.land.Pasture <- chk.pop.on.land * (chk.land.Pasture / chk.land.Total)
+chk.pop.on.land.RAOCUT <- chk.pop.on.land * (chk.land.RAOCUT / chk.land.Total)
 
 ##
 ## combining results
-chk.months <- 
-  data.frame(month = 1:12, 
-             month.chr =  factor(strftime(
-               as.POSIXct(paste0("2016-",1:12,"-01")), "%b"),
-               levels = strftime(
-                 as.POSIXct(paste0("2016-",1:12,"-01")), "%b")))
-chk.months.season <- rbind(data.frame(month = chk.Season.1.Months, season = 1),
-                           data.frame(month = chk.Season.2.Months, season = 2))
-chk.months.season <- merge(chk.months.season, chk.months)
-
-chk.location.season.elk <- rbind(
-  data.frame(season = 1, 
-             location = c("pasture", "forest", "RAOCUT","stream"),
-             elk = c(chk.season.1.Pasture.elk,
-                     chk.season.1.Forest.elk,
-                     chk.season.1.RAOCUT.elk,
-                     chk.season.1.Stream.elk)),
-  data.frame(season = 2, 
-             location = c("pasture", "forest", "RAOCUT","stream"),
-             elk = c(chk.season.2.Pasture.elk,
-                     chk.season.2.Forest.elk,
-                     chk.season.2.RAOCUT.elk,
-                     chk.season.2.Stream.elk)))
-## populations
-chk.elk <- merge(chk.months.season,chk.location.season.elk)
+chk.pop <- rbind(data.frame(location = "forest", pop = chk.pop.on.land.Forest),
+                 data.frame(location = "pasture", pop = chk.pop.on.land.Pasture),
+                 data.frame(location = "RAOCUT", pop = chk.pop.on.land.RAOCUT),
+                 data.frame(location = "stream", pop = chk.pop.in.around.stream))
 ## bacteria loads
-chk.elk.bac <- data.frame(chk.elk, total.bac = chk.elk$elk * chk.Bacteria.Prod)
-chk.elk.bac <- data.frame(chk.elk.bac, accum.bac = -1)
+chk.bac <- data.frame(chk.pop, total.bac = chk.pop$pop * chk.Bacteria.Prod)
+chk.bac <- data.frame(chk.bac, accum.bac = -1)
 
 ## accum
-## season 1
-## on pasture
-tmp.rows <- grep("TRUE", with(chk.elk.bac, 
-                              c(season == 1 & location == "pasture")))
-chk.elk.bac[tmp.rows, "accum.bac"] <- 
-  chk.elk.bac[tmp.rows, "total.bac"] / chk.Season.1.Pasture
 ## on forest
-tmp.rows <- grep("TRUE", with(chk.elk.bac, 
-                              c(season == 1 & location == "forest")))
-chk.elk.bac[tmp.rows, "accum.bac"] <- 
-  chk.elk.bac[tmp.rows, "total.bac"] / chk.Season.1.Forest
-## on RAOCUT
-tmp.rows <- grep("TRUE", with(chk.elk.bac, 
-                              c(season == 1 & location == "RAOCUT")))
-chk.elk.bac[tmp.rows, "accum.bac"] <- 
-  chk.elk.bac[tmp.rows, "total.bac"] / chk.Season.1.RAOCUT
-## season 2
+tmp.rows <- grep("TRUE", with(chk.bac, location == "forest"))
+chk.bac[tmp.rows, "accum.bac"] <- chk.bac[tmp.rows, "total.bac"] / 
+  chk.land.Forest
 ## on pasture
-tmp.rows <- grep("TRUE", with(chk.elk.bac, 
-                              c(season == 2 & location == "pasture")))
-chk.elk.bac[tmp.rows, "accum.bac"] <- 
-  chk.elk.bac[tmp.rows, "total.bac"] / chk.Season.2.Pasture
-## on forest
-tmp.rows <- grep("TRUE", with(chk.elk.bac, 
-                              c(season == 2 & location == "forest")))
-chk.elk.bac[tmp.rows, "accum.bac"] <- 
-  chk.elk.bac[tmp.rows, "total.bac"] / chk.Season.2.Forest
+tmp.rows <- grep("TRUE", with(chk.bac, location == "pasture"))
+chk.bac[tmp.rows, "accum.bac"] <- chk.bac[tmp.rows, "total.bac"] / 
+  chk.land.Pasture
 ## on RAOCUT
-tmp.rows <- grep("TRUE", with(chk.elk.bac, 
-                              c(season == 2 & location == "RAOCUT")))
-chk.elk.bac[tmp.rows, "accum.bac"] <- 
-  chk.elk.bac[tmp.rows, "total.bac"] / chk.Season.2.RAOCUT
+tmp.rows <- grep("TRUE", with(chk.bac, location == "RAOCUT"))
+chk.bac[tmp.rows, "accum.bac"] <- chk.bac[tmp.rows, "total.bac"] / 
+  chk.land.RAOCUT
 ## for stream 
-chk.elk.bac[chk.elk.bac$location == "stream", "accum.bac"] = NA
-
+chk.bac[chk.bac$location == "stream", "accum.bac"] = NA
 ## sqolim
-chk.elk.bac <- data.frame(chk.elk.bac, 
-                          sqolim.bac = chk.elk.bac$accum.bac * chk.sqolim)
-
+chk.bac <- data.frame(chk.bac, 
+                          sqolim.bac = chk.bac$accum.bac * chk.sqolim)
 ##
 ## check model output
 chk.dil <- 1E+06 # need to explain this
 ## population total and by locations
 ## total
 chk.total.pop <- data.frame(
-  manual.calc.pop.total = sum(chk.elk$elk),
+  manual.calc.pop.total = sum(chk.pop$pop),
   model.pop.total = sum(df.output$pop.total),
   dil = round(
-    chk.dil * ( sum(df.output$pop.total) - sum(chk.elk$elk)) /
-      sum(chk.elk$elk),
+    chk.dil * ( sum(df.output$pop.total) - sum(chk.pop$pop)) /
+      sum(chk.pop$pop),
     digits = 0))
 
-## total by month
-chk.total.pop.by.month <- merge(summaryBy(elk ~ month.chr, data = chk.elk, FUN = sum),
-      df.output[ , c("Month", "pop.total")],
-      by.x = "month.chr", by.y = "Month")
-names(chk.total.pop.by.month) <- c("Month", "manual.calc.pop.total",
-                                   "model.pop.total")
-tmp.month.num <- data.frame(Month = chk.total.pop.by.month$Month,
-                            num = match(chk.total.pop.by.month$Month, month.abb))
-chk.total.pop.by.month <- 
-  chk.total.pop.by.month[with(tmp.month.num,order(num)),]
-chk.total.pop.by.month <- 
-  data.frame(chk.total.pop.by.month,
-             dil = round(
-               chk.dil * ( chk.total.pop.by.month$model.pop.total -
-                                  chk.total.pop.by.month$manual.calc.pop.total) /
-               chk.total.pop.by.month$manual.calc.pop.total,
-               digits = 0))
-chk.total.pop.by.month$Month <- factor(strftime(as.POSIXct(paste0("2016-",1:12,"-01")), "%b"),
-                                          levels = strftime(
-                                            as.POSIXct(paste0("2016-",1:12,"-01")), "%b"))
 ## pop in/around stream
 chk.stream.pop <- data.frame(
-  manual.calc.pop.total = sum(chk.elk[chk.elk$location == "stream", "elk"]),
-  model.pop.total = sum(df.output[ , "pop.total.in.stream"]),
+  manual.calc.pop.total = chk.pop[chk.pop$location == "stream", "pop"],
+  model.pop.total = df.output[ , "pop.total.in.stream"],
   dil = round(
-    chk.dil * ( sum(df.output[ , "pop.total.in.stream"]) - 
-                  sum(chk.elk[chk.elk$location == "stream", "elk"])) /
-      sum(chk.elk[chk.elk$location == "stream", "elk"]),
+    chk.dil * (df.output[ , "pop.total.in.stream"] - 
+                  chk.pop[chk.pop$location == "stream", "pop"]) /
+      chk.pop[chk.pop$location == "stream", "pop"],
     digits = 0))
-## pop in/around stream by month
-chk.stream.pop.by.month <- merge(summaryBy(elk ~ month.chr, 
-                               data = chk.elk[chk.elk$location == "stream", ], 
-                               FUN = sum),
-                       df.output[ , c("Month", "pop.total.in.stream")],
-                       by.x = "month.chr", by.y = "Month")
-names(chk.stream.pop.by.month) <- c("Month", "manual.calc.pop.total",
-                          "model.pop.total")
-chk.stream.pop.by.month$Month <- factor(chk.stream.pop.by.month$Month,
-                              levels = strftime(
-                                as.POSIXct(paste0("2016-",1:12,"-01")), "%b"))
-chk.stream.pop.by.month <- 
-  data.frame(chk.stream.pop.by.month, 
-             dil = round(chk.dil * 
-                           (chk.stream.pop.by.month$model.pop.total - 
-                              chk.stream.pop.by.month$manual.calc.pop.total) /
-                           chk.stream.pop.by.month$manual.calc.pop.total,
-                         digits = 0))
-chk.stream.pop.by.month <- 
-  chk.stream.pop.by.month[with(tmp.month.num,order(num)),]
+
 ## pop on pasture
 chk.pasture.pop <- data.frame(
-  manual.calc.pop.total = sum(chk.elk[chk.elk$location == "pasture", "elk"]),
-  model.pop.total = sum(df.output[ , "pop.total.on.pasture"]),
+  manual.calc.pop.total = chk.pop[chk.pop$location == "pasture", "pop"],
+  model.pop.total = df.output[ , "pop.total.on.Pasture"],
   dil = round(
-    chk.dil * (sum(df.output[ , "pop.total.on.pasture"]) - 
-                  sum(chk.elk[chk.elk$location == "pasture", "elk"])) /
-      sum(chk.elk[chk.elk$location == "pasture", "elk"]),
+    chk.dil * (df.output[ , "pop.total.on.Pasture"] - 
+                  chk.pop[chk.pop$location == "pasture", "pop"]) /
+      chk.pop[chk.pop$location == "pasture", "pop"],
     digits = 0))
-## pop on pasture by month
-chk.pasture.pop.by.month <- merge(summaryBy(elk ~ month.chr, 
-                                        data = chk.elk[chk.elk$location == "pasture", ], 
-                                        FUN = sum),
-                              df.output[ , c("Month", "pop.total.on.pasture")],
-                              by.x = "month.chr", by.y = "Month")
-names(chk.pasture.pop.by.month) <- c("Month", "manual.calc.pop.total",
-                                 "model.pop.total")
-chk.pasture.pop.by.month$Month <- factor(chk.pasture.pop.by.month$Month,
-                                     levels = strftime(
-                                       as.POSIXct(paste0("2016-",1:12,"-01")), "%b"))
-chk.pasture.pop.by.month <- 
-  data.frame(chk.pasture.pop.by.month, 
-             dil = round(chk.dil * 
-                           (chk.pasture.pop.by.month$model.pop.total - 
-                              chk.pasture.pop.by.month$manual.calc.pop.total) /
-                           chk.pasture.pop.by.month$manual.calc.pop.total,
-                         digits = 0))
-chk.pasture.pop.by.month <- 
-  chk.pasture.pop.by.month[with(tmp.month.num,order(num)),]
+
 ## pop on forest
 chk.forest.pop <- data.frame(
-  manual.calc.pop.total = sum(chk.elk[chk.elk$location == "forest", "elk"]),
-  model.pop.total = sum(df.output[ , "pop.total.in.forest"]),
+  manual.calc.pop.total = chk.pop[chk.pop$location == "forest", "pop"],
+  model.pop.total = df.output[ , "pop.total.in.Forest"],
   dil = round(
-    chk.dil * (sum(df.output[ , "pop.total.in.forest"]) - 
-                 sum(chk.elk[chk.elk$location == "forest", "elk"])) /
-      sum(chk.elk[chk.elk$location == "forest", "elk"]),
+    chk.dil * (df.output[ , "pop.total.in.Forest"] - 
+                 chk.pop[chk.pop$location == "forest", "pop"]) /
+      chk.pop[chk.pop$location == "forest", "pop"],
     digits = 0))
-## pop on forest by month
-chk.forest.pop.by.month <- merge(summaryBy(elk ~ month.chr, 
-                                            data = chk.elk[chk.elk$location == "forest", ], 
-                                            FUN = sum),
-                                  df.output[ , c("Month", "pop.total.in.forest")],
-                                  by.x = "month.chr", by.y = "Month")
-names(chk.forest.pop.by.month) <- c("Month", "manual.calc.pop.total",
-                                     "model.pop.total")
-chk.forest.pop.by.month$Month <- factor(chk.forest.pop.by.month$Month,
-                                         levels = strftime(
-                                           as.POSIXct(paste0("2016-",1:12,"-01")), "%b"))
-chk.forest.pop.by.month <- 
-  data.frame(chk.forest.pop.by.month, 
-             dil = round(chk.dil * 
-                           (chk.forest.pop.by.month$model.pop.total - 
-                              chk.forest.pop.by.month$manual.calc.pop.total) /
-                           chk.forest.pop.by.month$manual.calc.pop.total,
-                         digits = 0))
-chk.forest.pop.by.month <- 
-  chk.forest.pop.by.month[with(tmp.month.num,order(num)),]
 ## pop on RAOCUT
 chk.RAOCUT.pop <- data.frame(
-  manual.calc.pop.total = sum(chk.elk[chk.elk$location == "RAOCUT", "elk"]),
-  model.pop.total = sum(df.output[ , "pop.total.on.RAOCUT"]),
+  manual.calc.pop.total = chk.pop[chk.pop$location == "RAOCUT", "pop"],
+  model.pop.total = df.output[ , "pop.total.on.RAOCUT"],
   dil = round(
-    chk.dil * (sum(df.output[ , "pop.total.on.RAOCUT"]) - 
-                 sum(chk.elk[chk.elk$location == "RAOCUT", "elk"])) /
-      sum(chk.elk[chk.elk$location == "RAOCUT", "elk"]),
+    chk.dil * (df.output[ , "pop.total.on.RAOCUT"] - 
+                 chk.pop[chk.pop$location == "RAOCUT", "pop"]) /
+      chk.pop[chk.pop$location == "RAOCUT", "pop"],
     digits = 0))
-## pop on RAOCUT by month
-chk.RAOCUT.pop.by.month <- merge(summaryBy(elk ~ month.chr, 
-                                           data = chk.elk[chk.elk$location == "RAOCUT", ], 
-                                           FUN = sum),
-                                 df.output[ , c("Month", "pop.total.on.RAOCUT")],
-                                 by.x = "month.chr", by.y = "Month")
-names(chk.RAOCUT.pop.by.month) <- c("Month", "manual.calc.pop.total",
-                                    "model.pop.total")
-chk.RAOCUT.pop.by.month$Month <- factor(chk.RAOCUT.pop.by.month$Month,
-                                        levels = strftime(
-                                          as.POSIXct(paste0("2016-",1:12,"-01")), "%b"))
-chk.RAOCUT.pop.by.month <- 
-  data.frame(chk.RAOCUT.pop.by.month, 
-             dil = round(chk.dil * 
-                           (chk.RAOCUT.pop.by.month$model.pop.total - 
-                              chk.RAOCUT.pop.by.month$manual.calc.pop.total) /
-                           chk.RAOCUT.pop.by.month$manual.calc.pop.total,
-                         digits = 0))
-chk.RAOCUT.pop.by.month <- 
-  chk.RAOCUT.pop.by.month[with(tmp.month.num,order(num)),]
-
-
+## all pop
+chk.all.pop <- rbind(chk.total.pop, chk.stream.pop, chk.forest.pop, 
+                     chk.pasture.pop, chk.RAOCUT.pop)
+chk.all.pop <- data.frame(cat = c("total", "stream", "forest", "pasture", 
+                                  "RAOCUT"), chk.all.pop)
 ## bacteria loads total and by locations
 ## total
 chk.total.bac <- data.frame(
-  manual.calc.bac.total = sum(chk.elk.bac$total.bac),
-  model.bac.total = sum(df.output$bac.total),
+  manual.calc.bac.total = sum(chk.bac$total.bac),
+  model.bac.total = df.output$bac.total,
   dil = round(
-    chk.dil * ( sum(df.output$bac.total) - sum(chk.elk.bac$total.bac)) /
-      sum(chk.elk.bac$total.bac),
+    chk.dil * (df.output$bac.total - sum(chk.bac$total.bac)) /
+      sum(chk.bac$total.bac),
     digits = 0))
 
-## total by month
-chk.total.bac.by.month <- merge(summaryBy(total.bac ~ month.chr, data = chk.elk.bac, FUN = sum),
-                                df.output[ , c("Month", "bac.total")],
-                                by.x = "month.chr", by.y = "Month")
-names(chk.total.bac.by.month) <- c("Month", "manual.calc.bac.total",
-                                   "model.bac.total")
-tmp.month.num <- data.frame(Month = chk.total.bac.by.month$Month,
-                            num = match(chk.total.bac.by.month$Month, month.abb))
-chk.total.bac.by.month <- 
-  chk.total.bac.by.month[with(tmp.month.num,order(num)),]
-chk.total.bac.by.month <- 
-  data.frame(chk.total.bac.by.month,
-             dil = round(
-               chk.dil * ( chk.total.bac.by.month$model.bac.total -
-                             chk.total.bac.by.month$manual.calc.bac.total) /
-                 chk.total.bac.by.month$manual.calc.bac.total,
-               digits = 0))
-chk.total.bac.by.month$Month <- factor(strftime(as.POSIXct(paste0("2016-",1:12,"-01")), "%b"),
-                                        levels = strftime(
-                                          as.POSIXct(paste0("2016-",1:12,"-01")), "%b"))
 ## bac in/around stream
 chk.stream.bac <- data.frame(
-  manual.calc.bac.total = sum(chk.elk.bac[chk.elk.bac$location == "stream", "total.bac"]),
-  model.bac.total = 24 * sum(df.output[ , "bac.total.in.stream"]),
+  manual.calc.bac.total = chk.bac[chk.bac$location == "stream", "total.bac"],
+  model.bac.total = df.output[ , "bac.total.in.stream"],
   dil = round(
-    chk.dil * ( 24 * sum(df.output[ , "bac.total.in.stream"]) - 
-                  sum(chk.elk.bac[chk.elk.bac$location == "stream", "total.bac"])) /
-      sum(chk.elk.bac[chk.elk.bac$location == "stream", "total.bac"]),
+    chk.dil * (df.output[ , "bac.total.in.stream"] - 
+                  chk.bac[chk.bac$location == "stream", "total.bac"]) /
+      chk.bac[chk.bac$location == "stream", "total.bac"],
     digits = 0))
-## bac in/around stream by month
-chk.stream.bac.by.month <- merge(summaryBy(total.bac ~ month.chr, 
-                                           data = chk.elk.bac[chk.elk.bac$location == "stream", ], 
-                                           FUN = sum),
-                                 df.output[ , c("Month", "bac.total.in.stream")],
-                                 by.x = "month.chr", by.y = "Month")
-names(chk.stream.bac.by.month) <- c("Month", "manual.calc.bac.total",
-                                    "model.bac.total")
-chk.stream.bac.by.month$model.bac.total <- 24 * chk.stream.bac.by.month$model.bac.total
-chk.stream.bac.by.month$Month <- factor(chk.stream.bac.by.month$Month,
-                                        levels = strftime(
-                                          as.POSIXct(paste0("2016-",1:12,"-01")), "%b"))
-chk.stream.bac.by.month <- 
-  data.frame(chk.stream.bac.by.month, 
-             dil = round(chk.dil * 
-                           (chk.stream.bac.by.month$model.bac.total - 
-                              chk.stream.bac.by.month$manual.calc.bac.total) /
-                           chk.stream.bac.by.month$manual.calc.bac.total,
-                         digits = 0))
-chk.stream.bac.by.month <- 
-  chk.stream.bac.by.month[with(tmp.month.num,order(num)),]
-## bac load on pasture
-chk.pasture.bac <- data.frame(
-  manual.calc.bac.total = sum(chk.elk.bac[chk.elk.bac$location == "pasture", "total.bac"]),
-  model.bac.total = sum(df.output[ , "bac.Pasture"]),
-  dil = round(
-    chk.dil * (sum(df.output[ , "bac.Pasture"]) - 
-                 sum(chk.elk.bac[chk.elk$location == "pasture", "total.bac"])) /
-      sum(chk.elk.bac[chk.elk.bac$location == "pasture", "total.bac"]),
-    digits = 0))
-## bac load on pasture by month
-chk.pasture.bac.by.month <- merge(summaryBy(total.bac ~ month.chr, 
-                                            data = chk.elk.bac[chk.elk.bac$location == "pasture", ], 
-                                            FUN = sum),
-                                  df.output[ , c("Month", "bac.Pasture")],
-                                  by.x = "month.chr", by.y = "Month")
-names(chk.pasture.bac.by.month) <- c("Month", "manual.calc.bac.total",
-                                     "model.bac.total")
-chk.pasture.bac.by.month$Month <- factor(chk.pasture.bac.by.month$Month,
-                                         levels = strftime(
-                                           as.POSIXct(paste0("2016-",1:12,"-01")), "%b"))
-chk.pasture.bac.by.month <- 
-  data.frame(chk.pasture.bac.by.month, 
-             dil = round(chk.dil * 
-                           (chk.pasture.bac.by.month$model.bac.total - 
-                              chk.pasture.bac.by.month$manual.calc.bac.total) /
-                           chk.pasture.bac.by.month$manual.calc.bac.total,
-                         digits = 0))
-chk.pasture.bac.by.month <- 
-  chk.pasture.bac.by.month[with(tmp.month.num,order(num)),]
+
 ## bac load in forest
 chk.forest.bac <- data.frame(
-  manual.calc.bac.total = sum(chk.elk.bac[chk.elk.bac$location == "forest", "total.bac"]),
-  model.bac.total = sum(df.output[ , "bac.Forest"]),
+  manual.calc.bac.total = chk.bac[chk.bac$location == "forest", "total.bac"],
+  model.bac.total = df.output[ , "bac.forest.on.land"],
   dil = round(
-    chk.dil * (sum(df.output[ , "bac.Forest"]) - 
-                 sum(chk.elk.bac[chk.elk.bac$location == "forest", "total.bac"])) /
-      sum(chk.elk.bac[chk.elk.bac$location == "forest", "total.bac"]),
+    chk.dil * (df.output[ , "bac.forest.on.land"] - 
+                 chk.bac[chk.bac$location == "forest", "total.bac"]) /
+      chk.bac[chk.bac$location == "forest", "total.bac"],
     digits = 0))
-## bac load on forest by month
-chk.forest.bac.by.month <- merge(summaryBy(total.bac ~ month.chr, 
-                                           data = chk.elk.bac[chk.elk.bac$location == "forest", ], 
-                                           FUN = sum),
-                                 df.output[ , c("Month", "bac.Forest")],
-                                 by.x = "month.chr", by.y = "Month")
-names(chk.forest.bac.by.month) <- c("Month", "manual.calc.bac.total",
-                                    "model.bac.total")
-chk.forest.bac.by.month$Month <- factor(chk.forest.bac.by.month$Month,
-                                        levels = strftime(
-                                          as.POSIXct(paste0("2016-",1:12,"-01")), "%b"))
-chk.forest.bac.by.month <- 
-  data.frame(chk.forest.bac.by.month, 
-             dil = round(chk.dil * 
-                           (chk.forest.bac.by.month$model.bac.total - 
-                              chk.forest.bac.by.month$manual.calc.bac.total) /
-                           chk.forest.bac.by.month$manual.calc.bac.total,
-                         digits = 0))
-chk.forest.bac.by.month <- 
-  chk.forest.bac.by.month[with(tmp.month.num,order(num)),]
+
+## bac load on pasture
+chk.pasture.bac <- data.frame(
+  manual.calc.bac.total = chk.bac[chk.bac$location == "pasture", "total.bac"],
+  model.bac.total = df.output[ , "bac.pasture.on.land"],
+  dil = round(
+    chk.dil * (df.output[ , "bac.pasture.on.land"] - 
+                 chk.bac[chk.bac$location == "pasture", "total.bac"]) /
+      chk.bac[chk.bac$location == "pasture", "total.bac"],
+    digits = 0))
+
 ## bac on RAOCUT
 chk.RAOCUT.bac <- data.frame(
-  manual.calc.bac.total = sum(chk.elk.bac[chk.elk.bac$location == "RAOCUT", "total.bac"]),
-  model.bac.total = sum(df.output[ , "bac.RAOCUT"]),
+  manual.calc.bac.total = chk.bac[chk.bac$location == "RAOCUT", "total.bac"],
+  model.bac.total = df.output[ , "bac.RAOCUT.on.land"],
   dil = round(
-    chk.dil * (sum(df.output[ , "bac.RAOCUT"]) - 
-                 sum(chk.elk.bac[chk.elk.bac$location == "RAOCUT", "total.bac"])) /
-      sum(chk.elk.bac[chk.elk.bac$location == "RAOCUT", "total.bac"]),
+    chk.dil * (df.output[ , "bac.RAOCUT.on.land"] - 
+                 chk.bac[chk.bac$location == "RAOCUT", "total.bac"]) /
+      chk.bac[chk.bac$location == "RAOCUT", "total.bac"],
     digits = 0))
-## bac on RAOCUT by month
-chk.RAOCUT.bac.by.month <- merge(summaryBy(total.bac ~ month.chr, 
-                                           data = chk.elk.bac[chk.elk.bac$location == "RAOCUT", ], 
-                                           FUN = sum),
-                                 df.output[ , c("Month", "bac.RAOCUT")],
-                                 by.x = "month.chr", by.y = "Month")
-names(chk.RAOCUT.bac.by.month) <- c("Month", "manual.calc.bac.total",
-                                    "model.bac.total")
-chk.RAOCUT.bac.by.month$Month <- factor(chk.RAOCUT.bac.by.month$Month,
-                                        levels = strftime(
-                                          as.POSIXct(paste0("2016-",1:12,"-01")), "%b"))
-chk.RAOCUT.bac.by.month <- 
-  data.frame(chk.RAOCUT.bac.by.month, 
-             dil = round(chk.dil * 
-                           (chk.RAOCUT.bac.by.month$model.bac.total - 
-                              chk.RAOCUT.bac.by.month$manual.calc.bac.total) /
-                           chk.RAOCUT.bac.by.month$manual.calc.bac.total,
-                         digits = 0))
-chk.RAOCUT.bac.by.month <- 
-  chk.RAOCUT.bac.by.month[with(tmp.month.num,order(num)),]
+
+## all bac
+chk.all.bac <- rbind(chk.total.bac, chk.stream.bac, chk.forest.bac, 
+                     chk.pasture.bac, chk.RAOCUT.bac)
+chk.all.bac <- data.frame(cat = c("total", "stream", "forest", "pasture", 
+                                  "RAOCUT"), chk.all.bac)
 
 ## accum loads
-## accum load on pasture by month
-chk.pasture.accum.by.month <- merge(summaryBy(accum.bac ~ month.chr, 
-                                           data = chk.elk.bac[chk.elk.bac$location == "pasture", ], 
-                                           FUN = sum),
-                                 df.output[ , c("Month", "Accum.Pasture")],
-                                 by.x = "month.chr", by.y = "Month")
-names(chk.pasture.accum.by.month) <- c("Month", "manual.calc.bac.total",
-                                    "model.bac.total")
-chk.pasture.accum.by.month$Month <- factor(chk.pasture.accum.by.month$Month,
-                                        levels = strftime(
-                                          as.POSIXct(paste0("2016-",1:12,"-01")), "%b"))
-chk.pasture.accum.by.month <- 
-  data.frame(chk.pasture.accum.by.month, 
-             dil = round(chk.dil * 
-                           (chk.pasture.accum.by.month$model.bac.total - 
-                              chk.pasture.accum.by.month$manual.calc.bac.total) /
-                           chk.pasture.accum.by.month$manual.calc.bac.total,
-                         digits = 0))
-tmp.month.num <- data.frame(Month = chk.pasture.accum.by.month$Month,
-                            num = match(chk.pasture.accum.by.month$Month, month.abb))
-chk.pasture.accum.by.month <- 
-  chk.pasture.accum.by.month[with(tmp.month.num,order(num)),]
-##
-## accum load on forest by month
-chk.forest.accum.by.month <- merge(summaryBy(accum.bac ~ month.chr, 
-                                              data = chk.elk.bac[chk.elk.bac$location == "forest", ], 
-                                              FUN = sum),
-                                    df.output[ , c("Month", "Accum.Forest")],
-                                    by.x = "month.chr", by.y = "Month")
-names(chk.forest.accum.by.month) <- c("Month", "manual.calc.bac.total",
-                                       "model.bac.total")
-chk.forest.accum.by.month$Month <- factor(chk.forest.accum.by.month$Month,
-                                           levels = strftime(
-                                             as.POSIXct(paste0("2016-",1:12,"-01")), "%b"))
-chk.forest.accum.by.month <- 
-  data.frame(chk.forest.accum.by.month, 
-             dil = round(chk.dil * 
-                           (chk.forest.accum.by.month$model.bac.total - 
-                              chk.forest.accum.by.month$manual.calc.bac.total) /
-                           chk.forest.accum.by.month$manual.calc.bac.total,
-                         digits = 0))
-tmp.month.num <- data.frame(Month = chk.forest.accum.by.month$Month,
-                            num = match(chk.forest.accum.by.month$Month, month.abb))
-chk.forest.accum.by.month <- 
-  chk.forest.accum.by.month[with(tmp.month.num,order(num)),]
-##
-## accum load on RAOCUT by month
-chk.RAOCUT.accum.by.month <- merge(summaryBy(accum.bac ~ month.chr, 
-                                             data = chk.elk.bac[chk.elk.bac$location == "RAOCUT", ], 
-                                             FUN = sum),
-                                   df.output[ , c("Month", "Accum.RAOCUT")],
-                                   by.x = "month.chr", by.y = "Month")
-names(chk.RAOCUT.accum.by.month) <- c("Month", "manual.calc.bac.total",
-                                      "model.bac.total")
-chk.RAOCUT.accum.by.month$Month <- factor(chk.RAOCUT.accum.by.month$Month,
-                                          levels = strftime(
-                                            as.POSIXct(paste0("2016-",1:12,"-01")), "%b"))
-chk.RAOCUT.accum.by.month <- 
-  data.frame(chk.RAOCUT.accum.by.month, 
-             dil = round(chk.dil * 
-                           (chk.RAOCUT.accum.by.month$model.bac.total - 
-                              chk.RAOCUT.accum.by.month$manual.calc.bac.total) /
-                           chk.RAOCUT.accum.by.month$manual.calc.bac.total,
-                         digits = 0))
-tmp.month.num <- data.frame(Month = chk.RAOCUT.accum.by.month$Month,
-                            num = match(chk.RAOCUT.accum.by.month$Month, month.abb))
-chk.RAOCUT.accum.by.month <- 
-  chk.RAOCUT.accum.by.month[with(tmp.month.num,order(num)),]
+## accum load in forest
+chk.forest.accum <- data.frame(
+  manual.calc.bac.total = chk.bac[chk.bac$location == "forest", "accum.bac"],
+  model.bac.total = df.output[ , "Accum.Forest"],
+  dil = round(
+    chk.dil * (df.output[ , "Accum.Forest"] - 
+      chk.bac[chk.bac$location == "forest", "accum.bac"]) /
+      chk.bac[chk.bac$location == "forest", "accum.bac"],
+    digits = 0))
 
+## accum load on pasture
+chk.pasture.accum <- data.frame(
+  manual.calc.bac.total = chk.bac[chk.bac$location == "pasture", "accum.bac"],
+  model.bac.total = df.output[ , "Accum.Pasture"],
+  dil = round(
+    chk.dil * (df.output[ , "Accum.Pasture"] - 
+                 chk.bac[chk.bac$location == "pasture", "accum.bac"]) /
+      chk.bac[chk.bac$location == "pasture", "accum.bac"],
+    digits = 0))
 
+## accum load on RAOCUT
+chk.RAOCUT.accum <- data.frame(
+  manual.calc.bac.total = chk.bac[chk.bac$location == "RAOCUT", "accum.bac"],
+  model.bac.total = df.output[ , "Accum.RAOCUT"],
+  dil = round(
+    chk.dil * (df.output[ , "Accum.RAOCUT"] - 
+                 chk.bac[chk.bac$location == "RAOCUT", "total.bac"]) /
+      chk.bac[chk.bac$location == "RAOCUT", "total.bac"],
+    digits = 0))
 
-
+## all accum
+chk.all.accum <- rbind(chk.forest.accum, 
+                     chk.pasture.accum, chk.RAOCUT.accum)
+chk.all.accum <- data.frame(cat = c("forest", "pasture", 
+                                  "RAOCUT"), chk.all.accum)
 
 ## output results in tables to pdf
-pdf(file = paste0(chr.wildlife.elk.dir, "/elk-bacteria-model-calc-check-",
+pdf(file = paste0(chr.wildlife.deer.dir, "/deer-bacteria-model-calc-check-",
                   gsub("\\.txt","-",chr.input) 
                   ,strftime(Sys.time(), format = "%Y%m%d%H%M"),
                   ".pdf"), height = 8.5, width = 11, onefile = TRUE)
-## total population
-tmp.table <- tableGrob(chk.total.pop, show.rownames = FALSE)
+## population
+tmp.table <- tableGrob(chk.all.pop, show.rownames = FALSE)
 tmp.h <- grobHeight(tmp.table)
 tmp.w <- grobWidth(tmp.table)
-tmp.title <- textGrob(label = paste0("Total Elk Population (dil = ", sprintf("%1.0E", chk.dil), ")"),
-                      y=unit(0.5,"npc") + 0.5*tmp.h, 
-                      vjust=0, gp=gpar(fontsize=20))
-tmp.gt <- gTree(children=gList(tmp.table, tmp.title))
-grid.draw(tmp.gt)
-grid.newpage()
-rm(list = ls(pattern = "tmp\\.*"))
-## total population by month
-tmp.table <- tableGrob(chk.total.pop.by.month, show.rownames = FALSE)
-tmp.h <- grobHeight(tmp.table)
-tmp.w <- grobWidth(tmp.table)
-tmp.title <- textGrob(label = paste0("Total Elk Population by month (dil = ", sprintf("%1.0E", chk.dil), ")"),
-                      y=unit(0.5,"npc") + 0.5*tmp.h, 
-                      vjust=0, gp=gpar(fontsize=20))
-tmp.gt <- gTree(children=gList(tmp.table, tmp.title))
-grid.draw(tmp.gt)
-grid.newpage()
-rm(list = ls(pattern = "tmp\\.*"))
-## population in/around stream
-tmp.table <- tableGrob(chk.stream.pop, show.rownames = FALSE)
-tmp.h <- grobHeight(tmp.table)
-tmp.w <- grobWidth(tmp.table)
-tmp.title <- textGrob(label = paste0("Total Elk Population in/around stream (dil = ", sprintf("%1.0E", chk.dil), ")"),
-                      y=unit(0.5,"npc") + 0.5*tmp.h, 
-                      vjust=0, gp=gpar(fontsize=20))
-tmp.gt <- gTree(children=gList(tmp.table, tmp.title))
-grid.draw(tmp.gt)
-grid.newpage()
-rm(list = ls(pattern = "tmp\\.*"))
-## population in/around stream by month
-tmp.table <- tableGrob(chk.stream.pop.by.month, show.rownames = FALSE)
-tmp.h <- grobHeight(tmp.table)
-tmp.w <- grobWidth(tmp.table)
-tmp.title <- textGrob(label = paste0("Total Elk Population in/around stream by month (dil = ", sprintf("%1.0E", chk.dil), ")"),
+tmp.title <- textGrob(label = paste0("Deer Population (dil = ", sprintf("%1.0E", chk.dil), ")"),
                       y=unit(0.5,"npc") + 0.5*tmp.h, 
                       vjust=0, gp=gpar(fontsize=20))
 tmp.gt <- gTree(children=gList(tmp.table, tmp.title))
@@ -531,22 +234,11 @@ grid.draw(tmp.gt)
 grid.newpage()
 rm(list = ls(pattern = "tmp\\.*"))
 
-## population on pasture
-tmp.table <- tableGrob(chk.pasture.pop, show.rownames = FALSE)
+## bac load
+tmp.table <- tableGrob(chk.all.bac, show.rownames = FALSE)
 tmp.h <- grobHeight(tmp.table)
 tmp.w <- grobWidth(tmp.table)
-tmp.title <- textGrob(label = paste0("Total Elk Population on pasture (dil = ", sprintf("%1.0E", chk.dil), ")"),
-                      y=unit(0.5,"npc") + 0.5*tmp.h, 
-                      vjust=0, gp=gpar(fontsize=20))
-tmp.gt <- gTree(children=gList(tmp.table, tmp.title))
-grid.draw(tmp.gt)
-grid.newpage()
-rm(list = ls(pattern = "tmp\\.*"))
-## population in/around stream by month
-tmp.table <- tableGrob(chk.pasture.pop.by.month, show.rownames = FALSE)
-tmp.h <- grobHeight(tmp.table)
-tmp.w <- grobWidth(tmp.table)
-tmp.title <- textGrob(label = paste0("Total Elk Population on pasture by month (dil = ", sprintf("%1.0E", chk.dil), ")"),
+tmp.title <- textGrob(label = paste0("Bacteria loads from Deer (dil = ", sprintf("%1.0E", chk.dil), ")"),
                       y=unit(0.5,"npc") + 0.5*tmp.h, 
                       vjust=0, gp=gpar(fontsize=20))
 tmp.gt <- gTree(children=gList(tmp.table, tmp.title))
@@ -554,192 +246,16 @@ grid.draw(tmp.gt)
 grid.newpage()
 rm(list = ls(pattern = "tmp\\.*"))
 
-## population in forest
-tmp.table <- tableGrob(chk.forest.pop, show.rownames = FALSE)
+## accum load
+tmp.table <- tableGrob(chk.all.accum, show.rownames = FALSE)
 tmp.h <- grobHeight(tmp.table)
 tmp.w <- grobWidth(tmp.table)
-tmp.title <- textGrob(label = paste0("Total Elk Population in forest (dil = ", sprintf("%1.0E", chk.dil), ")"),
-                      y=unit(0.5,"npc") + 0.5*tmp.h, 
-                      vjust=0, gp=gpar(fontsize=20))
-tmp.gt <- gTree(children=gList(tmp.table, tmp.title))
-grid.draw(tmp.gt)
-grid.newpage()
-rm(list = ls(pattern = "tmp\\.*"))
-## population in forest stream by month
-tmp.table <- tableGrob(chk.forest.pop.by.month, show.rownames = FALSE)
-tmp.h <- grobHeight(tmp.table)
-tmp.w <- grobWidth(tmp.table)
-tmp.title <- textGrob(label = paste0("Total Elk Population in forest by month (dil = ", sprintf("%1.0E", chk.dil), ")"),
-                      y=unit(0.5,"npc") + 0.5*tmp.h, 
-                      vjust=0, gp=gpar(fontsize=20))
-tmp.gt <- gTree(children=gList(tmp.table, tmp.title))
-grid.draw(tmp.gt)
-grid.newpage()
-rm(list = ls(pattern = "tmp\\.*"))
-
-## population on RAOCUT
-tmp.table <- tableGrob(chk.RAOCUT.pop, show.rownames = FALSE)
-tmp.h <- grobHeight(tmp.table)
-tmp.w <- grobWidth(tmp.table)
-tmp.title <- textGrob(label = paste0("Total Elk Population on RAOCUT (dil = ", sprintf("%1.0E", chk.dil), ")"),
-                      y=unit(0.5,"npc") + 0.5*tmp.h, 
-                      vjust=0, gp=gpar(fontsize=20))
-tmp.gt <- gTree(children=gList(tmp.table, tmp.title))
-grid.draw(tmp.gt)
-grid.newpage()
-rm(list = ls(pattern = "tmp\\.*"))
-## population on RAOCUT by month
-tmp.table <- tableGrob(chk.RAOCUT.pop.by.month, show.rownames = FALSE)
-tmp.h <- grobHeight(tmp.table)
-tmp.w <- grobWidth(tmp.table)
-tmp.title <- textGrob(label = paste0("Total Elk Population on RAOCUT by month (dil = ", sprintf("%1.0E", chk.dil), ")"),
-                      y=unit(0.5,"npc") + 0.5*tmp.h, 
-                      vjust=0, gp=gpar(fontsize=20))
-tmp.gt <- gTree(children=gList(tmp.table, tmp.title))
-grid.draw(tmp.gt)
-grid.newpage()
-rm(list = ls(pattern = "tmp\\.*"))
-
-
-## total bac load
-tmp.table <- tableGrob(chk.total.bac, show.rownames = FALSE)
-tmp.h <- grobHeight(tmp.table)
-tmp.w <- grobWidth(tmp.table)
-tmp.title <- textGrob(label = paste0("Total bacteria load from Elk (dil = ", sprintf("%1.0E", chk.dil), ")"),
-                      y=unit(0.5,"npc") + 0.5*tmp.h, 
-                      vjust=0, gp=gpar(fontsize=20))
-tmp.gt <- gTree(children=gList(tmp.table, tmp.title))
-grid.draw(tmp.gt)
-grid.newpage()
-rm(list = ls(pattern = "tmp\\.*"))
-## total bac load by month
-tmp.table <- tableGrob(chk.total.bac.by.month, show.rownames = FALSE)
-tmp.h <- grobHeight(tmp.table)
-tmp.w <- grobWidth(tmp.table)
-tmp.title <- textGrob(label = paste0("Total bacteria load from Elk by month (dil = ", sprintf("%1.0E", chk.dil), ")"),
-                      y=unit(0.5,"npc") + 0.5*tmp.h, 
-                      vjust=0, gp=gpar(fontsize=20))
-tmp.gt <- gTree(children=gList(tmp.table, tmp.title))
-grid.draw(tmp.gt)
-grid.newpage()
-rm(list = ls(pattern = "tmp\\.*"))
-## bac load in/around stream
-tmp.table <- tableGrob(chk.stream.bac, show.rownames = FALSE)
-tmp.h <- grobHeight(tmp.table)
-tmp.w <- grobWidth(tmp.table)
-tmp.title <- textGrob(label = paste0("Total bacteria load from Elk in/around stream (dil = ", sprintf("%1.0E", chk.dil), ")"),
-                      y=unit(0.5,"npc") + 0.5*tmp.h, 
-                      vjust=0, gp=gpar(fontsize=20))
-tmp.gt <- gTree(children=gList(tmp.table, tmp.title))
-grid.draw(tmp.gt)
-grid.newpage()
-rm(list = ls(pattern = "tmp\\.*"))
-## bac load in/around stream by month
-tmp.table <- tableGrob(chk.stream.bac.by.month, show.rownames = FALSE)
-tmp.h <- grobHeight(tmp.table)
-tmp.w <- grobWidth(tmp.table)
-tmp.title <- textGrob(label = paste0("Total bacteria load from Elk in/around stream by month (dil = ", sprintf("%1.0E", chk.dil), ")"),
-                      y=unit(0.5,"npc") + 0.5*tmp.h, 
-                      vjust=0, gp=gpar(fontsize=20))
-tmp.gt <- gTree(children=gList(tmp.table, tmp.title))
-grid.draw(tmp.gt)
-grid.newpage()
-rm(list = ls(pattern = "tmp\\.*"))
-
-## bac load on pasture
-tmp.table <- tableGrob(chk.pasture.bac, show.rownames = FALSE)
-tmp.h <- grobHeight(tmp.table)
-tmp.w <- grobWidth(tmp.table)
-tmp.title <- textGrob(label = paste0("Total bacteria load from Elk on pasture (dil = ", sprintf("%1.0E", chk.dil), ")"),
-                      y=unit(0.5,"npc") + 0.5*tmp.h, 
-                      vjust=0, gp=gpar(fontsize=20))
-tmp.gt <- gTree(children=gList(tmp.table, tmp.title))
-grid.draw(tmp.gt)
-grid.newpage()
-rm(list = ls(pattern = "tmp\\.*"))
-##  bac load on pasture by month
-tmp.table <- tableGrob(chk.pasture.bac.by.month, show.rownames = FALSE)
-tmp.h <- grobHeight(tmp.table)
-tmp.w <- grobWidth(tmp.table)
-tmp.title <- textGrob(label = paste0("Total bacteria laod from Elk on pasture by month (dil = ", sprintf("%1.0E", chk.dil), ")"),
-                      y=unit(0.5,"npc") + 0.5*tmp.h, 
-                      vjust=0, gp=gpar(fontsize=20))
-tmp.gt <- gTree(children=gList(tmp.table, tmp.title))
-grid.draw(tmp.gt)
-grid.newpage()
-rm(list = ls(pattern = "tmp\\.*"))
-
-## bac load in forest
-tmp.table <- tableGrob(chk.forest.bac, show.rownames = FALSE)
-tmp.h <- grobHeight(tmp.table)
-tmp.w <- grobWidth(tmp.table)
-tmp.title <- textGrob(label = paste0("Total bacteria load from Elk in forest (dil = ", sprintf("%1.0E", chk.dil), ")"),
-                      y=unit(0.5,"npc") + 0.5*tmp.h, 
-                      vjust=0, gp=gpar(fontsize=20))
-tmp.gt <- gTree(children=gList(tmp.table, tmp.title))
-grid.draw(tmp.gt)
-grid.newpage()
-rm(list = ls(pattern = "tmp\\.*"))
-## bac load in forest stream by month
-tmp.table <- tableGrob(chk.forest.bac.by.month, show.rownames = FALSE)
-tmp.h <- grobHeight(tmp.table)
-tmp.w <- grobWidth(tmp.table)
-tmp.title <- textGrob(label = paste0("Total bacteria load from Elk in forest by month (dil = ", sprintf("%1.0E", chk.dil), ")"),
-                      y=unit(0.5,"npc") + 0.5*tmp.h, 
-                      vjust=0, gp=gpar(fontsize=20))
-tmp.gt <- gTree(children=gList(tmp.table, tmp.title))
-grid.draw(tmp.gt)
-grid.newpage()
-rm(list = ls(pattern = "tmp\\.*"))
-
-## bac load on RAOCUT
-tmp.table <- tableGrob(chk.RAOCUT.pop, show.rownames = FALSE)
-tmp.h <- grobHeight(tmp.table)
-tmp.w <- grobWidth(tmp.table)
-tmp.title <- textGrob(label = paste0("Total bacteria load from Elk on RAOCUT (dil = ", sprintf("%1.0E", chk.dil), ")"),
-                      y=unit(0.5,"npc") + 0.5*tmp.h, 
-                      vjust=0, gp=gpar(fontsize=20))
-tmp.gt <- gTree(children=gList(tmp.table, tmp.title))
-grid.draw(tmp.gt)
-grid.newpage()
-rm(list = ls(pattern = "tmp\\.*"))
-
-## accum load on pasture by month
-tmp.table <- tableGrob(chk.pasture.accum.by.month, show.rownames = FALSE)
-tmp.h <- grobHeight(tmp.table)
-tmp.w <- grobWidth(tmp.table)
-tmp.title <- textGrob(label = paste0("Accum load from Elk on Pasture by month (dil = ", sprintf("%1.0E", chk.dil), ")"),
-                      y=unit(0.5,"npc") + 0.5*tmp.h, 
-                      vjust=0, gp=gpar(fontsize=20))
-tmp.gt <- gTree(children=gList(tmp.table, tmp.title))
-grid.draw(tmp.gt)
-grid.newpage()
-rm(list = ls(pattern = "tmp\\.*"))
-
-## accum load on forest by month
-tmp.table <- tableGrob(chk.forest.accum.by.month, show.rownames = FALSE)
-tmp.h <- grobHeight(tmp.table)
-tmp.w <- grobWidth(tmp.table)
-tmp.title <- textGrob(label = paste0("Accum load from Elk in Forest by month (dil = ", sprintf("%1.0E", chk.dil), ")"),
-                      y=unit(0.5,"npc") + 0.5*tmp.h, 
-                      vjust=0, gp=gpar(fontsize=20))
-tmp.gt <- gTree(children=gList(tmp.table, tmp.title))
-grid.draw(tmp.gt)
-grid.newpage()
-rm(list = ls(pattern = "tmp\\.*"))
-
-## accum load on RAOCUT by month
-tmp.table <- tableGrob(chk.RAOCUT.accum.by.month, show.rownames = FALSE)
-tmp.h <- grobHeight(tmp.table)
-tmp.w <- grobWidth(tmp.table)
-tmp.title <- textGrob(label = paste0("Accum load from Elk on RAOCUT by month (dil = ", sprintf("%1.0E", chk.dil), ")"),
+tmp.title <- textGrob(label = paste0("Accum loads from Deer (dil = ", sprintf("%1.0E", chk.dil), ")"),
                       y=unit(0.5,"npc") + 0.5*tmp.h, 
                       vjust=0, gp=gpar(fontsize=20))
 tmp.gt <- gTree(children=gList(tmp.table, tmp.title))
 grid.draw(tmp.gt)
 rm(list = ls(pattern = "tmp\\.*"))
-
-
 
 ## close the pdf file
 dev.off()
