@@ -38,9 +38,10 @@ wildlifeDeer <- function(chr.input="wildlifeDeerxx.txt", chr.wrkdir=getwd()) {
   ### Populations
   tmp.PopTotal  <- round(tmp.HabitatArea * tmp.ADHabitat,digits=0)
   tmp.PopOnLand <- round((1 - tmp.HabitatAreaWStreamAcess) * tmp.HabitatArea * tmp.ADHabitat,digits=0) + round((1 - tmp.PercentStrmTime) * tmp.HabitatAreaWStreamAcess * tmp.HabitatArea * tmp.ADHabitat,digits=0)
-  tmp.PopOnForest     <- round(tmp.PopOnLand * (tmp.ForestArea / tmp.HabitatArea),digits=0)
-  tmp.PopOnPasture    <- round(tmp.PopOnLand * (tmp.PastureArea / tmp.HabitatArea),digits=0)
-  tmp.PopOnRAOCUT    <- round(tmp.PopOnLand * (tmp.RAOCUTArea / tmp.HabitatArea),digits=0)
+  tmp.TotalFPR <- tmp.ForestArea + tmp.PastureArea + tmp.RAOCUTArea
+  tmp.PopOnForest     <- round(tmp.PopOnLand * (tmp.ForestArea / tmp.TotalFPR),digits=0)
+  tmp.PopOnPasture    <- round(tmp.PopOnLand * (tmp.PastureArea / tmp.TotalFPR),digits=0)
+  tmp.PopOnRAOCUT    <- round(tmp.PopOnLand * (tmp.RAOCUTArea / tmp.TotalFPR),digits=0)
   tmp.PopInStream  <- round(tmp.PercentStrmTime * tmp.HabitatAreaWStreamAcess * tmp.HabitatArea * tmp.ADHabitat,digits=0)
   ### bacteria loads
   tmp.bacteria.Total    <- round(tmp.bac.prod * tmp.PopTotal,digits=0)

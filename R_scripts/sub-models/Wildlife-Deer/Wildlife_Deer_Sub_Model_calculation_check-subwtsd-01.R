@@ -16,38 +16,26 @@ chk.Bacteria.Prod <- 1.8373286E+08
 chk.Animal.Density <- 4.7000000E-02
 ### Habitats
 chk.habitat <- 9777.0 # where does this number come from it's 545 ac greater than the sum of pasture and forest
-chk.habitat.pasture <- 441.35
-chk.habitat.forest   <- 8790.81
+### land end pints
+chk.land.Forest   <- 8790.81
+chk.land.Pasture <- 441.35
+chk.land.RAOCUT <- 435.35
+chk.land.Total <- chk.land.Forest + chk.land.Pasture + chk.land.RAOCUT
 ### Percent of Landuse with Stream access
 chk.Percent.habitat.with.Stream.Access <- 50
-### animals around streams
+### percent of animals in/around streams
 chk.in.and.around.streams <- 1.0000000E+00
 ## calculations
 ## animal numbers
-chk.all.habitat.deer <- chk.Animal.Density *   chk.habitat
-
+chk.pop.total <- chk.Animal.Density *   chk.habitat
 ## with/without stream access
-
-## without stream access
-chk.deer.wo.str.acc <- 
-  (1 - chk.Percent.habitat.with.Stream.Access / 100) * 
-  chk.all.habitat.deer
-
-## with stream access
-chk.deer.w.str.acc <- 
-  (chk.Percent.habitat.with.Stream.Access / 100) * 
-  chk.all.habitat.deer
-
-## with stream access on land
-chk.deer.w.str.acc.l <- (1 - chk.in.and.around.streams / 100) * 
-  chk.deer.w.str.acc
-
+chk.pop.wo.stream.access <- chk.pop.total * (1 - chk.Percent.habitat.with.Stream.Access / 100)
+chk.pop.w.stream.access <- chk.pop.total * (chk.Percent.habitat.with.Stream.Access / 100)
 ## with stream access on in/around atream
-chk.deer.w.str.acc.s <- (chk.in.and.around.streams / 100) * 
-  chk.deer.w.str.acc
-
+chk.pop.in.around.stream <- chk.pop.w.stream.access * (chk.in.and.around.streams / 100)
 ## deer on land
-chk.deer.land <- chk.deer.wo.str.acc + chk.deer.w.str.acc.l
+chk.pop.on.land <- chk.pop.wo.sream.access +
+  chk.pop.w.stream.access * (1 - chk.in.and.around.streams / 100)
 
 ##
 ## combining results
