@@ -1,7 +1,7 @@
 *** Wildlife Bacteria Source Model Input File
 *** Wildlife Species: Deer
 *** Watershed: Big Elk Creek Sub-Wtsd 01
-*** Date this Input File Created: 2014-01-10
+*** Date this Input File Created: 2016-03-15
 MUTSIN Start Year: 1995
 MUTSIN End Year: 2010
 HSPF-Sup File Header Number for Pasture in MON-ACCUM Table:  25
