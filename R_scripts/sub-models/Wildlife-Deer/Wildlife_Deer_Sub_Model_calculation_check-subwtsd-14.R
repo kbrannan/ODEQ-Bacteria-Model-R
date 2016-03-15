@@ -18,8 +18,8 @@ chk.Animal.Density <- 4.7000000E-02
 chk.habitat <- 2570.00
 ### land end pints
 chk.land.Forest   <- 2260.32
-chk.land.Pasture <- 642.5
-chk.land.RAOCUT <- 231.60
+chk.land.Pasture <- 642.50
+chk.land.RAOCUT <- 213.6
 chk.land.Total <- chk.land.Forest + chk.land.Pasture + chk.land.RAOCUT
 ### Percent of Landuse with Stream access
 chk.Percent.habitat.with.Stream.Access <- 50
@@ -207,8 +207,8 @@ chk.RAOCUT.accum <- data.frame(
   model.bac.total = df.output[ , "Accum.RAOCUT"],
   dil = round(
     chk.dil * (df.output[ , "Accum.RAOCUT"] - 
-                 chk.bac[chk.bac$location == "RAOCUT", "total.bac"]) /
-      chk.bac[chk.bac$location == "RAOCUT", "total.bac"],
+                 chk.bac[chk.bac$location == "RAOCUT", "accum.bac"]) /
+      chk.bac[chk.bac$location == "RAOCUT", "accum.bac"],
     digits = 0))
 
 ## all accum

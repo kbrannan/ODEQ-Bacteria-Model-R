@@ -15,11 +15,11 @@ chk.Bacteria.Prod <- 1.8373286E+08
 ### Animal Densities
 chk.Animal.Density <- 4.7000000E-02
 ### Habitats
-chk.habitat <- 9777.0 # where does this number come from it's 545 ac greater than the sum of pasture and forest
+chk.habitat <- 9777.00 # where does this number come from it's 545 ac greater than the sum of pasture and forest
 ### land end pints
 chk.land.Forest   <- 8790.81
 chk.land.Pasture <- 441.35
-chk.land.RAOCUT <- 435.35
+chk.land.RAOCUT <- 435.5
 chk.land.Total <- chk.land.Forest + chk.land.Pasture + chk.land.RAOCUT
 ### Percent of Landuse with Stream access
 chk.Percent.habitat.with.Stream.Access <- 50
@@ -207,8 +207,8 @@ chk.RAOCUT.accum <- data.frame(
   model.bac.total = df.output[ , "Accum.RAOCUT"],
   dil = round(
     chk.dil * (df.output[ , "Accum.RAOCUT"] - 
-                 chk.bac[chk.bac$location == "RAOCUT", "total.bac"]) /
-      chk.bac[chk.bac$location == "RAOCUT", "total.bac"],
+                 chk.bac[chk.bac$location == "RAOCUT", "accum.bac"]) /
+      chk.bac[chk.bac$location == "RAOCUT", "accum.bac"],
     digits = 0))
 
 ## all accum

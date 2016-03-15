@@ -207,8 +207,8 @@ chk.RAOCUT.accum <- data.frame(
   model.bac.total = df.output[ , "Accum.RAOCUT"],
   dil = round(
     chk.dil * (df.output[ , "Accum.RAOCUT"] - 
-                 chk.bac[chk.bac$location == "RAOCUT", "total.bac"]) /
-      chk.bac[chk.bac$location == "RAOCUT", "total.bac"],
+                 chk.bac[chk.bac$location == "RAOCUT", "accum.bac"]) /
+      chk.bac[chk.bac$location == "RAOCUT", "accum.bac"],
     digits = 0))
 
 ## all accum

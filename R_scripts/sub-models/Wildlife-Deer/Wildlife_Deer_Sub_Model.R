@@ -36,25 +36,27 @@ wildlifeDeer <- function(chr.input="wildlifeDeerxx.txt", chr.wrkdir=getwd()) {
   ##
   ### Calculations
   ### Populations
-  tmp.PopTotal  <- round(tmp.HabitatArea * tmp.ADHabitat,digits=0)
-  tmp.PopOnLand <- round((1 - tmp.HabitatAreaWStreamAcess) * tmp.HabitatArea * tmp.ADHabitat,digits=0) + round((1 - tmp.PercentStrmTime) * tmp.HabitatAreaWStreamAcess * tmp.HabitatArea * tmp.ADHabitat,digits=0)
+  tmp.PopTotal  <- tmp.HabitatArea * tmp.ADHabitat
+  tmp.PopInStream  <- tmp.PercentStrmTime * tmp.HabitatAreaWStreamAcess * tmp.HabitatArea * tmp.ADHabitat
+##  tmp.PopOnLand <- (1 - tmp.HabitatAreaWStreamAcess) * tmp.HabitatArea * tmp.ADHabitat + (1 - tmp.PercentStrmTime) * tmp.HabitatAreaWStreamAcess * tmp.HabitatArea * tmp.ADHabitat
+  tmp.PopOnLand <- tmp.PopTotal - tmp.PopInStream
   tmp.TotalFPR <- tmp.ForestArea + tmp.PastureArea + tmp.RAOCUTArea
-  tmp.PopOnForest     <- round(tmp.PopOnLand * (tmp.ForestArea / tmp.TotalFPR),digits=0)
-  tmp.PopOnPasture    <- round(tmp.PopOnLand * (tmp.PastureArea / tmp.TotalFPR),digits=0)
-  tmp.PopOnRAOCUT    <- round(tmp.PopOnLand * (tmp.RAOCUTArea / tmp.TotalFPR),digits=0)
-  tmp.PopInStream  <- round(tmp.PercentStrmTime * tmp.HabitatAreaWStreamAcess * tmp.HabitatArea * tmp.ADHabitat,digits=0)
+  tmp.PopOnForest     <- tmp.PopOnLand * (tmp.ForestArea / tmp.TotalFPR)
+  tmp.PopOnPasture    <- tmp.PopOnLand * (tmp.PastureArea / tmp.TotalFPR)
+  tmp.PopOnRAOCUT    <- tmp.PopOnLand * (tmp.RAOCUTArea / tmp.TotalFPR)
+
   ### bacteria loads
-  tmp.bacteria.Total    <- round(tmp.bac.prod * tmp.PopTotal,digits=0)
-  tmp.bacteria.TotalOnLand  <- round(tmp.bac.prod * tmp.PopOnLand,digits=0)
-  tmp.bacteria.TotalInStream  <- round(tmp.bac.prod * tmp.PopInStream,digits=0)/24
-  tmp.bacteria.OnForest     <- round(tmp.bac.prod * tmp.PopOnForest,digits=0)
-  tmp.bacteria.OnPasture    <- round(tmp.bac.prod * tmp.PopOnPasture ,digits=0)
-  tmp.bacteria.OnRAOCUT    <- round(tmp.bac.prod * tmp.PopOnRAOCUT ,digits=0)
+  tmp.bacteria.Total    <- tmp.bac.prod * tmp.PopTotal
+  tmp.bacteria.TotalOnLand  <- tmp.bac.prod * tmp.PopOnLand
+  tmp.bacteria.TotalInStream  <- tmp.bac.prod * tmp.PopInStream
+  tmp.bacteria.OnForest     <- tmp.bac.prod * tmp.PopOnForest
+  tmp.bacteria.OnPasture    <- tmp.bac.prod * tmp.PopOnPasture
+  tmp.bacteria.OnRAOCUT    <- tmp.bac.prod * tmp.PopOnRAOCUT
 
   ### accum values
-  tmp.accum.Forest  <- round(tmp.bacteria.OnForest / tmp.ForestArea,digits=0)
-  tmp.accum.Pasture <- round(tmp.bacteria.OnPasture / tmp.PastureArea,digits=0)
-  tmp.accum.RAOCUT  <- round(tmp.bacteria.OnRAOCUT / tmp.RAOCUTArea,digits=0)
+  tmp.accum.Forest  <- tmp.bacteria.OnForest / tmp.ForestArea
+  tmp.accum.Pasture <- tmp.bacteria.OnPasture / tmp.PastureArea
+  tmp.accum.RAOCUT  <- tmp.bacteria.OnRAOCUT / tmp.RAOCUTArea
 
   
   ##
