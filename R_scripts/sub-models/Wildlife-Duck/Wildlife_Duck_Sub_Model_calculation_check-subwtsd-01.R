@@ -1,9 +1,9 @@
 ## step bt step calculation check for wildlife_duck_sub_model using input from
 ## wildlifeDuck01.txt file
-chr.wildlife.elk.dir <- "M:/Models/Bacteria/HSPF/ODEQ-Bacteria-Model-R/R_scripts/sub-models/wildlife-Duck"
+chr.wildlife.duck.dir <- "M:/Models/Bacteria/HSPF/ODEQ-Bacteria-Model-R/R_scripts/sub-models/wildlife-Duck"
 chr.input <- "wildlifeDuck01.txt"
-source(paste0(chr.wildlife.elk.dir,"/Wildlife_Duck_Sub_Model.R"))
-df.output <- wildlifeDuck(chr.wrkdir=chr.wildlife.elk.dir,chr.input=chr.input)
+source(paste0(chr.wildlife.duck.dir,"/Wildlife_Duck_Sub_Model.R"))
+df.output <- wildlifeDuck(chr.wrkdir=chr.wildlife.duck.dir,chr.input=chr.input)
 ## packages
 library(doBy, quietly = TRUE)
 library(gridExtra, quietly = TRUE)
@@ -254,7 +254,7 @@ chk.forest.pop <- data.frame(
 chk.forest.pop.by.month <- merge(summaryBy(pop ~ month.chr, 
                                             data = chk.pop[chk.pop$location == "forest", ], 
                                             FUN = sum),
-                                  df.output[ , c("Month", "pop.total.on.forest")],
+                                  df.output[ , c("Month", "pop.total.in.forest")],
                                   by.x = "month.chr", by.y = "Month")
 names(chk.forest.pop.by.month) <- c("Month", "manual.calc.pop.total",
                                      "model.pop.total")
@@ -364,9 +364,9 @@ chk.stream.bac.by.month <-
 ## bac load on pasture
 chk.pasture.bac <- data.frame(
   manual.calc.bac.total = sum(chk.bac[chk.bac$location == "pasture", "total.bac"]),
-  model.bac.total = sum(df.output[ , "bac.Pasture"]),
+  model.bac.total = sum(df.output[ , "bac.on.pasture"]),
   dil = round(
-    chk.dil * (sum(df.output[ , "bac.Pasture"]) - 
+    chk.dil * (sum(df.output[ , "bac.on.pasture"]) - 
                  sum(chk.bac[chk.pop$location == "pasture", "total.bac"])) /
       sum(chk.bac[chk.bac$location == "pasture", "total.bac"]),
     digits = 0))
@@ -374,7 +374,7 @@ chk.pasture.bac <- data.frame(
 chk.pasture.bac.by.month <- merge(summaryBy(total.bac ~ month.chr, 
                                             data = chk.bac[chk.bac$location == "pasture", ], 
                                             FUN = sum),
-                                  df.output[ , c("Month", "bac.Pasture")],
+                                  df.output[ , c("Month", "bac.on.pasture")],
                                   by.x = "month.chr", by.y = "Month")
 names(chk.pasture.bac.by.month) <- c("Month", "manual.calc.bac.total",
                                      "model.bac.total")
@@ -393,9 +393,9 @@ chk.pasture.bac.by.month <-
 ## bac load in forest
 chk.forest.bac <- data.frame(
   manual.calc.bac.total = sum(chk.bac[chk.bac$location == "forest", "total.bac"]),
-  model.bac.total = sum(df.output[ , "bac.Forest"]),
+  model.bac.total = sum(df.output[ , "bac.in.forest"]),
   dil = round(
-    chk.dil * (sum(df.output[ , "bac.Forest"]) - 
+    chk.dil * (sum(df.output[ , "bac.in.forest"]) - 
                  sum(chk.bac[chk.bac$location == "forest", "total.bac"])) /
       sum(chk.bac[chk.bac$location == "forest", "total.bac"]),
     digits = 0))
@@ -403,7 +403,7 @@ chk.forest.bac <- data.frame(
 chk.forest.bac.by.month <- merge(summaryBy(total.bac ~ month.chr, 
                                            data = chk.bac[chk.bac$location == "forest", ], 
                                            FUN = sum),
-                                 df.output[ , c("Month", "bac.Forest")],
+                                 df.output[ , c("Month", "bac.in.forest")],
                                  by.x = "month.chr", by.y = "Month")
 names(chk.forest.bac.by.month) <- c("Month", "manual.calc.bac.total",
                                     "model.bac.total")
@@ -422,9 +422,9 @@ chk.forest.bac.by.month <-
 ## bac on RAOCUT
 chk.RAOCUT.bac <- data.frame(
   manual.calc.bac.total = sum(chk.bac[chk.bac$location == "RAOCUT", "total.bac"]),
-  model.bac.total = sum(df.output[ , "bac.RAOCUT"]),
+  model.bac.total = sum(df.output[ , "bac.on.RAOCUT"]),
   dil = round(
-    chk.dil * (sum(df.output[ , "bac.RAOCUT"]) - 
+    chk.dil * (sum(df.output[ , "bac.on.RAOCUT"]) - 
                  sum(chk.bac[chk.bac$location == "RAOCUT", "total.bac"])) /
       sum(chk.bac[chk.bac$location == "RAOCUT", "total.bac"]),
     digits = 0))
@@ -432,7 +432,7 @@ chk.RAOCUT.bac <- data.frame(
 chk.RAOCUT.bac.by.month <- merge(summaryBy(total.bac ~ month.chr, 
                                            data = chk.bac[chk.bac$location == "RAOCUT", ], 
                                            FUN = sum),
-                                 df.output[ , c("Month", "bac.RAOCUT")],
+                                 df.output[ , c("Month", "bac.on.RAOCUT")],
                                  by.x = "month.chr", by.y = "Month")
 names(chk.RAOCUT.bac.by.month) <- c("Month", "manual.calc.bac.total",
                                     "model.bac.total")
@@ -524,7 +524,7 @@ chk.RAOCUT.accum.by.month <-
 
 
 ## output results in tables to pdf
-pdf(file = paste0(chr.wildlife.elk.dir, "/elk-bacteria-model-calc-check-",
+pdf(file = paste0(chr.wildlife.duck.dir, "/duck-bacteria-model-calc-check-",
                   gsub("\\.txt","-",chr.input) 
                   ,strftime(Sys.time(), format = "%Y%m%d%H%M"),
                   ".pdf"), height = 8.5, width = 11, onefile = TRUE)
@@ -532,7 +532,7 @@ pdf(file = paste0(chr.wildlife.elk.dir, "/elk-bacteria-model-calc-check-",
 tmp.table <- tableGrob(chk.total.pop, show.rownames = FALSE)
 tmp.h <- grobHeight(tmp.table)
 tmp.w <- grobWidth(tmp.table)
-tmp.title <- textGrob(label = paste0("Total Elk Population (dil = ", sprintf("%1.0E", chk.dil), ")"),
+tmp.title <- textGrob(label = paste0("Total Duck Population (dil = ", sprintf("%1.0E", chk.dil), ")"),
                       y=unit(0.5,"npc") + 0.5*tmp.h, 
                       vjust=0, gp=gpar(fontsize=20))
 tmp.gt <- gTree(children=gList(tmp.table, tmp.title))
@@ -543,7 +543,7 @@ rm(list = ls(pattern = "tmp\\.*"))
 tmp.table <- tableGrob(chk.total.pop.by.month, show.rownames = FALSE)
 tmp.h <- grobHeight(tmp.table)
 tmp.w <- grobWidth(tmp.table)
-tmp.title <- textGrob(label = paste0("Total Elk Population by month (dil = ", sprintf("%1.0E", chk.dil), ")"),
+tmp.title <- textGrob(label = paste0("Total Duck Population by month (dil = ", sprintf("%1.0E", chk.dil), ")"),
                       y=unit(0.5,"npc") + 0.5*tmp.h, 
                       vjust=0, gp=gpar(fontsize=20))
 tmp.gt <- gTree(children=gList(tmp.table, tmp.title))
@@ -554,7 +554,7 @@ rm(list = ls(pattern = "tmp\\.*"))
 tmp.table <- tableGrob(chk.stream.pop, show.rownames = FALSE)
 tmp.h <- grobHeight(tmp.table)
 tmp.w <- grobWidth(tmp.table)
-tmp.title <- textGrob(label = paste0("Total Elk Population in/around stream (dil = ", sprintf("%1.0E", chk.dil), ")"),
+tmp.title <- textGrob(label = paste0("Total Duck Population in/around stream (dil = ", sprintf("%1.0E", chk.dil), ")"),
                       y=unit(0.5,"npc") + 0.5*tmp.h, 
                       vjust=0, gp=gpar(fontsize=20))
 tmp.gt <- gTree(children=gList(tmp.table, tmp.title))
@@ -565,7 +565,7 @@ rm(list = ls(pattern = "tmp\\.*"))
 tmp.table <- tableGrob(chk.stream.pop.by.month, show.rownames = FALSE)
 tmp.h <- grobHeight(tmp.table)
 tmp.w <- grobWidth(tmp.table)
-tmp.title <- textGrob(label = paste0("Total Elk Population in/around stream by month (dil = ", sprintf("%1.0E", chk.dil), ")"),
+tmp.title <- textGrob(label = paste0("Total Duck Population in/around stream by month (dil = ", sprintf("%1.0E", chk.dil), ")"),
                       y=unit(0.5,"npc") + 0.5*tmp.h, 
                       vjust=0, gp=gpar(fontsize=20))
 tmp.gt <- gTree(children=gList(tmp.table, tmp.title))
@@ -577,7 +577,7 @@ rm(list = ls(pattern = "tmp\\.*"))
 tmp.table <- tableGrob(chk.pasture.pop, show.rownames = FALSE)
 tmp.h <- grobHeight(tmp.table)
 tmp.w <- grobWidth(tmp.table)
-tmp.title <- textGrob(label = paste0("Total Elk Population on pasture (dil = ", sprintf("%1.0E", chk.dil), ")"),
+tmp.title <- textGrob(label = paste0("Total Duck Population on pasture (dil = ", sprintf("%1.0E", chk.dil), ")"),
                       y=unit(0.5,"npc") + 0.5*tmp.h, 
                       vjust=0, gp=gpar(fontsize=20))
 tmp.gt <- gTree(children=gList(tmp.table, tmp.title))
@@ -588,7 +588,7 @@ rm(list = ls(pattern = "tmp\\.*"))
 tmp.table <- tableGrob(chk.pasture.pop.by.month, show.rownames = FALSE)
 tmp.h <- grobHeight(tmp.table)
 tmp.w <- grobWidth(tmp.table)
-tmp.title <- textGrob(label = paste0("Total Elk Population on pasture by month (dil = ", sprintf("%1.0E", chk.dil), ")"),
+tmp.title <- textGrob(label = paste0("Total Duck Population on pasture by month (dil = ", sprintf("%1.0E", chk.dil), ")"),
                       y=unit(0.5,"npc") + 0.5*tmp.h, 
                       vjust=0, gp=gpar(fontsize=20))
 tmp.gt <- gTree(children=gList(tmp.table, tmp.title))
@@ -600,7 +600,7 @@ rm(list = ls(pattern = "tmp\\.*"))
 tmp.table <- tableGrob(chk.forest.pop, show.rownames = FALSE)
 tmp.h <- grobHeight(tmp.table)
 tmp.w <- grobWidth(tmp.table)
-tmp.title <- textGrob(label = paste0("Total Elk Population in forest (dil = ", sprintf("%1.0E", chk.dil), ")"),
+tmp.title <- textGrob(label = paste0("Total Duck Population in forest (dil = ", sprintf("%1.0E", chk.dil), ")"),
                       y=unit(0.5,"npc") + 0.5*tmp.h, 
                       vjust=0, gp=gpar(fontsize=20))
 tmp.gt <- gTree(children=gList(tmp.table, tmp.title))
@@ -611,7 +611,7 @@ rm(list = ls(pattern = "tmp\\.*"))
 tmp.table <- tableGrob(chk.forest.pop.by.month, show.rownames = FALSE)
 tmp.h <- grobHeight(tmp.table)
 tmp.w <- grobWidth(tmp.table)
-tmp.title <- textGrob(label = paste0("Total Elk Population in forest by month (dil = ", sprintf("%1.0E", chk.dil), ")"),
+tmp.title <- textGrob(label = paste0("Total Duck Population in forest by month (dil = ", sprintf("%1.0E", chk.dil), ")"),
                       y=unit(0.5,"npc") + 0.5*tmp.h, 
                       vjust=0, gp=gpar(fontsize=20))
 tmp.gt <- gTree(children=gList(tmp.table, tmp.title))
@@ -623,7 +623,7 @@ rm(list = ls(pattern = "tmp\\.*"))
 tmp.table <- tableGrob(chk.RAOCUT.pop, show.rownames = FALSE)
 tmp.h <- grobHeight(tmp.table)
 tmp.w <- grobWidth(tmp.table)
-tmp.title <- textGrob(label = paste0("Total Elk Population on RAOCUT (dil = ", sprintf("%1.0E", chk.dil), ")"),
+tmp.title <- textGrob(label = paste0("Total Duck Population on RAOCUT (dil = ", sprintf("%1.0E", chk.dil), ")"),
                       y=unit(0.5,"npc") + 0.5*tmp.h, 
                       vjust=0, gp=gpar(fontsize=20))
 tmp.gt <- gTree(children=gList(tmp.table, tmp.title))
@@ -634,7 +634,7 @@ rm(list = ls(pattern = "tmp\\.*"))
 tmp.table <- tableGrob(chk.RAOCUT.pop.by.month, show.rownames = FALSE)
 tmp.h <- grobHeight(tmp.table)
 tmp.w <- grobWidth(tmp.table)
-tmp.title <- textGrob(label = paste0("Total Elk Population on RAOCUT by month (dil = ", sprintf("%1.0E", chk.dil), ")"),
+tmp.title <- textGrob(label = paste0("Total Duck Population on RAOCUT by month (dil = ", sprintf("%1.0E", chk.dil), ")"),
                       y=unit(0.5,"npc") + 0.5*tmp.h, 
                       vjust=0, gp=gpar(fontsize=20))
 tmp.gt <- gTree(children=gList(tmp.table, tmp.title))
@@ -647,7 +647,7 @@ rm(list = ls(pattern = "tmp\\.*"))
 tmp.table <- tableGrob(chk.total.bac, show.rownames = FALSE)
 tmp.h <- grobHeight(tmp.table)
 tmp.w <- grobWidth(tmp.table)
-tmp.title <- textGrob(label = paste0("Total bacteria load from Elk (dil = ", sprintf("%1.0E", chk.dil), ")"),
+tmp.title <- textGrob(label = paste0("Total bacteria load from Duck (dil = ", sprintf("%1.0E", chk.dil), ")"),
                       y=unit(0.5,"npc") + 0.5*tmp.h, 
                       vjust=0, gp=gpar(fontsize=20))
 tmp.gt <- gTree(children=gList(tmp.table, tmp.title))
@@ -658,7 +658,7 @@ rm(list = ls(pattern = "tmp\\.*"))
 tmp.table <- tableGrob(chk.total.bac.by.month, show.rownames = FALSE)
 tmp.h <- grobHeight(tmp.table)
 tmp.w <- grobWidth(tmp.table)
-tmp.title <- textGrob(label = paste0("Total bacteria load from Elk by month (dil = ", sprintf("%1.0E", chk.dil), ")"),
+tmp.title <- textGrob(label = paste0("Total bacteria load from Duck by month (dil = ", sprintf("%1.0E", chk.dil), ")"),
                       y=unit(0.5,"npc") + 0.5*tmp.h, 
                       vjust=0, gp=gpar(fontsize=20))
 tmp.gt <- gTree(children=gList(tmp.table, tmp.title))
@@ -669,7 +669,7 @@ rm(list = ls(pattern = "tmp\\.*"))
 tmp.table <- tableGrob(chk.stream.bac, show.rownames = FALSE)
 tmp.h <- grobHeight(tmp.table)
 tmp.w <- grobWidth(tmp.table)
-tmp.title <- textGrob(label = paste0("Total bacteria load from Elk in/around stream (dil = ", sprintf("%1.0E", chk.dil), ")"),
+tmp.title <- textGrob(label = paste0("Total bacteria load from Duck in/around stream (dil = ", sprintf("%1.0E", chk.dil), ")"),
                       y=unit(0.5,"npc") + 0.5*tmp.h, 
                       vjust=0, gp=gpar(fontsize=20))
 tmp.gt <- gTree(children=gList(tmp.table, tmp.title))
@@ -680,7 +680,7 @@ rm(list = ls(pattern = "tmp\\.*"))
 tmp.table <- tableGrob(chk.stream.bac.by.month, show.rownames = FALSE)
 tmp.h <- grobHeight(tmp.table)
 tmp.w <- grobWidth(tmp.table)
-tmp.title <- textGrob(label = paste0("Total bacteria load from Elk in/around stream by month (dil = ", sprintf("%1.0E", chk.dil), ")"),
+tmp.title <- textGrob(label = paste0("Total bacteria load from Duck in/around stream by month (dil = ", sprintf("%1.0E", chk.dil), ")"),
                       y=unit(0.5,"npc") + 0.5*tmp.h, 
                       vjust=0, gp=gpar(fontsize=20))
 tmp.gt <- gTree(children=gList(tmp.table, tmp.title))
@@ -692,7 +692,7 @@ rm(list = ls(pattern = "tmp\\.*"))
 tmp.table <- tableGrob(chk.pasture.bac, show.rownames = FALSE)
 tmp.h <- grobHeight(tmp.table)
 tmp.w <- grobWidth(tmp.table)
-tmp.title <- textGrob(label = paste0("Total bacteria load from Elk on pasture (dil = ", sprintf("%1.0E", chk.dil), ")"),
+tmp.title <- textGrob(label = paste0("Total bacteria load from Duck on pasture (dil = ", sprintf("%1.0E", chk.dil), ")"),
                       y=unit(0.5,"npc") + 0.5*tmp.h, 
                       vjust=0, gp=gpar(fontsize=20))
 tmp.gt <- gTree(children=gList(tmp.table, tmp.title))
@@ -703,7 +703,7 @@ rm(list = ls(pattern = "tmp\\.*"))
 tmp.table <- tableGrob(chk.pasture.bac.by.month, show.rownames = FALSE)
 tmp.h <- grobHeight(tmp.table)
 tmp.w <- grobWidth(tmp.table)
-tmp.title <- textGrob(label = paste0("Total bacteria laod from Elk on pasture by month (dil = ", sprintf("%1.0E", chk.dil), ")"),
+tmp.title <- textGrob(label = paste0("Total bacteria laod from Duck on pasture by month (dil = ", sprintf("%1.0E", chk.dil), ")"),
                       y=unit(0.5,"npc") + 0.5*tmp.h, 
                       vjust=0, gp=gpar(fontsize=20))
 tmp.gt <- gTree(children=gList(tmp.table, tmp.title))
@@ -715,7 +715,7 @@ rm(list = ls(pattern = "tmp\\.*"))
 tmp.table <- tableGrob(chk.forest.bac, show.rownames = FALSE)
 tmp.h <- grobHeight(tmp.table)
 tmp.w <- grobWidth(tmp.table)
-tmp.title <- textGrob(label = paste0("Total bacteria load from Elk in forest (dil = ", sprintf("%1.0E", chk.dil), ")"),
+tmp.title <- textGrob(label = paste0("Total bacteria load from Duck in forest (dil = ", sprintf("%1.0E", chk.dil), ")"),
                       y=unit(0.5,"npc") + 0.5*tmp.h, 
                       vjust=0, gp=gpar(fontsize=20))
 tmp.gt <- gTree(children=gList(tmp.table, tmp.title))
@@ -726,7 +726,7 @@ rm(list = ls(pattern = "tmp\\.*"))
 tmp.table <- tableGrob(chk.forest.bac.by.month, show.rownames = FALSE)
 tmp.h <- grobHeight(tmp.table)
 tmp.w <- grobWidth(tmp.table)
-tmp.title <- textGrob(label = paste0("Total bacteria load from Elk in forest by month (dil = ", sprintf("%1.0E", chk.dil), ")"),
+tmp.title <- textGrob(label = paste0("Total bacteria load from Duck in forest by month (dil = ", sprintf("%1.0E", chk.dil), ")"),
                       y=unit(0.5,"npc") + 0.5*tmp.h, 
                       vjust=0, gp=gpar(fontsize=20))
 tmp.gt <- gTree(children=gList(tmp.table, tmp.title))
@@ -738,7 +738,7 @@ rm(list = ls(pattern = "tmp\\.*"))
 tmp.table <- tableGrob(chk.RAOCUT.pop, show.rownames = FALSE)
 tmp.h <- grobHeight(tmp.table)
 tmp.w <- grobWidth(tmp.table)
-tmp.title <- textGrob(label = paste0("Total bacteria load from Elk on RAOCUT (dil = ", sprintf("%1.0E", chk.dil), ")"),
+tmp.title <- textGrob(label = paste0("Total bacteria load from Duck on RAOCUT (dil = ", sprintf("%1.0E", chk.dil), ")"),
                       y=unit(0.5,"npc") + 0.5*tmp.h, 
                       vjust=0, gp=gpar(fontsize=20))
 tmp.gt <- gTree(children=gList(tmp.table, tmp.title))
@@ -750,7 +750,7 @@ rm(list = ls(pattern = "tmp\\.*"))
 tmp.table <- tableGrob(chk.pasture.accum.by.month, show.rownames = FALSE)
 tmp.h <- grobHeight(tmp.table)
 tmp.w <- grobWidth(tmp.table)
-tmp.title <- textGrob(label = paste0("Accum load from Elk on Pasture by month (dil = ", sprintf("%1.0E", chk.dil), ")"),
+tmp.title <- textGrob(label = paste0("Accum load from Duck on Pasture by month (dil = ", sprintf("%1.0E", chk.dil), ")"),
                       y=unit(0.5,"npc") + 0.5*tmp.h, 
                       vjust=0, gp=gpar(fontsize=20))
 tmp.gt <- gTree(children=gList(tmp.table, tmp.title))
@@ -762,7 +762,7 @@ rm(list = ls(pattern = "tmp\\.*"))
 tmp.table <- tableGrob(chk.forest.accum.by.month, show.rownames = FALSE)
 tmp.h <- grobHeight(tmp.table)
 tmp.w <- grobWidth(tmp.table)
-tmp.title <- textGrob(label = paste0("Accum load from Elk in Forest by month (dil = ", sprintf("%1.0E", chk.dil), ")"),
+tmp.title <- textGrob(label = paste0("Accum load from Duck in Forest by month (dil = ", sprintf("%1.0E", chk.dil), ")"),
                       y=unit(0.5,"npc") + 0.5*tmp.h, 
                       vjust=0, gp=gpar(fontsize=20))
 tmp.gt <- gTree(children=gList(tmp.table, tmp.title))
@@ -774,7 +774,7 @@ rm(list = ls(pattern = "tmp\\.*"))
 tmp.table <- tableGrob(chk.RAOCUT.accum.by.month, show.rownames = FALSE)
 tmp.h <- grobHeight(tmp.table)
 tmp.w <- grobWidth(tmp.table)
-tmp.title <- textGrob(label = paste0("Accum load from Elk on RAOCUT by month (dil = ", sprintf("%1.0E", chk.dil), ")"),
+tmp.title <- textGrob(label = paste0("Accum load from Duck on RAOCUT by month (dil = ", sprintf("%1.0E", chk.dil), ")"),
                       y=unit(0.5,"npc") + 0.5*tmp.h, 
                       vjust=0, gp=gpar(fontsize=20))
 tmp.gt <- gTree(children=gList(tmp.table, tmp.title))
