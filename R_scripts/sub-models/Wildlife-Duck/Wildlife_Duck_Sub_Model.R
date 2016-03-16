@@ -52,10 +52,19 @@ wildlifeDuck <- function(chr.input="wildlifeDuckxx.txt",chr.wrkdir=getwd()) {
   ### Instream
   tmp.BacteriaInStream <- tmp.bac.prod * tmp.PopInStream/24
   ###
+  ### On Land
+  tmp.Bacteria.Pasture <- round(tmp.bac.prod * tmp.PopOnPasture,0)
+  tmp.Bacteria.Forest  <- round(tmp.bac.prod * tmp.PopOnForest,0)
+  tmp.Bacteria.RAOCUT  <- round(tmp.bac.prod * tmp.PopOnRAOCUT,0)
+  ###
+  ### Bacteria Total
+  tmp.Bacteria.Total <- tmp.BacteriaInStream + tmp.Bacteria.Pasture + 
+    tmp.Bacteria.Forest + tmp.Bacteria.RAOCUT
+  ###
   ### Accume table values
-  tmp.Accum.Pasture <- round(tmp.bac.prod * tmp.PopOnPasture / tmp.PastureArea,0)
-  tmp.Accum.Forest  <- round(tmp.bac.prod * tmp.PopOnForest  / tmp.ForestArea,0)
-  tmp.Accum.RAOCUT  <- round(tmp.bac.prod * tmp.PopOnRAOCUT  / tmp.RAOCUTArea,0)
+  tmp.Accum.Pasture <- round(tmp.Bacteria.Pasture / tmp.PastureArea,0)
+  tmp.Accum.Forest  <- round(tmp.Bacteria.Forest  / tmp.ForestArea,0)
+  tmp.Accum.RAOCUT  <- round(tmp.Bacteria.RAOCUT  / tmp.RAOCUTArea,0)
   ##
   ### Assemble output data frame
   SubModelOutput <- data.frame(Month=c("Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"),
@@ -63,9 +72,13 @@ wildlifeDuck <- function(chr.input="wildlifeDuckxx.txt",chr.wrkdir=getwd()) {
                                pop.total.on.land=tmp.PopOnPasture + tmp.PopOnForest + tmp.PopOnRAOCUT,
                                pop.total.in.stream=tmp.PopInStream,
                                pop.total.on.pasture=tmp.PopOnPasture,
-                               pop.total.on.forest=tmp.PopOnForest,
+                               pop.total.in.forest=tmp.PopOnForest,
                                pop.total.on.RAOCUT=tmp.PopOnRAOCUT,
                                bac.total.in.stream=tmp.BacteriaInStream,
+                               bac.on.pasture=tmp.Bacteria.Pasture,
+                               bac.in.forest=tmp.Bacteria.Forest,
+                               bac.on.RAOCUT=tmp.Bacteria.RAOCUT,
+                               bac.total=tmp.Bacteria.Total,
                                Accum.Pasture=tmp.Accum.Pasture,
                                Accum.Forest=tmp.Accum.Forest,
                                Accum.RAOCUT=tmp.Accum.RAOCUT,
