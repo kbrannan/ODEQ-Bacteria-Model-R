@@ -35,36 +35,36 @@ wildlifeDuck <- function(chr.input="wildlifeDuckxx.txt",chr.wrkdir=getwd()) {
   ###
   ### Animal Populations
   tmp.PopOnPasture <- rep(-1,12)
-  tmp.PopOnPasture[tmp.S1Months] <- round((1 - tmp.ArndStreams) * tmp.PastureArea * tmp.S1AD,0)
-  tmp.PopOnPasture[tmp.S2Months]  <- round((1 - tmp.ArndStreams) * tmp.PastureArea * tmp.S2AD,0)
+  tmp.PopOnPasture[tmp.S1Months] <- (1 - tmp.ArndStreams) * tmp.PastureArea * tmp.S1AD
+  tmp.PopOnPasture[tmp.S2Months]  <- (1 - tmp.ArndStreams) * tmp.PastureArea * tmp.S2AD
   tmp.PopOnForest <- rep(-1,12)
-  tmp.PopOnForest[tmp.S1Months]  <- round((1 - tmp.ArndStreams) * tmp.ForestArea * tmp.S1AD,0)
-  tmp.PopOnForest[tmp.S2Months]  <- round((1 - tmp.ArndStreams) * tmp.ForestArea * tmp.S2AD,0)
+  tmp.PopOnForest[tmp.S1Months]  <- (1 - tmp.ArndStreams) * tmp.ForestArea * tmp.S1AD
+  tmp.PopOnForest[tmp.S2Months]  <- (1 - tmp.ArndStreams) * tmp.ForestArea * tmp.S2AD
   tmp.PopOnRAOCUT <- rep(-1,12)
-  tmp.PopOnRAOCUT[tmp.S1Months]  <- round((1 - tmp.ArndStreams) * tmp.RAOCUTArea * tmp.S1AD,0)
-  tmp.PopOnRAOCUT[tmp.S2Months]  <- round((1 - tmp.ArndStreams) * tmp.RAOCUTArea * tmp.S2AD,0)
+  tmp.PopOnRAOCUT[tmp.S1Months]  <- (1 - tmp.ArndStreams) * tmp.RAOCUTArea * tmp.S1AD
+  tmp.PopOnRAOCUT[tmp.S2Months]  <- (1 - tmp.ArndStreams) * tmp.RAOCUTArea * tmp.S2AD
   tmp.PopInStream <- rep(-1,12)
-  tmp.PopInStream[tmp.S1Months]  <- round(tmp.ArndStreams * (tmp.PastureArea + tmp.ForestArea + tmp.RAOCUTArea) * tmp.S1AD,0)
-  tmp.PopInStream[tmp.S2Months]  <- round(tmp.ArndStreams * (tmp.PastureArea + tmp.ForestArea + tmp.RAOCUTArea) * tmp.S2AD,0)
+  tmp.PopInStream[tmp.S1Months]  <- tmp.ArndStreams * (tmp.PastureArea + tmp.ForestArea + tmp.RAOCUTArea) * tmp.S1AD
+  tmp.PopInStream[tmp.S2Months]  <- tmp.ArndStreams * (tmp.PastureArea + tmp.ForestArea + tmp.RAOCUTArea) * tmp.S2AD
   ###
   ### Bacteria Production and Location
   ###
   ### Instream
-  tmp.BacteriaInStream <- tmp.bac.prod * tmp.PopInStream/24
+  tmp.BacteriaInStream <- tmp.bac.prod * tmp.PopInStream
   ###
   ### On Land
-  tmp.Bacteria.Pasture <- round(tmp.bac.prod * tmp.PopOnPasture,0)
-  tmp.Bacteria.Forest  <- round(tmp.bac.prod * tmp.PopOnForest,0)
-  tmp.Bacteria.RAOCUT  <- round(tmp.bac.prod * tmp.PopOnRAOCUT,0)
+  tmp.Bacteria.Pasture <- tmp.bac.prod * tmp.PopOnPasture
+  tmp.Bacteria.Forest  <- tmp.bac.prod * tmp.PopOnForest
+  tmp.Bacteria.RAOCUT  <- tmp.bac.prod * tmp.PopOnRAOCUT
   ###
   ### Bacteria Total
   tmp.Bacteria.Total <- tmp.BacteriaInStream + tmp.Bacteria.Pasture + 
     tmp.Bacteria.Forest + tmp.Bacteria.RAOCUT
   ###
   ### Accume table values
-  tmp.Accum.Pasture <- round(tmp.Bacteria.Pasture / tmp.PastureArea,0)
-  tmp.Accum.Forest  <- round(tmp.Bacteria.Forest  / tmp.ForestArea,0)
-  tmp.Accum.RAOCUT  <- round(tmp.Bacteria.RAOCUT  / tmp.RAOCUTArea,0)
+  tmp.Accum.Pasture <- tmp.Bacteria.Pasture / tmp.PastureArea
+  tmp.Accum.Forest  <- tmp.Bacteria.Forest  / tmp.ForestArea
+  tmp.Accum.RAOCUT  <- tmp.Bacteria.RAOCUT  / tmp.RAOCUTArea
   ##
   ### Assemble output data frame
   SubModelOutput <- data.frame(Month=c("Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"),
