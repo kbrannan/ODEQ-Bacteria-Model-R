@@ -334,9 +334,9 @@ chk.total.bac.by.month$Month <- factor(strftime(as.POSIXct(paste0("2016-",1:12,"
 ## bac in/around stream
 chk.stream.bac <- data.frame(
   manual.calc.bac.total = sum(chk.bac[chk.bac$location == "stream", "total.bac"]),
-  model.bac.total = 24 * sum(df.output[ , "bac.total.in.stream"]),
+  model.bac.total = sum(df.output[ , "bac.total.in.stream"]),
   dil = round(
-    chk.dil * ( 24 * sum(df.output[ , "bac.total.in.stream"]) - 
+    chk.dil * ( sum(df.output[ , "bac.total.in.stream"]) - 
                   sum(chk.bac[chk.bac$location == "stream", "total.bac"])) /
       sum(chk.bac[chk.bac$location == "stream", "total.bac"]),
     digits = 0))
@@ -348,7 +348,7 @@ chk.stream.bac.by.month <- merge(summaryBy(total.bac ~ month.chr,
                                  by.x = "month.chr", by.y = "Month")
 names(chk.stream.bac.by.month) <- c("Month", "manual.calc.bac.total",
                                     "model.bac.total")
-chk.stream.bac.by.month$model.bac.total <- 24 * chk.stream.bac.by.month$model.bac.total
+chk.stream.bac.by.month$model.bac.total <- chk.stream.bac.by.month$model.bac.total
 chk.stream.bac.by.month$Month <- factor(chk.stream.bac.by.month$Month,
                                         levels = strftime(
                                           as.POSIXct(paste0("2016-",1:12,"-01")), "%b"))
