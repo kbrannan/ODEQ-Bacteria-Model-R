@@ -29,12 +29,12 @@ wildlifeCoyote <- function(chr.input="wildlifeCoyotexx.txt",chr.wrkdir=getwd()) 
   ### Calculations
   ###
   ### Animal Populations
-  tmp.PopTotal     <- round((tmp.PastureArea + tmp.ForestArea + tmp.RAOCUTArea) * tmp.AD, 0)
-  tmp.PopOnPasture <- round((1 - tmp.ArndStreams) * tmp.PastureArea * tmp.AD,0)
-  tmp.PopInForest  <- round((1 - tmp.ArndStreams) * tmp.ForestArea * tmp.AD,0)
-  tmp.PopOnRAOCUT  <- round((1 - tmp.ArndStreams) * tmp.RAOCUTArea * tmp.AD,0)
+  tmp.PopTotal     <- (tmp.PastureArea + tmp.ForestArea + tmp.RAOCUTArea) * tmp.AD
+  tmp.PopOnPasture <- (1 - tmp.ArndStreams) * tmp.PastureArea * tmp.AD
+  tmp.PopInForest  <- (1 - tmp.ArndStreams) * tmp.ForestArea * tmp.AD
+  tmp.PopOnRAOCUT  <- (1 - tmp.ArndStreams) * tmp.RAOCUTArea * tmp.AD
   tmp.PopOnLand    <- tmp.PopOnPasture + tmp.PopInForest + tmp.PopOnRAOCUT
-  tmp.PopInStream  <- round(tmp.ArndStreams * (tmp.PastureArea + tmp.ForestArea + tmp.RAOCUTArea) * tmp.AD,0)
+  tmp.PopInStream  <- tmp.ArndStreams * (tmp.PastureArea + tmp.ForestArea + tmp.RAOCUTArea) * tmp.AD
   ###
   ### Bacteria Production and Location
   ###
@@ -52,9 +52,9 @@ wildlifeCoyote <- function(chr.input="wildlifeCoyotexx.txt",chr.wrkdir=getwd()) 
     tmp.BacteriaOnRAOCUT
   ###
   ### Accume table values
-  tmp.Accum.Pasture <- round(tmp.BacteriaOnPasture / tmp.PastureArea,0)
-  tmp.Accum.Forest  <- round(tmp.BacteriaInForest  / tmp.ForestArea,0)
-  tmp.Accum.RAOCUT  <- round(tmp.BacteriaOnRAOCUT  / tmp.RAOCUTArea,0)
+  tmp.Accum.Pasture <- tmp.BacteriaOnPasture / tmp.PastureArea
+  tmp.Accum.Forest  <- tmp.BacteriaInForest  / tmp.ForestArea
+  tmp.Accum.RAOCUT  <- tmp.BacteriaOnRAOCUT  / tmp.RAOCUTArea
   ##
   ### Assemble output data frame
   SubModelOutput <- data.frame(pop.total=tmp.PopTotal,
