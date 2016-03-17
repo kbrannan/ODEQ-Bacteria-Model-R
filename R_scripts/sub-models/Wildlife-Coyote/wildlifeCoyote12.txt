@@ -18,7 +18,7 @@ Residential/Agricultural Operration Area/Commercial/Urban/Transportation (ac): 2
 *** Percent of Landuse with Stream access
 *** all landuse has stream access for Coyotes
 *** Animal Densities
-Animal Density (animal/ac):     3.6063000E-06
+Animal Density (animal/ac):     3.6063000E-02
 *** General parameters
 Percent of animals in and around streams:     1.0000000E+00
 Bacteria Production of animal per day (orgs/day):     9.0000115E+08
