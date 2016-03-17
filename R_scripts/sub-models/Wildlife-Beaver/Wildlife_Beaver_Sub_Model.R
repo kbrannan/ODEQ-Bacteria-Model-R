@@ -27,14 +27,14 @@ wildlifeBeaver <- function(chr.input="wildlifeBeaverxx.txt",chr.wrkdir=getwd()) 
   ##
   ### Calculations
   ### Populations
-  tmp.PopTotal   <- round(tmp.HabitatArea * tmp.ADinHabitat,digits=0)
-  tmp.PopOnLand     <- round(((1-tmp.PercentStrmTime) * tmp.PopTotal),digits=0)
-  tmp.PopInStrm <- round((tmp.PercentStrmTime * tmp.PopTotal),digits=0)
+  tmp.PopTotal   <- tmp.HabitatArea * tmp.ADinHabitat
+  tmp.PopOnLand     <- (1-tmp.PercentStrmTime) * tmp.PopTotal
+  tmp.PopInStrm <- tmp.PercentStrmTime * tmp.PopTotal
   ### bacteria loads
-  tmp.bacteria.TotalOnLand  <- round(tmp.bac.prod * tmp.PopOnLand,digits=0)
-  tmp.bacteria.Total.InStrm   <- round(tmp.bac.prod * tmp.PopInStrm,digits=0)
+  tmp.bacteria.TotalOnLand  <- tmp.bac.prod * tmp.PopOnLand
+  tmp.bacteria.Total.InStrm   <- tmp.bac.prod * tmp.PopInStrm
   ### accum values
-  tmp.accum.forest  <- round(tmp.bacteria.TotalOnLand / tmp.HabitatArea,digits=0)
+  tmp.accum.forest  <- tmp.bacteria.TotalOnLand / tmp.HabitatArea
   
   ##
   ## Assemble output data frame
