@@ -15,7 +15,7 @@ chk.Bacteria.Prod <- 1.9665000E+05
 ### Animal Densities
 chk.Animal.Density <- 7.5000000E-03
 ### Habitats
-chk.land.Forest   <- 8790.81
+chk.land.Forest   <- 1034.01
 chk.land.Total <- chk.land.Forest
 chk.habitat <- chk.land.Forest
 ### Percent of Landuse with Stream access
