@@ -15,7 +15,7 @@ chk.Bacteria.Prod <- 9.0000115E+08
 ### Animal Densities
 chk.Animal.Density <- 3.6063000E-02
 ### habitat
-chk.land.Forest   <- 561.14
+chk.land.Forest   <- 561.17
 chk.land.Pasture <- 85.79
 chk.land.RAOCUT <- 97.37
 chk.land.Total <- chk.land.Forest + chk.land.Pasture + chk.land.RAOCUT
