@@ -29,17 +29,28 @@ chk.pop.Forest <- chk.Animal.Density * Stream.Habitat.Forest
 chk.pop.Pasture <- chk.Animal.Density * Stream.Habitat.Pasture
 chk.pop.total <- chk.pop.Forest + chk.pop.Pasture
 ## with/without stream access
-chk.pop.wo.stream.access <- chk.pop.total * (1 - chk.Percent.habitat.with.Stream.Access / 100)
-chk.pop.w.stream.access <- chk.pop.total * (chk.Percent.habitat.with.Stream.Access / 100)
+chk.pop.forest.wo.stream.access <- chk.pop.Forest * (1 - chk.Percent.habitat.with.Stream.Access / 100)
+chk.pop.forest.w.stream.access <- chk.pop.Forest * (chk.Percent.habitat.with.Stream.Access / 100)
+chk.pop.pasture.wo.stream.access <- chk.pop.Pasture * (1 - chk.Percent.habitat.with.Stream.Access / 100)
+chk.pop.pasture.w.stream.access <- chk.pop.Pasture * (chk.Percent.habitat.with.Stream.Access / 100)
 ## with stream access on in/around atream
-chk.pop.in.around.stream <- chk.pop.w.stream.access * (chk.in.and.around.streams / 100)
+chk.pop.forest.in.around.stream <- chk.pop.forest.w.stream.access * (chk.in.and.around.streams / 100)
+chk.pop.pasture.in.around.stream <- chk.pop.pasture.w.stream.access * (chk.in.and.around.streams / 100)
+chk.pop.in.around.stream <- chk.pop.forest.in.around.stream + chk.pop.pasture.in.around.stream
 ## otter on land
-chk.pop.on.land <- chk.pop.wo.stream.access +
-  chk.pop.w.stream.access * (1 - chk.in.and.around.streams / 100)
+chk.pop.forest.on.land.w.stream.access <- chk.pop.forest.w.stream.access -
+  chk.pop.forest.in.around.stream
+chk.pop.pasture.on.land.w.stream.access <- chk.pop.pasture.w.stream.access -
+  chk.pop.pasture.in.around.stream
+chk.pop.forest.on.land <- chk.pop.forest.wo.stream.access + 
+  chk.pop.forest.on.land.w.stream.access
+chk.pop.pasture.on.land <- chk.pop.pasture.wo.stream.access +
+  chk.pop.pasture.on.land.w.stream.access
+chk.pop.on.land <- chk.pop.forest.on.land + chk.pop.pasture.on.land
 ##
 ## combining results
-chk.pop <- rbind(data.frame(location = "forest", pop = chk.pop.Forest),
-                 data.frame(location = "pasture", pop = chk.pop.Pasture),
+chk.pop <- rbind(data.frame(location = "forest", pop = chk.pop.forest.on.land),
+                 data.frame(location = "pasture", pop = chk.pop.pasture.on.land),
                  data.frame(location = "stream", pop = chk.pop.in.around.stream))
 ## bacteria loads
 chk.bac <- data.frame(chk.pop, total.bac = chk.pop$pop * chk.Bacteria.Prod)
@@ -85,9 +96,9 @@ chk.stream.pop <- data.frame(
 ## pop on pasture
 chk.pasture.pop <- data.frame(
   manual.calc.pop.total = chk.pop[chk.pop$location == "pasture", "pop"],
-  model.pop.total = df.output[ , "pop.pasture"],
+  model.pop.total = df.output[ , "pop.pasture.on.land"],
   dil = round(
-    chk.dil * (df.output[ , "pop.pasture"] - 
+    chk.dil * (df.output[ , "pop.pasture.on.land"] - 
                   chk.pop[chk.pop$location == "pasture", "pop"]) /
       chk.pop[chk.pop$location == "pasture", "pop"],
     digits = 0))
@@ -95,9 +106,9 @@ chk.pasture.pop <- data.frame(
 ## pop on forest
 chk.forest.pop <- data.frame(
   manual.calc.pop.total = chk.pop[chk.pop$location == "forest", "pop"],
-  model.pop.total = df.output[ , "pop.forest"],
+  model.pop.total = df.output[ , "pop.forest.on.land"],
   dil = round(
-    chk.dil * (df.output[ , "pop.forest"] - 
+    chk.dil * (df.output[ , "pop.forest.on.land"] - 
                  chk.pop[chk.pop$location == "forest", "pop"]) /
       chk.pop[chk.pop$location == "forest", "pop"],
     digits = 0))
