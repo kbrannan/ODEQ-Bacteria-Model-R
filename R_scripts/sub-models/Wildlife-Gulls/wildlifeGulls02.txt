@@ -18,7 +18,7 @@ Residential/Agricultural Operration Area/Commercial/Urban/Transportation (ac): 9
 *** Percent of Landuse with Stream access
 *** all landuse has stream access for Gulls
 *** Animal Densities
-Animal Density (animal/ac):     4.5455000E-05
+Animal Density (animal/ac):     4.5455000E-02
 *** General parameters
 Percent of animals in and around streams:    4.7500000E+01
 Bacteria Production of animal per day (orgs/day):     2.3900007E+09
