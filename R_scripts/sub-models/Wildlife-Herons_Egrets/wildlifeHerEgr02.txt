@@ -18,7 +18,7 @@ Residential/Agricultural Operration Area/Commercial/Urban/Transportation (ac): 9
 *** Percent of Landuse with Stream access
 *** all landuse has stream access for Herons and Egrets
 *** Animal Densities
-Animal Density (animal/ac):     1.3794000E-05
+Animal Density (animal/ac):     1.3794000E-02
 *** General parameters
 Percent of animals in and around streams:     9.9000000E+01
 Bacteria Production of animal per day (orgs/day):     4.3020000E+09
