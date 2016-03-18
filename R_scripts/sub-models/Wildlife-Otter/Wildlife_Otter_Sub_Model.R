@@ -34,31 +34,32 @@ wildlifeOtter <- function(chr.input="wildlifeOtterxx.txt",
   ##
   ### Calculations
   ### Populations
-  tmp.PopPasture <- round(tmp.PastureStrmLength * tmp.PopStrmOnly,digits=0)
-  tmp.PopForest  <- round(tmp.ForestStrmLength * tmp.PopStrmOnly,digits=0)
-  tmp.PopTotal   <- round((tmp.PastureStrmLength + tmp.ForestStrmLength) * tmp.PopStrmOnly,digits=0)
-  tmp.PopOnPasture     <- round(((1-tmp.PercentStrmTime) * tmp.PopPasture),digits=0)
-  tmp.PopPastureInStrm <- round((tmp.PercentStrmTime * tmp.PopPasture),digits=0)
-  tmp.PopOnForest     <- round(((1-tmp.PercentStrmTime) * tmp.PopForest),digits=0)
-  tmp.PopForestInStrm <- round((tmp.PercentStrmTime * tmp.PopForest),digits=0)
-  tmp.PopTotalOnLand <- round(((1-tmp.PercentStrmTime) * tmp.PopTotal),digits=0)
-  tmp.PopTotalInStrm <- round((tmp.PercentStrmTime * tmp.PopTotal),digits=0)
+  tmp.PopPasture <- tmp.PastureStrmLength * tmp.PopStrmOnly
+  tmp.PopForest  <- tmp.ForestStrmLength * tmp.PopStrmOnly
+  tmp.PopTotal   <- (tmp.PastureStrmLength + tmp.ForestStrmLength) * tmp.PopStrmOnly
+  tmp.PopOnPasture     <- (1-tmp.PercentStrmTime) * tmp.PopPasture
+  tmp.PopPastureInStrm <- tmp.PercentStrmTime * tmp.PopPasture
+  tmp.PopOnForest     <- (1-tmp.PercentStrmTime) * tmp.PopForest
+  tmp.PopForestInStrm <- tmp.PercentStrmTime * tmp.PopForest
+  tmp.PopTotalOnLand <- (1-tmp.PercentStrmTime) * tmp.PopTotal
+  tmp.PopTotalInStrm <- tmp.PercentStrmTime * tmp.PopTotal
+  tmp.pop.total <- tmp.PopOnPasture + tmp.PopOnForest + tmp.PopTotalInStrm
   ### bacteria loads
-  tmp.bacteria.OnPasture    <- round(tmp.bac.prod * tmp.PopOnPasture,digits=0)
-  tmp.bacteria.OnForest     <- round(tmp.bac.prod * tmp.PopOnForest,digits=0)
-  tmp.bacteria.TotalOnLand  <- round(tmp.bac.prod * tmp.PopTotalOnLand,digits=0)
-  tmp.bacteria.Pasture.InStrm <- round(tmp.bac.prod * tmp.PopPastureInStrm,digits=0)/24
-  tmp.bacteria.Forest.InStrm  <- round(tmp.bac.prod * tmp.PopForestInStrm,digits=0)/24
-  tmp.bacteria.Total.InStrm   <- round(tmp.bac.prod * tmp.PopTotalInStrm,digits=0)/24
+  tmp.bacteria.OnPasture    <- tmp.bac.prod * tmp.PopOnPasture
+  tmp.bacteria.OnForest     <- tmp.bac.prod * tmp.PopOnForest
+  tmp.bacteria.TotalOnLand  <- tmp.bac.prod * tmp.PopTotalOnLand
+  tmp.bacteria.Pasture.InStrm <- tmp.bac.prod * tmp.PopPastureInStrm
+  tmp.bacteria.Forest.InStrm  <- tmp.bac.prod * tmp.PopForestInStrm
+  tmp.bacteria.Total.InStrm   <- tmp.bac.prod * tmp.PopTotalInStrm
   ### accum values
-  tmp.accum.pasture <- round(tmp.bacteria.OnPasture / tmp.PastureArea,digits=0)
-  tmp.accum.forest  <- round(tmp.bacteria.OnForest / tmp.ForestArea,digits=0)
+  tmp.accum.pasture <- tmp.bacteria.OnPasture / tmp.PastureArea
+  tmp.accum.forest  <- tmp.bacteria.OnForest / tmp.ForestArea
   
   
   
   ##
   ## Assemble output data frame
-  SubModelOutput <- data.frame(pop.total=tmp.PopTotal,
+  SubModelOutput <- data.frame(pop.total=tmp.pop.total,
                                pop.total.on.land=tmp.PopTotalOnLand,
                                pop.total.in.stream=tmp.PopTotalInStrm,
                                pop.pasture=tmp.PopPasture,
