@@ -8,7 +8,8 @@ df.output <- df.output <- cow.calf(chr.wrkdir=chr.cowcalf.dir,
 ## packages
 library(doBy, quietly = TRUE)
 library(gridExtra, quietly = TRUE)
-
+##
+## get input
 ## land use information
 chk.lu.pasture.area <- 445.3 # in acres
 chk.lu.forest.area  <- 8739.8 # in acres
@@ -32,13 +33,19 @@ chk.ainfo.sqolim.fac      <- 9 # unitless
 chk.ainfo.pasture.in.strm <- 1.2500000E+01 # as percent
 chk.ainfo.forest.in.strm  <- 3.7235884E+01 # as percent
 ##
+## create output check data.frame
+df.output.chk <- data.frame(Month = df.output$Month)
+##
 # calculations
 # Number of pairs is rea of pasture divided by stocking density
-chk.am.pairs     <- chk.lu.pasture.area / chk.amng.sd
+df.output.chk <- cbind(df.output.chk, 
+                       NumOfPairs = chk.lu.pasture.area / chk.amng.sd)
 # adjust size of pairs for calf growth by multiplying number of pairs by monthly
 # growth vector to get number of pairs (adjusted) by month
-chk.am.pairs.adj <- chk.am.pairs * chk.amng.adj.size
+df.output.chk <- cbind(df.output.chk,
+                       AUvsTime = df.output.chk$NumOfPairs * chk.amng.adj.size)
 # distribute the pairs among pasture, forest or confinement across months
+
 chk.loc.pasture <- chk.am.pairs.adj * chk.amng.in.pasture
 chk.loc.forest <- chk.am.pairs.adj * chk.amng.in.forest
 chk.loc.confine <- chk.am.pairs.adj * chk.amng.in.confine
