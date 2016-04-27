@@ -2,6 +2,11 @@
 ## cowcalf01.txt file
 chr.cowcalf.dir <- "M:/Models/Bacteria/HSPF/ODEQ-Bacteria-Model-R/R_scripts/sub-models/COw-Calf"
 chr.input <- "cowcalf01.txt"
+
+## for model
+chr.wrkdir <- chr.cowcalf.dir
+chr.input.file <- chr.input
+
 source(paste0(chr.cowcalf.dir,"/Cow_Calf_Sub_Model.R"))
 df.output <- df.output <- cow.calf(chr.wrkdir=chr.cowcalf.dir,
                                    chr.input.file=chr.input)
@@ -46,9 +51,9 @@ df.output.chk <- cbind(df.output.chk,
 df.output.chk <- cbind(df.output.chk,
                        AUvsTime = df.output.chk$NumOfPairs * chk.amng.adj.size)
 # distribute the pairs among pasture, forest or confinement across months
-chk.loc.pasture <- chk.am.pairs.adj * chk.amng.in.pasture
-chk.loc.forest <- chk.am.pairs.adj * chk.amng.in.forest
-chk.loc.confine <- chk.am.pairs.adj * chk.amng.in.confine
+chk.loc.pasture <- df.output.chk$AUvsTime * chk.amng.in.pasture
+chk.loc.forest <- df.output.chk$AUvsTime * chk.amng.in.forest
+chk.loc.confine <- df.output.chk$AUvsTime * chk.amng.in.confine
 ## on land with stream access
 chk.loc.pasture.w <- (chk.lu.pasture.w / 100) * chk.loc.pasture
 chk.loc.forest.w <- (chk.lu.forest.w / 100) * chk.loc.forest
@@ -105,8 +110,59 @@ df.output.chk <- cbind(df.output.chk,
                        
 
 
-rowSums(subset(df.output, select = c("pairs.OnPastureWOStreamAccess", "pairs.OnPastureWStreamAccess", "pairs.OnPastureInStream", "pairs.InConfinementvsTime", "pairs.InForestWOStreamAccess", "pairs.InForestWStreamAccess", "pairs.InForestInStream")))
-rowSums(subset(df.output.chk, select = c("pairs.OnPastureWOStreamAccess", "pairs.OnPastureWStreamAccess", "pairs.OnPastureInStream", "pairs.InConfinementvsTime", "pairs.InForestWOStreamAccess", "pairs.InForestWStreamAccess", "pairs.InForestInStream")))
+## compare manual and model output
+df.comp <- data.frame(Month = df.output$Month, diff = df.output[, -1] - df.output.chk[, -1])
+
+## output results in tables to pdf
+pdf(file = paste0(chr.cowcalf.dir, "/cow-calf-bacteria-model-calc-check-",
+                  gsub("\\.txt","-",chr.input) 
+                  ,strftime(Sys.time(), format = "%Y%m%d%H%M"),
+                  ".pdf"), height = 8.5, width = 11, onefile = TRUE)
+## population
+tmp.table <- tableGrob(df.comp, show.rownames = FALSE)
+tmp.h <- grobHeight(tmp.table)
+tmp.w <- grobWidth(tmp.table)
+tmp.title <- textGrob(label = "Compare Manual and Model Output for Cow-Calf Calcs",
+                      y=unit(0.5,"npc") + 0.5*tmp.h, 
+                      vjust=0, gp=gpar(fontsize=20))
+tmp.gt <- gTree(children=gList(tmp.table, tmp.title))
+grid.draw(tmp.gt)
+grid.newpage()
+rm(list = ls(pattern = "tmp\\.*"))
+dev.off()
+
+
+df.output[, -1] - df.output.chk[, -1]
+
+## number of pairs
+df.output$NumOfPairs - df.output.chk$NumOfPairs
+
+## AUvsTime
+df.output$AUvsTime - df.output.chk$AUvsTime
+
+
+## on pasture without stream access
+df.output$pairs.OnPastureWOStreamAccess - df.output.chk$pairs.OnPastureWOStreamAccess
+
+## on pasture with stream access (on land)
+df.output$pairs.OnPastureWStreamAccess - df.output.chk$pairs.OnPastureWStreamAccess
+
+## on pasture in stream
+df.output$pairs.OnPastureInStream - df.output.chk$pairs.OnPastureInStream
+
+
+num.cols <- c(4,5,6)
+df.comp.on.pasture <- data.frame(Month = df.output$Month,
+                                 mod = rowSums(subset(df.output, select = num.cols)),
+                                 man = rowSums(subset(df.output.chk, select = num.cols)))
+
+## in forest
+num.cols <- c(8,9,10)
+df.comp.in.forest <- data.frame(Month = df.output$Month,
+                                 mod = rowSums(subset(df.output, select = num.cols)),
+                                 man = rowSums(subset(df.output.chk, select = num.cols)))
+
+
 
 
 junk <- cbind(
