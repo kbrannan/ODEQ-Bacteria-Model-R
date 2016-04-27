@@ -87,9 +87,9 @@ df.output.chk <- cbind(df.output.chk,
                        Bacteria.InConfinementvsTime = chk.ainfo.bac.prod * 
                          chk.am.pairs.adj * chk.amng.in.confine,
                        Bacteria.InForest = chk.ainfo.bac.prod * 
-                         (1 - (chk.lu.forest.w / 100)) * chk.loc.forest +
+                         ((1 - (chk.lu.forest.w / 100)) * chk.loc.forest +
                          (1 - (chk.ainfo.forest.in.strm / 100)) * 
-                         chk.loc.forest.w,
+                         chk.loc.forest.w),
                        Bacteria.InForestInStream = chk.ainfo.bac.prod * 
                          (chk.ainfo.forest.in.strm / 100) * chk.loc.forest.w)
 # bacteria total loads
