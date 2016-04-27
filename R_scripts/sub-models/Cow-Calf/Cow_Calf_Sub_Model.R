@@ -181,7 +181,7 @@ cow.calf <- function(chr.wrkdir="E:/PEST/BigElk/Sub_Models",
     Accum.Forest = bac.forest.lnd / lu.forest.area,
     
     Lim.Pasture = ainfo.sqolim.fac * bac.pasture.lnd / lu.pasture.area,
-    Lim.Forest = ainfo.sqolim.fac * bac.pasture.lnd / lu.forest.area,
+    Lim.Forest = ainfo.sqolim.fac * bac.forest.lnd / lu.forest.area,
     stringsAsFactors = FALSE)
     
 
