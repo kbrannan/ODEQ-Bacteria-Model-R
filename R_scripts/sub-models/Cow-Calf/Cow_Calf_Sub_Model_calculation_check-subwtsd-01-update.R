@@ -8,6 +8,7 @@ df.output <- df.output <- cow.calf(chr.wrkdir=chr.cowcalf.dir,
 ## packages
 library(doBy, quietly = TRUE)
 library(gridExtra, quietly = TRUE)
+library(reshape2, quietly = TRUE)
 ##
 ## get input
 ## land use information
@@ -94,7 +95,7 @@ chk.bac.pasture.lnd <- df.output.chk$Bacteria.OnPastureWOStreamAccess +
 chk.bac.forest.lnd <- df.output.chk$Bacteria.InForest
 # total load in-stream, accum and lim
 df.output.chk <- cbind(df.output.chk, 
-                       Bacteria.InStream = chk.bac.strm,
+                       Bacteria.Instream = chk.bac.strm,
                        Accum.Pasture = chk.bac.pasture.lnd / chk.lu.pasture.area,
                        Accum.Forest = chk.bac.forest.lnd / chk.lu.forest.area,
                        Lim.Pasture = chk.ainfo.sqolim.fac * 
@@ -102,6 +103,47 @@ df.output.chk <- cbind(df.output.chk,
                        Lim.Forest = chk.ainfo.sqolim.fac * 
                          chk.bac.forest.lnd / chk.lu.forest.area)
                        
+
+
+rowSums(subset(df.output, select = c("pairs.OnPastureWOStreamAccess", "pairs.OnPastureWStreamAccess", "pairs.OnPastureInStream", "pairs.InConfinementvsTime", "pairs.InForestWOStreamAccess", "pairs.InForestWStreamAccess", "pairs.InForestInStream")))
+rowSums(subset(df.output.chk, select = c("pairs.OnPastureWOStreamAccess", "pairs.OnPastureWStreamAccess", "pairs.OnPastureInStream", "pairs.InConfinementvsTime", "pairs.InForestWOStreamAccess", "pairs.InForestWStreamAccess", "pairs.InForestInStream")))
+
+
+junk <- cbind(
+  melt.data.frame(
+    data = cbind(df.output, 
+                 src = factor("mod", levels = c("mod", "man")), 
+                 id.vars = c("Month", "src"))),
+    melt.data.frame(
+      data = cbind(df.output.chk, 
+                   src = factor("mod", levels = c("mod", "man")), 
+                   id.vars = c("Month", "src"))))
+
+junk <- rbind(
+  cbind(df.output, 
+              data.frame(src = 
+                           rep("mod", length(df.output$Month)), 
+                         stringsAsFactors = FALSE)), 
+  cbind(df.output.chk, 
+              data.frame(src = 
+                           rep("man", length(df.output$Month)), 
+                         stringsAsFactors = FALSE))
+)
+
+junk$src <- factor(junk$src, levels = c("mod", "man"))
+
+junk.melt <- melt.data.frame(data = junk, id.vars = c("Month", "src"))
+
+junk.pairs <- summaryBy(pairs.OnPastureWOStreamAccess + pairs.OnPastureWStreamAccess + pairs.OnPastureInStream + pairs.InConfinementvsTime + pairs.InForestWOStreamAccess + pairs.InForestWStreamAccess + pairs.InForestInStream ~ Month + src, data = junk.melt, FUN = sum)
+
+junk.By <- summaryBy(value ~ Month + src + variable, data = junk.melt, FUN = sum)
+
+subset(junk.melt, c("pairs.OnPastureWOStreamAccess", "pairs.OnPastureWStreamAccess", "pairs.OnPastureInStream", "pairs.InConfinementvsTime", "pairs.InForestWOStreamAccess", "pairs.InForestWStreamAccess", "pairs.InForestInStream"))
+junk.melt[, c("pairs.OnPastureWOStreamAccess", "pairs.OnPastureWStreamAccess", "pairs.OnPastureInStream", "pairs.InConfinementvsTime", "pairs.InForestWOStreamAccess", "pairs.InForestWStreamAccess", "pairs.InForestInStream")]
+
+junk.pairs <- summaryBy(variable ~ Month + src, 
+                        data = junk.melt, FUN = sum)
+
 
 # accum
 chk.Accum.Pasture <- chk.bac.pasture.lnd / chk.lu.pasture.area
@@ -168,7 +210,7 @@ df.output$Month <- factor(df.output$Month,
 df.output.chk$Month <- factor(df.output.chk$Month,
                           levels = c("Jan", "Feb", "Mar", "Apr", "May", "Jun",
                                      "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"))
-summaryBy( Month ~., 
+summaryBy( .~ Month, 
            data = df.output[, c(1, grep("pairs", names(df.output)))], 
            FUN = sum)
 
@@ -177,6 +219,17 @@ summaryBy( Month ~.,
            FUN = sum)
 
 df.output[, -1] - df.output.chk[, -1]
+
+
+
+
+
+summaryBy(pairs.OnPastureWOStreamAccess + pairs.OnPastureWStreamAccess +
+            pairs.OnPastureInStream + pairs.InConfinementvsTime +
+            pairs.InForestWOStreamAccess + pairs.InForestWStreamAccess +
+            pairs.InForestInStream ~ Month, data = df.output, FUN = sum)
+
+
 
 df.output[ , "AUvsTime"] - df.output.chk[ , "AUvsTime"]
 chk.total.pop <- data.frame(
