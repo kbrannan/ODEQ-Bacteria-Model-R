@@ -48,31 +48,27 @@ df.output.chk <- cbind(df.output.chk,
 chk.loc.pasture <- chk.am.pairs.adj * chk.amng.in.pasture
 chk.loc.forest <- chk.am.pairs.adj * chk.amng.in.forest
 chk.loc.confine <- chk.am.pairs.adj * chk.amng.in.confine
-# distribute pairs on forest or pasture with or without stream access
+## on land with stream access
+chk.loc.pasture.w <- (chk.lu.pasture.w / 100) * chk.loc.pasture
+chk.loc.forest.w <- (chk.lu.forest.w / 100) * chk.loc.forest
+# distribute pairs on forest or pasture with or without stream access or in-stream
 df.output.chk <- cbind(df.output.chk, 
                        pairs.OnPastureWOStreamAccess = 
                          (1 - (chk.lu.pasture.w / 100)) * chk.loc.pasture,
                        pairs.OnPastureWStreamAccess = 
-                         (chk.lu.pasture.w / 100) * chk.loc.pasture,
+                         (1 - (chk.ainfo.pasture.in.strm / 100)) * 
+                         chk.loc.pasture.w,
+                       pairs.OnPastureInStream = 
+                         (chk.ainfo.pasture.in.strm / 100) * chk.loc.pasture.w,
                        pairs.InConfinementvsTime = 
                          chk.am.pairs.adj * chk.amng.in.confine,
                        pairs.InForestWOStreamAccess = 
                          (1 - (chk.lu.forest.w / 100)) * chk.loc.forest,
                        pairs.InForestWStreamAccess = 
-                         (chk.lu.forest.w / 100) * chk.loc.forest)
-# distribute pairs on lu with stream access between in stream and land
-chk.loc.pasture.w.strm <- (chk.ainfo.pasture.in.strm / 100) * 
-  chk.loc.pasture.w
-chk.loc.pasture.w.lnd <- (1 - (chk.ainfo.pasture.in.strm / 100)) * 
-  chk.loc.pasture.w
-chk.loc.forest.w.strm <- (chk.ainfo.forest.in.strm / 100) * 
-  chk.loc.forest.w
-chk.loc.forest.w.lnd <- (1 - (chk.ainfo.forest.in.strm / 100)) * 
-  chk.loc.forest.w
-# check all location end points comapred to total pairs
-chk.am.pairs - sum((chk.loc.confine + chk.loc.pasture.wo + chk.loc.forest.wo +
-                      chk.loc.pasture.w.strm + chk.loc.pasture.w.lnd + 
-                      chk.loc.forest.w.strm + chk.loc.forest.w.lnd) / chk.amng.adj.size) / 12
+                         (1 - (chk.ainfo.forest.in.strm / 100)) * 
+                         chk.loc.forest.w,
+                       pairs.InForestInStream = 
+                         (chk.ainfo.forest.in.strm / 100) * chk.loc.forest.w)
 # bacteria loads
 chk.bac.strm <- (chk.loc.pasture.w.strm + chk.loc.forest.w.strm) * 
   chk.ainfo.bac.prod
