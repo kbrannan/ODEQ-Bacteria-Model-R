@@ -69,17 +69,40 @@ df.output.chk <- cbind(df.output.chk,
                          chk.loc.forest.w,
                        pairs.InForestInStream = 
                          (chk.ainfo.forest.in.strm / 100) * chk.loc.forest.w)
-# bacteria loads
-chk.bac.strm <- (chk.loc.pasture.w.strm + chk.loc.forest.w.strm) * 
-  chk.ainfo.bac.prod
-chk.bac.pasture.lnd <- (chk.loc.pasture.wo + chk.loc.pasture.w.lnd) * 
-  chk.ainfo.bac.prod
-chk.bac.forest.lnd <- (chk.loc.forest.wo + chk.loc.forest.w.lnd) * 
-  chk.ainfo.bac.prod
-chk.bac.confine <- chk.loc.confine * chk.ainfo.bac.prod
-# check bacteria loads to total
-sum((chk.am.pairs.adj * chk.ainfo.bac.prod) - 
-      sum(chk.bac.strm + chk.bac.pasture.lnd + chk.bac.forest.lnd + chk.bac.confine))
+# distribute bacteria loads on forest or pasture with or without stream access or in-stream
+df.output.chk <- cbind(df.output.chk, 
+                       Bacteria.OnPastureWOStreamAccess = chk.ainfo.bac.prod * 
+                         (1 - (chk.lu.pasture.w / 100)) * chk.loc.pasture,
+                       Bacteria.OnPastureWStreamAccess = chk.ainfo.bac.prod * 
+                         (1 - (chk.ainfo.pasture.in.strm / 100)) * 
+                         chk.loc.pasture.w,
+                       Bacteria.OnPastureInStream = chk.ainfo.bac.prod * 
+                         (chk.ainfo.pasture.in.strm / 100) * chk.loc.pasture.w,
+                       Bacteria.InConfinementvsTime = chk.ainfo.bac.prod * 
+                         chk.am.pairs.adj * chk.amng.in.confine,
+                       Bacteria.InForest = chk.ainfo.bac.prod * 
+                         (1 - (chk.lu.forest.w / 100)) * chk.loc.forest +
+                         (1 - (chk.ainfo.forest.in.strm / 100)) * 
+                         chk.loc.forest.w,
+                       Bacteria.InForestInStream = chk.ainfo.bac.prod * 
+                         (chk.ainfo.forest.in.strm / 100) * chk.loc.forest.w)
+# bacteria total loads
+chk.bac.strm <- df.output.chk$Bacteria.OnPastureInStream +
+  df.output.chk$Bacteria.InForestInStream
+chk.bac.pasture.lnd <- df.output.chk$Bacteria.OnPastureWOStreamAccess +
+  df.output.chk$Bacteria.OnPastureWStreamAccess
+chk.bac.forest.lnd <- df.output.chk$Bacteria.InForest
+# total load in-stream, accum and lim
+df.output.chk <- cbind(df.output.chk, 
+                       Bacteria.InStream = chk.bac.strm,
+                       Accum.Pasture = chk.bac.pasture.lnd / chk.lu.pasture.area,
+                       Accum.Forest = chk.bac.forest.lnd / chk.lu.forest.area,
+                       Lim.Pasture = chk.ainfo.sqolim.fac * 
+                         chk.bac.pasture.lnd / chk.lu.pasture.area,
+                       Lim.Forest = chk.ainfo.sqolim.fac * 
+                         chk.bac.forest.lnd / chk.lu.forest.area)
+                       
+
 # accum
 chk.Accum.Pasture <- chk.bac.pasture.lnd / chk.lu.pasture.area
 chk.Accum.forest <- chk.bac.forest.lnd / chk.lu.forest.area
@@ -138,6 +161,24 @@ chk.bac <- data.frame(chk.bac,
 chk.dil <- 1E+06 # need to explain this
 ## population total and by locations
 ## total
+df.output[2, c(1, grep("pairs", names(df.output)))]
+df.output$Month <- factor(df.output$Month,
+                          levels = c("Jan", "Feb", "Mar", "Apr", "May", "Jun",
+                                     "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"))
+df.output.chk$Month <- factor(df.output.chk$Month,
+                          levels = c("Jan", "Feb", "Mar", "Apr", "May", "Jun",
+                                     "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"))
+summaryBy( Month ~., 
+           data = df.output[, c(1, grep("pairs", names(df.output)))], 
+           FUN = sum)
+
+summaryBy( Month ~., 
+           data = df.output.chk[, c(1, grep("pairs", names(df.output.chk)))], 
+           FUN = sum)
+
+df.output[, -1] - df.output.chk[, -1]
+
+df.output[ , "AUvsTime"] - df.output.chk[ , "AUvsTime"]
 chk.total.pop <- data.frame(
   manual.calc.pop.total = sum(chk.pop$pop),
   model.pop.total = sum(df.output$pop.total),
