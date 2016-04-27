@@ -119,20 +119,27 @@ cow.calf <- function(chr.wrkdir="E:/PEST/BigElk/Sub_Models",
 #   # check
 #   abs(bac.pasture - (bac.pasture.w + bac.pasture.wo))
 #   abs(bac.forest - (bac.forest.w + bac.forest.wo))
-  bac.pasture.w  <- loc.pasture.w * ainfo.bac.prod
+  bac.pasture.w.lnd  <- loc.pasture.w.lnd * ainfo.bac.prod
   bac.pasture.wo <- loc.pasture.wo * ainfo.bac.prod
-  bac.forest.w   <- loc.forest.w * ainfo.bac.prod
+  bac.pasture.w.strm  <- loc.pasture.w.strm * ainfo.bac.prod
+  bac.forest.w.lnd   <- loc.forest.w.lnd * ainfo.bac.prod
   bac.forest.wo  <- loc.forest.wo * ainfo.bac.prod
+  bac.forest.w.strm  <- loc.forest.w.strm * ainfo.bac.prod
+  
+  # bac.pasture.w  <- loc.pasture.w.lnd * ainfo.bac.prod
+  # bac.pasture.wo <- loc.pasture.wo * ainfo.bac.prod
+  # bac.forest.w   <- loc.forest.w.lnd * ainfo.bac.prod
+  # bac.forest.wo  <- loc.forest.wo * ainfo.bac.prod
   # check
-  abs(bac.pasture - (bac.pasture.w + bac.pasture.wo))
-  abs(bac.forest - (bac.forest.w + bac.forest.wo))
+  abs(bac.pasture - (bac.pasture.w.lnd + bac.pasture.wo + bac.pasture.w.strm))
+  abs(bac.forest - (bac.forest.w.lnd + bac.forest.wo + bac.forest.w.strm))
   
   
   ## bacteria load in stream or not 
-  bac.pasture.w.strm  <- bac.pasture.w * ainfo.pasture.in.strm
-  bac.pasture.w.lnd   <- bac.pasture.w * (1 - ainfo.pasture.in.strm)
-  bac.forest.w.strm   <- bac.forest.w * ainfo.forest.in.strm
-  bac.forest.w.lnd    <- bac.forest.w * (1 - ainfo.forest.in.strm)
+  # bac.pasture.w.strm  <- bac.pasture.w * ainfo.pasture.in.strm
+  # bac.pasture.w.lnd   <- bac.pasture.w * (1 - ainfo.pasture.in.strm)
+  # bac.forest.w.strm   <- bac.forest.w * ainfo.forest.in.strm
+  # bac.forest.w.lnd    <- bac.forest.w * (1 - ainfo.forest.in.strm)
   # checks
   abs(bac.pasture.w - (bac.pasture.w.strm + bac.pasture.w.lnd))
   abs(bac.forest.w - (bac.forest.w.strm + bac.forest.w.lnd))
@@ -155,11 +162,11 @@ cow.calf <- function(chr.wrkdir="E:/PEST/BigElk/Sub_Models",
     NumOfPairs = am.pairs * rep(1,12),
     AUvsTime = am.pairs.adj,
     pairs.OnPastureWOStreamAccess = loc.pasture.wo,
-    pairs.OnPastureWStreamAccess = loc.pasture.w,
+    pairs.OnPastureWStreamAccess = loc.pasture.w.lnd,
     pairs.OnPastureInStream = loc.pasture.w.strm,
     pairs.InConfinementvsTime = loc.confine,
     pairs.InForestWOStreamAccess = loc.forest.wo,
-    pairs.InForestWStreamAccess = loc.forest.w,
+    pairs.InForestWStreamAccess = loc.forest.w.lnd,
     pairs.InForestInStream = loc.forest.w.strm,
 
     Bacteria.OnPastureWOStreamAccess = bac.pasture.wo,
