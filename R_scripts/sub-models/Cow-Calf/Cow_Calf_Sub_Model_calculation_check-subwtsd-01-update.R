@@ -45,17 +45,21 @@ df.output.chk <- cbind(df.output.chk,
 df.output.chk <- cbind(df.output.chk,
                        AUvsTime = df.output.chk$NumOfPairs * chk.amng.adj.size)
 # distribute the pairs among pasture, forest or confinement across months
-
 chk.loc.pasture <- chk.am.pairs.adj * chk.amng.in.pasture
 chk.loc.forest <- chk.am.pairs.adj * chk.amng.in.forest
 chk.loc.confine <- chk.am.pairs.adj * chk.amng.in.confine
-# check location of pairs to total
-chk.am.pairs - sum((chk.loc.pasture + chk.loc.forest + chk.loc.confine) / chk.amng.adj.size) / 12
 # distribute pairs on forest or pasture with or without stream access
-chk.loc.pasture.w <- (chk.lu.pasture.w / 100) * chk.loc.pasture
-chk.loc.pasture.wo <- (1 - (chk.lu.pasture.w / 100)) * chk.loc.pasture
-chk.loc.forest.w <- (chk.lu.forest.w / 100) * chk.loc.forest
-chk.loc.forest.wo <- (1 - (chk.lu.forest.w / 100)) * chk.loc.forest
+df.output.chk <- cbind(df.output.chk, 
+                       pairs.OnPastureWOStreamAccess = 
+                         (1 - (chk.lu.pasture.w / 100)) * chk.loc.pasture,
+                       pairs.OnPastureWStreamAccess = 
+                         (chk.lu.pasture.w / 100) * chk.loc.pasture,
+                       pairs.InConfinementvsTime = 
+                         chk.am.pairs.adj * chk.amng.in.confine,
+                       pairs.InForestWOStreamAccess = 
+                         (1 - (chk.lu.forest.w / 100)) * chk.loc.forest,
+                       pairs.InForestWStreamAccess = 
+                         (chk.lu.forest.w / 100) * chk.loc.forest)
 # distribute pairs on lu with stream access between in stream and land
 chk.loc.pasture.w.strm <- (chk.ainfo.pasture.in.strm / 100) * 
   chk.loc.pasture.w
