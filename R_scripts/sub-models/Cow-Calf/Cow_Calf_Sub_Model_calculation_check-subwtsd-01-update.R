@@ -112,34 +112,42 @@ df.output.chk <- cbind(df.output.chk,
 
 ## compare manual and model output
 df.comp <- data.frame(Month = df.output$Month, diff = df.output[, -1] - df.output.chk[, -1])
+names(df.comp) <- names(df.output)
+chk.dil <- 1E+06 # need to explain this
 
-## output results in tables to pdf
-pdf(file = paste0(chr.cowcalf.dir, "/cow-calf-bacteria-model-calc-check-",
-                  gsub("\\.txt","-",chr.input) 
-                  ,strftime(Sys.time(), format = "%Y%m%d%H%M"),
-                  ".pdf"), height = 8.5, width = 11, onefile = TRUE)
-## population
-tmp.table <- tableGrob(df.comp, show.rownames = FALSE)
+
+## number of pairs
+tmp.df <- data.frame(Month = df.output$Month, Manual = df.output.chk$NumOfPairs,
+                Model = df.output.chk$NumOfPairs, 
+                dil = round(chk.dil * df.comp$NumOfPairs/df.output.chk$NumOfPairs,
+                            digits = 0))
+tmp.table <- tableGrob(tmp.df, show.rownames = FALSE)
 tmp.h <- grobHeight(tmp.table)
 tmp.w <- grobWidth(tmp.table)
-tmp.title <- textGrob(label = "Compare Manual and Model Output for Cow-Calf Calcs",
+tmp.title <- textGrob(label = paste0("Total number of Cow-calf pairs (dil = ", sprintf("%1.0E", chk.dil), ")"),
                       y=unit(0.5,"npc") + 0.5*tmp.h, 
                       vjust=0, gp=gpar(fontsize=20))
 tmp.gt <- gTree(children=gList(tmp.table, tmp.title))
 grid.draw(tmp.gt)
 grid.newpage()
 rm(list = ls(pattern = "tmp\\.*"))
-dev.off()
-
-
-df.output[, -1] - df.output.chk[, -1]
-
-## number of pairs
-df.output$NumOfPairs - df.output.chk$NumOfPairs
 
 ## AUvsTime
 df.output$AUvsTime - df.output.chk$AUvsTime
-
+tmp.df <- data.frame(Month = df.output$Month, Manual = df.output.chk$AUvsTime,
+                     Model = df.output.chk$AUvsTime, 
+                     dil = round(chk.dil * df.comp$AUvsTime/df.output.chk$AUvsTime,
+                                 digits = 0))
+tmp.table <- tableGrob(tmp.df, show.rownames = FALSE)
+tmp.h <- grobHeight(tmp.table)
+tmp.w <- grobWidth(tmp.table)
+tmp.title <- textGrob(label = paste0("Ainimal Units by month of Cow-calf pairs (dil = ", sprintf("%1.0E", chk.dil), ")"),
+                      y=unit(0.5,"npc") + 0.5*tmp.h, 
+                      vjust=0, gp=gpar(fontsize=20))
+tmp.gt <- gTree(children=gList(tmp.table, tmp.title))
+grid.draw(tmp.gt)
+grid.newpage()
+rm(list = ls(pattern = "tmp\\.*"))
 
 ## on pasture without stream access
 df.output$pairs.OnPastureWOStreamAccess - df.output.chk$pairs.OnPastureWOStreamAccess
