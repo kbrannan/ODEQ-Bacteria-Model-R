@@ -14,6 +14,29 @@ df.output <- df.output <- cow.calf(chr.wrkdir=chr.cowcalf.dir,
 library(doBy, quietly = TRUE)
 library(gridExtra, quietly = TRUE)
 library(reshape2, quietly = TRUE)
+
+## funct for creating tables for output of results
+table.grob <- function(chr.col, df.output = df.output,
+                       df.output.chk = df.outout.chk,
+                       df.comp = df.comp, chr.title = NULL, chk.dil = 1E+06) {
+  df.output$pairs.OnPastureWStreamAccess - df.output.chk$pairs.OnPastureWStreamAccess
+  df.output$pairs.OnPastureWOStreamAccess - df.output.chk$pairs.OnPastureWOStreamAccess
+  df.output$AUvsTime - df.output.chk$AUvsTime
+  tmp.mod <- eval(parse(text = paste0("df.output$", chr.col)))
+  tmp.man <- eval(parse(text = paste0("df.output.chk$", chr.col)))
+  tmp.com <- eval(parse(text = paste0("df.comp$", chr.col)))
+  tmp.df <- data.frame(Month = df.output$Month,
+                       Manual = tmp.man,
+                       Model = tmp.mod, 
+                       dil = round(chk.dil * tmp.com/tmp.man, digits = 0))
+  tmp.table <- tableGrob(tmp.df, show.rownames = FALSE)
+  tmp.h <- grobHeight(tmp.table)
+  tmp.w <- grobWidth(tmp.table)
+  tmp.title <- textGrob(label = chr.title,
+                        y=unit(0.5,"npc") + 0.5*tmp.h, 
+                        vjust=0, gp=gpar(fontsize=20))
+  tmp.gt <- gTree(children=gList(tmp.table, tmp.title))
+}
 ##
 ## get input
 ## land use information
@@ -67,7 +90,7 @@ df.output.chk <- cbind(df.output.chk,
                        pairs.OnPastureInStream = 
                          (chk.ainfo.pasture.in.strm / 100) * chk.loc.pasture.w,
                        pairs.InConfinementvsTime = 
-                         chk.am.pairs.adj * chk.amng.in.confine,
+                         df.output.chk$AUvsTime * chk.amng.in.confine,
                        pairs.InForestWOStreamAccess = 
                          (1 - (chk.lu.forest.w / 100)) * chk.loc.forest,
                        pairs.InForestWStreamAccess = 
@@ -85,7 +108,7 @@ df.output.chk <- cbind(df.output.chk,
                        Bacteria.OnPastureInStream = chk.ainfo.bac.prod * 
                          (chk.ainfo.pasture.in.strm / 100) * chk.loc.pasture.w,
                        Bacteria.InConfinementvsTime = chk.ainfo.bac.prod * 
-                         chk.am.pairs.adj * chk.amng.in.confine,
+                         df.output.chk$AUvsTime * chk.amng.in.confine,
                        Bacteria.InForest = chk.ainfo.bac.prod * 
                          ((1 - (chk.lu.forest.w / 100)) * chk.loc.forest +
                          (1 - (chk.ainfo.forest.in.strm / 100)) * 
@@ -117,31 +140,34 @@ chk.dil <- 1E+06 # need to explain this
 
 
 ## number of pairs
-tmp.df <- data.frame(Month = df.output$Month, Manual = df.output.chk$NumOfPairs,
-                Model = df.output.chk$NumOfPairs, 
-                dil = round(chk.dil * df.comp$NumOfPairs/df.output.chk$NumOfPairs,
-                            digits = 0))
-tmp.table <- tableGrob(tmp.df, show.rownames = FALSE)
-tmp.h <- grobHeight(tmp.table)
-tmp.w <- grobWidth(tmp.table)
-tmp.title <- textGrob(label = paste0("Total number of Cow-calf pairs (dil = ", sprintf("%1.0E", chk.dil), ")"),
-                      y=unit(0.5,"npc") + 0.5*tmp.h, 
-                      vjust=0, gp=gpar(fontsize=20))
-tmp.gt <- gTree(children=gList(tmp.table, tmp.title))
+tmp.gt <- table.grob(chr.col = "NumOfPairs", df.output = df.output,
+                     df.output.chk = df.output.chk, df.comp = df.comp,
+                     chr.title = paste0("Total number of Cow-calf pairs (dil = ", sprintf("%1.0E", chk.dil), ")"),
+                     chk.dil = chk.dil)
 grid.draw(tmp.gt)
 grid.newpage()
-rm(list = ls(pattern = "tmp\\.*"))
+rm(tmp.gt)
 
 ## AUvsTime
+tmp.gt <- table.grob(chr.col = "AUvsTime", df.output = df.output,
+                     df.output.chk = df.output.chk, df.comp = df.comp,
+                     chr.title = paste0("Animal Units by month of Cow-calf pairs (dil = ", sprintf("%1.0E", chk.dil), ")"),
+                     chk.dil = chk.dil)
+grid.draw(tmp.gt)
+grid.newpage()
+rm(tmp.gt)
+
+## on pasture without stream access
+df.output$pairs.OnPastureWOStreamAccess - df.output.chk$pairs.OnPastureWOStreamAccess
 df.output$AUvsTime - df.output.chk$AUvsTime
-tmp.df <- data.frame(Month = df.output$Month, Manual = df.output.chk$AUvsTime,
-                     Model = df.output.chk$AUvsTime, 
-                     dil = round(chk.dil * df.comp$AUvsTime/df.output.chk$AUvsTime,
+tmp.df <- data.frame(Month = df.output$Month, Manual = df.output.chk$pairs.OnPastureWOStreamAccess,
+                     Model = df.output.chk$pairs.OnPastureWOStreamAccess, 
+                     dil = round(chk.dil * df.comp$pairs.OnPastureWOStreamAccess/df.output.chk$pairs.OnPastureWOStreamAccess,
                                  digits = 0))
 tmp.table <- tableGrob(tmp.df, show.rownames = FALSE)
 tmp.h <- grobHeight(tmp.table)
 tmp.w <- grobWidth(tmp.table)
-tmp.title <- textGrob(label = paste0("Ainimal Units by month of Cow-calf pairs (dil = ", sprintf("%1.0E", chk.dil), ")"),
+tmp.title <- textGrob(label = paste0("Cow-calf pairs on pasture without stream access (dil = ", sprintf("%1.0E", chk.dil), ")"),
                       y=unit(0.5,"npc") + 0.5*tmp.h, 
                       vjust=0, gp=gpar(fontsize=20))
 tmp.gt <- gTree(children=gList(tmp.table, tmp.title))
@@ -149,12 +175,24 @@ grid.draw(tmp.gt)
 grid.newpage()
 rm(list = ls(pattern = "tmp\\.*"))
 
-## on pasture without stream access
-df.output$pairs.OnPastureWOStreamAccess - df.output.chk$pairs.OnPastureWOStreamAccess
-
 ## on pasture with stream access (on land)
 df.output$pairs.OnPastureWStreamAccess - df.output.chk$pairs.OnPastureWStreamAccess
-
+df.output$pairs.OnPastureWOStreamAccess - df.output.chk$pairs.OnPastureWOStreamAccess
+df.output$AUvsTime - df.output.chk$AUvsTime
+tmp.df <- data.frame(Month = df.output$Month, Manual = df.output.chk$pairs.OnPastureWOStreamAccess,
+                     Model = df.output.chk$pairs.OnPastureWOStreamAccess, 
+                     dil = round(chk.dil * df.comp$pairs.OnPastureWOStreamAccess/df.output.chk$pairs.OnPastureWOStreamAccess,
+                                 digits = 0))
+tmp.table <- tableGrob(tmp.df, show.rownames = FALSE)
+tmp.h <- grobHeight(tmp.table)
+tmp.w <- grobWidth(tmp.table)
+tmp.title <- textGrob(label = paste0("Cow-calf pairs on pasture without stream access (dil = ", sprintf("%1.0E", chk.dil), ")"),
+                      y=unit(0.5,"npc") + 0.5*tmp.h, 
+                      vjust=0, gp=gpar(fontsize=20))
+tmp.gt <- gTree(children=gList(tmp.table, tmp.title))
+grid.draw(tmp.gt)
+grid.newpage()
+rm(list = ls(pattern = "tmp\\.*"))
 ## on pasture in stream
 df.output$pairs.OnPastureInStream - df.output.chk$pairs.OnPastureInStream
 
@@ -418,3 +456,6 @@ rm(list = ls(pattern = "tmp\\.*"))
 
 ## close the pdf file
 dev.off()
+
+
+
