@@ -139,6 +139,12 @@ names(df.comp) <- names(df.output)
 chk.dil <- 1E+06 # need to explain this
 
 
+## output results in tables to pdf
+pdf(file = paste0(chr.cowcalf.dir, "/cow-cal-bacteria-model-calc-check-",
+                  gsub("\\.txt","-",chr.input) 
+                  ,strftime(Sys.time(), format = "%Y%m%d%H%M"),
+                  ".pdf"), height = 8.5, width = 11, onefile = TRUE)
+
 ## number of pairs
 tmp.gt <- table.grob(chr.col = "NumOfPairs", df.output = df.output,
                      df.output.chk = df.output.chk, df.comp = df.comp,
@@ -158,304 +164,167 @@ grid.newpage()
 rm(tmp.gt)
 
 ## on pasture without stream access
-df.output$pairs.OnPastureWOStreamAccess - df.output.chk$pairs.OnPastureWOStreamAccess
-df.output$AUvsTime - df.output.chk$AUvsTime
-tmp.df <- data.frame(Month = df.output$Month, Manual = df.output.chk$pairs.OnPastureWOStreamAccess,
-                     Model = df.output.chk$pairs.OnPastureWOStreamAccess, 
-                     dil = round(chk.dil * df.comp$pairs.OnPastureWOStreamAccess/df.output.chk$pairs.OnPastureWOStreamAccess,
-                                 digits = 0))
-tmp.table <- tableGrob(tmp.df, show.rownames = FALSE)
-tmp.h <- grobHeight(tmp.table)
-tmp.w <- grobWidth(tmp.table)
-tmp.title <- textGrob(label = paste0("Cow-calf pairs on pasture without stream access (dil = ", sprintf("%1.0E", chk.dil), ")"),
-                      y=unit(0.5,"npc") + 0.5*tmp.h, 
-                      vjust=0, gp=gpar(fontsize=20))
-tmp.gt <- gTree(children=gList(tmp.table, tmp.title))
+tmp.gt <- table.grob(chr.col = "pairs.OnPastureWOStreamAccess", df.output = df.output,
+                     df.output.chk = df.output.chk, df.comp = df.comp,
+                     chr.title = paste0("Cow-calf pairs on pasture without stream access (dil = ", sprintf("%1.0E", chk.dil), ")"),
+                     chk.dil = chk.dil)
 grid.draw(tmp.gt)
 grid.newpage()
-rm(list = ls(pattern = "tmp\\.*"))
+rm(tmp.gt)
+
+
 
 ## on pasture with stream access (on land)
-df.output$pairs.OnPastureWStreamAccess - df.output.chk$pairs.OnPastureWStreamAccess
-df.output$pairs.OnPastureWOStreamAccess - df.output.chk$pairs.OnPastureWOStreamAccess
-df.output$AUvsTime - df.output.chk$AUvsTime
-tmp.df <- data.frame(Month = df.output$Month, Manual = df.output.chk$pairs.OnPastureWOStreamAccess,
-                     Model = df.output.chk$pairs.OnPastureWOStreamAccess, 
-                     dil = round(chk.dil * df.comp$pairs.OnPastureWOStreamAccess/df.output.chk$pairs.OnPastureWOStreamAccess,
-                                 digits = 0))
-tmp.table <- tableGrob(tmp.df, show.rownames = FALSE)
-tmp.h <- grobHeight(tmp.table)
-tmp.w <- grobWidth(tmp.table)
-tmp.title <- textGrob(label = paste0("Cow-calf pairs on pasture without stream access (dil = ", sprintf("%1.0E", chk.dil), ")"),
-                      y=unit(0.5,"npc") + 0.5*tmp.h, 
-                      vjust=0, gp=gpar(fontsize=20))
-tmp.gt <- gTree(children=gList(tmp.table, tmp.title))
+tmp.gt <- table.grob(chr.col = "pairs.OnPastureWStreamAccess", df.output = df.output,
+                     df.output.chk = df.output.chk, df.comp = df.comp,
+                     chr.title = paste0("Cow-calf pairs on pasture with stream access (dil = ", sprintf("%1.0E", chk.dil), ")"),
+                     chk.dil = chk.dil)
 grid.draw(tmp.gt)
 grid.newpage()
-rm(list = ls(pattern = "tmp\\.*"))
+rm(tmp.gt)
+
 ## on pasture in stream
-df.output$pairs.OnPastureInStream - df.output.chk$pairs.OnPastureInStream
-
-
-num.cols <- c(4,5,6)
-df.comp.on.pasture <- data.frame(Month = df.output$Month,
-                                 mod = rowSums(subset(df.output, select = num.cols)),
-                                 man = rowSums(subset(df.output.chk, select = num.cols)))
-
-## in forest
-num.cols <- c(8,9,10)
-df.comp.in.forest <- data.frame(Month = df.output$Month,
-                                 mod = rowSums(subset(df.output, select = num.cols)),
-                                 man = rowSums(subset(df.output.chk, select = num.cols)))
-
-
-
-
-junk <- cbind(
-  melt.data.frame(
-    data = cbind(df.output, 
-                 src = factor("mod", levels = c("mod", "man")), 
-                 id.vars = c("Month", "src"))),
-    melt.data.frame(
-      data = cbind(df.output.chk, 
-                   src = factor("mod", levels = c("mod", "man")), 
-                   id.vars = c("Month", "src"))))
-
-junk <- rbind(
-  cbind(df.output, 
-              data.frame(src = 
-                           rep("mod", length(df.output$Month)), 
-                         stringsAsFactors = FALSE)), 
-  cbind(df.output.chk, 
-              data.frame(src = 
-                           rep("man", length(df.output$Month)), 
-                         stringsAsFactors = FALSE))
-)
-
-junk$src <- factor(junk$src, levels = c("mod", "man"))
-
-junk.melt <- melt.data.frame(data = junk, id.vars = c("Month", "src"))
-
-junk.pairs <- summaryBy(pairs.OnPastureWOStreamAccess + pairs.OnPastureWStreamAccess + pairs.OnPastureInStream + pairs.InConfinementvsTime + pairs.InForestWOStreamAccess + pairs.InForestWStreamAccess + pairs.InForestInStream ~ Month + src, data = junk.melt, FUN = sum)
-
-junk.By <- summaryBy(value ~ Month + src + variable, data = junk.melt, FUN = sum)
-
-subset(junk.melt, c("pairs.OnPastureWOStreamAccess", "pairs.OnPastureWStreamAccess", "pairs.OnPastureInStream", "pairs.InConfinementvsTime", "pairs.InForestWOStreamAccess", "pairs.InForestWStreamAccess", "pairs.InForestInStream"))
-junk.melt[, c("pairs.OnPastureWOStreamAccess", "pairs.OnPastureWStreamAccess", "pairs.OnPastureInStream", "pairs.InConfinementvsTime", "pairs.InForestWOStreamAccess", "pairs.InForestWStreamAccess", "pairs.InForestInStream")]
-
-junk.pairs <- summaryBy(variable ~ Month + src, 
-                        data = junk.melt, FUN = sum)
-
-
-# accum
-chk.Accum.Pasture <- chk.bac.pasture.lnd / chk.lu.pasture.area
-chk.Accum.forest <- chk.bac.forest.lnd / chk.lu.forest.area
-# sqolim
-chk.Lim.Pasture <- chk.ainfo.sqolim.fac * chk.Accum.Pasture
-chk.Lim.Forest <- chk.ainfo.sqolim.fac * chk.Accum.forest
-
-##
-## get input
-## SQOLIM multiplcation factor: 
-chk.sqolim <- 9
-chk.Bacteria.Prod <- 1.9665000E+05
-### Animal Densities
-chk.Animal.Density <- 7.5000000E-03
-### Habitats
-chk.land.Forest   <- 1034.01
-chk.land.Total <- chk.land.Forest
-chk.habitat <- chk.land.Forest
-### Percent of Landuse with Stream access
-chk.Percent.habitat.with.Stream.Access <- 100
-### percent of animals in/around streams
-chk.in.and.around.streams <- 3.1245634E+01
-## calculations
-## animal numbers
-chk.pop.total <- chk.Animal.Density *   chk.habitat
-## with/without stream access
-chk.pop.wo.stream.access <- chk.pop.total * (1 - chk.Percent.habitat.with.Stream.Access / 100)
-chk.pop.w.stream.access <- chk.pop.total * (chk.Percent.habitat.with.Stream.Access / 100)
-## with stream access on in/around atream
-chk.pop.in.around.stream <- chk.pop.w.stream.access * (chk.in.and.around.streams / 100)
-## Beaver on land
-chk.pop.on.land <- chk.pop.wo.stream.access +
-  chk.pop.w.stream.access * (1 - chk.in.and.around.streams / 100)
-chk.pop.on.land.Forest <- chk.pop.on.land * (chk.land.Forest / chk.land.Total)
-
-##
-## combining results
-chk.pop <- rbind(data.frame(location = "forest", pop = chk.pop.on.land.Forest),
-                 data.frame(location = "stream", pop = chk.pop.in.around.stream))
-## bacteria loads
-chk.bac <- data.frame(chk.pop, total.bac = chk.pop$pop * chk.Bacteria.Prod)
-chk.bac <- data.frame(chk.bac, accum.bac = -1)
-
-## accum
-## on forest
-tmp.rows <- grep("TRUE", with(chk.bac, location == "forest"))
-chk.bac[tmp.rows, "accum.bac"] <- chk.bac[tmp.rows, "total.bac"] / 
-  chk.land.Forest
-## for stream 
-chk.bac[chk.bac$location == "stream", "accum.bac"] = NA
-## sqolim
-chk.bac <- data.frame(chk.bac, 
-                          sqolim.bac = chk.bac$accum.bac * chk.sqolim)
-##
-## check model output
-chk.dil <- 1E+06 # need to explain this
-## population total and by locations
-## total
-df.output[2, c(1, grep("pairs", names(df.output)))]
-df.output$Month <- factor(df.output$Month,
-                          levels = c("Jan", "Feb", "Mar", "Apr", "May", "Jun",
-                                     "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"))
-df.output.chk$Month <- factor(df.output.chk$Month,
-                          levels = c("Jan", "Feb", "Mar", "Apr", "May", "Jun",
-                                     "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"))
-summaryBy( .~ Month, 
-           data = df.output[, c(1, grep("pairs", names(df.output)))], 
-           FUN = sum)
-
-summaryBy( Month ~., 
-           data = df.output.chk[, c(1, grep("pairs", names(df.output.chk)))], 
-           FUN = sum)
-
-df.output[, -1] - df.output.chk[, -1]
-
-
-
-
-
-summaryBy(pairs.OnPastureWOStreamAccess + pairs.OnPastureWStreamAccess +
-            pairs.OnPastureInStream + pairs.InConfinementvsTime +
-            pairs.InForestWOStreamAccess + pairs.InForestWStreamAccess +
-            pairs.InForestInStream ~ Month, data = df.output, FUN = sum)
-
-
-
-df.output[ , "AUvsTime"] - df.output.chk[ , "AUvsTime"]
-chk.total.pop <- data.frame(
-  manual.calc.pop.total = sum(chk.pop$pop),
-  model.pop.total = sum(df.output$pop.total),
-  dil = round(
-    chk.dil * ( sum(df.output$pop.total) - sum(chk.pop$pop)) /
-      sum(chk.pop$pop),
-    digits = 0))
-
-## pop in/around stream
-chk.stream.pop <- data.frame(
-  manual.calc.pop.total = chk.pop[chk.pop$location == "stream", "pop"],
-  model.pop.total = df.output[ , "pop.total.in.stream"],
-  dil = round(
-    chk.dil * (df.output[ , "pop.total.in.stream"] - 
-                  chk.pop[chk.pop$location == "stream", "pop"]) /
-      chk.pop[chk.pop$location == "stream", "pop"],
-    digits = 0))
-
-## pop on forest
-chk.forest.pop <- data.frame(
-  manual.calc.pop.total = chk.pop[chk.pop$location == "forest", "pop"],
-  model.pop.total = df.output[ , "pop.total.in.Forest"],
-  dil = round(
-    chk.dil * (df.output[ , "pop.total.in.Forest"] - 
-                 chk.pop[chk.pop$location == "forest", "pop"]) /
-      chk.pop[chk.pop$location == "forest", "pop"],
-    digits = 0))
-
-## all pop
-chk.all.pop <- rbind(chk.total.pop, chk.stream.pop, chk.forest.pop)
-chk.all.pop <- data.frame(cat = c("total", "stream", "forest"), chk.all.pop)
-## bacteria loads total and by locations
-## total
-chk.total.bac <- data.frame(
-  manual.calc.bac.total = sum(chk.bac$total.bac),
-  model.bac.total = df.output$bac.total,
-  dil = round(
-    chk.dil * (df.output$bac.total - sum(chk.bac$total.bac)) /
-      sum(chk.bac$total.bac),
-    digits = 0))
-
-## bac in/around stream
-chk.stream.bac <- data.frame(
-  manual.calc.bac.total = chk.bac[chk.bac$location == "stream", "total.bac"],
-  model.bac.total = df.output[ , "bac.total.in.stream"],
-  dil = round(
-    chk.dil * (df.output[ , "bac.total.in.stream"] - 
-                  chk.bac[chk.bac$location == "stream", "total.bac"]) /
-      chk.bac[chk.bac$location == "stream", "total.bac"],
-    digits = 0))
-
-## bac load in forest
-chk.forest.bac <- data.frame(
-  manual.calc.bac.total = chk.bac[chk.bac$location == "forest", "total.bac"],
-  model.bac.total = df.output[ , "bac.total.in.Forest"],
-  dil = round(
-    chk.dil * (df.output[ , "bac.total.in.Forest"] - 
-                 chk.bac[chk.bac$location == "forest", "total.bac"]) /
-      chk.bac[chk.bac$location == "forest", "total.bac"],
-    digits = 0))
-
-## all bac
-chk.all.bac <- rbind(chk.total.bac, chk.stream.bac, chk.forest.bac)
-chk.all.bac <- data.frame(cat = c("total", "stream", "forest"), chk.all.bac)
-
-## accum loads
-## accum load in forest
-chk.forest.accum <- data.frame(
-  manual.calc.bac.total = chk.bac[chk.bac$location == "forest", "accum.bac"],
-  model.bac.total = df.output[ , "Accum.Forest"],
-  dil = round(
-    chk.dil * (df.output[ , "Accum.Forest"] - 
-      chk.bac[chk.bac$location == "forest", "accum.bac"]) /
-      chk.bac[chk.bac$location == "forest", "accum.bac"],
-    digits = 0))
-
-## all accum
-chk.all.accum <- rbind(chk.forest.accum)
-chk.all.accum <- data.frame(cat = c("forest"), chk.all.accum)
-
-## output results in tables to pdf
-pdf(file = paste0(chr.wildlife.beaver.dir, "/beaver-bacteria-model-calc-check-",
-                  gsub("\\.txt","-",chr.input) 
-                  ,strftime(Sys.time(), format = "%Y%m%d%H%M"),
-                  ".pdf"), height = 8.5, width = 11, onefile = TRUE)
-## population
-tmp.table <- tableGrob(chk.all.pop, show.rownames = FALSE)
-tmp.h <- grobHeight(tmp.table)
-tmp.w <- grobWidth(tmp.table)
-tmp.title <- textGrob(label = paste0("Beaver Population (dil = ", sprintf("%1.0E", chk.dil), ")"),
-                      y=unit(0.5,"npc") + 0.5*tmp.h, 
-                      vjust=0, gp=gpar(fontsize=20))
-tmp.gt <- gTree(children=gList(tmp.table, tmp.title))
+tmp.gt <- table.grob(chr.col = "pairs.OnPastureInStream", df.output = df.output,
+                     df.output.chk = df.output.chk, df.comp = df.comp,
+                     chr.title = paste0("Cow-calf pairs on pasture in stream (dil = ", sprintf("%1.0E", chk.dil), ")"),
+                     chk.dil = chk.dil)
 grid.draw(tmp.gt)
 grid.newpage()
-rm(list = ls(pattern = "tmp\\.*"))
+rm(tmp.gt)
 
-## bac load
-tmp.table <- tableGrob(chk.all.bac, show.rownames = FALSE)
-tmp.h <- grobHeight(tmp.table)
-tmp.w <- grobWidth(tmp.table)
-tmp.title <- textGrob(label = paste0("Bacteria loads from Beaver (dil = ", sprintf("%1.0E", chk.dil), ")"),
-                      y=unit(0.5,"npc") + 0.5*tmp.h, 
-                      vjust=0, gp=gpar(fontsize=20))
-tmp.gt <- gTree(children=gList(tmp.table, tmp.title))
+## in confinement
+tmp.gt <- table.grob(chr.col = "pairs.InConfinementvsTime", df.output = df.output,
+                     df.output.chk = df.output.chk, df.comp = df.comp,
+                     chr.title = paste0("Cow-calf pairs in confinement (dil = ", sprintf("%1.0E", chk.dil), ")"),
+                     chk.dil = chk.dil)
 grid.draw(tmp.gt)
 grid.newpage()
-rm(list = ls(pattern = "tmp\\.*"))
+rm(tmp.gt)
 
-## accum load
-tmp.table <- tableGrob(chk.all.accum, show.rownames = FALSE)
-tmp.h <- grobHeight(tmp.table)
-tmp.w <- grobWidth(tmp.table)
-tmp.title <- textGrob(label = paste0("Accum loads from Beaver (dil = ", sprintf("%1.0E", chk.dil), ")"),
-                      y=unit(0.5,"npc") + 0.5*tmp.h, 
-                      vjust=0, gp=gpar(fontsize=20))
-tmp.gt <- gTree(children=gList(tmp.table, tmp.title))
+## in forest without stream access
+tmp.gt <- table.grob(chr.col = "pairs.InForestWOStreamAccess", df.output = df.output,
+                     df.output.chk = df.output.chk, df.comp = df.comp,
+                     chr.title = paste0("Cow-calf pairs in forest without stream access (dil = ", sprintf("%1.0E", chk.dil), ")"),
+                     chk.dil = chk.dil)
 grid.draw(tmp.gt)
-rm(list = ls(pattern = "tmp\\.*"))
+grid.newpage()
+rm(tmp.gt)
 
-## close the pdf file
+## in forest without stream access on land
+tmp.gt <- table.grob(chr.col = "pairs.InForestWStreamAccess", df.output = df.output,
+                     df.output.chk = df.output.chk, df.comp = df.comp,
+                     chr.title = paste0("Cow-calf pairs in forest on land without stream access (dil = ", sprintf("%1.0E", chk.dil), ")"),
+                     chk.dil = chk.dil)
+grid.draw(tmp.gt)
+grid.newpage()
+rm(tmp.gt)
+
+## in forest without stream access in stream
+tmp.gt <- table.grob(chr.col = "pairs.InForestInStream", df.output = df.output,
+                     df.output.chk = df.output.chk, df.comp = df.comp,
+                     chr.title = paste0("Cow-calf pairs in forest in stream access (dil = ", sprintf("%1.0E", chk.dil), ")"),
+                     chk.dil = chk.dil)
+grid.draw(tmp.gt)
+grid.newpage()
+rm(tmp.gt)
+
+## bacteria on pasture without stream access
+tmp.gt <- table.grob(chr.col = "Bacteria.OnPastureWOStreamAccess", df.output = df.output,
+                     df.output.chk = df.output.chk, df.comp = df.comp,
+                     chr.title = paste0("Bacteria on pasture without stream access (dil = ", sprintf("%1.0E", chk.dil), ")"),
+                     chk.dil = chk.dil)
+grid.draw(tmp.gt)
+grid.newpage()
+rm(tmp.gt)
+
+## bacteria on pasture with stream access
+tmp.gt <- table.grob(chr.col = "Bacteria.OnPastureWStreamAccess", df.output = df.output,
+                     df.output.chk = df.output.chk, df.comp = df.comp,
+                     chr.title = paste0("Bacteria on pasture with stream access (dil = ", sprintf("%1.0E", chk.dil), ")"),
+                     chk.dil = chk.dil)
+grid.draw(tmp.gt)
+grid.newpage()
+rm(tmp.gt)
+
+## bacteria on pasture in stream access in stream
+tmp.gt <- table.grob(chr.col = "Bacteria.OnPastureInStream", df.output = df.output,
+                     df.output.chk = df.output.chk, df.comp = df.comp,
+                     chr.title = paste0("Bacteria on pasture in stream (dil = ", sprintf("%1.0E", chk.dil), ")"),
+                     chk.dil = chk.dil)
+grid.draw(tmp.gt)
+grid.newpage()
+rm(tmp.gt)
+
+## bacteria in confinement
+tmp.gt <- table.grob(chr.col = "pairs.InConfinementvsTime", df.output = df.output,
+                     df.output.chk = df.output.chk, df.comp = df.comp,
+                     chr.title = paste0("Bacteria in confinement (dil = ", sprintf("%1.0E", chk.dil), ")"),
+                     chk.dil = chk.dil)
+grid.draw(tmp.gt)
+grid.newpage()
+rm(tmp.gt)
+
+## bacteria in forest without and with stream access
+tmp.gt <- table.grob(chr.col = "Bacteria.InForest", df.output = df.output,
+                     df.output.chk = df.output.chk, df.comp = df.comp,
+                     chr.title = paste0("Bacteria in forest on land with and without stream access (dil = ", sprintf("%1.0E", chk.dil), ")"),
+                     chk.dil = chk.dil)
+grid.draw(tmp.gt)
+grid.newpage()
+rm(tmp.gt)
+
+## bacteria in forest in stream
+tmp.gt <- table.grob(chr.col = "Bacteria.InForestInStream", df.output = df.output,
+                     df.output.chk = df.output.chk, df.comp = df.comp,
+                     chr.title = paste0("Bacteria in forest in stream (dil = ", sprintf("%1.0E", chk.dil), ")"),
+                     chk.dil = chk.dil)
+grid.draw(tmp.gt)
+grid.newpage()
+rm(tmp.gt)
+
+## bacteria in stream
+tmp.gt <- table.grob(chr.col = "Bacteria.Instream", df.output = df.output,
+                     df.output.chk = df.output.chk, df.comp = df.comp,
+                     chr.title = paste0("Bacteria in stream (dil = ", sprintf("%1.0E", chk.dil), ")"),
+                     chk.dil = chk.dil)
+grid.draw(tmp.gt)
+grid.newpage()
+rm(tmp.gt)
+
+## Accum for pasture
+tmp.gt <- table.grob(chr.col = "Accum.Pasture", df.output = df.output,
+                     df.output.chk = df.output.chk, df.comp = df.comp,
+                     chr.title = paste0("Accum for pasture (dil = ", sprintf("%1.0E", chk.dil), ")"),
+                     chk.dil = chk.dil)
+grid.draw(tmp.gt)
+grid.newpage()
+rm(tmp.gt)
+
+## Accum for forest
+tmp.gt <- table.grob(chr.col = "Accum.Forest", df.output = df.output,
+                     df.output.chk = df.output.chk, df.comp = df.comp,
+                     chr.title = paste0("Accum for Forest (dil = ", sprintf("%1.0E", chk.dil), ")"),
+                     chk.dil = chk.dil)
+grid.draw(tmp.gt)
+grid.newpage()
+rm(tmp.gt)
+
+## Lim for pasture
+tmp.gt <- table.grob(chr.col = "Lim.Pasture", df.output = df.output,
+                     df.output.chk = df.output.chk, df.comp = df.comp,
+                     chr.title = paste0("SQOLIM for pasture (dil = ", sprintf("%1.0E", chk.dil), ")"),
+                     chk.dil = chk.dil)
+grid.draw(tmp.gt)
+grid.newpage()
+rm(tmp.gt)
+
+## Lim for forest
+tmp.gt <- table.grob(chr.col = "Lim.Forest", df.output = df.output,
+                     df.output.chk = df.output.chk, df.comp = df.comp,
+                     chr.title = paste0("SQOLIM for Forest (dil = ", sprintf("%1.0E", chk.dil), ")"),
+                     chk.dil = chk.dil)
+grid.draw(tmp.gt)
+rm(tmp.gt)
+
+## close pdf file
 dev.off()
-
-
-
