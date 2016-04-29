@@ -101,7 +101,7 @@ df.output.chk <- cbind(df.output.chk,
                        bac.onsite.NearStrmStrctFailure = df.output.chk$num.onsite.NearStrmStrctFailure * chk.onsite.bac.prod)
 ## to stream
 df.output.chk <- cbind(df.output.chk,
-                       bac.onsite.NearStrmStrctFailure.to.stream.load = (chk.failure.pre.1974.to.stream + chk.failure.1974.1986.to.stream + chk.failure.post.1986.to.stream) * chk.onsite.bac.prod)
+                       bac.onsite.NearStrmStrctFailure.to.stream.load = df.output.chk$num.onsite.NearStrmStrctFailureInStream * chk.onsite.bac.prod)
 ## 
 ## accum
 df.output.chk <- cbind(df.output.chk,
