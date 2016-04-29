@@ -116,33 +116,34 @@ chk.dil <- 1E+06 # need to explain this
 
 
 ## output results in tables to pdf
-pdf(file = paste0(chr.cowcalf.dir, "/cow-cal-bacteria-model-calc-check-",
+pdf(file = paste0(chr.onsitepets.dir, "/onsite-pets-bacteria-model-calc-check-",
                   gsub("\\.txt","-",chr.input) 
                   ,strftime(Sys.time(), format = "%Y%m%d%H%M"),
                   ".pdf"), height = 8.5, width = 11, onefile = TRUE)
 
-## number of pairs
-tmp.gt <- table.grob(chr.col = "NumOfPairs", df.output = df.output,
+## Pet population
+tmp.gt <- table.grob(chr.col = "pop.pet.total", df.output = df.output,
                      df.output.chk = df.output.chk, df.comp = df.comp,
-                     chr.title = paste0("Total number of Cow-calf pairs (dil = ", sprintf("%1.0E", chk.dil), ")"),
+                     chr.title = paste0("Total number of pets (dil = ", sprintf("%1.0E", chk.dil), ")"),
                      chk.dil = chk.dil)
 grid.draw(tmp.gt)
 grid.newpage()
 rm(tmp.gt)
 
-## AUvsTime
-tmp.gt <- table.grob(chr.col = "AUvsTime", df.output = df.output,
+## onsite
+## structures near-stream built pre 1974
+tmp.gt <- table.grob(chr.col = "num.onsite.NearStrmStrctPre1974", df.output = df.output,
                      df.output.chk = df.output.chk, df.comp = df.comp,
-                     chr.title = paste0("Animal Units by month of Cow-calf pairs (dil = ", sprintf("%1.0E", chk.dil), ")"),
+                     chr.title = paste0("Number of structures near-stream structures built pre 1974 (dil = ", sprintf("%1.0E", chk.dil), ")"),
                      chk.dil = chk.dil)
 grid.draw(tmp.gt)
 grid.newpage()
 rm(tmp.gt)
 
-## on pasture without stream access
-tmp.gt <- table.grob(chr.col = "pairs.OnPastureWOStreamAccess", df.output = df.output,
+## structures near-stream built between 1974 to 1986
+tmp.gt <- table.grob(chr.col = "num.onsite.NearStrmStrct1974to1986", df.output = df.output,
                      df.output.chk = df.output.chk, df.comp = df.comp,
-                     chr.title = paste0("Cow-calf pairs on pasture without stream access (dil = ", sprintf("%1.0E", chk.dil), ")"),
+                     chr.title = paste0("Number of structures near-stream structures built between 1974 to 1986 (dil = ", sprintf("%1.0E", chk.dil), ")"),
                      chk.dil = chk.dil)
 grid.draw(tmp.gt)
 grid.newpage()
@@ -150,157 +151,131 @@ rm(tmp.gt)
 
 
 
-## on pasture with stream access (on land)
-tmp.gt <- table.grob(chr.col = "pairs.OnPastureWStreamAccess", df.output = df.output,
+## structures near-stream built after 1986
+tmp.gt <- table.grob(chr.col = "num.onsite.NearStrmStrctPost1986", df.output = df.output,
                      df.output.chk = df.output.chk, df.comp = df.comp,
-                     chr.title = paste0("Cow-calf pairs on pasture with stream access (dil = ", sprintf("%1.0E", chk.dil), ")"),
+                     chr.title = paste0("Number of structures near-stream structures built after 1986 (dil = ", sprintf("%1.0E", chk.dil), ")"),
                      chk.dil = chk.dil)
 grid.draw(tmp.gt)
 grid.newpage()
 rm(tmp.gt)
 
-## on pasture in stream
-tmp.gt <- table.grob(chr.col = "pairs.OnPastureInStream", df.output = df.output,
+## total near stream structures
+tmp.gt <- table.grob(chr.col = "num.onsite.NearStrmStrct", df.output = df.output,
                      df.output.chk = df.output.chk, df.comp = df.comp,
-                     chr.title = paste0("Cow-calf pairs on pasture in stream (dil = ", sprintf("%1.0E", chk.dil), ")"),
+                     chr.title = paste0("Total number of structures near-stream structures (dil = ", sprintf("%1.0E", chk.dil), ")"),
                      chk.dil = chk.dil)
 grid.draw(tmp.gt)
 grid.newpage()
 rm(tmp.gt)
 
-## in confinement
-tmp.gt <- table.grob(chr.col = "pairs.InConfinementvsTime", df.output = df.output,
+## failing on-site systems for structures near-stream built before 1974
+tmp.gt <- table.grob(chr.col = "num.onsite.NearStrmStrctFailurePre1974", df.output = df.output,
                      df.output.chk = df.output.chk, df.comp = df.comp,
-                     chr.title = paste0("Cow-calf pairs in confinement (dil = ", sprintf("%1.0E", chk.dil), ")"),
+                     chr.title = paste0("Failing on-site systems for structures near-stream built before 197 (dil = ", sprintf("%1.0E", chk.dil), ")"),
                      chk.dil = chk.dil)
 grid.draw(tmp.gt)
 grid.newpage()
 rm(tmp.gt)
 
-## in forest without stream access
-tmp.gt <- table.grob(chr.col = "pairs.InForestWOStreamAccess", df.output = df.output,
+## failing on-site systems for structures near-stream built between 1974 and 1986
+tmp.gt <- table.grob(chr.col = "num.onsite.NearStrmStrctFailure1974to1986", df.output = df.output,
                      df.output.chk = df.output.chk, df.comp = df.comp,
-                     chr.title = paste0("Cow-calf pairs in forest without stream access (dil = ", sprintf("%1.0E", chk.dil), ")"),
+                     chr.title = paste0("Failing on-site systems for structures near-stream built between 1974 and 1986 (dil = ", sprintf("%1.0E", chk.dil), ")"),
                      chk.dil = chk.dil)
 grid.draw(tmp.gt)
 grid.newpage()
 rm(tmp.gt)
 
-## in forest without stream access on land
-tmp.gt <- table.grob(chr.col = "pairs.InForestWStreamAccess", df.output = df.output,
+## failing on-site systems for structures near-stream built after 1986
+tmp.gt <- table.grob(chr.col = "num.onsite.NearStrmStrctFailurePost1986", df.output = df.output,
                      df.output.chk = df.output.chk, df.comp = df.comp,
-                     chr.title = paste0("Cow-calf pairs in forest on land without stream access (dil = ", sprintf("%1.0E", chk.dil), ")"),
+                     chr.title = paste0("Failing on-site systems for structures near-stream built after 1986 (dil = ", sprintf("%1.0E", chk.dil), ")"),
                      chk.dil = chk.dil)
 grid.draw(tmp.gt)
 grid.newpage()
 rm(tmp.gt)
 
-## in forest without stream access in stream
-tmp.gt <- table.grob(chr.col = "pairs.InForestInStream", df.output = df.output,
+## total failing on-site systems for structures near-stream 
+tmp.gt <- table.grob(chr.col = "num.onsite.NearStrmStrctFailure", df.output = df.output,
                      df.output.chk = df.output.chk, df.comp = df.comp,
-                     chr.title = paste0("Cow-calf pairs in forest in stream access (dil = ", sprintf("%1.0E", chk.dil), ")"),
+                     chr.title = paste0("Total failing on-site systems for structures near-stream (dil = ", sprintf("%1.0E", chk.dil), ")"),
                      chk.dil = chk.dil)
 grid.draw(tmp.gt)
 grid.newpage()
 rm(tmp.gt)
 
-## bacteria on pasture without stream access
-tmp.gt <- table.grob(chr.col = "Bacteria.OnPastureWOStreamAccess", df.output = df.output,
+## total failing on-site systems for structures near-stream discharging to stream 
+tmp.gt <- table.grob(chr.col = "num.onsite.NearStrmStrctFailureInStream", df.output = df.output,
                      df.output.chk = df.output.chk, df.comp = df.comp,
-                     chr.title = paste0("Bacteria on pasture without stream access (dil = ", sprintf("%1.0E", chk.dil), ")"),
+                     chr.title = paste0("Total failing on-site systems for structures near-stream discharging to stream (dil = ", sprintf("%1.0E", chk.dil), ")"),
                      chk.dil = chk.dil)
 grid.draw(tmp.gt)
 grid.newpage()
 rm(tmp.gt)
 
-## bacteria on pasture with stream access
-tmp.gt <- table.grob(chr.col = "Bacteria.OnPastureWStreamAccess", df.output = df.output,
+## bacteria load from pets 
+tmp.gt <- table.grob(chr.col = "bac.pets.load", df.output = df.output,
                      df.output.chk = df.output.chk, df.comp = df.comp,
-                     chr.title = paste0("Bacteria on pasture with stream access (dil = ", sprintf("%1.0E", chk.dil), ")"),
+                     chr.title = paste0("Total bacteria load from pets (dil = ", sprintf("%1.0E", chk.dil), ")"),
                      chk.dil = chk.dil)
 grid.draw(tmp.gt)
 grid.newpage()
 rm(tmp.gt)
 
-## bacteria on pasture in stream access in stream
-tmp.gt <- table.grob(chr.col = "Bacteria.OnPastureInStream", df.output = df.output,
+## onsite system bacteria load from near-stream structures built before 1974
+tmp.gt <- table.grob(chr.col = "bac.onsite.NearStrmStrctFailurePre1974", df.output = df.output,
                      df.output.chk = df.output.chk, df.comp = df.comp,
-                     chr.title = paste0("Bacteria on pasture in stream (dil = ", sprintf("%1.0E", chk.dil), ")"),
+                     chr.title = paste0("Total onsite system bacteria load from near-stream structures built before 1974 (dil = ", sprintf("%1.0E", chk.dil), ")"),
                      chk.dil = chk.dil)
 grid.draw(tmp.gt)
 grid.newpage()
 rm(tmp.gt)
 
-## bacteria in confinement
-tmp.gt <- table.grob(chr.col = "pairs.InConfinementvsTime", df.output = df.output,
+## onsite system bacteria load from near-stream structures built between 1974 and 1986
+tmp.gt <- table.grob(chr.col = "bac.onsite.NearStrmStrctFailure1974to1986", df.output = df.output,
                      df.output.chk = df.output.chk, df.comp = df.comp,
-                     chr.title = paste0("Bacteria in confinement (dil = ", sprintf("%1.0E", chk.dil), ")"),
+                     chr.title = paste0("Total onsite system failure bacteria load from near-stream structures built between 1974 and 1986 (dil = ", sprintf("%1.0E", chk.dil), ")"),
                      chk.dil = chk.dil)
 grid.draw(tmp.gt)
 grid.newpage()
 rm(tmp.gt)
 
-## bacteria in forest without and with stream access
-tmp.gt <- table.grob(chr.col = "Bacteria.InForest", df.output = df.output,
+## onsite system bacteria load from near-stream structures built after 1986
+tmp.gt <- table.grob(chr.col = "bac.onsite.NearStrmStrctFailurePost1986", df.output = df.output,
                      df.output.chk = df.output.chk, df.comp = df.comp,
-                     chr.title = paste0("Bacteria in forest on land with and without stream access (dil = ", sprintf("%1.0E", chk.dil), ")"),
+                     chr.title = paste0("Total onsite system failure bacteria load from near-stream structures built after 1986 (dil = ", sprintf("%1.0E", chk.dil), ")"),
                      chk.dil = chk.dil)
 grid.draw(tmp.gt)
 grid.newpage()
 rm(tmp.gt)
 
-## bacteria in forest in stream
-tmp.gt <- table.grob(chr.col = "Bacteria.InForestInStream", df.output = df.output,
+## total onsite system bacteria load from near-stream structures
+tmp.gt <- table.grob(chr.col = "bac.onsite.NearStrmStrctFailure", df.output = df.output,
                      df.output.chk = df.output.chk, df.comp = df.comp,
-                     chr.title = paste0("Bacteria in forest in stream (dil = ", sprintf("%1.0E", chk.dil), ")"),
+                     chr.title = paste0("Total onsite system failure bacteria load from near-stream structures (dil = ", sprintf("%1.0E", chk.dil), ")"),
                      chk.dil = chk.dil)
 grid.draw(tmp.gt)
 grid.newpage()
 rm(tmp.gt)
 
-## bacteria in stream
-tmp.gt <- table.grob(chr.col = "Bacteria.Instream", df.output = df.output,
+## total onsite system bacteria load from near-stream structures to stream
+tmp.gt <- table.grob(chr.col = "bac.onsite.NearStrmStrctFailure.to.stream.load", df.output = df.output,
                      df.output.chk = df.output.chk, df.comp = df.comp,
-                     chr.title = paste0("Bacteria in stream (dil = ", sprintf("%1.0E", chk.dil), ")"),
+                     chr.title = paste0("Total onsite system failure bacteria load from near-stream structures to stream (dil = ", sprintf("%1.0E", chk.dil), ")"),
                      chk.dil = chk.dil)
 grid.draw(tmp.gt)
 grid.newpage()
 rm(tmp.gt)
 
-## Accum for pasture
-tmp.gt <- table.grob(chr.col = "Accum.Pasture", df.output = df.output,
+## accum to RAOCUT
+tmp.gt <- table.grob(chr.col = "Accum.RAOCUT", df.output = df.output,
                      df.output.chk = df.output.chk, df.comp = df.comp,
-                     chr.title = paste0("Accum for pasture (dil = ", sprintf("%1.0E", chk.dil), ")"),
+                     chr.title = paste0("Accum to RAOCUT (dil = ", sprintf("%1.0E", chk.dil), ")"),
                      chk.dil = chk.dil)
 grid.draw(tmp.gt)
-grid.newpage()
 rm(tmp.gt)
 
-## Accum for forest
-tmp.gt <- table.grob(chr.col = "Accum.Forest", df.output = df.output,
-                     df.output.chk = df.output.chk, df.comp = df.comp,
-                     chr.title = paste0("Accum for Forest (dil = ", sprintf("%1.0E", chk.dil), ")"),
-                     chk.dil = chk.dil)
-grid.draw(tmp.gt)
-grid.newpage()
-rm(tmp.gt)
-
-## Lim for pasture
-tmp.gt <- table.grob(chr.col = "Lim.Pasture", df.output = df.output,
-                     df.output.chk = df.output.chk, df.comp = df.comp,
-                     chr.title = paste0("SQOLIM for pasture (dil = ", sprintf("%1.0E", chk.dil), ")"),
-                     chk.dil = chk.dil)
-grid.draw(tmp.gt)
-grid.newpage()
-rm(tmp.gt)
-
-## Lim for forest
-tmp.gt <- table.grob(chr.col = "Lim.Forest", df.output = df.output,
-                     df.output.chk = df.output.chk, df.comp = df.comp,
-                     chr.title = paste0("SQOLIM for Forest (dil = ", sprintf("%1.0E", chk.dil), ")"),
-                     chk.dil = chk.dil)
-grid.draw(tmp.gt)
-rm(tmp.gt)
 
 ## close pdf file
 dev.off()
