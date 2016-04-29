@@ -64,7 +64,7 @@ onsite_pets <- function(chr.input="OnSitePetsxx.txt",chr.wrkdir=getwd()) {
   tmp.onsite.NearStrmStrctFailurePost1986.load   <- tmp.onsite.NearStrmStrctFailurePost1986 * tmp.onsite.bac.prod
   tmp.onsite.NearStrmStrctFailure.load <- tmp.onsite.NearStrmStrctFailurePre1974.load + tmp.onsite.NearStrmStrctFailure1974to1986.load + tmp.onsite.NearStrmStrctFailurePost1986.load
   ## adjust for structures near stream that may not have toilet facilities
-  tmp.onsite.NearStrmStrctFailure.to.stream.load <- tmp.percent.in.stream * tmp.onsite.NearStrmStrctFailure.load / 24
+  tmp.onsite.NearStrmStrctFailure.to.stream.load <- tmp.percent.in.stream * tmp.onsite.NearStrmStrctFailure.load
   tmp.Accum.RAOCUT <- tmp.Accum.RAOCUT + (1- tmp.percent.in.stream) * tmp.onsite.NearStrmStrctFailure.load / tmp.RAOCUTArea
   ##
   ### Assemble output data frame
