@@ -1,68 +1,75 @@
-cow.calf <- function(chr.wrkdir="E:/PEST/BigElk/Sub_Models",
-                     chr.input.file="cowcalf.txt") {
+cow.calf <- function(chr.input.dir,chr.input.file,
+                     lu.pasture.area, lu.forest.area) {
   
 #   This function is the bacteria source-model cow-calf systems 
-#   and generates input for input to HSPF. The specific outputs from 
+#   and generates input for HSPF. The specific outputs from 
 #   this source model are loads from the cow-calf system to the land 
 #   and directly to the stream. The load to the land is in the form 
 #   of load/acre for each PLS in a sub-watershed that the source-model 
-#   contributes to and the hourly load to the stream in the form of 
-#   a MUTSIN file. The input for the model is from an ASCII text file.
-#   Use the text below as a template for the input file. The symbol 
-#   used for comments in the input file is "***". The definitions for 
-#   the symbols used in the template are: YYYY is four-digit year, 
-#   MM two-digit month, DD is the two-digit day, ## is an integer, 
-#   #.# is a floating pint number, and #.#E+## is a number in 
-#   scientific notation
+#   contributes to and the daily load to the stream. 
+#   The input for the model is from an ASCII text file. For the input 
+#   file. The symbol used for comments in the input file is "***". 
+#   ":" is used to seperate parameter names or descriptions from values.
+#   The function returns a data.frame with populations for different 
+#   locations in the sub-watershed along with the associated bacteria loads.
 
 
-  ## set for testing code in side function
-##  chr.wrkdir <- getwd()
-##  chr.input.file <- "cowcalf01.txt"
-  
   ## read input file
-  ## SubModelData => df.input 
-  df.input <- read.delim(paste0(chr.wrkdir, "/", chr.input.file), 
+  df.input <- read.delim(paste0(chr.input.dir, "/", chr.input.file), 
                          sep=":", comment.char="*", stringsAsFactors=FALSE, 
                          header=FALSE)
   names(df.input) <- c("parameter","value")
-  
-  
-  ## not sure what the output is for  
-##  SubModelFilename <- strsplit(chr.input,".",fixed=TRUE)[[1]][[1]]
-  
-  
-  ## set values for variables
-
-  ## HSPF information
-  hspf.AccumPasRow <- rep(df.input$value[5],12)
-  hspf.LimPasRow   <- rep(df.input$value[6],12)
-  hspf.AccumForRow <- rep(df.input$value[7],12)
-  hspf.LimForRow   <- rep(df.input$value[8],12)
-  
-  ## land use information
-  lu.pasture.area <- as.numeric(df.input$value[9])
-  lu.forest.area  <- as.numeric(df.input$value[10])
-  lu.pasture.w    <- as.numeric(df.input$value[11]) / 100
-  lu.forest.w     <- as.numeric(df.input$value[12]) / 100
-  
-  ## animal management information
-  amng.sd         <- as.numeric(df.input$value[13])
-  amng.adj.size   <- as.numeric(strsplit(df.input$value[14],",")[[1]])
-  amng.in.pasture <- as.numeric(strsplit(df.input$value[15],",")[[1]])
-  amng.in.confine <- as.numeric(strsplit(df.input$value[16],",")[[1]])
-  amng.in.forest  <- as.numeric(strsplit(df.input$value[17],",")[[1]])
-  
-  ## animal information
-  ainfo.bac.prod        <- as.numeric(df.input$value[18])
-  ainfo.sqolim.fac      <- as.numeric(df.input$value[19])
-  ainfo.pasture.in.strm <- as.numeric(df.input$value[20]) / 100
-  ainfo.forest.in.strm  <- as.numeric(df.input$value[21]) / 100
-  
 
   
-  ## calculations
+## set values for variables
+
+## land use information
+  ## % pasture with stream access
+  lu.pasture.w    <- as.numeric(df.input$value[
+    df.input$parameter == "Percent of pasture with stream access"]) / 100
+  ## % forest with stream access
+  lu.forest.w     <- as.numeric(df.input$value[
+    df.input$parameter == "Percent of forest with stream access"]) / 100
   
+## animal management information
+  ## cow-calf pair stocking density ac/pair
+  amng.sd <- 
+    as.numeric(df.input$value[
+      df.input$parameter == 
+        "Average Stocking Density for Pasture in watershed (ac/Cow-Calf pair)"]) 
+  ## adjustment in cow size to account for calf growth in cow-calf pair
+  amng.adj.size   <- as.numeric(strsplit(df.input$value[
+    df.input$parameter == "Adjusted animal size"],",")[[1]]) 
+  ## stocking schedule for pasture
+  amng.in.pasture <- as.numeric(strsplit(df.input$value[
+    df.input$parameter == "Pasture"],",")[[1]])
+  ## stocking schedule for confinement
+  amng.in.confine <- as.numeric(strsplit(df.input$value[
+    df.input$parameter == "Confinement"],",")[[1]])
+  ## stocking schedule for forest
+  amng.in.forest  <- as.numeric(strsplit(df.input$value[
+    df.input$parameter == "Forest"],",")[[1]])
+  
+## animal information
+  ## bacteria production by cow #/(day-cow)
+  ainfo.bac.prod <- as.numeric(
+    df.input$value[df.input$parameter == 
+                     "Fecal Coliform production by animal (org/(day-animal))"])
+  ## SQOLIM factor > 1
+  ainfo.sqolim.fac <- as.numeric(
+    df.input$value[df.input$parameter == 
+                     "SQOLIM multiplcation factor"])
+  ## % of time cow-calf pair are in our around stream when on pasture
+  ainfo.pasture.in.strm <- as.numeric(
+    df.input$value[
+      df.input$parameter == 
+        "Percent of animals on pasture in and around streams"]) / 100
+  ## % of time cow-calf pair are in our around stream when in forest
+  ainfo.forest.in.strm  <- as.numeric(df.input$value[
+    df.input$parameter == 
+      "Percent of animals on forest in and around streams"]) / 100
+  
+## calculations
   ## pairs
   am.pairs     <- lu.pasture.area / amng.sd
   am.pairs.adj <- am.pairs * amng.adj.size
