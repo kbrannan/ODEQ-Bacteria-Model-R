@@ -127,9 +127,9 @@ Pasture in MON-SQOLIM Table:  112
 Forest in  MON-SQOLIM Table:  111
 RAOCUT in  MON-SQOLIM Table:  113
 sub-watershed: 14
-Pasture area in acres: ????
-Forest  area in acres: ????
-RAOCUT  area in acres: ????
+Pasture area in acres: 1.9304E+02
+Forest  area in acres: 1.3677E+03
+RAOCUT  area in acres: 7.3500E+01
 Pasture in MON-ACCUM Table:   063
 Forest in  MON-ACCUM Table:   062
 RAOCUT in  MON-ACCUM Table:   064
@@ -137,9 +137,9 @@ Pasture in MON-SQOLIM Table:  115
 Forest in  MON-SQOLIM Table:  114
 RAOCUT in  MON-SQOLIM Table:  116
 sub-watershed: 16
-Pasture area in acres: ????
-Forest  area in acres: ????
-RAOCUT  area in acres: ????
+Pasture area in acres: 1.0929E+02
+Forest  area in acres: 1.0477E+03
+RAOCUT  area in acres: 8.8240E+01
 Pasture in MON-ACCUM Table:   068
 Forest in  MON-ACCUM Table:   067
 RAOCUT in  MON-ACCUM Table:   069
@@ -147,9 +147,9 @@ Pasture in MON-SQOLIM Table:  120
 Forest in  MON-SQOLIM Table:  119
 RAOCUT in  MON-SQOLIM Table:  121
 sub-watershed: 17
-Pasture area in acres: ????
-Forest  area in acres: ????
-RAOCUT  area in acres: ????
+Pasture area in acres: 1.7329E+02
+Forest  area in acres: 5.3035E+02
+RAOCUT  area in acres: 2.8460E+01
 Pasture in MON-ACCUM Table:   071
 Forest in  MON-ACCUM Table:   070
 RAOCUT in  MON-ACCUM Table:   072
@@ -157,9 +157,9 @@ Pasture in MON-SQOLIM Table:  123
 Forest in  MON-SQOLIM Table:  122
 RAOCUT in  MON-SQOLIM Table:  124
 sub-watershed: 18
-Pasture area in acres: ????
-Forest  area in acres: ????
-RAOCUT  area in acres: ????
+Pasture area in acres: 4.6880E+01
+Forest  area in acres: 1.2875E+03
+RAOCUT  area in acres: 1.1234E+02
 Pasture in MON-ACCUM Table:   074
 Forest in  MON-ACCUM Table:   073
 RAOCUT in  MON-ACCUM Table:   075
