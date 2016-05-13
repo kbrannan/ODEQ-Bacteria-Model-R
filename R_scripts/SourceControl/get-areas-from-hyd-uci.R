@@ -43,7 +43,7 @@ chr.implnd.gen.info.blk <- chr.implnd.blk[(grep("^ {1,}GEN-INFO", chr.implnd.blk
 num.wtsd <- 1:18
 
 
-df.areas <- data.frame()
+df.areas.hyd <- data.frame()
 
 ## get pls lines for sub-wtsd
 for(ii in 1:length(num.wtsd)) {
@@ -59,8 +59,8 @@ for(ii in 1:length(num.wtsd)) {
   
   tmp.pls.merge <- merge(df.pls.gen.info,tmp.schem)
   
-  df.areas <- rbind(
-    df.areas,
+  df.areas.hyd <- rbind(
+    df.areas.hyd,
     data.frame(wtsd = sprintf(fmt = "%02i", num.wtsd[ii]), 
                ls = "forest",
                area = sum(tmp.pls.merge$area[grep("[fF]orest", 
@@ -81,4 +81,6 @@ for(ii in 1:length(num.wtsd)) {
   rm(list=ls(pattern="^tmp\\."))
 }
 
-df.areas[df.areas$area == 0,]
+df.areas.hyd <- df.areas.hyd[df.areas.hyd$area != 0,]
+
+rm(list = ls()[-1 * grep("df.areas.wq|df.areas.hyd", ls())])
