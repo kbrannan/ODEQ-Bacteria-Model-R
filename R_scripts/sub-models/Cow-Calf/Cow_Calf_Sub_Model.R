@@ -1,5 +1,4 @@
-cow.calf <- function(chr.input.dir,chr.input.file,
-                     lu.pasture.area, lu.forest.area) {
+cow.calf <- function(chr.input.file) {
   
 #   This function is the bacteria source-model cow-calf systems 
 #   and generates input for HSPF. The specific outputs from 
@@ -15,7 +14,7 @@ cow.calf <- function(chr.input.dir,chr.input.file,
 
 
   ## read input file
-  df.input <- read.delim(paste0(chr.input.dir, "/", chr.input.file), 
+  df.input <- read.delim(chr.input.file, 
                          sep=":", comment.char="*", stringsAsFactors=FALSE, 
                          header=FALSE)
   names(df.input) <- c("parameter","value")
@@ -24,6 +23,12 @@ cow.calf <- function(chr.input.dir,chr.input.file,
 ## set values for variables
 
 ## land use information
+  ## pasture area
+  lu.pasture.area  <- as.numeric(df.input$value[
+    df.input$parameter == "Pasture Area in Watershed (ac)"])
+  ## forest area
+  lu.forest.area  <- as.numeric(df.input$value[
+    df.input$parameter == "Forest Area in Watershed (ac)"])
   ## % pasture with stream access
   lu.pasture.w    <- as.numeric(df.input$value[
     df.input$parameter == "Percent of pasture with stream access"]) / 100
