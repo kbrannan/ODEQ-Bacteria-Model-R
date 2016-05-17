@@ -2,19 +2,16 @@
 ## cowcalf11.txt file
 chr.cowcalf.dir <- "M:/Models/Bacteria/HSPF/ODEQ-Bacteria-Model-R/R_scripts/sub-models/COw-Calf"
 chr.input <- "cowcalf11.txt"
-
 ## for model
 chr.wrkdir <- chr.cowcalf.dir
 chr.input.file <- chr.input
-
+## run model
 source(paste0(chr.cowcalf.dir,"/Cow_Calf_Sub_Model.R"))
-df.output <- df.output <- cow.calf(chr.wrkdir=chr.cowcalf.dir,
-                                   chr.input.file=chr.input)
+df.output <- cow.calf(chr.input.file=chr.input)
 ## packages
 library(doBy, quietly = TRUE)
 library(gridExtra, quietly = TRUE)
 library(reshape2, quietly = TRUE)
-
 ## funct for creating tables for output of results
 table.grob <- function(chr.col, df.output = df.output,
                        df.output.chk = df.outout.chk,
@@ -131,20 +128,15 @@ df.output.chk <- cbind(df.output.chk,
                        Lim.Forest = chk.ainfo.sqolim.fac * 
                          chk.bac.forest.lnd / chk.lu.forest.area)
                        
-
-
 ## compare manual and model output
 df.comp <- data.frame(Month = df.output$Month, diff = df.output[, -1] - df.output.chk[, -1])
 names(df.comp) <- names(df.output)
 chk.dil <- 1E+06 # need to explain this
-
-
 ## output results in tables to pdf
 pdf(file = paste0(chr.cowcalf.dir, "/cow-cal-bacteria-model-calc-check-",
                   gsub("\\.txt","-",chr.input) 
                   ,strftime(Sys.time(), format = "%Y%m%d%H%M"),
                   ".pdf"), height = 8.5, width = 11, onefile = TRUE)
-
 ## number of pairs
 tmp.gt <- table.grob(chr.col = "NumOfPairs", df.output = df.output,
                      df.output.chk = df.output.chk, df.comp = df.comp,
@@ -153,7 +145,6 @@ tmp.gt <- table.grob(chr.col = "NumOfPairs", df.output = df.output,
 grid.draw(tmp.gt)
 grid.newpage()
 rm(tmp.gt)
-
 ## AUvsTime
 tmp.gt <- table.grob(chr.col = "AUvsTime", df.output = df.output,
                      df.output.chk = df.output.chk, df.comp = df.comp,
@@ -162,36 +153,30 @@ tmp.gt <- table.grob(chr.col = "AUvsTime", df.output = df.output,
 grid.draw(tmp.gt)
 grid.newpage()
 rm(tmp.gt)
-
 ## on pasture without stream access
 tmp.gt <- table.grob(chr.col = "pairs.OnPastureWOStreamAccess", df.output = df.output,
                      df.output.chk = df.output.chk, df.comp = df.comp,
-                     chr.title = paste0("Cow-calf pairs on pasture without stream access (dil = ", sprintf("%1.0E", chk.dil), ")"),
+                     chr.title = paste0("Cow-calf pairs on land for pasture without stream access (dil = ", sprintf("%1.0E", chk.dil), ")"),
                      chk.dil = chk.dil)
 grid.draw(tmp.gt)
 grid.newpage()
 rm(tmp.gt)
-
-
-
 ## on pasture with stream access (on land)
 tmp.gt <- table.grob(chr.col = "pairs.OnPastureWStreamAccess", df.output = df.output,
                      df.output.chk = df.output.chk, df.comp = df.comp,
-                     chr.title = paste0("Cow-calf pairs on pasture with stream access (dil = ", sprintf("%1.0E", chk.dil), ")"),
+                     chr.title = paste0("Cow-calf pairs on land for pasture with stream access (dil = ", sprintf("%1.0E", chk.dil), ")"),
                      chk.dil = chk.dil)
 grid.draw(tmp.gt)
 grid.newpage()
 rm(tmp.gt)
-
 ## on pasture in stream
 tmp.gt <- table.grob(chr.col = "pairs.OnPastureInStream", df.output = df.output,
                      df.output.chk = df.output.chk, df.comp = df.comp,
-                     chr.title = paste0("Cow-calf pairs on pasture in stream (dil = ", sprintf("%1.0E", chk.dil), ")"),
+                     chr.title = paste0("Cow-calf pairs in stream for pasture (dil = ", sprintf("%1.0E", chk.dil), ")"),
                      chk.dil = chk.dil)
 grid.draw(tmp.gt)
 grid.newpage()
 rm(tmp.gt)
-
 ## in confinement
 tmp.gt <- table.grob(chr.col = "pairs.InConfinementvsTime", df.output = df.output,
                      df.output.chk = df.output.chk, df.comp = df.comp,
@@ -200,61 +185,54 @@ tmp.gt <- table.grob(chr.col = "pairs.InConfinementvsTime", df.output = df.outpu
 grid.draw(tmp.gt)
 grid.newpage()
 rm(tmp.gt)
-
 ## in forest without stream access
 tmp.gt <- table.grob(chr.col = "pairs.InForestWOStreamAccess", df.output = df.output,
                      df.output.chk = df.output.chk, df.comp = df.comp,
-                     chr.title = paste0("Cow-calf pairs in forest without stream access (dil = ", sprintf("%1.0E", chk.dil), ")"),
+                     chr.title = paste0("Cow-calf pairs on land for forest without stream access (dil = ", sprintf("%1.0E", chk.dil), ")"),
                      chk.dil = chk.dil)
 grid.draw(tmp.gt)
 grid.newpage()
 rm(tmp.gt)
-
 ## in forest without stream access on land
 tmp.gt <- table.grob(chr.col = "pairs.InForestWStreamAccess", df.output = df.output,
                      df.output.chk = df.output.chk, df.comp = df.comp,
-                     chr.title = paste0("Cow-calf pairs in forest on land without stream access (dil = ", sprintf("%1.0E", chk.dil), ")"),
+                     chr.title = paste0("Cow-calf pairs on land for forest with stream access (dil = ", sprintf("%1.0E", chk.dil), ")"),
                      chk.dil = chk.dil)
 grid.draw(tmp.gt)
 grid.newpage()
 rm(tmp.gt)
-
 ## in forest without stream access in stream
 tmp.gt <- table.grob(chr.col = "pairs.InForestInStream", df.output = df.output,
                      df.output.chk = df.output.chk, df.comp = df.comp,
-                     chr.title = paste0("Cow-calf pairs in forest in stream access (dil = ", sprintf("%1.0E", chk.dil), ")"),
+                     chr.title = paste0("Cow-calf pairs in stream for forest (dil = ", sprintf("%1.0E", chk.dil), ")"),
                      chk.dil = chk.dil)
 grid.draw(tmp.gt)
 grid.newpage()
 rm(tmp.gt)
-
 ## bacteria on pasture without stream access
 tmp.gt <- table.grob(chr.col = "Bacteria.OnPastureWOStreamAccess", df.output = df.output,
                      df.output.chk = df.output.chk, df.comp = df.comp,
-                     chr.title = paste0("Bacteria on pasture without stream access (dil = ", sprintf("%1.0E", chk.dil), ")"),
+                     chr.title = paste0("Bacteria on land for pasture without stream access (dil = ", sprintf("%1.0E", chk.dil), ")"),
                      chk.dil = chk.dil)
 grid.draw(tmp.gt)
 grid.newpage()
 rm(tmp.gt)
-
 ## bacteria on pasture with stream access
 tmp.gt <- table.grob(chr.col = "Bacteria.OnPastureWStreamAccess", df.output = df.output,
                      df.output.chk = df.output.chk, df.comp = df.comp,
-                     chr.title = paste0("Bacteria on pasture with stream access (dil = ", sprintf("%1.0E", chk.dil), ")"),
+                     chr.title = paste0("Bacteria on land for pasture with stream access (dil = ", sprintf("%1.0E", chk.dil), ")"),
                      chk.dil = chk.dil)
 grid.draw(tmp.gt)
 grid.newpage()
 rm(tmp.gt)
-
 ## bacteria on pasture in stream access in stream
 tmp.gt <- table.grob(chr.col = "Bacteria.OnPastureInStream", df.output = df.output,
                      df.output.chk = df.output.chk, df.comp = df.comp,
-                     chr.title = paste0("Bacteria on pasture in stream (dil = ", sprintf("%1.0E", chk.dil), ")"),
+                     chr.title = paste0("Bacteria in stream for pasture (dil = ", sprintf("%1.0E", chk.dil), ")"),
                      chk.dil = chk.dil)
 grid.draw(tmp.gt)
 grid.newpage()
 rm(tmp.gt)
-
 ## bacteria in confinement
 tmp.gt <- table.grob(chr.col = "pairs.InConfinementvsTime", df.output = df.output,
                      df.output.chk = df.output.chk, df.comp = df.comp,
@@ -263,25 +241,22 @@ tmp.gt <- table.grob(chr.col = "pairs.InConfinementvsTime", df.output = df.outpu
 grid.draw(tmp.gt)
 grid.newpage()
 rm(tmp.gt)
-
 ## bacteria in forest without and with stream access
 tmp.gt <- table.grob(chr.col = "Bacteria.InForest", df.output = df.output,
                      df.output.chk = df.output.chk, df.comp = df.comp,
-                     chr.title = paste0("Bacteria in forest on land with and without stream access (dil = ", sprintf("%1.0E", chk.dil), ")"),
+                     chr.title = paste0("Bacteria on land for forest with and without stream access (dil = ", sprintf("%1.0E", chk.dil), ")"),
                      chk.dil = chk.dil)
 grid.draw(tmp.gt)
 grid.newpage()
 rm(tmp.gt)
-
 ## bacteria in forest in stream
 tmp.gt <- table.grob(chr.col = "Bacteria.InForestInStream", df.output = df.output,
                      df.output.chk = df.output.chk, df.comp = df.comp,
-                     chr.title = paste0("Bacteria in forest in stream (dil = ", sprintf("%1.0E", chk.dil), ")"),
+                     chr.title = paste0("Bacteria in stream for forest (dil = ", sprintf("%1.0E", chk.dil), ")"),
                      chk.dil = chk.dil)
 grid.draw(tmp.gt)
 grid.newpage()
 rm(tmp.gt)
-
 ## bacteria in stream
 tmp.gt <- table.grob(chr.col = "Bacteria.Instream", df.output = df.output,
                      df.output.chk = df.output.chk, df.comp = df.comp,
@@ -290,7 +265,6 @@ tmp.gt <- table.grob(chr.col = "Bacteria.Instream", df.output = df.output,
 grid.draw(tmp.gt)
 grid.newpage()
 rm(tmp.gt)
-
 ## Accum for pasture
 tmp.gt <- table.grob(chr.col = "Accum.Pasture", df.output = df.output,
                      df.output.chk = df.output.chk, df.comp = df.comp,
@@ -299,7 +273,6 @@ tmp.gt <- table.grob(chr.col = "Accum.Pasture", df.output = df.output,
 grid.draw(tmp.gt)
 grid.newpage()
 rm(tmp.gt)
-
 ## Accum for forest
 tmp.gt <- table.grob(chr.col = "Accum.Forest", df.output = df.output,
                      df.output.chk = df.output.chk, df.comp = df.comp,
@@ -308,7 +281,6 @@ tmp.gt <- table.grob(chr.col = "Accum.Forest", df.output = df.output,
 grid.draw(tmp.gt)
 grid.newpage()
 rm(tmp.gt)
-
 ## Lim for pasture
 tmp.gt <- table.grob(chr.col = "Lim.Pasture", df.output = df.output,
                      df.output.chk = df.output.chk, df.comp = df.comp,
@@ -317,7 +289,6 @@ tmp.gt <- table.grob(chr.col = "Lim.Pasture", df.output = df.output,
 grid.draw(tmp.gt)
 grid.newpage()
 rm(tmp.gt)
-
 ## Lim for forest
 tmp.gt <- table.grob(chr.col = "Lim.Forest", df.output = df.output,
                      df.output.chk = df.output.chk, df.comp = df.comp,
@@ -325,6 +296,5 @@ tmp.gt <- table.grob(chr.col = "Lim.Forest", df.output = df.output,
                      chk.dil = chk.dil)
 grid.draw(tmp.gt)
 rm(tmp.gt)
-
 ## close pdf file
 dev.off()
