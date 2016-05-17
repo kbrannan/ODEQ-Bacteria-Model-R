@@ -3,13 +3,6 @@
 *** Gerneral Information
 Watershed: Big Elk Creek Sub-Wtsd 16
 Date this Input File Created: 2013-05-10
-*** HSPF Information
-MUTSIN Start Year: 1995
-MUTSIN End Year: 2010
-HSPF-Sup File Header Number for Pasture in MON-ACCUM Table:  68
-HSPF-Sup File Header Number for Pasture in MON-SQOLIM Table: 120
-HSPF-Sup File Header Number for Forest in MON-ACCUM Table:   67
-HSPF-Sup File Header Number for Forest in MON-SQOLIM Table:  119
 *** Land Use Information
 Pasture Area in Watershed (ac): 150.8
 Forest Area in Watershed (ac): 2767.1

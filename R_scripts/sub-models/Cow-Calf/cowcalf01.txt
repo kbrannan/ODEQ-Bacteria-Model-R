@@ -3,6 +3,8 @@
 Watershed: Big Elk Creek Sub-Wtsd 01
 Date this Input File Created: 2016-05-04
 *** Land Use Information
+Pasture Area in Watershed (ac): 445.3
+Forest Area in Watershed (ac): 8739.8
 Percent of pasture with stream access:     4.8000000E+01
 Percent of forest with stream access:      3.7235884E+01
 *** Animal Management Information

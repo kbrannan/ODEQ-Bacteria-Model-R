@@ -1,15 +1,7 @@
 *** Cow-Calf Bacteria Source Model Input File
-*** Program Version 3.1.12102012
 *** Gerneral Information
 Watershed: Big Elk Creek Sub-Wtsd 02
 Date this Input File Created: 2013-05-10
-*** HSPF Information
-MUTSIN Start Year: 1995
-MUTSIN End Year: 2010
-HSPF-Sup File Header Number for Pasture in MON-ACCUM Table:  28
-HSPF-Sup File Header Number for Pasture in MON-SQOLIM Table: 80
-HSPF-Sup File Header Number for Forest in MON-ACCUM Table:   27
-HSPF-Sup File Header Number for Forest in MON-SQOLIM Table:  79
 *** Land Use Information
 Pasture Area in Watershed (ac): 324.9
 Forest Area in Watershed (ac): 6308.4
