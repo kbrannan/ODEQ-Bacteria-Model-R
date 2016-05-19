@@ -37,9 +37,9 @@ onsite_pets <- function(chr.input.file) {
 
 ## pet information
   pets.NumOfHH  <- as.numeric(df.input$value[
-    df.input$parameter == "SQOLIM multiplcation factor"])
+    df.input$parameter == "Number of House-Holds"])
   pets.PetsPerHH  <- as.numeric(df.input$value[
-    df.input$parameter == "SQOLIM multiplcation factor"])
+    df.input$parameter == "Pets per House-Hold"])
 
 ## On-site and structure Information
   onsite.NumNearStrmStrct  <- as.numeric(df.input$value[
