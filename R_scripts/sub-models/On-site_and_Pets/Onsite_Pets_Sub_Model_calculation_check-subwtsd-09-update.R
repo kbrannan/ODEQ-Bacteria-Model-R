@@ -4,12 +4,11 @@ chr.onsitepets.dir <- "M:/Models/Bacteria/HSPF/ODEQ-Bacteria-Model-R/R_scripts/s
 chr.input <- "onsitepets09.txt"
 
 ## for model
-chr.wrkdir <- chr.onsitepets.dir
-chr.input.file <- chr.input
+chr.input.file <- paste0(chr.onsitepets.dir, "/", chr.input)
 
 source(paste0(chr.onsitepets.dir,"/onsite_pets_Sub_Model.R"))
-df.output <- onsite_pets(chr.wrkdir=chr.onsitepets.dir,
-                                   chr.input=chr.input)
+df.output <- onsite_pets(chr.input.file)
+
 ## packages
 library(doBy, quietly = TRUE)
 library(gridExtra, quietly = TRUE)
@@ -37,7 +36,7 @@ table.grob <- function(chr.col, df.output = df.output,
 ##
 ## get input
 ## land use information
-chk.lu.RAOCUT.area <- 49.8 # in acres
+chk.lu.RAOCUT.area <- 19.1 # in acres
 ## general
 chk.sqolim.fac      <- 9 # unitless
 ## onsite information
@@ -90,23 +89,23 @@ chk.failure.post.1986.to.land <- df.output.chk$num.onsite.NearStrmStrctFailurePo
 ##
 ## bacteria loads
 ## pets
-df.output.chk <- cbind(df.output.chk, bac.pets.load = df.output.chk$pop.pet.total * chk.pets.bac.prod)
+df.output.chk <- cbind(df.output.chk, Bacteria.pets.load = df.output.chk$pop.pet.total * chk.pets.bac.prod)
 ##
 ## onsite
 ## all failures
 df.output.chk <- cbind(df.output.chk, 
-                       bac.onsite.NearStrmStrctFailurePre1974 = df.output.chk$num.onsite.NearStrmStrctFailurePre1974 * chk.onsite.bac.prod,
-                       bac.onsite.NearStrmStrctFailure1974to1986 = df.output.chk$num.onsite.NearStrmStrctFailure1974to1986 * chk.onsite.bac.prod,
-                       bac.onsite.NearStrmStrctFailurePost1986 = df.output.chk$num.onsite.NearStrmStrctFailurePost1986 * chk.onsite.bac.prod,
-                       bac.onsite.NearStrmStrctFailure = df.output.chk$num.onsite.NearStrmStrctFailure * chk.onsite.bac.prod)
+                       Bacteria.onsite.NearStrmStrctFailurePre1974 = df.output.chk$num.onsite.NearStrmStrctFailurePre1974 * chk.onsite.bac.prod,
+                       Bacteria.onsite.NearStrmStrctFailure1974to1986 = df.output.chk$num.onsite.NearStrmStrctFailure1974to1986 * chk.onsite.bac.prod,
+                       Bacteria.onsite.NearStrmStrctFailurePost1986 = df.output.chk$num.onsite.NearStrmStrctFailurePost1986 * chk.onsite.bac.prod,
+                       Bacteria.onsite.NearStrmStrctFailure = df.output.chk$num.onsite.NearStrmStrctFailure * chk.onsite.bac.prod)
 ## to stream
 df.output.chk <- cbind(df.output.chk,
-                       bac.onsite.NearStrmStrctFailure.to.stream.load = df.output.chk$num.onsite.NearStrmStrctFailureInStream * chk.onsite.bac.prod)
+                       Bacteria.onsite.NearStrmStrctFailure.to.stream.load = df.output.chk$num.onsite.NearStrmStrctFailureInStream * chk.onsite.bac.prod)
 ## 
 ## accum
 df.output.chk <- cbind(df.output.chk,
                        Accum.RAOCUT = (chk.onsite.bac.prod * (chk.failure.pre.1974.to.land + chk.failure.1974.1986.to.land + chk.failure.post.1986.to.land) +
-                                         df.output.chk$bac.pets.load)/ chk.lu.RAOCUT.area)
+                                         df.output.chk$Bacteria.pets.load)/ chk.lu.RAOCUT.area)
 
 
 ## compare manual and model output
@@ -215,7 +214,7 @@ grid.newpage()
 rm(tmp.gt)
 
 ## bacteria load from pets 
-tmp.gt <- table.grob(chr.col = "bac.pets.load", df.output = df.output,
+tmp.gt <- table.grob(chr.col = "Bacteria.pets.load", df.output = df.output,
                      df.output.chk = df.output.chk, df.comp = df.comp,
                      chr.title = paste0("Total bacteria load from pets (dil = ", sprintf("%1.0E", chk.dil), ")"),
                      chk.dil = chk.dil)
@@ -224,7 +223,7 @@ grid.newpage()
 rm(tmp.gt)
 
 ## onsite system bacteria load from near-stream structures built before 1974
-tmp.gt <- table.grob(chr.col = "bac.onsite.NearStrmStrctFailurePre1974", df.output = df.output,
+tmp.gt <- table.grob(chr.col = "Bacteria.onsite.NearStrmStrctFailurePre1974", df.output = df.output,
                      df.output.chk = df.output.chk, df.comp = df.comp,
                      chr.title = paste0("Total onsite system bacteria load from near-stream structures built before 1974 (dil = ", sprintf("%1.0E", chk.dil), ")"),
                      chk.dil = chk.dil)
@@ -233,7 +232,7 @@ grid.newpage()
 rm(tmp.gt)
 
 ## onsite system bacteria load from near-stream structures built between 1974 and 1986
-tmp.gt <- table.grob(chr.col = "bac.onsite.NearStrmStrctFailure1974to1986", df.output = df.output,
+tmp.gt <- table.grob(chr.col = "Bacteria.onsite.NearStrmStrctFailure1974to1986", df.output = df.output,
                      df.output.chk = df.output.chk, df.comp = df.comp,
                      chr.title = paste0("Total onsite system failure bacteria load from near-stream structures built between 1974 and 1986 (dil = ", sprintf("%1.0E", chk.dil), ")"),
                      chk.dil = chk.dil)
@@ -242,7 +241,7 @@ grid.newpage()
 rm(tmp.gt)
 
 ## onsite system bacteria load from near-stream structures built after 1986
-tmp.gt <- table.grob(chr.col = "bac.onsite.NearStrmStrctFailurePost1986", df.output = df.output,
+tmp.gt <- table.grob(chr.col = "Bacteria.onsite.NearStrmStrctFailurePost1986", df.output = df.output,
                      df.output.chk = df.output.chk, df.comp = df.comp,
                      chr.title = paste0("Total onsite system failure bacteria load from near-stream structures built after 1986 (dil = ", sprintf("%1.0E", chk.dil), ")"),
                      chk.dil = chk.dil)
@@ -251,7 +250,7 @@ grid.newpage()
 rm(tmp.gt)
 
 ## total onsite system bacteria load from near-stream structures
-tmp.gt <- table.grob(chr.col = "bac.onsite.NearStrmStrctFailure", df.output = df.output,
+tmp.gt <- table.grob(chr.col = "Bacteria.onsite.NearStrmStrctFailure", df.output = df.output,
                      df.output.chk = df.output.chk, df.comp = df.comp,
                      chr.title = paste0("Total onsite system failure bacteria load from near-stream structures (dil = ", sprintf("%1.0E", chk.dil), ")"),
                      chk.dil = chk.dil)
@@ -260,7 +259,7 @@ grid.newpage()
 rm(tmp.gt)
 
 ## total onsite system bacteria load from near-stream structures to stream
-tmp.gt <- table.grob(chr.col = "bac.onsite.NearStrmStrctFailure.to.stream.load", df.output = df.output,
+tmp.gt <- table.grob(chr.col = "Bacteria.onsite.NearStrmStrctFailure.to.stream.load", df.output = df.output,
                      df.output.chk = df.output.chk, df.comp = df.comp,
                      chr.title = paste0("Total onsite system failure bacteria load from near-stream structures to stream (dil = ", sprintf("%1.0E", chk.dil), ")"),
                      chk.dil = chk.dil)
