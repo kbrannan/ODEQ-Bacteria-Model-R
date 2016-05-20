@@ -18,7 +18,7 @@ wildlifeBeaver <- function(chr.input.file) {
                           header=FALSE)
   names(df.input) <- c("parameter","value(s)")
 
-  ##
+##
 ## set values for variables
 
 ## land use information
@@ -53,15 +53,17 @@ wildlifeBeaver <- function(chr.input.file) {
   
   ##
   ## Assemble output data frame
-  df.output <- data.frame(pop.total=pop.total,
-                          pop.on.land=pop.on.land,
-                          pop.in.stream=pop.in.stream,
-                          Bacteria.total=bac.total,
-                          Bacteria.on.land=bac.on.land,
-                          Bacteria.in.stream=bac.in.stream,
-                          Accum.forest=accum.forest,
-                          Lim.forest=amn.SQLIM.factor * accum.forest,
-                               stringsAsFactors=FALSE)
+  df.output <- data.frame(
+    Month=format(as.POSIXct(paste0("1967-",1:12,"-01")), format = "%b"),
+    pop.total=pop.total,
+    pop.on.land=pop.on.land,
+    pop.in.stream=pop.in.stream,
+    Bacteria.total=bac.total,
+    Bacteria.on.land=bac.on.land,
+    Bacteria.in.stream=bac.in.stream,
+    Accum.forest=accum.forest,
+    Lim.forest=amn.SQLIM.factor * accum.forest,
+    stringsAsFactors=FALSE)
 
   return(df.output)
 }
