@@ -1,7 +1,7 @@
 ## step bt step calculation check for wildlife_beaver_sub_model using input from
 ## wildlifeBeaver01.txt file
 chr.wildlife.beaver.dir <- "M:/Models/Bacteria/HSPF/ODEQ-Bacteria-Model-R/R_scripts/sub-models/wildlife-beaver"
-chr.input <- "wildlifebeaver01.txt"
+chr.input <- "wildlifeBeaver01.txt"
 
 ## file for model
 chr.input.file <- paste0(chr.wildlife.beaver.dir, "/", chr.input)
@@ -65,6 +65,7 @@ chk.accum <- chk.bac.on.land / chk.habitat
 chk.lim <- chk.accum * chk.sqolim
 ## put together
 df.chk <- data.frame(
+  Month=format(as.POSIXct(paste0("1967-",1:12,"-01")), format = "%b"),
   pop.total = chk.pop.total,
   pop.on.land = chk.pop.on.land,
   pop.in.stream = chk.pop.in.around.stream,
@@ -76,7 +77,9 @@ df.chk <- data.frame(
   stringsAsFactors = FALSE)
 
 ## compare
-df.comp <- df.output - df.chk
+df.comp <- data.frame(
+  Month=format(as.POSIXct(paste0("1967-",1:12,"-01")), format = "%b"),
+  df.output[, -1] - df.chk[, -1])
 
 ##
 ## check model output
@@ -88,38 +91,75 @@ pdf(file = paste0(chr.wildlife.beaver.dir, "/beaver-bacteria-model-calc-check-",
                   gsub("\\.txt","-",chr.input) 
                   ,strftime(Sys.time(), format = "%Y%m%d%H%M"),
                   ".pdf"), height = 8.5, width = 11, onefile = TRUE)
-## population
-tmp.table <- tableGrob(chk.all.pop, show.rownames = FALSE)
-tmp.h <- grobHeight(tmp.table)
-tmp.w <- grobWidth(tmp.table)
-tmp.title <- textGrob(label = paste0("Beaver Population (dil = ", sprintf("%1.0E", chk.dil), ")"),
-                      y=unit(0.5,"npc") + 0.5*tmp.h, 
-                      vjust=0, gp=gpar(fontsize=20))
-tmp.gt <- gTree(children=gList(tmp.table, tmp.title))
+## total population
+tmp.gt <- table.grob(chr.col = "pop.total", df.output = df.output,
+                     df.output.chk = df.chk, df.comp = df.comp,
+                     chr.title = paste0("Total number of beavers (dil = ", sprintf("%1.0E", chk.dil), ")"),
+                     chk.dil = chk.dil)
 grid.draw(tmp.gt)
 grid.newpage()
 rm(list = ls(pattern = "tmp\\.*"))
 
-## bac load
-tmp.table <- tableGrob(chk.all.bac, show.rownames = FALSE)
-tmp.h <- grobHeight(tmp.table)
-tmp.w <- grobWidth(tmp.table)
-tmp.title <- textGrob(label = paste0("Bacteria loads from Beaver (dil = ", sprintf("%1.0E", chk.dil), ")"),
-                      y=unit(0.5,"npc") + 0.5*tmp.h, 
-                      vjust=0, gp=gpar(fontsize=20))
-tmp.gt <- gTree(children=gList(tmp.table, tmp.title))
+## population on land
+tmp.gt <- table.grob(chr.col = "pop.on.land", df.output = df.output,
+                     df.output.chk = df.chk, df.comp = df.comp,
+                     chr.title = paste0("Number of beavers on land (dil = ", sprintf("%1.0E", chk.dil), ")"),
+                     chk.dil = chk.dil)
 grid.draw(tmp.gt)
 grid.newpage()
 rm(list = ls(pattern = "tmp\\.*"))
 
-## accum load
-tmp.table <- tableGrob(chk.all.accum, show.rownames = FALSE)
-tmp.h <- grobHeight(tmp.table)
-tmp.w <- grobWidth(tmp.table)
-tmp.title <- textGrob(label = paste0("Accum loads from Beaver (dil = ", sprintf("%1.0E", chk.dil), ")"),
-                      y=unit(0.5,"npc") + 0.5*tmp.h, 
-                      vjust=0, gp=gpar(fontsize=20))
-tmp.gt <- gTree(children=gList(tmp.table, tmp.title))
+## population in stream
+tmp.gt <- table.grob(chr.col = "pop.in.stream", df.output = df.output,
+                     df.output.chk = df.chk, df.comp = df.comp,
+                     chr.title = paste0("Number of beavers in stream (dil = ", sprintf("%1.0E", chk.dil), ")"),
+                     chk.dil = chk.dil)
+grid.draw(tmp.gt)
+grid.newpage()
+rm(list = ls(pattern = "tmp\\.*"))
+
+
+## Total bacteria load
+tmp.gt <- table.grob(chr.col = "Bacteria.total", df.output = df.output,
+                     df.output.chk = df.chk, df.comp = df.comp,
+                     chr.title = paste0("Total bacteria load from beavers (dil = ", sprintf("%1.0E", chk.dil), ")"),
+                     chk.dil = chk.dil)
+grid.draw(tmp.gt)
+grid.newpage()
+rm(list = ls(pattern = "tmp\\.*"))
+
+## bacteria load on land
+tmp.gt <- table.grob(chr.col = "Bacteria.on.land", df.output = df.output,
+                     df.output.chk = df.chk, df.comp = df.comp,
+                     chr.title = paste0("Bacteria load on land from beavers (dil = ", sprintf("%1.0E", chk.dil), ")"),
+                     chk.dil = chk.dil)
+grid.draw(tmp.gt)
+grid.newpage()
+rm(list = ls(pattern = "tmp\\.*"))
+
+## bacteria load to stream
+tmp.gt <- table.grob(chr.col = "Bacteria.in.stream", df.output = df.output,
+                     df.output.chk = df.chk, df.comp = df.comp,
+                     chr.title = paste0("Bacteria load to stream from beavers (dil = ", sprintf("%1.0E", chk.dil), ")"),
+                     chk.dil = chk.dil)
+grid.draw(tmp.gt)
+grid.newpage()
+rm(list = ls(pattern = "tmp\\.*"))
+
+## Accum bacteria load
+tmp.gt <- table.grob(chr.col = "Accum.forest", df.output = df.output,
+                     df.output.chk = df.chk, df.comp = df.comp,
+                     chr.title = paste0("Bacteria load to land as accum for forest from beavers (dil = ", sprintf("%1.0E", chk.dil), ")"),
+                     chk.dil = chk.dil)
+grid.draw(tmp.gt)
+grid.newpage()
+rm(list = ls(pattern = "tmp\\.*"))
+
+## Lim bacteria load
+tmp.gt <- table.grob(chr.col = "Lim.forest", df.output = df.output,
+                     df.output.chk = df.chk, df.comp = df.comp,
+                     chr.title = paste0("Bacteria load limit to land as accum for forest from beavers (dil = ", sprintf("%1.0E", chk.dil), ")"),
+                     chk.dil = chk.dil)
 grid.draw(tmp.gt)
 rm(list = ls(pattern = "tmp\\.*"))
 
