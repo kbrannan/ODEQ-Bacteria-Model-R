@@ -1,4 +1,3 @@
-@echo off
 "C:\Program Files\R\R-3.1.3\bin\x64\Rscript.exe" --vanilla Wildlife_Beaver_Sub_Model_calculation_check-subwtsd-01.R
 "C:\Program Files\R\R-3.1.3\bin\x64\Rscript.exe" --vanilla Wildlife_Beaver_Sub_Model_calculation_check-subwtsd-02.R
 "C:\Program Files\R\R-3.1.3\bin\x64\Rscript.exe" --vanilla Wildlife_Beaver_Sub_Model_calculation_check-subwtsd-04.R
