@@ -1,24 +1,16 @@
-*** Wildlife Bacteria Source Model Input File
-*** Wildlife Species: Coyote
-*** Watershed: Big Elk Creek Sub-Wtsd 12
-*** Date this Input File Created: 2014-01-16
-MUTSIN Start Year: 1995
-MUTSIN End Year: 2010
-HSPF-Sup File Header Number for Pasture in MON-ACCUM Table:  57
-HSPF-Sup File Header Number for Pasture in MON-SQOLIM Table: 109
-HSPF-Sup File Header Number for Forest in MON-ACCUM Table:   56
-HSPF-Sup File Header Number for Forest in MON-SQOLIM Table:  108
-HSPF-Sup File Header Number for Residential/Agricultural Operration Area/Commercial/Urban/Transportation in MON-ACCUM Table:   58
-HSPF-Sup File Header Number for Residential/Agricultural Operration Area/Commercial/Urban/Transportation in MON-SQOLIM Table:  110
-SQOLIM multiplcation factor: 9
-*** Habitats
-Pasture Area in Watershed (ac): 8.11
-Forest Area in Watershed (ac): 530.95
-Residential/Agricultural Operration Area/Commercial/Urban/Transportation (ac): 23.45
-*** Percent of Landuse with Stream access
-*** all landuse has stream access for Coyotes
-*** Animal Densities
+*** Wildlife Bacteria Source Model Input File:
+Wildlife Species: Coyote
+Watershed:Big Elk Creek Sub-Wtsd 12
+Date this Input File Created: 2016-05-23
+*** Habitats:
+Pasture Area in Watershed (ac):   8.7
+Forest Area in Watershed (ac):   1117.9
+Residential/Agricultural Operration Area/Commercial/Urban/Transportation (ac):   7
+*** Percent of Landuse with Stream access:
+*** all landuse has stream access for Coyotes:
+*** Animal Densities:
 Animal Density (animal/ac):     3.6063000E-02
-*** General parameters
+*** General parameters:
 Percent of animals in and around streams:     1.0000000E+00
 Bacteria Production of animal per day (orgs/day):     9.0000115E+08
+SQOLIM multiplcation factor: 9
