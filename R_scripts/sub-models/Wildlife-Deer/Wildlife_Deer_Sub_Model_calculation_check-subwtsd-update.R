@@ -1,7 +1,7 @@
 ## step bt step calculation check for wildlife_deer_sub_model using input from
 ## wildlifeDeerXX.txt file
 chr.wildlife.deer.dir <- "M:/Models/Bacteria/HSPF/ODEQ-Bacteria-Model-R/R_scripts/sub-models/wildlife-deer"
-chr.input <- "wildlifeDeer01.txt"
+chr.input <- "wildlifeDeerXX.txt"
 ## file for model
 chr.input.file <- paste0(chr.wildlife.deer.dir, "/", chr.input)
 ## run model
