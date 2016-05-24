@@ -48,16 +48,25 @@ wildlifeCoyote <- function(chr.input.file) {
   ### Calculations
   ### Populations
   pop.total   <- lu.habitatarea * amn.density
+  pop.pasture   <- lu.pasture.area * amn.density
+  pop.forest   <- lu.forest.area * amn.density
+  pop.RAOCUT   <- lu.RAOCUT.area * amn.density
   pop.on.land     <- (1-amn.percentstream) * pop.total
+  pop.on.land.pasture <- (1-amn.percentstream) * pop.pasture
+  pop.on.land.forest <- (1-amn.percentstream) * pop.forest
+  pop.on.land.RAOCUT     <- (1-amn.percentstream) * pop.RAOCUT
   pop.in.stream <- amn.percentstream * pop.total
   ### bacteria loads
   bac.total <- pop.total * amn.bac.prod
   bac.on.land  <- amn.bac.prod * pop.on.land
+  bac.on.land.pasture  <- amn.bac.prod * pop.on.land.pasture
+  bac.on.land.forest  <- amn.bac.prod * pop.on.land.forest
+  bac.on.land.RAOCUT  <- amn.bac.prod * pop.on.land.RAOCUT
   bac.in.stream   <- amn.bac.prod * pop.in.stream
   ### accum values
-  accum.forest  <- (bac.on.land / lu.habitatarea) * (lu.forest.area / lu.habitatarea)
-  accum.pasture  <- (bac.on.land / lu.habitatarea) * (lu.pasture.area / lu.habitatarea)
-  accum.RAOCUT  <- (bac.on.land / lu.habitatarea) * (lu.RAOCUT.area / lu.habitatarea)
+  accum.pasture  <- bac.on.land.pasture / lu.pasture.area
+  accum.forest  <- bac.on.land.forest / lu.forest.area
+  accum.RAOCUT  <- bac.on.land.RAOCUT / lu.RAOCUT.area
   ##
   ## Assemble output data frame
   df.output <- data.frame(
