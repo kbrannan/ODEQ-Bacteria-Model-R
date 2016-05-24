@@ -12,7 +12,7 @@ wildlifeCoyote <- function(chr.input.file) {
   #   DD is the two-digit day, ## is an integer, #.# is a floating point 
   #   number, and #.#E+## is a number in scientific notation
   
-  
+## read input files  
   df.input <- read.delim(chr.input.file, sep=":", 
                           comment.char="*", stringsAsFactors=FALSE, 
                           header=FALSE)
