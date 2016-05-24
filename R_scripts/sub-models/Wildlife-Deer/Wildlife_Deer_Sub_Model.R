@@ -1,91 +1,92 @@
-wildlifeDeer <- function(chr.input="wildlifeDeerxx.txt", chr.wrkdir=getwd()) {
-
-  #setwd(chr.wrkdir)
+wildlifeDeer <- function(chr.input.file) {
+  #   This function is the bacteria source-model deer The model 
+  #   generates input for HSPF. The specific outputs from this source model
+  #   are loads from the beaver to land and directly to the stream
+  #   The load to the land is in the form of load/acre for forest 
+  #   PLS in a sub-watershed that the source-model contributes to and 
+  #   the hourly load to the stream in the form of a MUTSIN file. The 
+  #   input for the model is from an ASCII text file. Use the text below
+  #   as a template for the input file. The symbol used for comments in
+  #   the input file is "***". The definitions for the symbols used in
+  #   the template are: YYYY is four-digit year, MM two-digit month, 
+  #   DD is the two-digit day, ## is an integer, #.# is a floating point 
+  #   number, and #.#E+## is a number in scientific notation
+  
+  ## read input files  
+  df.input <- read.delim(chr.input.file, sep=":", 
+                         comment.char="*", stringsAsFactors=FALSE, 
+                         header=FALSE)
+  names(df.input) <- c("parameter","value(s)")
   
   ##
-  ## Read input file
-  SubModelFile <- paste0(chr.wrkdir,"/",chr.input)
-  SubModelData <- read.delim(SubModelFile, sep=":",comment.char="*",stringsAsFactors=FALSE, header=FALSE)
-  #SubModelFilename <- strsplit(chr.input,".",fixed=TRUE)[[1]][[1]]
-  names(SubModelData) <- c("parameter","value(s)")
-  ##
-  ### Getting input parameter values
-  ### HSPF related information
-  tmp.MUTSINStartYr <- as.numeric(SubModelData[1,2])
-  tmp.MUTSINEndYr   <- as.numeric(SubModelData[2,2])
-  tmp.HdrACCUMPasture <- as.numeric(SubModelData[3,2])
-  tmp.HdrSQLIMPasture <- as.numeric(SubModelData[4,2])
-  tmp.HdrACCUMForest  <- as.numeric(SubModelData[5,2])
-  tmp.HdrSQLIMForest  <- as.numeric(SubModelData[6,2])
-  tmp.HdrACCUMRAOCUT  <- as.numeric(SubModelData[7,2])
-  tmp.HdrSQLIMRAOCUT  <- as.numeric(SubModelData[8,2])
-  tmp.SQLIMFactor     <- as.numeric(SubModelData[9,2])
-  ### Habitats
-  tmp.HabitatArea  <- as.numeric(SubModelData[10,2])
-  tmp.PastureArea  <- as.numeric(SubModelData[11,2])
-  tmp.ForestArea   <- as.numeric(SubModelData[12,2])
-  tmp.RAOCUTArea  <- as.numeric(SubModelData[13,2])
+  ## set values for variables
+  
+  ## land use information
+  lu.pasture.area   <- as.numeric(df.input$value[
+    df.input$parameter == "Pasture Area in Watershed (ac)"])
+  lu.forest.area   <- as.numeric(df.input$value[
+    df.input$parameter == "Forest Area in Watershed (ac)"])
+  lu.RAOCUT.area   <- as.numeric(df.input$value[
+    df.input$parameter == "Residential/Agricultural Operration Area/Commercial/Urban/Transportation (ac)"])
+  ## deer habitat set to all PLS area
+  lu.habitatarea <- lu.pasture.area + lu.forest.area + lu.RAOCUT.area
   ### percent of habitat with stream access
-  tmp.HabitatAreaWStreamAcess <- as.numeric(SubModelData[14,2])/100
-  ### percent time spent in around streams
-  tmp.PercentStrmTime <- as.numeric(SubModelData[15,2])/100
-  ### Animal Densities
-  tmp.ADHabitat <- as.numeric(SubModelData[16,2])
-  ### bacteria production per animal
-  tmp.bac.prod  <- as.numeric(SubModelData[17,2])
+  amn.percentstream <- as.numeric(df.input$value[
+    df.input$parameter == "Percent of time defecating in streams"])/100
+## animal information
+  ## population densities
+  amn.density  <- as.numeric(df.input$value[
+    df.input$parameter == "Animal Density (animal/ac)"])
+  ## percent of time defecating in or around streams
+  amn.percentstream <- as.numeric(df.input$value[
+    df.input$parameter == "Percent of animals in and around streams"]) / 100
+  ## all landuse has stream access for deers
+  ## bacteria production per animal
+  amn.bac.prod  <- as.numeric(df.input$value[
+    df.input$parameter == "Bacteria Production of animal per day (orgs/day)"])
+  amn.SQLIM.factor  <- as.numeric(df.input$value[
+    df.input$parameter == "SQOLIM multiplcation factor"])
+
   ##
   ### Calculations
   ### Populations
-  tmp.PopTotal  <- tmp.HabitatArea * tmp.ADHabitat
-  tmp.PopInStream  <- tmp.PercentStrmTime * tmp.HabitatAreaWStreamAcess * tmp.HabitatArea * tmp.ADHabitat
-##  tmp.PopOnLand <- (1 - tmp.HabitatAreaWStreamAcess) * tmp.HabitatArea * tmp.ADHabitat + (1 - tmp.PercentStrmTime) * tmp.HabitatAreaWStreamAcess * tmp.HabitatArea * tmp.ADHabitat
-  tmp.PopOnLand <- tmp.PopTotal - tmp.PopInStream
-  tmp.TotalFPR <- tmp.ForestArea + tmp.PastureArea + tmp.RAOCUTArea
-  tmp.PopOnForest     <- tmp.PopOnLand * (tmp.ForestArea / tmp.TotalFPR)
-  tmp.PopOnPasture    <- tmp.PopOnLand * (tmp.PastureArea / tmp.TotalFPR)
-  tmp.PopOnRAOCUT    <- tmp.PopOnLand * (tmp.RAOCUTArea / tmp.TotalFPR)
-
+  pop.total   <- lu.habitatarea * amn.density
+  pop.pasture   <- lu.pasture.area * amn.density
+  pop.forest   <- lu.forest.area * amn.density
+  pop.RAOCUT   <- lu.RAOCUT.area * amn.density
+  pop.on.land     <- (1-amn.percentstream) * pop.total
+  pop.on.land.pasture <- (1-amn.percentstream) * pop.pasture
+  pop.on.land.forest <- (1-amn.percentstream) * pop.forest
+  pop.on.land.RAOCUT     <- (1-amn.percentstream) * pop.RAOCUT
+  pop.in.stream <- amn.percentstream * pop.total
   ### bacteria loads
-  tmp.bacteria.Total    <- tmp.bac.prod * tmp.PopTotal
-  tmp.bacteria.TotalOnLand  <- tmp.bac.prod * tmp.PopOnLand
-  tmp.bacteria.TotalInStream  <- tmp.bac.prod * tmp.PopInStream
-  tmp.bacteria.OnForest     <- tmp.bac.prod * tmp.PopOnForest
-  tmp.bacteria.OnPasture    <- tmp.bac.prod * tmp.PopOnPasture
-  tmp.bacteria.OnRAOCUT    <- tmp.bac.prod * tmp.PopOnRAOCUT
-
+  bac.total <- pop.total * amn.bac.prod
+  bac.on.land  <- amn.bac.prod * pop.on.land
+  bac.on.land.pasture  <- amn.bac.prod * pop.on.land.pasture
+  bac.on.land.forest  <- amn.bac.prod * pop.on.land.forest
+  bac.on.land.RAOCUT  <- amn.bac.prod * pop.on.land.RAOCUT
+  bac.in.stream   <- amn.bac.prod * pop.in.stream
   ### accum values
-  tmp.accum.Forest  <- tmp.bacteria.OnForest / tmp.ForestArea
-  tmp.accum.Pasture <- tmp.bacteria.OnPasture / tmp.PastureArea
-  tmp.accum.RAOCUT  <- tmp.bacteria.OnRAOCUT / tmp.RAOCUTArea
-
-  
+  accum.pasture  <- bac.on.land.pasture / lu.pasture.area
+  accum.forest  <- bac.on.land.forest / lu.forest.area
+  accum.RAOCUT  <- bac.on.land.RAOCUT / lu.RAOCUT.area
   ##
   ## Assemble output data frame
-  SubModelOutput <- data.frame(pop.total=tmp.PopTotal,
-                               pop.total.on.land=tmp.PopOnLand,
-                               pop.total.in.Forest=tmp.PopOnForest,
-                               pop.total.on.Pasture=tmp.PopOnPasture,
-                               pop.total.on.RAOCUT=tmp.PopOnRAOCUT,
-                               pop.total.in.stream=tmp.PopInStream,
-                               bac.total=tmp.bacteria.Total,
-                               bac.total.on.land=tmp.bacteria.TotalOnLand,
-                               bac.total.in.stream=tmp.bacteria.TotalInStream,
-                               bac.forest.on.land=tmp.bacteria.OnForest,
-                               bac.pasture.on.land=tmp.bacteria.OnPasture,
-                               bac.RAOCUT.on.land=tmp.bacteria.OnRAOCUT,
-                               Accum.Forest=tmp.accum.Forest,
-                               Accum.Pasture=tmp.accum.Pasture,
-                               Accum.RAOCUT=tmp.accum.RAOCUT,
-                               SQLIM.factor=tmp.SQLIMFactor,
-                               MUTSIN.Start.Year=tmp.MUTSINStartYr,
-                               MUTSIN.End.Year=tmp.MUTSINEndYr,
-                               SUP.ACCUM.Forest.line=tmp.HdrACCUMForest,
-                               SUP.SQLIM.Forest.line=tmp.HdrSQLIMForest,
-                               SUP.ACCUM.Pastrure.line=tmp.HdrACCUMPasture,
-                               SUP.SQLIM.Pastrure.line=tmp.HdrSQLIMPasture,
-                               SUP.ACCUM.RAOCUT.line=tmp.HdrACCUMRAOCUT,
-                               SUP.SQLIM.RAOCUT.line=tmp.HdrSQLIMRAOCUT,
-                               stringsAsFactors=FALSE)
-
-  return(SubModelOutput)
+  df.output <- data.frame(
+    Month=format(as.POSIXct(paste0("1967-",1:12,"-01")), format = "%b"),
+    pop.total=pop.total,
+    pop.on.land=pop.on.land,
+    pop.in.stream=pop.in.stream,
+    Bacteria.total=bac.total,
+    Bacteria.on.land=bac.on.land,
+    Bacteria.in.stream=bac.in.stream,
+    Accum.pasture=accum.pasture,
+    Accum.forest=accum.forest,
+    Accum.RAOCUT=accum.RAOCUT,
+    Lim.pasture=amn.SQLIM.factor * accum.pasture,
+    Lim.forest=amn.SQLIM.factor * accum.forest,
+    Lim.RAOCUT=amn.SQLIM.factor * accum.RAOCUT,
+    stringsAsFactors=FALSE)
+  
+  return(df.output)
 }
