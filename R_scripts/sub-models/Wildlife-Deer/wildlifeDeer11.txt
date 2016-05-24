@@ -1,24 +1,16 @@
-*** Wildlife Bacteria Source Model Input File
-*** Wildlife Species: Deer
-*** Watershed: Big Elk Creek Sub-Wtsd 11
-*** Date this Input File Created: 2016-03-15
-MUTSIN Start Year: 1995
-MUTSIN End Year: 2010
-HSPF-Sup File Header Number for Pasture in MON-ACCUM Table:  54
-HSPF-Sup File Header Number for Pasture in MON-SQOLIM Table: 106
-HSPF-Sup File Header Number for Forest in MON-ACCUM Table:   53
-HSPF-Sup File Header Number for Forest in MON-SQOLIM Table:  105
-HSPF-Sup File Header Number for Residential/Agricultural Operration Area/Commercial/Urban/Transportation in MON-ACCUM Table:  55
-HSPF-Sup File Header Number for Residential/Agricultural Operration Area/Commercial/Urban/Transportation in MON-SQOLIM Table: 107
-SQOLIM multiplcation factor: 9
-*** Habitats
-Habitat Area in Watershed (ac): 4209.5
-Pasture Area in Watershed (ac): 89.46
-Forest Area in Watershed (ac):  3934.07
-Residential/Agricultural Operration Area/Commercial/Urban/Transportation (ac): 87.3
-*** Percent of Landuse with Stream access
+*** Wildlife Bacteria Source Model Input File:
+Wildlife Species: Deer
+Watershed: Big Elk Creek Sub-Wtsd 11
+Date this Input File Created: 2016-05-24
+*** Habitats:
+Pasture Area in Watershed (ac):   92.5
+Forest Area in Watershed (ac):   3916.2
+Residential/Agricultural Operration Area/Commercial/Urban/Transportation (ac):   28.1
+*** Percent of Landuse with Stream access:
 Percent of Habitat with stream access:    5.0000000E+01
-*** General parameters
+*** Animal Densities:
+Animal Density (animal/ac):     4.7000000E-02
+*** General parameters:
 Percent of animals in and around streams:     1.0000000E+00
-Animal Density for Habitat in watershed (animal/ac):     4.7000000E-02
 Bacteria Production of animal per day (orgs/day):     1.8373286E+08
+SQOLIM multiplcation factor: 9

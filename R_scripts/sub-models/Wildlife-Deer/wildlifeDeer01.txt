@@ -1,11 +1,11 @@
-*** Wildlife Bacteria Source Model Input File
+*** Wildlife Bacteria Source Model Input File:
 Wildlife Species: Deer
 Watershed: Big Elk Creek Sub-Wtsd 01
 Date this Input File Created: 2016-05-24
 *** Habitats:
-Pasture Area in Watershed (ac): 441.35
-Forest Area in Watershed (ac):  8790.81
-Residential/Agricultural Operration Area/Commercial/Urban/Transportation (ac): 435.5
+Pasture Area in Watershed (ac):   445.3
+Forest Area in Watershed (ac):   8739.8
+Residential/Agricultural Operration Area/Commercial/Urban/Transportation (ac):   75
 *** Percent of Landuse with Stream access:
 Percent of Habitat with stream access:    5.0000000E+01
 *** Animal Densities:
@@ -14,4 +14,3 @@ Animal Density (animal/ac):     4.7000000E-02
 Percent of animals in and around streams:     1.0000000E+00
 Bacteria Production of animal per day (orgs/day):     1.8373286E+08
 SQOLIM multiplcation factor: 9
-
