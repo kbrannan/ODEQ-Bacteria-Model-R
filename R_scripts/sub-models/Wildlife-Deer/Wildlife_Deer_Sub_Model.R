@@ -31,8 +31,8 @@ wildlifeDeer <- function(chr.input.file) {
   ## deer habitat set to all PLS area
   lu.habitatarea <- lu.pasture.area + lu.forest.area + lu.RAOCUT.area
   ### percent of habitat with stream access
-  amn.percentstream <- as.numeric(df.input$value[
-    df.input$parameter == "Percent of time defecating in streams"])/100
+  lu.percentstream <- as.numeric(df.input$value[
+    df.input$parameter == "Percent of Habitat with stream access"])/100
 ## animal information
   ## population densities
   amn.density  <- as.numeric(df.input$value[
@@ -48,19 +48,46 @@ wildlifeDeer <- function(chr.input.file) {
     df.input$parameter == "SQOLIM multiplcation factor"])
 
   ##
-  ### Calculations
-  ### Populations
+## Calculations
+  ## land use stream access
+  ## with stream access
+  lu.w.st.access <- lu.habitatarea * lu.percentstream
+  lu.w.st.access.pasture <- lu.pasture.area * lu.percentstream
+  lu.w.st.access.forest <- lu.forest.area * lu.percentstream
+  lu.w.st.access.RAOCUT <- lu.RAOCUT.area * lu.percentstream
+  ## without stream access
+  lu.wo.st.access <- lu.habitatarea - lu.w.st.access
+  lu.wo.st.access.pasture <- lu.pasture.area - lu.w.st.access.pasture
+  lu.wo.st.access.forest <- lu.forest.area- lu.w.st.access.forest
+  lu.wo.st.access.RAOCUT <- lu.RAOCUT.area - lu.w.st.access.RAOCUT
+  ## populations
+  ## overall locations
   pop.total   <- lu.habitatarea * amn.density
   pop.pasture   <- lu.pasture.area * amn.density
   pop.forest   <- lu.forest.area * amn.density
   pop.RAOCUT   <- lu.RAOCUT.area * amn.density
-  pop.on.land     <- (1-amn.percentstream) * pop.total
-  pop.on.land.pasture <- (1-amn.percentstream) * pop.pasture
-  pop.on.land.forest <- (1-amn.percentstream) * pop.forest
-  pop.on.land.RAOCUT     <- (1-amn.percentstream) * pop.RAOCUT
-  pop.in.stream <- amn.percentstream * pop.total
-  ### bacteria loads
-  bac.total <- pop.total * amn.bac.prod
+  ## on-land
+  pop.on.land <- (lu.wo.st.access + 
+                    (1 - amn.percentstream) * lu.w.st.access) * amn.density
+  pop.on.land.pasture <- (lu.wo.st.access.pasture + 
+                    (1 - amn.percentstream) * lu.w.st.access.pasture) * 
+    amn.density
+  pop.on.land.forest <- (lu.wo.st.access.forest + 
+                            (1 - amn.percentstream) * lu.w.st.access.forest) * 
+    amn.density
+  pop.on.land.RAOCUT <- (lu.wo.st.access.RAOCUT + 
+                            (1 - amn.percentstream) * lu.w.st.access.RAOCUT) * 
+    amn.density
+  ## in-stream
+  pop.in.stream <- amn.percentstream * lu.w.st.access * amn.density
+  pop.instream.pasture <- amn.percentstream * lu.w.st.access.pasture * 
+    amn.density
+  pop.in.stream.forest <- amn.percentstream * lu.w.st.access.forest * 
+    amn.density
+  pop.in.stream.RAOCUT <- amn.percentstream * lu.w.st.access.RAOCUT * 
+    amn.density
+  ## bacteria loads
+  bac.total <- amn.bac.prod * pop.total
   bac.on.land  <- amn.bac.prod * pop.on.land
   bac.on.land.pasture  <- amn.bac.prod * pop.on.land.pasture
   bac.on.land.forest  <- amn.bac.prod * pop.on.land.forest
