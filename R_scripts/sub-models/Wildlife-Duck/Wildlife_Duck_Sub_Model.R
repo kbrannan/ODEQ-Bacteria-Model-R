@@ -1,38 +1,84 @@
-wildlifeDuck <- function(chr.input="wildlifeDuckxx.txt",chr.wrkdir=getwd()) {
+wildlifeDuck <- function(chr.input.file) {
+  #   This function is the bacteria source-model deer The model 
+  #   generates input for HSPF. The specific outputs from this source model
+  #   are loads from the beaver to land and directly to the stream
+  #   The load to the land is in the form of load/acre for forest 
+  #   PLS in a sub-watershed that the source-model contributes to and 
+  #   the hourly load to the stream in the form of a MUTSIN file. The 
+  #   input for the model is from an ASCII text file. Use the text below
+  #   as a template for the input file. The symbol used for comments in
+  #   the input file is "***". The definitions for the symbols used in
+  #   the template are: YYYY is four-digit year, MM two-digit month, 
+  #   DD is the two-digit day, ## is an integer, #.# is a floating point 
+  #   number, and #.#E+## is a number in scientific notation
+  
+  ## read input files  
+  df.input <- read.delim(chr.input.file, sep=":", 
+                         comment.char="*", stringsAsFactors=FALSE, 
+                         header=FALSE)
+  names(df.input) <- c("parameter","value(s)")
+  
+##
+## Getting input parameter values
+  ## land use information
+  lu.pasture.area   <- as.numeric(df.input$value[
+    df.input$parameter == "Pasture Area in Watershed (ac)"])
+  lu.forest.area   <- as.numeric(df.input$value[
+    df.input$parameter == "Forest Area in Watershed (ac)"])
+  lu.RAOCUT.area   <- as.numeric(df.input$value[
+    df.input$parameter == "Residential/Agricultural Operration Area/Commercial/Urban/Transportation (ac)"])  ### Animal Densities
+  lu.habitatarea <- lu.pasture.area + lu.forest.area + lu.RAOCUT.area
+  ## animal information
+  ## months for seasons
+  amn.months.season.1 <- as.numeric(df.input$value[
+    df.input$parameter == "Season 1 Months (numbers)"])
+  amn.months.season.1 <- as.numeric(strsplit(df.input$value[
+    df.input$parameter == "Season 1 Months (numbers)"], split = ",")[[1]])
+  amn.months.season.2 <- as.numeric(strsplit(df.input$value[
+    df.input$parameter == "Season 2 Months (numbers)"], split = ",")[[1]])
+  ## Animal Densities
+  amn.animal.density.season.1  <- as.numeric(df.input$value[
+    df.input$parameter == "Season 1 Animal Density (animal/ac)"])
+  amn.animal.density.season.2  <- as.numeric(df.input$value[
+    df.input$parameter == "Season 2 Animal Density (animal/ac)"])
+  ## Percent animals around streams
+  amn.percentstream <- as.numeric(df.input$value[
+    df.input$parameter == "Percent of animals on Pasture in and around streams"])/100
+  ## bacteria production per animal
+  amn.bac.prod  <- as.numeric(df.input$value[
+    df.input$parameter == "Bacteria Production of animal per day (orgs/day)"])
+  amn.SQLIM.factor  <- as.numeric(df.input$value[
+    df.input$parameter == "SQOLIM multiplcation factor"])  ##
 
-  ## read input file
-  SubModelFile <- paste0(chr.wrkdir,"/",chr.input)
-  SubModelData <- read.delim(SubModelFile, sep=":",comment.char="*",stringsAsFactors=FALSE, header=FALSE)
-  names(SubModelData) <- c("parameter","value(s)")
-  ##
-  ### Getting input parameter values
-  ### HSPF related information
-  tmp.MUTSINStartYr <- as.numeric(SubModelData[1,2])
-  tmp.MUTSINEndYr   <- as.numeric(SubModelData[2,2])
-  tmp.HdrACCUMPasture <- as.numeric(SubModelData[3,2])
-  tmp.HdrSQLIMPasture <- as.numeric(SubModelData[4,2])
-  tmp.HdrACCUMForest  <- as.numeric(SubModelData[5,2])
-  tmp.HdrSQLIMForest  <- as.numeric(SubModelData[6,2])
-  tmp.HdrACCUMRAOCUT  <- as.numeric(SubModelData[7,2])
-  tmp.HdrSQLIMRAOCUT  <- as.numeric(SubModelData[8,2])
-  tmp.SQLIMFactor  <- as.numeric(SubModelData[9,2])
-  ### months for seasons
-  tmp.S1Months <- as.numeric(strsplit(SubModelData[10,2],",")[[1]])
-  tmp.S2Months <- as.numeric(strsplit(SubModelData[11,2],",")[[1]])
-  ### Habitats
-  tmp.PastureArea  <- as.numeric(SubModelData[12,2])
-  tmp.ForestArea   <- as.numeric(SubModelData[13,2])
-  tmp.RAOCUTArea   <- as.numeric(SubModelData[14,2])
-  ### Animal Densities
-  tmp.S1AD  <- as.numeric(SubModelData[15,2])
-  tmp.S2AD  <- as.numeric(SubModelData[16,2])
-  ### Percent animals around streams and bacteria production per animal
-  tmp.ArndStreams <- as.numeric(SubModelData[17,2])/100
-  tmp.bac.prod  <- as.numeric(SubModelData[18,2])
-  ##
-  ### Calculations
-
-  ###
+  ## Calculations
+  ## populations
+  ## overall locations
+  pop.total.season.1 <-   lu.habitatarea * amn.animal.density.season.1
+  pop.pasture.season.1 <- lu.pasture.area * amn.animal.density.season.1
+  pop.forest.season.1 <-  lu.forest.area * amn.animal.density.season.1
+  pop.RAOCUT.season.1 <-  lu.RAOCUT.area * amn.animal.density.season.1
+  pop.total.season.2 <-   lu.habitatarea * amn.animal.density.season.2
+  pop.pasture.season.2 <- lu.pasture.area * amn.animal.density.season.2
+  pop.forest.season.2 <-  lu.forest.area * amn.animal.density.season.2
+  pop.RAOCUT.season.2 <-  lu.RAOCUT.area * amn.animal.density.season.2
+  ## on land
+  pop.total.on.land.season.1 <-   amn.percentstream * pop.total.season.1
+  pop.pasture.on.land.season.1 <- amn.percentstream * pop.pasture.season.1
+  pop.forest.on.land.season.1 <-  amn.percentstream * pop.forest.season.1
+  pop.RAOCUT.on.land.season.1 <-  amn.percentstream * pop.RAOCUT.season.1
+  pop.total.on.land.season.2 <-   amn.percentstream * pop.total.season.2
+  pop.pasture.on.land.season.2 <- amn.percentstream * pop.pasture.season.2
+  pop.forest.on.land.season.2 <-  amn.percentstream * pop.forest.season.2
+  pop.RAOCUT.on.land.season.2 <-  amn.percentstream * pop.RAOCUT.season.2
+  ## in stream
+  pop.total.in.stream.season.1 <-   (1 - amn.percentstream) * pop.total.season.1
+  pop.pasture.in.stream.season.1 <- (1 - amn.percentstream) * pop.pasture.season.1
+  pop.forest.in.stream.season.1 <-  (1 - amn.percentstream) * pop.forest.season.1
+  pop.RAOCUT.in.stream.season.1 <-  (1 - amn.percentstream) * pop.RAOCUT.season.1
+  pop.total.in.stream.season.2 <-   (1 - amn.percentstream) * pop.total.season.2
+  pop.pasture.in.stream.season.2 <- (1 - amn.percentstream) * pop.pasture.season.2
+  pop.forest.in.stream.season.2 <-  (1 - amn.percentstream) * pop.forest.season.2
+  pop.RAOCUT.in.stream.season.2 <-  (1 - amn.percentstream) * pop.RAOCUT.season.2
   ### Animal Populations
   tmp.PopOnPasture <- rep(-1,12)
   tmp.PopOnPasture[tmp.S1Months] <- (1 - tmp.ArndStreams) * tmp.PastureArea * tmp.S1AD
