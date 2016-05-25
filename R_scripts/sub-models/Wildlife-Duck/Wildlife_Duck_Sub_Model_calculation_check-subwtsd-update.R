@@ -127,9 +127,9 @@ chk.bac.on.land.pasture.season.1 <- chk.bac.on.land.wo.stream.access.pasture.sea
 chk.bac.on.land.forest.season.1  <- chk.bac.on.land.wo.stream.access.forest.season.1  + chk.bac.on.land.wo.stream.access.forest.season.1 
 chk.bac.on.land.RAOCUT.season.1  <- chk.bac.on.land.wo.stream.access.RAOCUT.season.1  + chk.bac.on.land.wo.stream.access.RAOCUT.season.1 
 ## accum loads
-chk.bac.on.land.pasture.season.1 <- chk.bac.on.land.pasture.season.1 / chk.land.pasture
-chk.bac.on.land.forest.season.1  <- chk.bac.on.land.forest.season.1  / chk.land.forest
-chk.bac.on.land.RAOCUT.season.1  <- chk.bac.on.land.RAOCUT.season.1  / chk.land.RAOCUT
+chk.bac.accum.pasture.season.1 <- chk.bac.on.land.pasture.season.1 / chk.land.pasture
+chk.bac.accum.forest.season.1  <- chk.bac.on.land.forest.season.1  / chk.land.forest
+chk.bac.accum.RAOCUT.season.1  <- chk.bac.on.land.RAOCUT.season.1  / chk.land.RAOCUT
 ## season 2
 ## on land with out stream access
 chk.bac.on.land.wo.stream.access.habitat.season.2 <- chk.bacteria.prod * chk.pop.on.land.wo.stream.access.habitat.season.2
@@ -157,10 +157,41 @@ chk.bac.on.land.forest.season.2  <- chk.bac.on.land.forest.season.2  / chk.land.
 chk.bac.on.land.RAOCUT.season.2  <- chk.bac.on.land.RAOCUT.season.2  / chk.land.RAOCUT
 ##
 ## combining results
-chk.output
-
-
-
+chk.output.season.1 <- data.frame(
+  Month=format(as.POSIXct(paste0("1967-",chk.season.1.Months,"-01")), format = "%b"),
+  pop.total=chk.pop.on.land.habitat.season.1 + chk.pop.in.stream.habitat.season.1,
+  pop.on.land=chk.pop.on.land.habitat.season.1,
+  pop.in.stream=chk.pop.in.stream.habitat.season.1,
+  Bacteria.total=chk.bac.on.land.habitat.season.1 + chk.bac.in.stream.habitat.season.1,
+  Bacteria.on.land=chk.bac.on.land.habitat.season.1,
+  Bacteria.in.stream=chk.bac.in.stream.habitat.season.1,
+  Accum.pasture=chk.bac.accum.pasture.season.1,
+  Accum.forest=chk.bac.accum.forest.season.1,
+  Accum.RAOCUT=chk.bac.accum.RAOCUT.season.1,
+  Lim.pasture=chk.sqolim * chk.bac.accum.pasture.season.1,
+  Lim.forest=chk.sqolim * chk.bac.accum.forest.season.1,
+  Lim.RAOCUT=chk.sqolim * chk.bac.accum.RAOCUT.season.1,
+  month.order=chk.season.1.Months,
+  stringsAsFactors=FALSE)
+chk.output.season.2 <- data.frame(
+  Month=format(as.POSIXct(paste0("1967-",chk.season.2.Months,"-01")), format = "%b"),
+  pop.total=chk.pop.on.land.habitat.season.2 + chk.pop.in.stream.habitat.season.2,
+  pop.on.land=chk.pop.on.land.habitat.season.2,
+  pop.in.stream=chk.pop.in.stream.habitat.season.2,
+  Bacteria.total=chk.bac.on.land.habitat.season.2 + chk.bac.in.stream.habitat.season.2,
+  Bacteria.on.land=chk.bac.on.land.habitat.season.2,
+  Bacteria.in.stream=chk.bac.in.stream.habitat.season.2,
+  Accum.pasture=chk.bac.accum.pasture.season.2,
+  Accum.forest=chk.bac.accum.forest.season.2,
+  Accum.RAOCUT=chk.bac.accum.RAOCUT.season.2,
+  Lim.pasture=chk.sqolim * chk.bac.accum.pasture.season.2,
+  Lim.forest=chk.sqolim * chk.bac.accum.forest.season.2,
+  Lim.RAOCUT=chk.sqolim * chk.bac.accum.RAOCUT.season.2,
+  month.order=chk.season.2.Months,
+  stringsAsFactors=FALSE)
+chk.output <- rbind(chk.output.season.1, chk.output.season.2)
+chk.output <- chk.output[order(chk.output$month.order), ]
+chk.output <- chk.output[, -1 * grep("month.order", names(chk.output))]
 ##
 ## check model output
 chk.dil <- 1E+06 # need to explain this
