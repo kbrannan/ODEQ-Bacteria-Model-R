@@ -79,10 +79,10 @@ chk.pop.in.stream.pasture.season.1 <- chk.Animal.Density.season.1 * (chk.in.and.
 chk.pop.in.stream.forest.season.1  <- chk.Animal.Density.season.1 * (chk.in.and.around.streams / 100) * chk.land.w.stream.access.forest
 chk.pop.in.stream.RAOCUT.season.1  <- chk.Animal.Density.season.1 * (chk.in.and.around.streams / 100) * chk.land.w.stream.access.RAOCUT
 ## on land
-chk.pop.on.land.habitat.season.1 <- chk.pop.on.land.wo.stream.access.habitat.season.1 + chk.pop.on.land.wo.stream.access.habitat.season.1
-chk.pop.on.land.pasture.season.1 <- chk.pop.on.land.wo.stream.access.pasture.season.1 + chk.pop.on.land.wo.stream.access.pasture.season.1
-chk.pop.on.land.forest.season.1  <- chk.pop.on.land.wo.stream.access.forest.season.1  + chk.pop.on.land.wo.stream.access.forest.season.1 
-chk.pop.on.land.RAOCUT.season.1  <- chk.pop.on.land.wo.stream.access.RAOCUT.season.1  + chk.pop.on.land.wo.stream.access.RAOCUT.season.1 
+chk.pop.on.land.habitat.season.1 <- chk.pop.on.land.wo.stream.access.habitat.season.1 + chk.pop.on.land.w.stream.access.habitat.season.1
+chk.pop.on.land.pasture.season.1 <- chk.pop.on.land.wo.stream.access.pasture.season.1 + chk.pop.on.land.w.stream.access.pasture.season.1
+chk.pop.on.land.forest.season.1  <- chk.pop.on.land.wo.stream.access.forest.season.1  + chk.pop.on.land.w.stream.access.forest.season.1 
+chk.pop.on.land.RAOCUT.season.1  <- chk.pop.on.land.wo.stream.access.RAOCUT.season.1  + chk.pop.on.land.w.stream.access.RAOCUT.season.1 
 ## season 2
 ## on land with out stream access
 chk.pop.on.land.wo.stream.access.habitat.season.2 <- chk.Animal.Density.season.2 * chk.land.wo.stream.access.habitat
@@ -100,10 +100,10 @@ chk.pop.in.stream.pasture.season.2 <- chk.Animal.Density.season.2 * (chk.in.and.
 chk.pop.in.stream.forest.season.2  <- chk.Animal.Density.season.2 * (chk.in.and.around.streams / 100) * chk.land.w.stream.access.forest
 chk.pop.in.stream.RAOCUT.season.2  <- chk.Animal.Density.season.2 * (chk.in.and.around.streams / 100) * chk.land.w.stream.access.RAOCUT
 ## on land
-chk.pop.on.land.habitat.season.2 <- chk.pop.on.land.wo.stream.access.habitat.season.2 + chk.pop.on.land.wo.stream.access.habitat.season.2
-chk.pop.on.land.pasture.season.2 <- chk.pop.on.land.wo.stream.access.pasture.season.2 + chk.pop.on.land.wo.stream.access.pasture.season.2
-chk.pop.on.land.forest.season.2  <- chk.pop.on.land.wo.stream.access.forest.season.2  + chk.pop.on.land.wo.stream.access.forest.season.2 
-chk.pop.on.land.RAOCUT.season.2  <- chk.pop.on.land.wo.stream.access.RAOCUT.season.2  + chk.pop.on.land.wo.stream.access.RAOCUT.season.2 
+chk.pop.on.land.habitat.season.2 <- chk.pop.on.land.wo.stream.access.habitat.season.2 + chk.pop.on.land.w.stream.access.habitat.season.2
+chk.pop.on.land.pasture.season.2 <- chk.pop.on.land.wo.stream.access.pasture.season.2 + chk.pop.on.land.w.stream.access.pasture.season.2
+chk.pop.on.land.forest.season.2  <- chk.pop.on.land.wo.stream.access.forest.season.2  + chk.pop.on.land.w.stream.access.forest.season.2 
+chk.pop.on.land.RAOCUT.season.2  <- chk.pop.on.land.wo.stream.access.RAOCUT.season.2  + chk.pop.on.land.w.stream.access.RAOCUT.season.2 
 ## bacteria loads
 ## season 1
 ## on land with out stream access
@@ -122,10 +122,10 @@ chk.bac.in.stream.pasture.season.1 <- chk.bacteria.prod * chk.pop.in.stream.past
 chk.bac.in.stream.forest.season.1  <- chk.bacteria.prod * chk.pop.in.stream.forest.season.1 
 chk.bac.in.stream.RAOCUT.season.1  <- chk.bacteria.prod * chk.pop.in.stream.RAOCUT.season.1 
 ## on land
-chk.bac.on.land.habitat.season.1 <- chk.bac.on.land.wo.stream.access.habitat.season.1 + chk.bac.on.land.wo.stream.access.habitat.season.1
-chk.bac.on.land.pasture.season.1 <- chk.bac.on.land.wo.stream.access.pasture.season.1 + chk.bac.on.land.wo.stream.access.pasture.season.1
-chk.bac.on.land.forest.season.1  <- chk.bac.on.land.wo.stream.access.forest.season.1  + chk.bac.on.land.wo.stream.access.forest.season.1 
-chk.bac.on.land.RAOCUT.season.1  <- chk.bac.on.land.wo.stream.access.RAOCUT.season.1  + chk.bac.on.land.wo.stream.access.RAOCUT.season.1 
+chk.bac.on.land.habitat.season.1 <- chk.bac.on.land.wo.stream.access.habitat.season.1 + chk.bac.on.land.w.stream.access.habitat.season.1
+chk.bac.on.land.pasture.season.1 <- chk.bac.on.land.wo.stream.access.pasture.season.1 + chk.bac.on.land.w.stream.access.pasture.season.1
+chk.bac.on.land.forest.season.1  <- chk.bac.on.land.wo.stream.access.forest.season.1  + chk.bac.on.land.w.stream.access.forest.season.1 
+chk.bac.on.land.RAOCUT.season.1  <- chk.bac.on.land.wo.stream.access.RAOCUT.season.1  + chk.bac.on.land.w.stream.access.RAOCUT.season.1 
 ## accum loads
 chk.bac.accum.pasture.season.1 <- chk.bac.on.land.pasture.season.1 / chk.land.pasture
 chk.bac.accum.forest.season.1  <- chk.bac.on.land.forest.season.1  / chk.land.forest
@@ -147,10 +147,10 @@ chk.bac.in.stream.pasture.season.2 <- chk.bacteria.prod * chk.pop.in.stream.past
 chk.bac.in.stream.forest.season.2  <- chk.bacteria.prod * chk.pop.in.stream.forest.season.2 
 chk.bac.in.stream.RAOCUT.season.2  <- chk.bacteria.prod * chk.pop.in.stream.RAOCUT.season.2 
 ## on land
-chk.bac.on.land.habitat.season.2 <- chk.bac.on.land.wo.stream.access.habitat.season.2 + chk.bac.on.land.wo.stream.access.habitat.season.2
-chk.bac.on.land.pasture.season.2 <- chk.bac.on.land.wo.stream.access.pasture.season.2 + chk.bac.on.land.wo.stream.access.pasture.season.2
-chk.bac.on.land.forest.season.2  <- chk.bac.on.land.wo.stream.access.forest.season.2  + chk.bac.on.land.wo.stream.access.forest.season.2 
-chk.bac.on.land.RAOCUT.season.2  <- chk.bac.on.land.wo.stream.access.RAOCUT.season.2  + chk.bac.on.land.wo.stream.access.RAOCUT.season.2 
+chk.bac.on.land.habitat.season.2 <- chk.bac.on.land.wo.stream.access.habitat.season.2 + chk.bac.on.land.w.stream.access.habitat.season.2
+chk.bac.on.land.pasture.season.2 <- chk.bac.on.land.wo.stream.access.pasture.season.2 + chk.bac.on.land.w.stream.access.pasture.season.2
+chk.bac.on.land.forest.season.2  <- chk.bac.on.land.wo.stream.access.forest.season.2  + chk.bac.on.land.w.stream.access.forest.season.2 
+chk.bac.on.land.RAOCUT.season.2  <- chk.bac.on.land.wo.stream.access.RAOCUT.season.2  + chk.bac.on.land.w.stream.access.RAOCUT.season.2 
 ## accum loads
 chk.bac.accum.pasture.season.2 <- chk.bac.on.land.pasture.season.2 / chk.land.pasture
 chk.bac.accum.forest.season.2  <- chk.bac.on.land.forest.season.2  / chk.land.forest
@@ -192,10 +192,17 @@ chk.output.season.2 <- data.frame(
 chk.output <- rbind(chk.output.season.1, chk.output.season.2)
 chk.output <- chk.output[order(chk.output$month.order), ]
 df.chk <- chk.output[, -1 * grep("month.order", names(chk.output))]
+rm(chk.output)
 ## compare
 df.comp <- data.frame(
   Month=format(as.POSIXct(paste0("1967-",1:12,"-01")), format = "%b"),
   df.output[, -1] - df.chk[, -1])
+
+
+
+
+
+
 ##
 ## check model output
 chk.dil <- 1E+06 # need to explain this
