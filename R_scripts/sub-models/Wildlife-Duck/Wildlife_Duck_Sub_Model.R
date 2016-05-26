@@ -46,7 +46,7 @@ wildlifeDuck <- function(chr.input.file) {
   amn.bac.prod  <- as.numeric(df.input$value[
     df.input$parameter == "Bacteria Production of animal per day (orgs/day)"])
   amn.SQLIM.factor  <- as.numeric(df.input$value[
-    df.input$parameter == "SQOLIM multiplcation factor"])  ##
+    df.input$parameter == "SQOLIM multiplcation factor"])
 
   ## Calculations
   ## populations
