@@ -1,7 +1,7 @@
 ## step bt step calculation check for wildlife_duck_sub_model using input from
 ## wildlifeDuckXX.txt file
 chr.wildlife.duck.dir <- "M:/Models/Bacteria/HSPF/ODEQ-Bacteria-Model-R/R_scripts/sub-models/wildlife-Duck"
-chr.input <- "wildlifeDuckXX.txt"
+chr.input <- "wildlifeDuck01.txt"
 ## file for model
 chr.input.file <- paste0(chr.wildlife.duck.dir, "/", chr.input)
 ## run model
@@ -41,9 +41,9 @@ chk.season.2.Months <- c(2,3,4,8,9,10)
 chk.Animal.Density.season.1 <- 2.50E-02
 chk.Animal.Density.season.2 <- 2.50E-04
 ### Habitats
-chk.land.pasture <- -999
-chk.land.forest  <- -999
-chk.land.RAOCUT    <- -999
+chk.land.pasture <- 323.06
+chk.land.forest  <- 2030.6
+chk.land.RAOCUT    <- 168.44
 chk.habitat <- chk.land.pasture + chk.land.forest + chk.land.RAOCUT
 ### All Landuse has Stream access for ducks
 chk.land.stream.w.access <- 100
@@ -69,15 +69,15 @@ chk.pop.on.land.wo.stream.access.pasture.season.1 <- chk.Animal.Density.season.1
 chk.pop.on.land.wo.stream.access.forest.season.1  <- chk.Animal.Density.season.1 * chk.land.wo.stream.access.forest
 chk.pop.on.land.wo.stream.access.RAOCUT.season.1  <- chk.Animal.Density.season.1 * chk.land.wo.stream.access.RAOCUT
 ## on land with stream access
-chk.pop.on.land.w.stream.access.habitat.season.1 <- chk.Animal.Density.season.1 * (1 - chk.in.and.around.streams) * chk.land.w.stream.access.habitat
-chk.pop.on.land.w.stream.access.pasture.season.1 <- chk.Animal.Density.season.1 * (1 - chk.in.and.around.streams) * chk.land.w.stream.access.pasture
-chk.pop.on.land.w.stream.access.forest.season.1  <- chk.Animal.Density.season.1 * (1 - chk.in.and.around.streams) * chk.land.w.stream.access.forest
-chk.pop.on.land.w.stream.access.RAOCUT.season.1  <- chk.Animal.Density.season.1 * (1 - chk.in.and.around.streams) * chk.land.w.stream.access.RAOCUT
+chk.pop.on.land.w.stream.access.habitat.season.1 <- chk.Animal.Density.season.1 * (1 - chk.in.and.around.streams / 100) * chk.land.w.stream.access.habitat
+chk.pop.on.land.w.stream.access.pasture.season.1 <- chk.Animal.Density.season.1 * (1 - chk.in.and.around.streams / 100) * chk.land.w.stream.access.pasture
+chk.pop.on.land.w.stream.access.forest.season.1  <- chk.Animal.Density.season.1 * (1 - chk.in.and.around.streams / 100) * chk.land.w.stream.access.forest
+chk.pop.on.land.w.stream.access.RAOCUT.season.1  <- chk.Animal.Density.season.1 * (1 - chk.in.and.around.streams / 100) * chk.land.w.stream.access.RAOCUT
 ## in stream
-chk.pop.in.stream.habitat.season.1 <- chk.Animal.Density.season.1 * chk.in.and.around.streams * chk.land.w.stream.access.habitat
-chk.pop.in.stream.pasture.season.1 <- chk.Animal.Density.season.1 * chk.in.and.around.streams * chk.land.w.stream.access.pasture
-chk.pop.in.stream.forest.season.1  <- chk.Animal.Density.season.1 * chk.in.and.around.streams * chk.land.w.stream.access.forest
-chk.pop.in.stream.RAOCUT.season.1  <- chk.Animal.Density.season.1 * chk.in.and.around.streams * chk.land.w.stream.access.RAOCUT
+chk.pop.in.stream.habitat.season.1 <- chk.Animal.Density.season.1 * (chk.in.and.around.streams / 100) * chk.land.w.stream.access.habitat
+chk.pop.in.stream.pasture.season.1 <- chk.Animal.Density.season.1 * (chk.in.and.around.streams / 100) * chk.land.w.stream.access.pasture
+chk.pop.in.stream.forest.season.1  <- chk.Animal.Density.season.1 * (chk.in.and.around.streams / 100) * chk.land.w.stream.access.forest
+chk.pop.in.stream.RAOCUT.season.1  <- chk.Animal.Density.season.1 * (chk.in.and.around.streams / 100) * chk.land.w.stream.access.RAOCUT
 ## on land
 chk.pop.on.land.habitat.season.1 <- chk.pop.on.land.wo.stream.access.habitat.season.1 + chk.pop.on.land.wo.stream.access.habitat.season.1
 chk.pop.on.land.pasture.season.1 <- chk.pop.on.land.wo.stream.access.pasture.season.1 + chk.pop.on.land.wo.stream.access.pasture.season.1
@@ -90,15 +90,15 @@ chk.pop.on.land.wo.stream.access.pasture.season.2 <- chk.Animal.Density.season.2
 chk.pop.on.land.wo.stream.access.forest.season.2  <- chk.Animal.Density.season.2 * chk.land.wo.stream.access.forest
 chk.pop.on.land.wo.stream.access.RAOCUT.season.2  <- chk.Animal.Density.season.2 * chk.land.wo.stream.access.RAOCUT
 ## on land with stream access
-chk.pop.on.land.w.stream.access.habitat.season.2 <- chk.Animal.Density.season.2 * (1 - chk.in.and.around.streams) * chk.land.w.stream.access.habitat
-chk.pop.on.land.w.stream.access.pasture.season.2 <- chk.Animal.Density.season.2 * (1 - chk.in.and.around.streams) * chk.land.w.stream.access.pasture
-chk.pop.on.land.w.stream.access.forest.season.2  <- chk.Animal.Density.season.2 * (1 - chk.in.and.around.streams) * chk.land.w.stream.access.forest
-chk.pop.on.land.w.stream.access.RAOCUT.season.2  <- chk.Animal.Density.season.2 * (1 - chk.in.and.around.streams) * chk.land.w.stream.access.RAOCUT
+chk.pop.on.land.w.stream.access.habitat.season.2 <- chk.Animal.Density.season.2 * (1 - chk.in.and.around.streams / 100) * chk.land.w.stream.access.habitat
+chk.pop.on.land.w.stream.access.pasture.season.2 <- chk.Animal.Density.season.2 * (1 - chk.in.and.around.streams / 100) * chk.land.w.stream.access.pasture
+chk.pop.on.land.w.stream.access.forest.season.2  <- chk.Animal.Density.season.2 * (1 - chk.in.and.around.streams / 100) * chk.land.w.stream.access.forest
+chk.pop.on.land.w.stream.access.RAOCUT.season.2  <- chk.Animal.Density.season.2 * (1 - chk.in.and.around.streams / 100) * chk.land.w.stream.access.RAOCUT
 ## in stream
-chk.pop.in.stream.habitat.season.2 <- chk.Animal.Density.season.2 * chk.in.and.around.streams * chk.land.w.stream.access.habitat
-chk.pop.in.stream.pasture.season.2 <- chk.Animal.Density.season.2 * chk.in.and.around.streams * chk.land.w.stream.access.pasture
-chk.pop.in.stream.forest.season.2  <- chk.Animal.Density.season.2 * chk.in.and.around.streams * chk.land.w.stream.access.forest
-chk.pop.in.stream.RAOCUT.season.2  <- chk.Animal.Density.season.2 * chk.in.and.around.streams * chk.land.w.stream.access.RAOCUT
+chk.pop.in.stream.habitat.season.2 <- chk.Animal.Density.season.2 * (chk.in.and.around.streams / 100) * chk.land.w.stream.access.habitat
+chk.pop.in.stream.pasture.season.2 <- chk.Animal.Density.season.2 * (chk.in.and.around.streams / 100) * chk.land.w.stream.access.pasture
+chk.pop.in.stream.forest.season.2  <- chk.Animal.Density.season.2 * (chk.in.and.around.streams / 100) * chk.land.w.stream.access.forest
+chk.pop.in.stream.RAOCUT.season.2  <- chk.Animal.Density.season.2 * (chk.in.and.around.streams / 100) * chk.land.w.stream.access.RAOCUT
 ## on land
 chk.pop.on.land.habitat.season.2 <- chk.pop.on.land.wo.stream.access.habitat.season.2 + chk.pop.on.land.wo.stream.access.habitat.season.2
 chk.pop.on.land.pasture.season.2 <- chk.pop.on.land.wo.stream.access.pasture.season.2 + chk.pop.on.land.wo.stream.access.pasture.season.2
@@ -152,9 +152,9 @@ chk.bac.on.land.pasture.season.2 <- chk.bac.on.land.wo.stream.access.pasture.sea
 chk.bac.on.land.forest.season.2  <- chk.bac.on.land.wo.stream.access.forest.season.2  + chk.bac.on.land.wo.stream.access.forest.season.2 
 chk.bac.on.land.RAOCUT.season.2  <- chk.bac.on.land.wo.stream.access.RAOCUT.season.2  + chk.bac.on.land.wo.stream.access.RAOCUT.season.2 
 ## accum loads
-chk.bac.on.land.pasture.season.2 <- chk.bac.on.land.pasture.season.2 / chk.land.pasture
-chk.bac.on.land.forest.season.2  <- chk.bac.on.land.forest.season.2  / chk.land.forest
-chk.bac.on.land.RAOCUT.season.2  <- chk.bac.on.land.RAOCUT.season.2  / chk.land.RAOCUT
+chk.bac.accum.pasture.season.2 <- chk.bac.on.land.pasture.season.2 / chk.land.pasture
+chk.bac.accum.forest.season.2  <- chk.bac.on.land.forest.season.2  / chk.land.forest
+chk.bac.accum.RAOCUT.season.2  <- chk.bac.on.land.RAOCUT.season.2  / chk.land.RAOCUT
 ##
 ## combining results
 chk.output.season.1 <- data.frame(
@@ -191,7 +191,11 @@ chk.output.season.2 <- data.frame(
   stringsAsFactors=FALSE)
 chk.output <- rbind(chk.output.season.1, chk.output.season.2)
 chk.output <- chk.output[order(chk.output$month.order), ]
-chk.output <- chk.output[, -1 * grep("month.order", names(chk.output))]
+df.chk <- chk.output[, -1 * grep("month.order", names(chk.output))]
+## compare
+df.comp <- data.frame(
+  Month=format(as.POSIXct(paste0("1967-",1:12,"-01")), format = "%b"),
+  df.output[, -1] - df.chk[, -1])
 ##
 ## check model output
 chk.dil <- 1E+06 # need to explain this
