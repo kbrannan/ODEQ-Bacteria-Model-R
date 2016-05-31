@@ -1,7 +1,7 @@
 ## step bt step calculation check for wildlife_geese_sub_model using input from
-## wildlifeGeese09.txt file
+## wildlifeGeeseXX.txt file
 chr.wildlife.geese.dir <- "M:/Models/Bacteria/HSPF/ODEQ-Bacteria-Model-R/R_scripts/sub-models/wildlife-Geese"
-chr.input <- "wildlifeGeese09.txt"
+chr.input <- "wildlifeGeeseXX.txt"
 ## file for model
 chr.input.file <- paste0(chr.wildlife.geese.dir, "/", chr.input)
 ## run model
@@ -40,9 +40,9 @@ chk.season.2.Months <- c(2,3,4,8,9,10)
 ### Animal Densities
 chk.Animal.Density.season.1 <- 1.3888900E-02
 chk.Animal.Density.season.2 <- 1.8518500E-06
-chk.land.pasture <-    35.38
-chk.land.forest  <-    1065.72
-chk.land.RAOCUT    <-    42.87
+chk.land.pasture <- -999
+chk.land.forest  <- -999
+chk.land.RAOCUT    <- -999
 chk.habitat <- chk.land.pasture + chk.land.forest + chk.land.RAOCUT
 ### All Landuse has Stream access for geeses
 chk.land.stream.w.access <- 100
@@ -196,6 +196,12 @@ rm(chk.output)
 df.comp <- data.frame(
   Month=format(as.POSIXct(paste0("1967-",1:12,"-01")), format = "%b"),
   df.output[, -1] - df.chk[, -1])
+
+
+
+
+
+
 ##
 ## check model output
 chk.dil <- 1E+06 # need to explain this
