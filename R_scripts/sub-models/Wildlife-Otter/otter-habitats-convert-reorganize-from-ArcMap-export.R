@@ -15,7 +15,7 @@ num.ft2.in.acre <- 43560
 
 ## data in correct units
 df.data <- df.raw
-
+df.data$wtsd <- sprintf(fmt = "%02i", df.raw$wtsd)
 df.data$len <- round(as.numeric(df.raw$len) / num.ft.in.mile, 2)
 df.data$area <- round(as.numeric(df.raw$area) / num.ft2.in.acre, 2)
 
