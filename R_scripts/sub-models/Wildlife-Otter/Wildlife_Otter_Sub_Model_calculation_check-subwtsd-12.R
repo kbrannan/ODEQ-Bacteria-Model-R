@@ -45,7 +45,7 @@ chk.habitat.area <- chk.land.pasture.area + chk.land.forest.area
 chk.habitat.len <- chk.land.pasture.len + chk.land.forest.len
 chk.land.stream.w.access <- 1.0000000E+02
 ### percent of animals in/around streams
-chk.in.and.around.streams <- 9.9000000E+01
+chk.in.and.around.streams <- 3.1213069E+01
 ## calculations
 ## land use stream access
 ## without stream access
