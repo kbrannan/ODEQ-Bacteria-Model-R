@@ -1,7 +1,7 @@
 ## step bt step calculation check for wildlife_elk_sub_model using input from
-## wildlifeElkXX.txt file
+## wildlifeElk08.txt file
 chr.wildlife.elk.dir <- "M:/Models/Bacteria/HSPF/ODEQ-Bacteria-Model-R/R_scripts/sub-models/wildlife-Elk"
-chr.input <- "wildlifeElkXX.txt"
+chr.input <- "wildlifeElk08.txt"
 ## file for model
 chr.input.file <- paste0(chr.wildlife.elk.dir, "/", chr.input)
 ## run model
@@ -43,12 +43,12 @@ chk.Animal.Density.forest.season.1  <- 3.0072900E-03
 chk.Animal.Density.pasture.season.2 <- 4.5000000E-02
 chk.Animal.Density.forest.season.2  <- 4.5000000E-02
 ### Habitats
-chk.land.pasture.season.1 <- -999
-chk.land.forest.season.1  <- -999
-chk.habitat.season.1 <- chk.land.pasture.1 + chk.land.forest.1
-chk.land.pasture.season.2 <- -999
-chk.land.forest.season.2  <- -999
-chk.habitat.season.2 <- chk.land.pasture.2 + chk.land.forest.2
+chk.land.pasture.season.1 <- 10.41
+chk.land.forest.season.1  <- 275.26
+chk.habitat.season.1 <- chk.land.pasture.season.1 + chk.land.forest.season.1
+chk.land.pasture.season.2 <- 0.07
+chk.land.forest.season.2  <- 38.2
+chk.habitat.season.2 <- chk.land.pasture.season.2 + chk.land.forest.season.2
 ### Percent landuse with stream access
 chk.land.pasture.w.stream.access.season.1 <- 25
 chk.land.forest.w.stream.access.season.1  <- 50
@@ -145,7 +145,7 @@ chk.output.season.1 <- data.frame(
   Month=format(as.POSIXct(paste0("1967-",chk.season.1.Months,"-01")), format = "%b"),
   pop.total=chk.pop.on.land.total.season.1 + chk.pop.in.stream.total.season.1,
   pop.on.land=chk.pop.on.land.total.season.1,
-  pop.in.stream=chk.pop.in.stream.habitat.season.1,
+  pop.in.stream=chk.pop.in.stream.total.season.1,
   Bacteria.total=chk.bac.on.land.total.season.1 + chk.bac.in.stream.total.season.1,
   Bacteria.on.land=chk.bac.on.land.total.season.1,
   Bacteria.in.stream=chk.bac.in.stream.total.season.1,
@@ -177,7 +177,7 @@ rm(chk.output)
 ## these NaN with 0
 df.nan <- df.chk[, -1]
 df.nan[is.na(df.nan)] <- 0
-df.chk <- cbind(df.chk[, 1], df.nan)
+df.chk <- cbind(Month = df.chk[, 1], df.nan)
 rm(df.nan)
 ## compare
 df.comp <- data.frame(
