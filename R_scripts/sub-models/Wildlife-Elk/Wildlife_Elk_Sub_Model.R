@@ -26,27 +26,27 @@ wildlifeElk <- function(chr.input.file) {
     df.input$parameter == "Season 1 Pasture Area in Watershed (ac)"])
   lu.forest.area.season.1   <- as.numeric(df.input$value[
     df.input$parameter == "Season 1 Forest Area in Watershed (ac)"])
-  lu.habitatarea.season.1 <- lu.pasture.area.seaon.1 + lu.forest.area.season.1
+  lu.habitatarea.season.1 <- lu.pasture.area.season.1 + lu.forest.area.season.1
   lu.pasture.area.season.2   <- as.numeric(df.input$value[
     df.input$parameter == "Season 2 Pasture Area in Watershed (ac)"])
   lu.forest.area.season.2   <- as.numeric(df.input$value[
     df.input$parameter == "Season 2 Forest Area in Watershed (ac)"])
-  lu.habitatarea.season.2 <- lu.pasture.area.seaon.2 + lu.forest.area.season.2
+  lu.habitatarea.season.2 <- lu.pasture.area.season.2 + lu.forest.area.season.2
   ### Percent of Landuse with Stream access
-  lu.pasture.area.w.seaon.1   <- as.numeric(df.input$value[
+  lu.pasture.area.w.season.1   <- as.numeric(df.input$value[
     df.input$parameter == "Season 1 Percent of Pasture with stream access"]) / 100
-  lu.forest.area.w.season.1   <- as.numeric(df.input$value[
+  lu.forest.area.w.seasson.1   <- as.numeric(df.input$value[
     df.input$parameter == "Season 1 Percent of Forest with stream access"]) / 100
-  lu.pasture.area.w.seaon.2   <- as.numeric(df.input$value[
+  lu.pasture.area.w.season.2   <- as.numeric(df.input$value[
     df.input$parameter == "Season 2 Percent of Pasture with stream access"]) / 100
-  lu.forest.area.w.season.2   <- as.numeric(df.input$value[
+  lu.forest.area.w.seasson.2   <- as.numeric(df.input$value[
     df.input$parameter == "Season 2 Percent of Forest with stream access"]) / 100
   ## animal information
   ## months for seasons
   amn.months.season.1 <- as.numeric(strsplit(df.input$value[
     df.input$parameter == "Season 1 Months (numbers)"], split = ",")[[1]])
   amn.months.season.2 <- as.numeric(strsplit(df.input$value[
-    df.input$parameter == "Season 1 Months (numbers)"], split = ",")[[1]])
+    df.input$parameter == "Season 2 Months (numbers)"], split = ",")[[1]])
   ## Animal Densities
   amn.animal.density.pasture.season.1  <- as.numeric(df.input$value[
     df.input$parameter == "Season 1 Animal Density for Pasture in watershed (animal/ac)"])
@@ -74,193 +74,93 @@ wildlifeElk <- function(chr.input.file) {
   ## Calculations
   ## populations
   ## overall locations
-  pop.total.season.1 <-   lu.habitatarea * amn.animal.density.season.1
-  pop.pasture.season.1 <- lu.pasture.area * amn.animal.density.season.1
-  pop.forest.season.1 <-  lu.forest.area * amn.animal.density.season.1
-  pop.RAOCUT.season.1 <-  lu.RAOCUT.area * amn.animal.density.season.1
-  pop.total.season.2 <-   lu.habitatarea * amn.animal.density.season.2
-  pop.pasture.season.2 <- lu.pasture.area * amn.animal.density.season.2
-  pop.forest.season.2 <-  lu.forest.area * amn.animal.density.season.2
-  pop.RAOCUT.season.2 <-  lu.RAOCUT.area * amn.animal.density.season.2
+  pop.pasture.season.1 <- lu.pasture.area.season.1 * amn.animal.density.pasture.season.1
+  pop.forest.season.1 <-  lu.forest.area.season.1 * amn.animal.density.forest.season.1
+  pop.total.season.1 <- pop.pasture.season.1 + pop.forest.season.1
+  pop.pasture.season.2 <- lu.pasture.area.season.2 * amn.animal.density.pasture.season.2
+  pop.forest.season.2 <-  lu.forest.area.season.2 * amn.animal.density.forest.season.2
+  pop.total.season.2 <- pop.pasture.season.2 + pop.forest.season.2
   ## on land
-  pop.total.on.land.season.1 <-   (1 - amn.percentstream) * pop.total.season.1
-  pop.pasture.on.land.season.1 <- (1 - amn.percentstream) * pop.pasture.season.1
-  pop.forest.on.land.season.1 <-  (1 - amn.percentstream) * pop.forest.season.1
-  pop.RAOCUT.on.land.season.1 <-  (1 - amn.percentstream) * pop.RAOCUT.season.1
-  pop.total.on.land.season.2 <-   (1 - amn.percentstream) * pop.total.season.2
-  pop.pasture.on.land.season.2 <- (1 - amn.percentstream) * pop.pasture.season.2
-  pop.forest.on.land.season.2 <-  (1 - amn.percentstream) * pop.forest.season.2
-  pop.RAOCUT.on.land.season.2 <-  (1 - amn.percentstream) * pop.RAOCUT.season.2
+  pop.pasture.on.land.season.1 <- (1 - amn.percentstream.pasture.season.1) * pop.pasture.season.1
+  pop.forest.on.land.season.1  <- (1 - amn.percentstream.forest.season.1) * pop.forest.season.1
+  pop.total.on.land.season.1   <- pop.pasture.on.land.season.1 + pop.forest.on.land.season.1
+  pop.pasture.on.land.season.2 <- (1 - amn.percentstream.pasture.season.2) * pop.pasture.season.2
+  pop.forest.on.land.season.2  <- (1 - amn.percentstream.forest.season.2) * pop.forest.season.2
+  pop.total.on.land.season.2   <- pop.pasture.on.land.season.2 + pop.forest.on.land.season.2
   ## in stream
-  pop.total.in.stream.season.1 <-   amn.percentstream * pop.total.season.1
-  pop.pasture.in.stream.season.1 <- amn.percentstream * pop.pasture.season.1
-  pop.forest.in.stream.season.1 <-  amn.percentstream * pop.forest.season.1
-  pop.RAOCUT.in.stream.season.1 <-  amn.percentstream * pop.RAOCUT.season.1
-  pop.total.in.stream.season.2 <-   amn.percentstream * pop.total.season.2
-  pop.pasture.in.stream.season.2 <- amn.percentstream * pop.pasture.season.2
-  pop.forest.in.stream.season.2 <-  amn.percentstream * pop.forest.season.2
-  pop.RAOCUT.in.stream.season.2 <-  amn.percentstream * pop.RAOCUT.season.2  
-  
-  
-  ### Animal Densities
-  ### Percent animals around streams and bacteria production per animal
-  tmp.S1PastureArndStreams <- as.numeric(SubModelData[30,2])/100
-  tmp.S1ForestArndStreams  <- as.numeric(SubModelData[31,2])/100
-  tmp.S1RAOCUTArndStreams  <- as.numeric(SubModelData[32,2])/100
-  tmp.S2PastureArndStreams <- as.numeric(SubModelData[33,2])/100
-  tmp.S2ForestArndStreams  <- as.numeric(SubModelData[34,2])/100
-  tmp.S2RAOCUTArndStreams  <- as.numeric(SubModelData[35,2])/100
-  tmp.bac.prod  <- as.numeric(SubModelData[36,2])
-  ##
-  ### Calculations
-  ### Migration to/within watershed
-  tmp.PastureArea <- rep(-1,12)
-  tmp.PastureArea[tmp.S1Months] <- tmp.S1PastureArea
-  tmp.PastureArea[tmp.S2Months] <- tmp.S2PastureArea
-  tmp.ForestArea <- rep(-1,12)
-  tmp.ForestArea[tmp.S1Months]  <- tmp.S1ForestArea
-  tmp.ForestArea[tmp.S2Months]  <- tmp.S2ForestArea
-  tmp.RAOCUTArea <- rep(-1,12)
-  tmp.RAOCUTArea[tmp.S1Months]  <- tmp.S1RAOCUTArea
-  tmp.RAOCUTArea[tmp.S2Months]  <- tmp.S2RAOCUTArea
-  ###
-  ### Stream Access on Land
-  tmp.PastureAreaWStreamAcess <- rep(-1,12)
-  tmp.PastureAreaWStreamAcess[tmp.S1Months] <- tmp.S1PastureArea * tmp.S1PastureWStreamAcess
-  tmp.PastureAreaWStreamAcess[tmp.S2Months] <- tmp.S2PastureArea * tmp.S2PastureWStreamAcess
-  tmp.ForestAreaWStreamAcess <- rep(-1,12)
-  tmp.ForestAreaWStreamAcess[tmp.S1Months]  <- tmp.S1ForestArea  * tmp.S1ForestWStreamAcess
-  tmp.ForestAreaWStreamAcess[tmp.S2Months]  <- tmp.S2ForestArea  * tmp.S2ForestWStreamAcess
-  tmp.RAOCUTAreaWStreamAcess <- rep(-1,12)
-  tmp.RAOCUTAreaWStreamAcess[tmp.S1Months]  <- tmp.S1RAOCUTArea  * tmp.S1RAOCUTWStreamAcess
-  tmp.RAOCUTAreaWStreamAcess[tmp.S2Months]  <- tmp.S2RAOCUTArea  * tmp.S2RAOCUTWStreamAcess
-  ###
-  ### Stream Access In Stream
-  tmp.PastureAreaWStreamAcessInStream <- rep(-1,12)
-  tmp.PastureAreaWStreamAcessInStream[tmp.S1Months] <- tmp.S1PastureArndStreams
-  tmp.PastureAreaWStreamAcessInStream[tmp.S2Months]  <- tmp.S2PastureArndStreams
-  tmp.ForestAreaWStreamAcessInStream <- rep(-1,12)
-  tmp.ForestAreaWStreamAcessInStream[tmp.S1Months] <- tmp.S1ForestArndStreams
-  tmp.ForestAreaWStreamAcessInStream[tmp.S2Months] <- tmp.S2ForestArndStreams
-  tmp.RAOCUTAreaWStreamAcessInStream <- rep(-1,12)
-  tmp.RAOCUTAreaWStreamAcessInStream[tmp.S1Months] <- tmp.S1RAOCUTArndStreams
-  tmp.RAOCUTAreaWStreamAcessInStream[tmp.S2Months] <- tmp.S2RAOCUTArndStreams
-  ###
-  ### Without Stream Access
-  tmp.PastureAreaWOStreamAcess <- tmp.PastureArea - tmp.PastureAreaWStreamAcess
-  tmp.ForestAreaWOStreamAcess  <- tmp.ForestArea  - tmp.ForestAreaWStreamAcess
-  tmp.RAOCUTAreaWOStreamAcess  <- tmp.RAOCUTArea  - tmp.RAOCUTAreaWStreamAcess
-  ###
-  ### Animal Densities  
-  tmp.ADOnPasture <- rep(-1,12)
-  tmp.ADOnPasture[tmp.S1Months] <- tmp.S1ADPasture
-  tmp.ADOnPasture[tmp.S2Months] <- tmp.S2ADPasture
-  tmp.ADOnForest <- rep(-1,12)
-  tmp.ADOnForest[tmp.S1Months]  <- tmp.S1ADForest
-  tmp.ADOnForest[tmp.S2Months]  <- tmp.S2ADForest
-  tmp.ADOnRAOCUT <- rep(-1,12)
-  tmp.ADOnRAOCUT[tmp.S1Months]  <- tmp.S1ADRAOCUT
-  tmp.ADOnRAOCUT[tmp.S2Months]  <- tmp.S2ADRAOCUT
-  ###
-  ### Animal Populations
-  ###
-  ### Land without Stream Access
-  tmp.ElkOnPastureWOStreamAcess <- tmp.ADOnPasture * tmp.PastureAreaWOStreamAcess
-  tmp.ElkOnForestWOStreamAcess  <- tmp.ADOnForest  * tmp.ForestAreaWOStreamAcess
-  tmp.ElkOnRAOCUTWOStreamAcess  <- tmp.ADOnRAOCUT  * tmp.RAOCUTAreaWOStreamAcess
-  ###
-  ### Instream from Land with Stream Access
-  tmp.ElkOnPastureInStream <- tmp.ADOnPasture * tmp.PastureAreaWStreamAcess * tmp.PastureAreaWStreamAcessInStream
-  tmp.ElkOnForestInStream  <- tmp.ADOnForest  * tmp.ForestAreaWStreamAcess  * tmp.ForestAreaWStreamAcessInStream
-  tmp.ElkOnRAOCUTInStream  <- tmp.ADOnRAOCUT  * tmp.RAOCUTAreaWStreamAcess  * tmp.RAOCUTAreaWStreamAcessInStream
-  ###
-  ### On Land with Stream Access and Not in Stream
-  tmp.ElkOnPastureWStreamAcess <- tmp.ADOnPasture * tmp.PastureAreaWStreamAcess - tmp.ElkOnPastureInStream
-  tmp.ElkOnForestWStreamAcess  <- tmp.ADOnForest  * tmp.ForestAreaWStreamAcess  - tmp.ElkOnForestInStream
-  tmp.ElkOnRAOCUTWStreamAcess  <- tmp.ADOnRAOCUT  * tmp.RAOCUTAreaWStreamAcess  - tmp.ElkOnRAOCUTInStream
-  ###
-  ### General
-  tmp.ElkOnPasture <- tmp.ElkOnPastureWOStreamAcess + tmp.ElkOnPastureWStreamAcess
-  tmp.ElkOnForest  <- tmp.ElkOnForestWOStreamAcess  + tmp.ElkOnForestWStreamAcess
-  tmp.ElkOnRAOCUT  <- tmp.ElkOnRAOCUTWOStreamAcess  + tmp.ElkOnRAOCUTWStreamAcess
-  tmp.ElkInStream  <- tmp.ElkOnPastureInStream      + tmp.ElkOnForestInStream  + tmp.ElkOnRAOCUTInStream
-  tmp.ElkTotal     <- tmp.ElkOnPasture + tmp.ElkOnForest + tmp.ElkOnRAOCUT + tmp.ElkInStream
-  ###
-  ### Bacteria Production and Location
-  ###
-  ### Areas without Stream Access
-  tmp.ElkBacteriaOnPastureWOStreamAcess <- tmp.bac.prod * tmp.ElkOnPastureWOStreamAcess
-  tmp.ElkBacteriaOnForestWOStreamAcess  <- tmp.bac.prod * tmp.ElkOnForestWOStreamAcess
-  tmp.ElkBacteriaOnRAOCUTWOStreamAcess  <- tmp.bac.prod * tmp.ElkOnRAOCUTWOStreamAcess
-  ###
-  ### Areas with Stream Access and Not in Stream
-  tmp.ElkBacteriaOnPastureWStreamAcess <- tmp.bac.prod * tmp.ElkOnPastureWStreamAcess
-  tmp.ElkBacteriaOnForestWStreamAcess  <- tmp.bac.prod * tmp.ElkOnForestWStreamAcess
-  tmp.ElkBacteriaOnRAOCUTWStreamAcess  <- tmp.bac.prod * tmp.ElkOnRAOCUTWStreamAcess
-  ###
-  ### Land Areas
-  tmp.ElkBacteriaOnPasture <- tmp.ElkBacteriaOnPastureWOStreamAcess + tmp.ElkBacteriaOnPastureWStreamAcess
-  tmp.ElkBacteriaOnForest  <- tmp.ElkBacteriaOnForestWOStreamAcess  + tmp.ElkBacteriaOnForestWStreamAcess
-  tmp.ElkBacteriaOnRAOCUT  <- tmp.ElkBacteriaOnRAOCUTWOStreamAcess  + tmp.ElkBacteriaOnRAOCUTWStreamAcess
-  tmp.ElkBacteriaOnLand    <- tmp.ElkBacteriaOnPasture + tmp.ElkBacteriaOnForest + tmp.ElkBacteriaOnRAOCUT
-  ###
-  ### Instream
-  tmp.ElkNacteriaOnPastureInStream <- tmp.bac.prod * tmp.ElkOnPastureInStream
-  tmp.ElkBacteriaOnForestInStream  <- tmp.bac.prod * tmp.ElkOnForestInStream
-  tmp.ElkBacteriaOnRAOCUTInStream  <- tmp.bac.prod * tmp.ElkOnRAOCUTInStream
-  tmp.ElkBacteriaInStream <- tmp.ElkNacteriaOnPastureInStream + tmp.ElkBacteriaOnForestInStream + tmp.ElkBacteriaOnRAOCUTInStream
-  ###
-  ### Accume table values
-  tmp.Accum.Pasture <- tmp.ElkBacteriaOnPasture / tmp.PastureArea
-  tmp.Accum.Forest  <- tmp.ElkBacteriaOnForest  / tmp.ForestArea
-  tmp.Accum.RAOCUT  <- tmp.ElkBacteriaOnRAOCUT  / tmp.RAOCUTArea
-  ##
-  ### Assemble output data frame
-  SubModelOutput <- data.frame(Month=c("Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"),
-                               pop.total=tmp.ElkTotal,
-                               pop.total.on.land=tmp.ElkTotal - tmp.ElkInStream,
-                               pop.total.in.stream=tmp.ElkInStream,
-                               pop.total.on.pasture= tmp.ElkOnPasture,
-                               pop.total.in.forest= tmp.ElkOnForest,                               
-                               pop.total.on.RAOCUT= tmp.ElkOnRAOCUT,
-                               pop.on.pasture.wo.stream.access=tmp.ElkOnPastureWOStreamAcess,
-                               pop.on.pasture.w.stream.access=tmp.ElkOnPastureWStreamAcess,
-                               pop.from.pasture.in.stream=tmp.ElkOnPastureInStream,
-                               pop.in.forest.wo.stream.access=tmp.ElkOnForestWOStreamAcess,
-                               pop.in.forest.w.stream.access=tmp.ElkOnForestWStreamAcess,
-                               pop.from.forest.in.stream=tmp.ElkOnForestInStream,
-                               pop.on.raocut.wo.stream.access=tmp.ElkOnRAOCUTWOStreamAcess,
-                               pop.on.raocut.w.stream.access=tmp.ElkOnRAOCUTWStreamAcess,
-                               pop.from.raocut.in.stream=tmp.ElkOnRAOCUTInStream,
-                               bac.total= tmp.ElkBacteriaOnLand + tmp.ElkBacteriaInStream,
-                               bac.total.to.land=tmp.ElkBacteriaOnLand,
-                               bac.total.in.stream=tmp.ElkBacteriaInStream/24,
-                               bac.on.pasture.wo.stream.access=tmp.ElkBacteriaOnPastureWOStreamAcess,
-                               bac.on.pasture.w.stream.access=tmp.ElkBacteriaOnPastureWStreamAcess,
-                               bac.from.pasture.in.stream=tmp.ElkNacteriaOnPastureInStream,
-                               bac.on.forest.wo.stream.access=tmp.ElkBacteriaOnForestWOStreamAcess,
-                               bac.on.forest.w.stream.access=tmp.ElkBacteriaOnForestWStreamAcess,
-                               bac.from.forest.in.stream=tmp.ElkBacteriaOnForestInStream,
-                               bac.on.RAOCUT.wo.stream.access=tmp.ElkBacteriaOnRAOCUTWOStreamAcess,
-                               bac.on.RAOCUT.w.stream.access=tmp.ElkBacteriaOnRAOCUTWStreamAcess,
-                               bac.from.RAOCUT.in.stream=tmp.ElkBacteriaOnRAOCUTInStream,
-                               bac.Pasture=tmp.ElkBacteriaOnPasture,
-                               bac.Forest=tmp.ElkBacteriaOnForest,
-                               bac.RAOCUT=tmp.ElkBacteriaOnRAOCUT,
-                               Accum.Pasture=tmp.Accum.Pasture,
-                               Accum.Forest=tmp.Accum.Forest,
-                               Accum.RAOCUT=tmp.Accum.RAOCUT,
-                               SQLIM.factor=tmp.SQLIMFactor,
-                               MUTSIN.Start.Year=tmp.MUTSINStartYr,
-                               MUTSIN.End.Year=tmp.MUTSINEndYr,
-                               SUP.ACCUM.pastrure.line=tmp.HdrACCUMPasture,
-                               SUP.SQLIM.pastrure.line=tmp.HdrSQLIMPasture,
-                               SUP.ACCUM.forest.line=tmp.HdrACCUMForest,
-                               SUP.SQLIM.forest.line=tmp.HdrSQLIMForest,
-                               SUP.ACCUM.RAOCUT.line=tmp.HdrACCUMRAOCUT,
-                               SUP.SQLIM.RAOCUT.line=tmp.HdrSQLIMRAOCUT,
-                               stringsAsFactors=FALSE)
-  ##
+  pop.pasture.in.stream.season.1 <- amn.percentstream.pasture.season.1 * pop.pasture.season.1
+  pop.forest.in.stream.season.1  <- amn.percentstream.forest.season.1 * pop.forest.season.1
+  pop.total.in.stream.season.1   <- pop.pasture.in.stream.season.1 + pop.forest.in.stream.season.1
+  pop.pasture.in.stream.season.2 <- amn.percentstream.pasture.season.2 * pop.pasture.season.2
+  pop.forest.in.stream.season.2  <- amn.percentstream.forest.season.2 * pop.forest.season.2
+  pop.total.in.stream.season.2   <- pop.pasture.in.stream.season.2 + pop.forest.in.stream.season.2
+  ## bacteria loads
+  ## overall locations
+  bac.total.season.1 <-   amn.bac.prod * pop.total.season.1
+  bac.pasture.season.1 <- amn.bac.prod * pop.pasture.season.1
+  bac.forest.season.1 <-  amn.bac.prod * pop.forest.season.1
+  bac.total.season.2 <-   amn.bac.prod * pop.total.season.2
+  bac.pasture.season.2 <- amn.bac.prod * pop.pasture.season.2
+  bac.forest.season.2 <-  amn.bac.prod * pop.forest.season.2
+  ## on land
+  bac.total.on.land.season.1 <-   pop.total.on.land.season.1   * amn.bac.prod
+  bac.pasture.on.land.season.1 <- pop.pasture.on.land.season.1 * amn.bac.prod
+  bac.forest.on.land.season.1 <-  pop.forest.on.land.season.1  * amn.bac.prod
+  bac.total.on.land.season.2 <-   pop.total.on.land.season.2   * amn.bac.prod
+  bac.pasture.on.land.season.2 <- pop.pasture.on.land.season.2 * amn.bac.prod
+  bac.forest.on.land.season.2 <-  pop.forest.on.land.season.2  * amn.bac.prod
+  ## in stream
+  bac.total.in.stream.season.1 <-   pop.total.in.stream.season.1   * amn.bac.prod
+  bac.pasture.in.stream.season.1 <- pop.pasture.in.stream.season.1 * amn.bac.prod
+  bac.forest.in.stream.season.1 <-  pop.forest.in.stream.season.1  * amn.bac.prod
+  bac.total.in.stream.season.2 <-   pop.total.in.stream.season.2   * amn.bac.prod
+  bac.pasture.in.stream.season.2 <- pop.pasture.in.stream.season.2 * amn.bac.prod
+  bac.forest.in.stream.season.2 <-  pop.forest.in.stream.season.2  * amn.bac.prod
+  ## accum values
+  accum.pasture.season.1 <- bac.pasture.on.land.season.1 / lu.pasture.area.season.1
+  accum.forest.season.1 <-  bac.forest.on.land.season.1 / lu.forest.area.w.seasson.1
+  accum.pasture.season.2 <- bac.pasture.on.land.season.2 / lu.pasture.area.season.2
+  accum.forest.season.2 <-  bac.forest.on.land.season.2 / lu.forest.area.season.2
+## Assemble output data frame
+  ## season 1
+  df.output.season.1 <- data.frame(
+    Month=format(as.POSIXct(paste0("1967-",amn.months.season.1,"-01")), format = "%b"),
+    pop.total=pop.total.season.1,
+    pop.on.land=pop.total.on.land.season.1,
+    pop.in.stream=pop.total.in.stream.season.1,
+    Bacteria.total=bac.total.season.1,
+    Bacteria.on.land=bac.total.on.land.season.1,
+    Bacteria.in.stream=bac.total.in.stream.season.1,
+    Accum.pasture=accum.pasture.season.1,
+    Accum.forest=accum.forest.season.1,
+    Lim.pasture=amn.SQLIM.factor * accum.pasture.season.1,
+    Lim.forest=amn.SQLIM.factor * accum.forest.season.1,
+    month.order=amn.months.season.1,
+    stringsAsFactors=FALSE)
+  ## season 1
+  df.output.season.2 <- data.frame(
+    Month=format(as.POSIXct(paste0("1967-",amn.months.season.2,"-01")), format = "%b"),
+    pop.total=pop.total.season.2,
+    pop.on.land=pop.total.on.land.season.2,
+    pop.in.stream=pop.total.in.stream.season.2,
+    Bacteria.total=bac.total.season.2,
+    Bacteria.on.land=bac.total.on.land.season.2,
+    Bacteria.in.stream=bac.total.in.stream.season.2,
+    Accum.pasture=accum.pasture.season.2,
+    Accum.forest=accum.forest.season.2,
+    Lim.pasture=amn.SQLIM.factor * accum.pasture.season.2,
+    Lim.forest=amn.SQLIM.factor * accum.forest.season.2,
+    month.order=amn.months.season.2,
+    stringsAsFactors=FALSE)
+  ## combine, re-order for months and drop month.order column
+  df.output <- rbind(df.output.season.1, df.output.season.2)
+  df.output <- df.output[order(df.output$month.order), ]
+  df.output <- df.output[, -1 * grep("month.order", names(df.output))]
+  ## may get NaN in accum becuase of zero areas for habitat. replace these
+  ## these NaN with 0
+  df.nan <- df.output[, -1]
+  df.nan[is.na(df.nan)] <- 0
+  df.output <- cbind(df.output[, 1], df.nan)
   ### return results
-  return(SubModelOutput)
+  return(df.output)
 }
