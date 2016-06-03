@@ -160,7 +160,7 @@ wildlifeElk <- function(chr.input.file) {
   ## these NaN with 0
   df.nan <- df.output[, -1]
   df.nan[is.na(df.nan)] <- 0
-  df.output <- cbind(df.output[, 1], df.nan)
+    df.output <- cbind(Month=df.output[, "Month"], df.nan)
   ### return results
   return(df.output)
 }
