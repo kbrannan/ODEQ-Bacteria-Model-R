@@ -1,7 +1,7 @@
 ## step bt step calculation check for wildlife_elk_sub_model using input from
-## wildlifeElk08.txt file
+## wildlifeElkXX.txt file
 chr.wildlife.elk.dir <- "M:/Models/Bacteria/HSPF/ODEQ-Bacteria-Model-R/R_scripts/sub-models/wildlife-Elk"
-chr.input <- "wildlifeElk08.txt"
+chr.input <- "wildlifeElkXX.txt"
 ## file for model
 chr.input.file <- paste0(chr.wildlife.elk.dir, "/", chr.input)
 ## run model
@@ -43,11 +43,11 @@ chk.Animal.Density.forest.season.1  <- 3.0072900E-03
 chk.Animal.Density.pasture.season.2 <- 4.5000000E-02
 chk.Animal.Density.forest.season.2  <- 4.5000000E-02
 ### Habitats
-chk.land.pasture.season.1 <- 10.41
-chk.land.forest.season.1  <- 275.26
+chk.land.pasture.season.1 <- -999
+chk.land.forest.season.1  <- -999
 chk.habitat.season.1 <- chk.land.pasture.season.1 + chk.land.forest.season.1
-chk.land.pasture.season.2 <- 0.07
-chk.land.forest.season.2  <- 38.2
+chk.land.pasture.season.2 <- -999
+chk.land.forest.season.2  <- -999
 chk.habitat.season.2 <- chk.land.pasture.season.2 + chk.land.forest.season.2
 ### Percent landuse with stream access
 chk.land.pasture.w.stream.access.season.1 <- 25
@@ -87,8 +87,8 @@ chk.pop.on.land.wo.stream.access.total.season.2   <- chk.pop.on.land.wo.stream.a
 chk.pop.on.land.w.stream.access.pasture.season.1 <- chk.Animal.Density.pasture.season.1 * (1 - chk.pasture.in.and.around.streams.season.1 / 100) * chk.land.w.stream.access.pasture.season.1
 chk.pop.on.land.w.stream.access.forest.season.1  <- chk.Animal.Density.forest.season.1 * (1 - chk.forest.in.and.around.streams.season.1 / 100) * chk.land.w.stream.access.forest.season.1
 chk.pop.on.land.w.stream.access.total.season.1   <- chk.pop.on.land.w.stream.access.pasture.season.1 + chk.pop.on.land.w.stream.access.forest.season.1
-chk.pop.on.land.w.stream.access.pasture.season.2 <- chk.Animal.Density.pasture.season.2 * (1 - chk.pasture.in.and.around.streams.season.1 / 100) * chk.land.w.stream.access.pasture.season.2
-chk.pop.on.land.w.stream.access.forest.season.2  <- chk.Animal.Density.forest.season.2 * (1 - chk.forest.in.and.around.streams.season.1 / 100) * chk.land.w.stream.access.forest.season.2
+chk.pop.on.land.w.stream.access.pasture.season.2 <- chk.Animal.Density.pasture.season.2 * (1 - chk.pasture.in.and.around.streams.season.2 / 100) * chk.land.w.stream.access.pasture.season.2
+chk.pop.on.land.w.stream.access.forest.season.2  <- chk.Animal.Density.forest.season.2 * (1 - chk.forest.in.and.around.streams.season.2 / 100) * chk.land.w.stream.access.forest.season.2
 chk.pop.on.land.w.stream.access.total.season.2   <- chk.pop.on.land.w.stream.access.pasture.season.2 + chk.pop.on.land.w.stream.access.forest.season.2
 ## in stream
 chk.pop.in.stream.pasture.season.1 <- chk.Animal.Density.pasture.season.1 * (chk.pasture.in.and.around.streams.season.1 / 100) * chk.land.w.stream.access.pasture.season.1
