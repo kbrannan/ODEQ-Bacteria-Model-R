@@ -33,13 +33,13 @@ wildlifeElk <- function(chr.input.file) {
     df.input$parameter == "Season 2 Forest Area in Watershed (ac)"])
   lu.habitatarea.season.2 <- lu.pasture.area.season.2 + lu.forest.area.season.2
   ### Percent of Landuse with Stream access
-  lu.pasture.area.w.season.1   <- as.numeric(df.input$value[
+  lu.pasture.percent.w.season.1   <- as.numeric(df.input$value[
     df.input$parameter == "Season 1 Percent of Pasture with stream access"]) / 100
-  lu.forest.area.w.seasson.1   <- as.numeric(df.input$value[
+  lu.forest.percent.w.season.1   <- as.numeric(df.input$value[
     df.input$parameter == "Season 1 Percent of Forest with stream access"]) / 100
-  lu.pasture.area.w.season.2   <- as.numeric(df.input$value[
+  lu.pasture.percent.w.season.2   <- as.numeric(df.input$value[
     df.input$parameter == "Season 2 Percent of Pasture with stream access"]) / 100
-  lu.forest.area.w.seasson.2   <- as.numeric(df.input$value[
+  lu.forest.percent.w.season.2   <- as.numeric(df.input$value[
     df.input$parameter == "Season 2 Percent of Forest with stream access"]) / 100
   ## animal information
   ## months for seasons
@@ -72,6 +72,21 @@ wildlifeElk <- function(chr.input.file) {
     df.input$parameter == "SQOLIM multiplcation factor"])
 
   ## Calculations
+  ## land use
+  ## without stream access
+  lu.land.wo.stream.access.pasture.season.1 <- (1 - lu.pasture.percent.w.season.1) * lu.pasture.area.season.1
+  lu.land.wo.stream.access.forest.season.1  <- (1 - lu.forest.percent.w.season.1) * lu.forest.area.season.1
+  lu.land.wo.stream.access.total.season.1   <- lu.land.wo.stream.access.pasture.season.1 + lu.land.wo.stream.access.forest.season.1
+  lu.land.wo.stream.access.pasture.season.2 <- (1 - lu.pasture.percent.w.season.2) * lu.pasture.area.season.2
+  lu.land.wo.stream.access.forest.season.2  <- (1 - lu.forest.percent.w.season.2) * lu.forest.area.season.2
+  lu.land.wo.stream.access.total.season.2   <- lu.land.wo.stream.access.pasture.season.2 + lu.land.wo.stream.access.forest.season.2
+  ## with stream access
+  lu.land.w.stream.access.pasture.season.1 <- lu.pasture.percent.w.season.1 * lu.pasture.area.season.1
+  lu.land.w.stream.access.forest.season.1 <- lu.forest.percent.w.season.1 * lu.forest.area.season.1
+  lu.land.w.stream.access.total.season.1   <- lu.land.w.stream.access.pasture.season.1 + lu.land.w.stream.access.forest.season.1
+  lu.land.w.stream.access.pasture.season.2 <- lu.pasture.percent.w.season.2 * lu.pasture.area.season.2
+  lu.land.w.stream.access.forest.season.2 <- lu.forest.percent.w.season.2 * lu.forest.area.season.2
+  lu.land.w.stream.access.total.season.2   <- lu.land.w.stream.access.pasture.season.2 + lu.land.w.stream.access.forest.season.2
   ## populations
   ## overall locations
   pop.pasture.season.1 <- lu.pasture.area.season.1 * amn.animal.density.pasture.season.1
@@ -80,20 +95,39 @@ wildlifeElk <- function(chr.input.file) {
   pop.pasture.season.2 <- lu.pasture.area.season.2 * amn.animal.density.pasture.season.2
   pop.forest.season.2 <-  lu.forest.area.season.2 * amn.animal.density.forest.season.2
   pop.total.season.2 <- pop.pasture.season.2 + pop.forest.season.2
-  ## on land
-  pop.pasture.on.land.season.1 <- (1 - amn.percentstream.pasture.season.1) * pop.pasture.season.1
-  pop.forest.on.land.season.1  <- (1 - amn.percentstream.forest.season.1) * pop.forest.season.1
-  pop.total.on.land.season.1   <- pop.pasture.on.land.season.1 + pop.forest.on.land.season.1
-  pop.pasture.on.land.season.2 <- (1 - amn.percentstream.pasture.season.2) * pop.pasture.season.2
-  pop.forest.on.land.season.2  <- (1 - amn.percentstream.forest.season.2) * pop.forest.season.2
-  pop.total.on.land.season.2   <- pop.pasture.on.land.season.2 + pop.forest.on.land.season.2
+  ## on-land without stream access
+  pop.pasture.on.land.wo.season.1 <- amn.animal.density.pasture.season.1 * lu.land.wo.stream.access.pasture.season.1
+  pop.forest.on.land.wo.season.1 <- amn.animal.density.pasture.season.1 * lu.land.wo.stream.access.forest.season.1
+  pop.total.on.land.wo.season.1   <- pop.pasture.on.land.wo.season.1 + pop.forest.on.land.wo.season.1
+  pop.pasture.on.land.wo.season.2 <- amn.animal.density.pasture.season.2 * lu.land.wo.stream.access.pasture.season.2
+  pop.forest.on.land.wo.season.2 <- amn.animal.density.pasture.season.2 * lu.land.wo.stream.access.forest.season.2
+  pop.total.on.land.wo.season.2   <- pop.pasture.on.land.wo.season.2 + pop.forest.on.land.wo.season.2
+  ## with stream access
+  pop.pasture.w.season.1 <- amn.animal.density.pasture.season.1 * lu.land.w.stream.access.pasture.season.1
+  pop.forest.w.season.1 <- amn.animal.density.pasture.season.1 * lu.land.w.stream.access.forest.season.1
+  pop.pasture.w.season.2 <- amn.animal.density.pasture.season.2 * lu.land.w.stream.access.pasture.season.2
+  pop.forest.w.season.2 <- amn.animal.density.pasture.season.2 * lu.land.w.stream.access.forest.season.2
+  ## on-land with stream access
+  pop.pasture.on.land.w.season.1 <- (1 - amn.percentstream.pasture.season.1) * pop.pasture.w.season.1
+  pop.forest.on.land.w.season.1 <- (1 - amn.percentstream.forest.season.1) * pop.forest.w.season.1
+  pop.total.on.land.w.season.1 <- pop.pasture.on.land.w.season.1 + pop.forest.on.land.w.season.1
+  pop.pasture.on.land.w.season.2 <- (1 - amn.percentstream.pasture.season.2) * pop.pasture.w.season.2
+  pop.forest.on.land.w.season.2 <- (1 - amn.percentstream.forest.season.2) * pop.forest.w.season.2
+  pop.total.on.land.w.season.2 <- pop.pasture.on.land.w.season.2 + pop.forest.on.land.w.season.2
   ## in stream
-  pop.pasture.in.stream.season.1 <- amn.percentstream.pasture.season.1 * pop.pasture.season.1
-  pop.forest.in.stream.season.1  <- amn.percentstream.forest.season.1 * pop.forest.season.1
-  pop.total.in.stream.season.1   <- pop.pasture.in.stream.season.1 + pop.forest.in.stream.season.1
-  pop.pasture.in.stream.season.2 <- amn.percentstream.pasture.season.2 * pop.pasture.season.2
-  pop.forest.in.stream.season.2  <- amn.percentstream.forest.season.2 * pop.forest.season.2
-  pop.total.in.stream.season.2   <- pop.pasture.in.stream.season.2 + pop.forest.in.stream.season.2
+  pop.pasture.in.stream.season.1 <- amn.percentstream.pasture.season.1 * pop.pasture.w.season.1
+  pop.forest.in.stream.season.1 <- amn.percentstream.forest.season.1 * pop.forest.w.season.1
+  pop.total.in.stream.season.1 <- pop.pasture.in.stream.season.1 + pop.forest.in.stream.season.1
+  pop.pasture.in.stream.season.2 <- amn.percentstream.pasture.season.2 * pop.pasture.w.season.2
+  pop.forest.in.stream.season.2 <- amn.percentstream.forest.season.2 * pop.forest.w.season.2
+  pop.total.in.stream.season.2 <- pop.pasture.in.stream.season.2 + pop.forest.in.stream.season.2
+  ## on-land
+  pop.pasture.on.land.season.1 <- pop.pasture.on.land.wo.season.1 + pop.pasture.on.land.w.season.1
+  pop.forest.on.land.season.1 <- pop.forest.on.land.wo.season.1 + pop.forest.on.land.w.season.1
+  pop.total.on.land.season.1 <- pop.pasture.on.land.season.1 + pop.forest.on.land.season.1
+  pop.pasture.on.land.season.2 <- pop.pasture.on.land.wo.season.2 + pop.pasture.on.land.w.season.2
+  pop.forest.on.land.season.2 <- pop.forest.on.land.wo.season.2 + pop.forest.on.land.w.season.2
+  pop.total.on.land.season.2 <- pop.pasture.on.land.season.2 + pop.forest.on.land.season.2
   ## bacteria loads
   ## overall locations
   bac.total.season.1 <-   amn.bac.prod * pop.total.season.1
@@ -118,7 +152,7 @@ wildlifeElk <- function(chr.input.file) {
   bac.forest.in.stream.season.2 <-  pop.forest.in.stream.season.2  * amn.bac.prod
   ## accum values
   accum.pasture.season.1 <- bac.pasture.on.land.season.1 / lu.pasture.area.season.1
-  accum.forest.season.1 <-  bac.forest.on.land.season.1 / lu.forest.area.w.seasson.1
+  accum.forest.season.1 <-  bac.forest.on.land.season.1 / lu.forest.area.season.1
   accum.pasture.season.2 <- bac.pasture.on.land.season.2 / lu.pasture.area.season.2
   accum.forest.season.2 <-  bac.forest.on.land.season.2 / lu.forest.area.season.2
 ## Assemble output data frame
